@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- reset CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- link css -->
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <!-- link google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-5.15.4/css/all.css">
+    <!-- link image -->
+</head>
+<body>
+    <!-- Block Elemnnt Modifier  => only used for-->
+    <div class="main">
+        <header class="header">
+            <div class="grid">
+                <nav class="header__navbar">
+                    <ul class="header__navbar-list">
+                        <li class="header__navbar-item header__navbar--has-qr header__navbar-item--seperate">
+                            Vao cua hang tren ung dung
+                            <!-- header qr code  -->
+                            <div class="header__qr">
+                                <img src="assets/image/qr_code.png" alt="QR code" class="header__qr-img">
+                                <div class="header__qr-apps">
+                                    <a href="" class="header__qr-link">
+                                        <img src="assets/image/app_store.png" alt="App store" class="header__qr-apps-img">
+                                    </a>
+                                    <a href="" class="header__qr-link">
+                                        <img src="assets/image/google_play.png" alt="Google play" class="header__qr-apps-img">
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header__navbar-item">
+                            <span class="header__navbar-item--nopointer">Ket noi</span>
+                            <a href="" class="header__navbar-icon-link">
+                                <i class="header__navbar-icon fab fa-facebook"></i>
+                            </a>
+                            <a href="" class="header__navbar-icon-link">
+                                <i class="header__navbar-icon fab fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+    
+                    <ul class="header__navbar-list">
+                        <li class="header__navbar-item">
+                            <a href="" class="header__navbar-item-link">
+                                <i class="header__navbar-icon far fa-bell"></i>
+                                Thong bao
+                            </a>
+                        </li>
+                        <li class="header__navbar-item">
+                            <a href="" class="header__navbar-item-link">
+                                <i class="header__navbar-icon fas fa-question-circle"></i>
+                                Tro giup
+                            </a>
+                        </li>
+                        <li class="header__navbar-item header__navbar-item--bold header__navbar-item--seperate">Dang ky</li>
+                        <li class="header__navbar-item header__navbar-item--bold">Dang nhap</li>
+                    </ul>
+                </nav>
+            </div>
+        
+        </header>
+
+        <div class="app__container">    
+            <div class="grid">
+                <div class="grid__row">
+                    <div class="grid__col-2">
+                        <div class="container">
+                            <nav class="category">
+                                <div class="category__heading">
+                                    <i class="category__heading-icon fas fa-list"></i>
+                                    Danh muc
+                                </div>
+                                <ul class = "category__list">
+                                    <li class="category__item">
+                                        <a href="" class="category__item-link category__link--active">Trang diem</a>
+                                    </li>
+                                    <li class="category__item">
+                                        <a href="" class="category__item-link">Tay trang</a>
+                                    </li>
+                                    <li class="category__item">
+                                        <a href="" class="category__item-link">Nuoc hoa</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+    
+                    <div class="grid__col-10">
+                        
+                    </div>
+                </div>
+
+                <div class="grid__row">
+                    <div class="grid__col-10 ">
+                        <div class="detail__container">
+                            <div class="detail__heading">
+                                Thông tin chi tiết
+                            </div>
+    
+                            <div class="detail__table">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>Công ty phát hành</td>
+                                            <td>Gubooks</td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Ngày xuất bản</td>
+                                            <td>2021-06-01 00:00:00</td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Kích thước</td>
+                                            <td>13.5 x 20 cm</td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Dịch giả</td>
+                                            <td>Đặng Quân</td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Loại bìa</td>
+                                            <td>Bìa mềm</td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Số trang</td>
+                                            <td>316</td>
+                                        </tr>
+    
+                                        <tr>
+                                            <td>Nhà xuất bản</td>
+                                            <td>Nhà xuất bản Nhi đồng</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="detail__description">
+                            <div class="detail__description-heading">
+                                Mô Tả Sản Phẩm
+                            </div>
+
+                            <div class="detail__description-content">
+                                Trong độ xuân xanh phơi phới ngày ấy, bạn không dám mạo hiểm, không dám nỗ lực để kiếm học bổng, không chịu tìm tòi những thử thách trong công việc, không phấn đấu hướng đến ước mơ của mình. Bạn mơ mộng rằng làm việc xong sẽ vào làm ở một công ty nổi tiếng, làm một thời gian sẽ thăng quan tiến chức. Mơ mộng rằng khởi nghiệp xong sẽ lập tức nhận được tiền đầu tư, cầm được tiền đầu tư là sẽ niêm yết trên sàn chứng khoán. Mơ mộng rằng muốn gì sẽ có đó, không thiếu tiền cũng chẳng thiếu tình, an hưởng những năm tháng êm đềm trong cuộc đời mình. Nhưng vì sao bạn lại nghĩ rằng bạn chẳng cần bỏ ra chút công sức nào, cuộc sống sẽ dâng đến tận miệng những thứ bạn muốn? Bạn cần phải hiểu rằng: Hấp tấp muốn mau chóng thành công rất dễ khiến chúng ta đi vào mê lộ. Thanh xuân là khoảng thời gian đẹp đẽ nhất trong đời, cũng là những năm tháng then chốt có thể quyết định tương lai của một người. Nếu bạn lựa chọn an nhàn trong 10 năm, tương lai sẽ buộc bạn phải vất vả trong 50 năm để bù đắp lại. Nếu bạn bươn chải vất vả trong 10 năm, thứ mà bạn chắc chắn có được là 50 năm hạnh phúc. Điều quý giá nhất không phải là tiền mà là tiền bạc. Thế nên, bạn à, đừng lựa chọn an nhàn khi còn trẻ.
+                                <p>
+                                    Giá sản phẩm trên Tiki đã bao gồm thuế theo luật hiện hành. Bên cạnh đó, tuỳ vào loại sản phẩm, hình thức và địa chỉ giao hàng mà có thể phát sinh thêm chi phí khác như phí vận chuyển, phụ phí hàng cồng kềnh, thuế nhập khẩu (đối với đơn hàng giao từ nước ngoài có giá trị trên 1 triệu đồng).....
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="customer__reviews">
+            <div class="grid">
+                <div class="reviews__heading">
+                    Đánh Giá - Nhận Xét Từ Khách Hàng
+                </div>
+                
+                <div class="reviews__top">
+                    <div class="grid__row">
+                        <div class="grid__col-3">
+                            <div class="reviews__rate">
+                                <div class="rating__sumary">
+                                    <div class="rating__point">
+                                        4.8
+                                    </div>
+
+                                    <div class="rating__stars">
+                                        <div class="rating__stars-icon">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+
+                                        <div class="rating__stars-count">
+                                            336 nhan xet
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="rating__details">
+                                    <div class="rating__details-level">
+                                        <div class="level__stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="level__bar">
+
+                                        </div>
+                                        <div class="level__count">
+                                            289
+                                        </div>
+                                    </div>
+                                    <div class="rating__details-level">
+                                        <div class="level__stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                        </div>
+                                        <div class="level__bar">
+
+                                        </div>
+                                        <div class="level__count">
+                                            33
+                                        </div>
+                                    </div>
+                                    <div class="rating__details-level">
+                                        <div class="level__stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                        </div>
+                                        <div class="level__bar">
+
+                                        </div>
+                                        <div class="level__count">
+                                            5
+                                        </div>
+                                    </div>
+                                    <div class="rating__details-level">
+                                        <div class="level__stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                        </div>
+                                        <div class="level__bar">
+
+                                        </div>
+                                        <div class="level__count">
+                                            1
+                                        </div>
+                                    </div>
+                                    <div class="rating__details-level">
+                                        <div class="level__stars">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                            <i class="fas fa-star level__star--unvoted"></i>
+                                        </div>
+
+                                        <div class="level__count">
+                                            8
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="grid__col-9">
+                            <div class="top__right-heading">
+                                Tất cả hình ảnh (92)
+                            </div>
+                            <div class="top__images">
+                                <div class="top__images-container">
+                                    <div class="top__images__item" style="background-image: url(https://salt.tikicdn.com/ts/review/e2/bf/3a/9afbdf78742573aa339db36b70fa9394.jpg);"></div>
+                                    <div class="top__images__item" style="background-image: url(https://salt.tikicdn.com/ts/review/76/4b/09/198b7aaec0614e406d65239f6efe45f4.jpg);"></div>
+                                    <div class="top__images__item" style="background-image: url(https://salt.tikicdn.com/ts/review/d5/1f/5b/a58f601cbabab2a4a802a2c0a83537ea.jpg);"></div>
+                                    <div class="top__images__item" style="background-image: url(https://salt.tikicdn.com/ts/review/f6/ed/51/9d1b77befbc00cd53628d15a3b1e6927.jpg);"></div>
+                                    <div class="top__images-total">
+                                        <div class="top__images__item" style="background-image: url(https://salt.tikicdn.com/ts/review/ce/90/56/50f696613f056d4a5a97530d29b15234.jpg);"></div>
+                                        <div class="top__images-total__cover">
+                                            +86
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="top__filter">
+                                <div class="top__filter-label">
+                                    Lọc xem theo :
+                                </div>
+                                <div class="top__filter-item">
+                                    Mới nhất
+                                </div>
+                                <div class="top__filter-item">
+                                    Có hình ảnh
+                                </div>
+                                <div class="top__filter-item">
+                                    Đã mua hàng
+                                </div>
+                                <div class="top__filter-stars">
+                                    <div class="filter-stars__item">
+                                            5
+                                            <div class="filter-stars__icon">
+                                                <i class="far fa-star"></i>
+                                            </div>
+                                    </div>
+                                    <div class="filter-stars__item">
+                                        4
+                                        <div class="filter-stars__icon">
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="filter-stars__item">
+                                        3
+                                        <div class="filter-stars__icon">
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="filter-stars__item">
+                                        2
+                                        <div class="filter-stars__icon">
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                    <div class="filter-stars__item">
+                                        1
+                                        <div class="filter-stars__icon">
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reviews-comment">
+                    <div class="grid__row">
+                        <div class="grid__col-3">
+                            <div class="comment-user">
+                                <div class="comment-user__avatar" style="background-image: url(https://business.bing.com/api/v3/search/person/photo?caller=IP&id=acb7239c-c356-4185-8bc3-2870955be68f);"></div>
+                                
+                                <div class="comment-user__info">
+                                    <div class="comment-user__name">
+                                        Nam Hoàng
+                                    </div>
+                                    <div class="comment-user__date">
+                                        Đã tham gia 3 năm
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="comment-user__history">
+                                        <div class="history__icon">
+                                            <i class="fas fa-comments"></i>
+                                        </div>
+                                        <span class="history__heading">
+                                            Đã viết:
+                                        </span>
+                                        <span style="font-weight: 350;">
+                                            9 Đánh giá
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="comment-user__history">
+                                        <div class="history__icon">
+                                            <i class="far fa-thumbs-up"></i>
+                                        </div>
+                                        <span class="history__heading">
+                                            Da nhan:
+                                        </span>
+                                        <span style="font-weight: 350;">
+                                            3 lượt cảm ơn on
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid__col-9">
+                            <div class="comment-content">
+                                <div class="comment-content__top">
+                                    <div class="comment-content__top-rate">
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__level">
+                                            Cực kỳ hài lòng
+                                        </div>
+                                    </div>
+                                    <div class="comment-content__top-check">
+                                        <div class="top-check__icon">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        Đã mua hàng
+                                    </div>
+                                    <span style="font-weight: 300;">
+                                        sách chất lượng, giao hàng nhanh
+                                    </span>
+                                </div>
+
+                                <div class="comment-content__images">
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/f2/d5/3d/5b4e67216a22e64daa2416d9c89e7adc.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/be/5f/13/c3d52fc0a76c4e3f9d496a70aa38d301.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/54/c7/94/f22e53e0ef99d0363cd9d92f6ebe2f80.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/dd/22/0e/ff800c6e8d46f9bc6bf784b9b37daf54.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/dd/22/0e/ff800c6e8d46f9bc6bf784b9b37daf54.jpg);"></div>
+                                </div>
+
+                                <div class="comment-content__time">
+                                    Đánh giá vào 4 ngày trước  -  Đã dùng 7 giờ
+
+                                </div>
+
+                                <div class="comment-content__interact">
+                                    <div class="interact__like">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span>
+                                            Hữu ích
+                                        </span>
+                                    </div>
+
+                                    <div class="interact__comment">
+                                        Bình luận
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reviews-comment">
+                    <div class="grid__row">
+                        <div class="grid__col-3">
+                            <div class="comment-user">
+                                <div class="comment-user__avatar" style="background-image: url(https://business.bing.com/api/v3/search/person/photo?caller=IP&id=acb7239c-c356-4185-8bc3-2870955be68f);"></div>
+                                
+                                <div class="comment-user__info">
+                                    <div class="comment-user__name">
+                                        Nam Hoàng
+                                    </div>
+                                    <div class="comment-user__date">
+                                        Đã tham gia 3 năm
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="comment-user__history">
+                                        <div class="history__icon">
+                                            <i class="fas fa-comments"></i>
+                                        </div>
+                                        <span class="history__heading">
+                                            Đã viết:
+                                        </span>
+                                        <span style="font-weight: 350;">
+                                            9 Đánh giá
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="comment-user__history">
+                                        <div class="history__icon">
+                                            <i class="far fa-thumbs-up"></i>
+                                        </div>
+                                        <span class="history__heading">
+                                            Da nhan:
+                                        </span>
+                                        <span style="font-weight: 350;">
+                                            3 lượt cảm ơn on
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid__col-9">
+                            <div class="comment-content">
+                                <div class="comment-content__top">
+                                    <div class="comment-content__top-rate">
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__level">
+                                            Cực kỳ hài lòng
+                                        </div>
+                                    </div>
+                                    <div class="comment-content__top-check">
+                                        <div class="top-check__icon">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        Đã mua hàng
+                                    </div>
+                                    <span style="font-weight: 300;">
+                                        sách chất lượng, giao hàng nhanh
+                                    </span>
+                                </div>
+
+                                <div class="comment-content__images">
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/f2/d5/3d/5b4e67216a22e64daa2416d9c89e7adc.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/be/5f/13/c3d52fc0a76c4e3f9d496a70aa38d301.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/54/c7/94/f22e53e0ef99d0363cd9d92f6ebe2f80.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/dd/22/0e/ff800c6e8d46f9bc6bf784b9b37daf54.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/dd/22/0e/ff800c6e8d46f9bc6bf784b9b37daf54.jpg);"></div>
+                                </div>
+
+                                <div class="comment-content__time">
+                                    Đánh giá vào 4 ngày trước  -  Đã dùng 7 giờ
+
+                                </div>
+
+                                <div class="comment-content__interact">
+                                    <div class="interact__like">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span>
+                                            Hữu ích
+                                        </span>
+                                    </div>
+
+                                    <div class="interact__comment">
+                                        Bình luận
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reviews-comment">
+                    <div class="grid__row">
+                        <div class="grid__col-3">
+                            <div class="comment-user">
+                                <div class="comment-user__avatar" style="background-image: url(https://business.bing.com/api/v3/search/person/photo?caller=IP&id=acb7239c-c356-4185-8bc3-2870955be68f);")></div>
+                                
+                                <div class="comment-user__info">
+                                    <div class="comment-user__name">
+                                        Nam Hoàng
+                                    </div>
+                                    <div class="comment-user__date">
+                                        Đã tham gia 3 năm
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="comment-user__history">
+                                        <div class="history__icon">
+                                            <i class="fas fa-comments"></i>
+                                        </div>
+                                        <span class="history__heading">
+                                            Đã viết:
+                                        </span>
+                                        <span style="font-weight: 350;">
+                                            9 Đánh giá
+                                        </span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="comment-user__history">
+                                        <div class="history__icon">
+                                            <i class="far fa-thumbs-up"></i>
+                                        </div>
+                                        <span class="history__heading">
+                                            Da nhan:
+                                        </span>
+                                        <span style="font-weight: 350;">
+                                            3 lượt cảm ơn on
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid__col-9">
+                            <div class="comment-content">
+                                <div class="comment-content__top">
+                                    <div class="comment-content__top-rate">
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="top-rate__level">
+                                            Cực kỳ hài lòng
+                                        </div>
+                                    </div>
+                                    <div class="comment-content__top-check">
+                                        <div class="top-check__icon">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        Đã mua hàng
+                                    </div>
+                                    <span style="font-weight: 300;">
+                                        sách chất lượng, giao hàng nhanh
+                                    </span>
+                                </div>
+
+                                <div class="comment-content__images">
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/f2/d5/3d/5b4e67216a22e64daa2416d9c89e7adc.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/be/5f/13/c3d52fc0a76c4e3f9d496a70aa38d301.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/54/c7/94/f22e53e0ef99d0363cd9d92f6ebe2f80.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/dd/22/0e/ff800c6e8d46f9bc6bf784b9b37daf54.jpg);"></div>
+                                    <div class="comment-content__images-item" style="background-image: url(https://salt.tikicdn.com/ts/review/dd/22/0e/ff800c6e8d46f9bc6bf784b9b37daf54.jpg);"></div>
+                                </div>
+
+                                <div class="comment-content__time">
+                                    Đánh giá vào 4 ngày trước  -  Đã dùng 7 giờ
+
+                                </div>
+
+                                <div class="comment-content__interact">
+                                    <div class="interact__like">
+                                        <i class="far fa-thumbs-up"></i>
+                                        <span>
+                                            Hữu ích
+                                        </span>
+                                    </div>
+
+                                    <div class="interact__comment">
+                                        Bình luận
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-pagination">
+            <div class="grid">
+                    <div class="gird__row">
+                        <div class="reviews-comment__pagination">
+                            <div class="pagination__icon">
+                                <i class="fas fa-chevron-left"></i>
+                            </div>
+                            <div class="reviews-pages">
+                                <div class="reviews-pages__item reviews-pages__item--active">
+                                    1
+                                </div>
+                                <div class="reviews-pages__item">
+                                    2
+                                </div>
+                                <div class="reviews-pages__item">
+                                    3
+                                </div>
+                                <div class="reviews-pages__item">
+                                    4
+                                </div>
+                                <div class="reviews-pages__item">
+                                    5
+                                </div>
+                            </div>
+                            <div class="pagination__icon">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+
+        </footer>
+    </div>
+</body>
+</html>
