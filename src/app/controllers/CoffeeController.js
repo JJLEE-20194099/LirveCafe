@@ -12,29 +12,63 @@ const CoffeeController = {
 
     // GET /coffee/list
     index(req, res, next) {
-        Coffee.find({})
+        let coffeeQuery = Coffee.find({});
+        
+        if(res.locals.sort.enabled && res.locals.sort.field != 'default') {
+            let asc_or_desc = 1
+            if (res.locals.sort.type == 'desc') {
+                asc_or_desc = -1
+            }
+            
+
+            if (res.locals.sort.field == 'price') {
+               
+                coffeeQuery = coffeeQuery.sort({
+                    price: asc_or_desc
+                })
+            }
+
+            if (res.locals.sort.field == 'createdAt') {
+                coffeeQuery = coffeeQuery.sort({
+                    createdAt: asc_or_desc
+                })
+            }
+
+            if (res.locals.sort.field == 'sold') {
+                coffeeQuery = coffeeQuery.sort({
+                    sold: asc_or_desc
+                })
+            }
+            
+            
+        }
+
+        Promise.resolve(coffeeQuery)
             .then((coffee) => {
-                console.log(res.locals)
+               
                 res.render('drink/list/list.hbs', {
                     coffee: mongooseDocumentsToObject(coffee),
                     user: res.locals.user
                 });
             }).catch(next);
-    },    
+    },
 
     // GET /coffee/:slug
     show(req, res, next) {
         
-        Coffee.findOne({slug: req.params.slug})
-            .then((coffee) => {
+        Promise.all([Coffee.findOne({slug: req.params.slug}), Coffee.find({})])
+            .then(([coffee, coffees]) => {
                 coffee = singleMongooseDocumentToObject(coffee)
+                coffees = mongooseDocumentsToObject(coffees)
                 Comment.find({itemId: coffee._id})
-                .sort({"updatedAt": -1})
+                .sort({updatedAt: -1})
                     .then((commentList) => {
                         res.render('drink/item/coffee_info.hbs', {
                             coffee: coffee,
+                            coffees: coffees,
                             commentList: mongooseDocumentsToObject(commentList),
-                            user: res.locals.user
+                            user: res.locals.user,
+                            cart: res.locals.cart
                         })
                     })
                
@@ -43,7 +77,6 @@ const CoffeeController = {
 
     // GET: /coffee/buy/:id
     showPayForm(req, res, next) {
-        console.log(req.params.id)
         Coffee.findOne({_id: req.params.id})
             .then((coffee) => {
                 coffee = singleMongooseDocumentToObject(coffee)

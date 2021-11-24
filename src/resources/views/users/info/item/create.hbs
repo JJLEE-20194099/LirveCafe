@@ -3,21 +3,75 @@
         <p>{{this}}</p>
 {{/each}}
 
-<form action="/users/save" method="POST" enctype="multipart/form-data">
-    <div class="form-group"> <label class="form-control-label text-muted">firstname</label> <input type="text"
-            id="firstname" name="firstname" placeholder="" class="form-control"> </div>
-    <div class="form-group"> <label class="form-control-label text-muted">lastname</label> <input
-            id="psw" name="lastname" placeholder="" class="form-control"> </div>
-    <div class="form-group"> <label class="form-control-label text-muted">email</label> <input id="psw"
-            name="email"  class="form-control"> </div>
-    <div class="form-group"> <label class="form-control-label text-muted">phone</label> <input type="" id="psw"
-            name="phone"  class="form-control"> </div>
-    <div class="form-group"> <label class="form-control-label text-muted">username</label> <input type="" id="psw"
-            name="username"  class="form-control"> </div>
-    <div class="form-group"> <label class="form-control-label text-muted">password</label> <input type="password"
-            id="password" name="password"  class="form-control"> </div>
-    <div class="form-group"> <label class="form-control-label text-muted">avatar</label> <input type="file" id="psw"
-            name="avatar"  class="form-control"> </div>
-    
-    <button class="btn btn-primary" type="submit">Sign up</button>
-</form>
+
+<div class="signup__container">
+  <div class="container__child signup__thumbnail">
+    <div class="thumbnail__logo d-flex align-items-center">
+      <img src="/img/brand-logo.png" alt="logo-brand" class="logo__shape" width="80px" height="80px">
+      <h1 class="logo__text" style="margin-bottom: -20px">LirveCafe is all you need for a long day</h1>
+    </div>
+    <div class="thumbnail__content text-center">
+      <h1 class="heading--primary" style="color: #8f7529; font-weight: 600; text-shadow: 2px 2px 4px #000000;">Welcome to LirveCafe</h1>
+      <h2 class="heading--secondary" style="color: #dfae1d; font-weight: 400; text-shadow: 2px 2px 4px #000000;">Are you ready to join the lirvecafe group ?</h2>
+    </div>
+    <div class="thumbnail__links">
+      <ul class="list-inline m-b-0 text-center">
+        <li><a href="http://alexdevero.com/" target="_blank"><i class="fa fa-globe"></i></a></li>
+        <li><a href="https://www.behance.net/alexdevero" target="_blank"><fa class="fa fa-behance"></fa></a></li>
+        <li><a href="https://github.com/alexdevero" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a href="https://twitter.com/alexdevero" target="_blank"><i class="fa fa-twitter"></i></a></li>
+      </ul>
+    </div>
+    <div class="signup__overlay"></div>
+  </div>
+  <div class="container__child signup__form">
+         
+    <form  action="/users/save" method="POST" enctype="multipart/form-data">
+              <div class="form-group">
+        <label for="firstname">Firstname</label>
+        <input class="form-control" type="text" name="firstname" id="firstname" placeholder="Long" required />
+      </div>
+      <div class="form-group">
+        <label for="lastname">Lastname</label>
+        <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Lê Thành" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" type="email" name="email" id="email" placeholder="lirvecafehust@gmail.com" required />
+      </div>
+        <div class="form-group">
+        <label for="username">Username</label>
+        <input class="form-control" type="text" name="username" id="username" placeholder="JJLee" required />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input class="form-control" type="text" name="phone" id="phone" placeholder="(84+)969973023" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" name="password" id="password" placeholder="********" required />
+      </div>
+      <div class="form-group">
+        <label for="passwordRepeat">Repeat Password</label>
+        <input class="form-control" type="password" name="passwordRepeat" id="passwordRepeat" placeholder="********" required />
+      </div>
+
+       <div class="form-group">
+        <label for="avatar">Avatar</label>
+        <input class="form-control" type="file" name="avatar" id="avatar" placeholder="********"/>
+      </div>
+      <div class="m-t-lg">
+        <ul class="list-inline">
+          <li>
+            <input class="btn btn--form" type="submit" value="Register" />
+          </li>
+          <li>
+            <a class="signup__link" href="#">I am already a member</a>
+          </li>
+        </ul>
+      </div>
+    </form>  
+  </div>
+</div>

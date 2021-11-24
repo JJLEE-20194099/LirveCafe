@@ -157,7 +157,6 @@ def crawl_coffee_detail_by_slug(detail_by_slug_api, slug):
     payload = {}
    
     response = requests.post(detail_by_slug_api.format(slug), headers=get_header(), data=payload)
-    print(detail_by_slug_api.format(slug))
     if response.status_code == 200:
         response_json = response.json()
     else:

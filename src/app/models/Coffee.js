@@ -12,6 +12,7 @@ const Coffee = new Schema(
         image: {type: String, required: true},
         price: {type: String, required: true},
         slug: {type: String, slug: 'name', unique: true},
+        sold: {type: Number, default: 0},
         meta: {
             votes: {type: Number, default: 0},
             favs: {type: Number, default: 0}

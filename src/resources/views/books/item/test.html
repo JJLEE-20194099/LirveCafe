@@ -229,23 +229,8 @@
             <div id="commentBox">
                 {{#each commentList}}
                 <div id="{{this._id}}" class="each_comment_box">
-                    <div class="media d-flex align-items-center">
-                        <span class="round"><img src="https://img.icons8.com/bubbles/100/000000/groups.png"
-                            class="align-self-start mr-3"></span>
-                        <div class="d-flex flex-column align-items-start justify-content-evenly">
-                            <h6 class="user pt-2">{{this.username}}</h6>
-                            <div class="ml-auto">
-                                <div class="d-flex justify-content-between">
-                                    <p class="content">{{this.content}}</p>
-                                    <span class="date">{{this.updatedAt}}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    
+                    <p class="content">{{this.username}}: {{this.content}}</p> <span
+                        class="date">{{this.updatedAt}}</span>
                     <ul class="replyList">
                         {{#each this.replyList}}
                         <li>
@@ -274,7 +259,7 @@
     <script src="../socket.io/socket.io.js"></script>
     <script src="/js/datetime_handling.js"></script>
     <script src="/js/book_detail.js"></script>
-
+    
     <script>
         var socket = io("http://localhost:3000")
 
@@ -286,7 +271,7 @@
                 parentCommentId: commentId,
             }
             alert(data)
-
+            
             $.ajax({
                 url: '/books/reply-comment',
                 method: 'POST',
@@ -381,7 +366,7 @@
                             </div>
                         </div>`
                 var commentBox = $("#commentBox")
-
+                
                 commentBox.html(html + commentBox.html())
 
             })

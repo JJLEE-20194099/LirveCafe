@@ -17,6 +17,10 @@ const validate = {
         if (!req.body.password) {
             errors.push("Password is required");
         }
+        if (req.body.password && req.body.passwordRepeat) {
+            if (req.body.password != req.body.passwordRepeat) 
+                errors.push("Password re-entered is incorrect")
+        }
 
         if (errors.length) {
             res.render('users/create', {
@@ -38,11 +42,15 @@ const validate = {
         }
 
         if (errors.length) {
-            res.render('users/login', {
+            res.render('auth/index', {
                 errors: errors,
                 values: req.body
             });
             return ;
+        }
+
+        if (req.body.remember) {
+            res.locals.username = req.body.key
         }
         
         next();

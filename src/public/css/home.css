@@ -4,7 +4,8 @@
   scroll-behavior: smooth; }
 
 body {
-  background-image: url("/img/background_list.jpg"); }
+  background-image: url("/img/body_background.jpg");
+  background-size: cover; }
 
 #header {
   background-color: #c39e51;
@@ -21,16 +22,39 @@ body {
     font-size: 18px;
     margin-left: 8px;
     line-height: 38px; }
-  #header .header-list {
-<<<<<<< HEAD
-    padding-top: 12px;
-=======
->>>>>>> cd1796dcd6fbe9eaec6df864e4b8d0d74553b219
+  #header .func-list {
     z-index: 2;
     display: none;
     position: absolute;
-    top: 100%;
-    left: 10px; }
+    top: 75%;
+    right: 4px; }
+    #header .func-list ul {
+      padding-left: 0px;
+      margin-bottom: 0;
+      background-color: #c39e51;
+      border: 1px solid #fff;
+      text-align: center;
+      border-radius: 6px;
+      box-shadow: 0 0 8px #fff; }
+    #header .func-list li {
+      list-style-type: none;
+      height: 40px;
+      padding: 4px 16px;
+      width: 150px; }
+    #header .func-list li:hover {
+      background-color: #fff; }
+      #header .func-list li:hover a {
+        color: #c39e51; }
+    #header .func-list a {
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px; }
+  #header .header-list {
+    z-index: 2;
+    display: none;
+    position: absolute;
+    top: 75%;
+    left: 200px; }
     #header .header-list ul {
       padding-left: 0px;
       margin-bottom: 0;
@@ -43,7 +67,7 @@ body {
       list-style-type: none;
       height: 40px;
       padding: 4px 16px;
-      min-width: 145px; }
+      width: 150px; }
     #header .header-list li:hover {
       background-color: #fff; }
       #header .header-list li:hover a {
@@ -75,17 +99,8 @@ body {
     color: #000; }
 
 #main-header {
-<<<<<<< HEAD
-  padding: 0;
-  width: 85%;
-=======
   width: 84%;
-<<<<<<< HEAD
->>>>>>> cd1796dcd6fbe9eaec6df864e4b8d0d74553b219
-  background-color: #FBB117;
-=======
   background-color: #c39e51;
->>>>>>> ce3e2258f660a10be1dddaade88b4d8f86deb523
   height: 100px;
   margin: 0 auto; }
   #main-header #name-brand {
@@ -94,8 +109,7 @@ body {
 .header-menu,
 .header-user {
   height: 40px;
-  font-size: 13px;
-  margin-right: 40px; }
+  font-size: 13px; }
 
 .search-btn {
   margin-left: 12px;
@@ -109,18 +123,7 @@ body {
   border: 1px solid #c39e51; }
 
 .header-user {
-  margin: 12px; }
-
-.search-btn {
-  margin-left: 12px;
-  background-color: #FBB117;
-  color: #fff;
-  border: 1px solid #fff; }
-
-.search-btn:hover {
-  color: #FBB117;
-  background-color: #fff;
-  border: 1px solid #FBB117; }
+  margin: 8px; }
 
 #header .header-icon {
   color: #fff;
@@ -134,36 +137,18 @@ body {
   width: 84%;
   margin-top: 126px; }
 
-<<<<<<< HEAD
-.header-form .header-search-icon {
-  margin-right: 4px; }
-
-=======
->>>>>>> cd1796dcd6fbe9eaec6df864e4b8d0d74553b219
 .carousel-control-next, .carousel-control-prev {
   top: 170px;
   bottom: 170px;
   color: #c39e51; }
 
 #home-slider {
-  margin-top: 32px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  box-shadow: 0 0 8px #000; }
-  #home-slider .carousel-item img {
-    height: 500px;
-    object-fit: cover; }
-=======
-  box-shadow: 0 0 36px #FBB117; }
-=======
-  box-shadow: 0 0 36px #c39e51; }
->>>>>>> ce3e2258f660a10be1dddaade88b4d8f86deb523
+  margin-top: 32px; }
   #home-slider .carousel-item {
     text-decoration: none !important; }
     #home-slider .carousel-item img {
       height: 500px;
       object-fit: cover; }
->>>>>>> cd1796dcd6fbe9eaec6df864e4b8d0d74553b219
 
 .home-product {
   margin-top: 32px;
@@ -206,14 +191,6 @@ body {
         padding: 8px 12px; }
       .home-product .carousel-item .card .card-title {
         margin-bottom: 8px; }
-<<<<<<< HEAD
-      .home-product .carousel-item .card .card-text {
-        display: -webkit-box;
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2; }
-=======
->>>>>>> cd1796dcd6fbe9eaec6df864e4b8d0d74553b219
       .home-product .carousel-item .card .book-author {
         font-size: 16px;
         margin-bottom: 8px; }
@@ -235,15 +212,8 @@ body {
         padding: 1px; }
   .home-product .carousel-item:hover {
     box-shadow: 0 0 4px #fff;
-<<<<<<< HEAD
-=======
     text-decoration: none;
-<<<<<<< HEAD
->>>>>>> cd1796dcd6fbe9eaec6df864e4b8d0d74553b219
-    color: #FBB117; }
-=======
     color: #c39e51; }
->>>>>>> ce3e2258f660a10be1dddaade88b4d8f86deb523
   .home-product .carousel-inner .active,
   .home-product .carousel-inner .active + .carousel-item,
   .home-product .carousel-inner .active + .carousel-item + .carousel-item,
@@ -295,15 +265,7 @@ body {
   margin: 16px 0;
   padding-top: 50%;
   background: url("/img/homeimage.jpg") center center/cover no-repeat;
-<<<<<<< HEAD
-<<<<<<< HEAD
-  border: 2px solid #FBB117;
-=======
-  border: 3px solid #FBB117;
->>>>>>> cd1796dcd6fbe9eaec6df864e4b8d0d74553b219
-=======
   box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;
->>>>>>> ce3e2258f660a10be1dddaade88b4d8f86deb523
   border-radius: 12px; }
 
 #footer {
@@ -352,4 +314,8 @@ a {
 
 .carousel-inner {
   box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;
-  border-radius: 8px; }
+  border-radius: 10px !important; }
+
+.carousel.slide {
+  margin-left: 0;
+  margin-right: 0; }

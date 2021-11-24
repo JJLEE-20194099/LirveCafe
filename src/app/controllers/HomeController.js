@@ -1,4 +1,3 @@
-// import { Promises } from 'stream';
 import Book from '../models/Book.js';
 import Coffee from '../models/Coffee.js';
 
@@ -9,7 +8,7 @@ import {
 
 const HomeController = {
     index: function(req, res, next) {
-       
+        console.log(1)
         Promise.all([Book.find({}), Coffee.find({})])
             .then(([books, coffee]) => {
                 books = mongooseDocumentsToObject(books)

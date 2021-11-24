@@ -1,19 +1,16 @@
-<link rel="stylesheet" href="/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/css/home.css">
-    <link rel="stylesheet" href="/css/product.css">
 <div id="header">
 
     <div id="main-header" class="row navbar d-flex flex-row justify-content-start align-items-center">
 
        <div class="d-flex justify-content-start align-items-center" style="flex: 3">
-            <a href="#" class="navbar-brand mx-0 d-flex align-items-center justify-content-between">
+            <a href="/" class="navbar-brand mx-0 d-flex align-items-center justify-content-between">
                 <img src="/img/brand-logo.png" alt="logo-brand" width="80px" height="80px">
                 <span id="name-brand">LivreCafé</span>
             </a>
 
         <div class="header-menu d-flex mx-3 align-items-center">
             <i class="header-icon ti-menu"></i>
-            
+            <div class= "link-tri"></div>
 
             <div id = "menu-list" class= "header-list">
                 <ul>
@@ -27,8 +24,8 @@
         </div>
 
         <form class="form-inline col col-9 row header-form">
-            <input class="col-9 form-control " type="search" placeholder="Nhập để tìm kiếm..." aria-label="Search">
-            <button class="btn col-2 search-btn" type="submit"><i class = "header-search-icon ti-search"></i>Search</button>
+            <input class="col-9 form-control " type="search" placeholder="Nhập để tìm kiếm..." aria-label="Search" style="background-color: white">
+            <button class="btn col-2 search-btn" type="submit">Search</button>
         </form>
        </div>
 
@@ -51,18 +48,18 @@
 
          <div class="header-user d-flex .align-items-center">
             <i class="header-icon ti-user ml-3 mr-1"></i>
-            <div class="header-des">
+            <div class="header-des d-flex align-items-center">
                 {{#if user}}   
                     <span class="header-text" id="user-name">{{user.username}}</span>
                 {{else}}
                     <a class="header-text" id = "login-text" href="/auth/index">Đăng nhập</a>
                 {{/if}}
             </div>
-
-            <div id = "user-list" class= "header-list">
+            <div class="link-tri"></div>
+            <div id = "user-list" class= "func-list">
                 <ul>
                     <li><a href = '#'>Tài khoản</a></li>
-                    <li><a href = '#'>Đăng xuất</a></li>
+                    <li><a href = '/auth/logout'>Đăng xuất</a></li>
                 </ul>
             </div>
 

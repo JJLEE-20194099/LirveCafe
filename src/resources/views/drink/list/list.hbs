@@ -114,30 +114,30 @@
     </div>
     <!--/.Carousel Wrapper-->
 
-    <div class="product-filter">
+     <div class="product-filter">
       <ul>
         <li class="">
-          <a href='#'>Phổ biến</a>
+          <a href='/coffee/list?sort=default'>Phổ biến</a>
           <div class="filter-pane"></div>
         </li>
         <li class="active">
-          <a href='#'>Bán chạy</a>
+          <a href='/coffee/list?sort=top_seller'>Bán chạy</a>
           <div class="filter-pane"></div>
         </li>
         <li class="">
-          <a href='#'>Hàng mới</a>
+          <a href='/coffee/list?sort=newest'>Hàng mới</a>
           <div class="filter-pane "></div>
         </li>
         <li class="">
-          <a href='#'>Giá thấp</a>
+          <a href='/coffee/list?sort=price&type=asc'>Giá thấp</a>
           <div class="filter-pane "></div>
         </li>
         <li class="">
-          <a href='#'>Giá cao</a>
+          <a href='/coffee/list?sort=price&type=desc'>Giá cao</a>
           <div class="filter-pane"></div>
         </li>
       </ul>
-    </div>
+    </div>  
 
     <div id="product-list" class="row ">
 
@@ -159,8 +159,10 @@
       {{/each}}
     </div>
 
+
   </div>
 </div>
+
 
 <script>
   const $ = document.querySelector.bind(document);

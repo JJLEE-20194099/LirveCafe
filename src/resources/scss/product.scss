@@ -43,10 +43,6 @@ $valueColor: #FF424E;
 
     #product-category {
         
-        border: 2px solid $mainColor;
-        width: 250px;
-        border-radius: 8px;
-        margin-right: 16px;
         padding: 16px 16px;
         height: 100%;
         width: 100%;
@@ -142,13 +138,11 @@ $valueColor: #FF424E;
         height: 370px;
         overflow: hidden;
     }
-    .carousel-item {
-        margin-bottom: 20px;
-      
-    }
+    
 
     #product-name {
         height: 44px;
+        padding-left: 24px;
         font-size: 24px;
         font-weight: 600;
         color: $mainColor;
@@ -261,6 +255,7 @@ $valueColor: #FF424E;
 
                 .card-img-top{
                     height: 230px;
+                    object-fit: cover;
                 }
 
                 .card-body {
@@ -276,6 +271,7 @@ $valueColor: #FF424E;
 
         #pagination {
 
+            border: 2px solid $mainColor;
             border-radius: 8px;
 
             ul {

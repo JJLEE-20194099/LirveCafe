@@ -1,5 +1,6 @@
 <body>
-    <p id="username">{{cart.username}}</p>
+    <div class="cart-container">
+        <p id="username">{{cart.username}}</p>
     <input type="text" id="cartId" value="{{cart._id}}">
     {{#each cart.itemList}}
     <div id="{{this.book._id}}">
@@ -29,6 +30,7 @@
     {{#if cart.itemList.length}}
     <a href="/books/buys/{{cart._id}}" id="purchaseBtn">Purchase now</a>
     {{/if}}
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
          function calculateTotal() {

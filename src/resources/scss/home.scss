@@ -14,7 +14,8 @@ $valueColor: #FF424E;
 }
 
 body {
-    background-image: url('/img/background_list.jpg');
+    background-image: url('/img/body_background.jpg');
+    background-size: cover;
 }
 
 #header {
@@ -40,13 +41,54 @@ body {
         }
     }
 
-    .header-list {
-        padding-top: 12px;
+
+    .func-list {
         z-index: 2;
         display: none;
         position: absolute;
-        top: 100%;
-        left: 10px; 
+        top: 75%;
+        right: 4px;
+        
+        ul {
+            padding-left: 0px;
+            margin-bottom: 0;
+            background-color:$headerColor1;
+            border: 1px solid $textHeaderColor; 
+            text-align: center;
+            border-radius: 6px;
+            box-shadow: 0 0 8px $textHeaderColor;
+        }
+
+        li {
+            list-style-type: none;
+            
+            height: 40px;
+            padding: 4px 16px;
+            width: 150px;
+        }
+
+        li:hover {
+           
+            background-color: $textHeaderColor;
+            a {
+                color: $headerColor1;
+            }
+        }
+
+        a {
+            color:  $textHeaderColor;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+    }
+
+    .header-list {
+        z-index: 2;
+        display: none;
+        position: absolute;
+        top: 75%;
+        left: 200px; 
         
         
         ul {
@@ -64,7 +106,7 @@ body {
             
             height: 40px;
             padding: 4px 16px;
-            min-width: 145px;
+            width: 150px;
         }
 
         li:hover {
@@ -117,9 +159,8 @@ body {
 }
 
 #main-header {
-
-    padding: 0;
-    width: 85%;
+    width: 84%;
+    // background-image: linear-gradient(90deg,#ffb141,#fb8d17);
     background-color: $headerColor1;
     height: $headerHeight;
     margin: 0 auto;
@@ -134,11 +175,7 @@ body {
 .header-user {
     height: 40px;
     font-size: 13px;
-    margin-right: 40px;
-}
-
-.header-user {
-    margin: 12px;
+    
 }
 
 .search-btn {
@@ -154,7 +191,9 @@ body {
     border: 1px solid $headerColor1;
 }
 
-
+.header-user {
+    margin: 8px;
+}
 
 #header .header-icon {
     color: $textHeaderColor;
@@ -170,14 +209,6 @@ body {
     margin-top: 126px;
 }
 
-.header-form {
-
-    .header-search-icon {
-        margin-right: 4px;
-    }
-    
-}
-
 // -----------Slider------------- 
 
 .carousel-control-next, .carousel-control-prev {
@@ -188,7 +219,6 @@ body {
 
 #home-slider {
     margin-top: 32px;
-    box-shadow: 0 0 8px #000;
 
     .carousel-item {
         text-decoration: none!important;
@@ -259,12 +289,7 @@ body {
                 margin-bottom: 8px;
             }
 
-            .card-text {
-                display: -webkit-box;
-                overflow: hidden;
-                -webkit-box-orient: vertical;
-                -webkit-line-clamp: 2;
-            }
+
 
             .book-author {
                 font-size: 16px;
@@ -373,6 +398,7 @@ body {
      }
 
     
+  
 }
 
 #home-image {
@@ -441,6 +467,11 @@ a {
 
 .carousel-inner {
     box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);
-    border-radius: 8px;
+    border-radius: 10px!important;
 }
 
+
+.carousel.slide {
+    margin-left: 0;
+    margin-right: 0;
+}

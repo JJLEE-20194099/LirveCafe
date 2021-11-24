@@ -1,6 +1,9 @@
 import User from '../models/User.js'
+import Book from '../models/Book.js';
+import Coffee from '../models/Coffee.js';
 import { 
-    mongooseDocumentsToObject
+    mongooseDocumentsToObject,
+    singleMongooseDocumentToObject,
 } from '../../support_lib/mongoose.js';
 
 import Vonage  from '@vonage/server-sdk'
@@ -39,7 +42,6 @@ const AuthController = {
 
     login: function(req, res, next) {
         const {key, password} = req.body;
-        
         const errors = [];
 
         const checkLogin = function(item) {
@@ -79,20 +81,32 @@ const AuthController = {
                     //         }
                     //     }
                     // })
-
+                   
                     const data =  {
                         user: user,
                         // validToken: otpGenerator.generate(6, { upperCase: false, specialChars: false})
                     }
-                       // res.render('auth/2fa', {data: data});
-                    res.redirect('/')
+
+                    return Promise.all([Book.find({}), Coffee.find({}), User.findOne({username: key})])
+                       // res.render('auth/2fa', {data: data});                    
+                } else {
                     errors.push('username or phone or email or password is not correct');
+                   
                     res.render('auth/index', {
                        errors: errors,
                        values: req.body
                     });
                 }
-            }).catch(next)
+            }).then(([books, coffee, user]) => {
+                books = mongooseDocumentsToObject(books)
+                coffee = mongooseDocumentsToObject(coffee)
+                res.render('home/home.hbs', {
+                    user: singleMongooseDocumentToObject(user),
+                    books: books,
+                    coffee: coffee,
+                });
+            })
+            .catch(next)
 
 
 

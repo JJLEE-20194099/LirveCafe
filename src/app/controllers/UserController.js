@@ -1,4 +1,6 @@
 import User from '../models/User.js';
+import Book from '../models/Book.js';
+import Coffee from '../models/Coffee.js';
 import { 
     singleMongooseDocumentToObject,
     mongooseDocumentsToObject
@@ -47,9 +49,10 @@ const UserController = {
             const name = req.body.firstname + ' ' + req.body.lastname;
             req.body.avatar = '/img/' + name + '-default.jpg'; 
         }
-        const user = new User(req.body);
+        let user = new User(req.body);
+        
         user.save()
-            .then(() => res.render('/home/home.hbs', {user: user}))
+            .then(() => res.render('auth/index', { user: singleMongooseDocumentToObject(user)}))
             .catch(next);
     },  
 
