@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- reset CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- link css -->
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <!-- link google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-5.15.4/css/all.css">
+    <!-- link image -->
+</head>
+<body>
+    <div class="user-info">
+        <div class="grid ">
+            <div class="grid__row">
+                <div class="grid__col-2">
+                    <div class="user-info__left">
+                        <div class="user-info__top">
+                            <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="user-info__img">
+                            <div class="user-info__detail">
+                                <span class="user-info__name">Princie Kidy</span>
+                                <a href="#" class="user-info__action">
+                                    <i class="fas fa-pen user-info__change-icon"></i>
+                                    <span href="#" class="user-info__change">Sửa hồ sơ</span>
+                                </a>
+                            </div>
+                        </div>
+    
+                        <div class="user-info__myaccount">
+                            <div class="myaccount__heading">
+                                <i class="far fa-user myaccount__heading-icon"></i>
+                                <span>Tài khoản của tôi</span>
+                            </div>
+                            <div class="myaccount__content">
+                                <a href="#" class="myaccount__content-item myaccount__content-item--active">Hồ sơ</a>
+                                <a href="#" class="myaccount__content-item">Đổi mật khẩu</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="grid__col-10">
+                    <div class="user-info__content">
+                        <div class="user-info__content-top">
+                            <span class="user__content-top__heading">Hồ sơ của tôi</span>
+                            <span style="color: #848484;">Quản lí thông tin hồ sơ để bảo mật an toàn</span>
+                        </div>
+                        <div class="user__info__content-body">
+                            <div class="user__body-detail">
+                                <div class="user__body-detail-item">
+                                    <div class="user-detail-item__left">Tên đăng nhập</div>
+                                    <div class="user-detail-item__right">Princie Kidy</div>
+                                </div>
+
+                                <div class="user__body-detail-item">
+                                    <div class="user-detail-item__left">Tên</div>
+                                    <div class="user-detail-item__right">
+                                        <input type="text" class="user-item__right-input">
+                                    </div>
+                                </div>
+                                <div class="user__body-detail-item">
+                                    <div class="user-detail-item__left">Email</div>
+                                    <div class="user-detail-item__right">
+                                        lo*******@gmail.com
+                                        <a href="#" class="user-detail-item__change">Thay đổi</a>
+                                    </div>
+                                </div>
+                                <div class="user__body-detail-item">
+                                    <div class="user-detail-item__left">Số Điện Thoại</div>
+                                    <div class="user-detail-item__right">
+                                        *********92
+                                        <a href="#" class="user-detail-item__change">Thay đổi</a>
+                                    </div>
+                                </div>
+                                <div class="user__body-detail-item">
+                                    <div class="user-detail-item__left">Giới tính</div>
+                                    <div class="user-detail-item__right">
+                                        <div class="user-detail-item__gender">
+                                            <div class="user__gender-item">
+                                                <i class="far fa-circle gender__icon"></i>
+                                                <i class="far fa-dot-circle gender__icon--selected"></i>
+                                                Nam
+                                            </div>
+
+                                            <!-- selected -->
+                                            <div class="user__gender-item user__gender-item--selected">
+                                                <i class="far fa-circle gender__icon"></i>
+                                                <i class="far fa-dot-circle gender__icon--selected"></i>
+                                                Nữ
+                                            </div>
+                                            <div class="user__gender-item">
+                                                <i class="far fa-circle gender__icon"></i>
+                                                <i class="far fa-dot-circle  gender__icon--selected"></i>
+                                                Khác
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="user__body-detail-item">
+                                    <div class="user-detail-item__left">Ngày Sinh</div>
+                                    <div class="user-detail-item__right user-detail-item__right--dateOfBirth ">
+                                        <div class="user-detail-item__opt">
+
+                                            <!-- add class user-detail-item__right-options--onclick vào sẽ hiện options -->
+                                            <div class="user-detail-item__right-options ">
+                                                1
+                                                <i class="fas fa-chevron-down user-options__icon"></i>
+                                                <i class="fas fa-chevron-up user-options__icon--onclick"></i>
+
+                                                <div class="user-options__container">
+                                                    <span class="user-options__item">1</span>
+                                                    <span class="user-options__item">2</span>
+                                                    <span class="user-options__item">3</span>
+                                                    <span class="user-options__item">4</span>
+                                                    <span class="user-options__item">5</span>
+                                                    <span class="user-options__item">6</span>
+                                                    <span class="user-options__item">7</span>
+                                                    <span class="user-options__item">8</span>
+                                                    <span class="user-options__item">9</span>
+                                                    <span class="user-options__item">10</span>
+                                                    <span class="user-options__item">11</span>
+                                                    <span class="user-options__item">12</span>
+    
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        <div class="user-detail-item__opt">
+                                            <div class="user-detail-item__right-options ">
+                                                Tháng 1
+                                                <i class="fas fa-chevron-down user-options__icon"></i>
+                                                <i class="fas fa-chevron-up user-options__icon--onclick"></i>
+
+                                                <div class="user-options__container">
+                                                    <span class="user-options__item">Tháng 1</span>
+                                                    <span class="user-options__item">Tháng 2</span>
+                                                    <span class="user-options__item">Tháng 3</span>
+                                                    <span class="user-options__item">Tháng 4</span>
+                                                    <span class="user-options__item">Tháng 5</span>
+                                                    <span class="user-options__item">Tháng 6</span>
+                                                    <span class="user-options__item">Tháng 7</span>
+                                                    <span class="user-options__item">Tháng 8</span>
+                                                    <span class="user-options__item">Tháng 9</span>
+                                                    <span class="user-options__item">Tháng 10</span>
+                                                    <span class="user-options__item">Tháng 11</span>
+                                                    <span class="user-options__item">Tháng 12</span>
+    
+                                                </div>
+                                            </div>    
+                                        </div>
+                                        <div class="user-detail-item__opt">
+                                            <div class="user-detail-item__right-options user-detail-item__right-options--onclick">
+                                                1999
+                                                <i class="fas fa-chevron-down user-options__icon"></i>
+                                                <i class="fas fa-chevron-up user-options__icon--onclick"></i>
+
+                                                <div class="user-options__container">
+                                                    <span class="user-options__item">1991</span>
+                                                    <span class="user-options__item">1992</span>
+                                                    <span class="user-options__item">1993</span>
+                                                    <span class="user-options__item">1994</span>
+                                                    <span class="user-options__item">1995</span>
+                                                    <span class="user-options__item">1996</span>
+                                                    <span class="user-options__item">1997</span>
+                                                    <span class="user-options__item">1998</span>
+                                                    <span class="user-options__item">1999</span>
+                                                    <span class="user-options__item">2000</span>
+                                                    <span class="user-options__item">2001</span>
+                                                    <span class="user-options__item">2002</span>
+                                                    <span class="user-options__item">2003</span>
+                                                    <span class="user-options__item">2004</span>
+                                                    <span class="user-options__item">2005</span>
+                                                    <span class="user-options__item">2006</span>
+                                                    <span class="user-options__item">2007</span>
+                                                    <span class="user-options__item">2008</span>
+                                                    <span class="user-options__item">2009</span>
+                                                    <span class="user-options__item">2010</span>
+                                                </div>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="user__body-detail__btn">Lưu</button>
+                            </div>
+    
+                            <div class="user__body-right">
+                                <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="user__body-right__img">
+                                <button class="user__body-right__btn">Chọn ảnh</button>
+                                <div class="body-right__des">
+                                    <div class="body-right__des-item">Dung lượng tối đa 1MB</div>
+                                    <div class="body-right__des-item">Định dạng: .JPEG, .PNG</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
