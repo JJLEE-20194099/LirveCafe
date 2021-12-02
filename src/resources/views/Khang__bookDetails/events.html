@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- reset CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- link css -->
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <!-- link google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/fonts/fontawesome-free-5.15.4/css/all.css">
+    <!-- link image -->
+</head>
+<body>
+    <div class="admin__events">
+        <div class="events__heading">
+            Events: 
+            <span class="events__heading-count">14</span>
+
+            <a href="#">
+                <button class="events__heading-add">
+                    <i class="fas fa-plus events-add__icon"></i>
+                    Add new event
+                </button>
+            </a>
+        </div>
+        <div class="events__content">
+            <div class="events__content-search">
+                <i class="fas fa-search events-search__icon"></i>
+            </div>
+            <ul class="events-list">
+                <li class="events-list__item events-list__item--heading">
+                    <span class="events-item-category--name">Customer Name</span>
+                    <span class="events-item-category--guests">Guests</span>  
+                    <span class="events-item-category--date">Date</span>  
+                    <span class="events-item-category--time">Time</span>  
+                    <span class="events-item-category--type">Type</span>  
+                    <div class="events-item-category--status">Status</div>
+                    <span href="#" class="events-item__view">
+                        View
+                    </span>
+                </li>    
+                <li class="events-list__item">
+                    <span class="events-item-category--name">Charlie Gay</span>
+                    <span class="events-item-category--guests">20</span>  
+                    <span class="events-item-category--date">6 Dec</span>  
+                    <span class="events-item-category--time">12:00</span>  
+                    <span class="events-item-category--type">Dinner</span>  
+                    <div class="events-item-category--status">
+                        <!-- add modifier  events-item__btn--inprogress/--paid/--canceled/--deposit -->
+                        <button class="events-item__btn events-item__btn--inprogress">
+                            <span class="item--inprogress">
+                                In progress
+                            </span>
+                            <span class="item--deposit">
+                                Deposit
+                            </span>
+                            <span class="item--paid">
+                                Paid   
+                            </span>
+                            <span class="item--canceled">
+                                Canceled
+                            </span>
+                        </button>
+                    </div> 
+                    <a href="#" class="events-item__view">
+                        <i class="fas fa-eye events-item__icon"></i>
+                    </a>
+                </li>          
+                <li class="events-list__item">
+                    <span class="events-item-category--name">Charlie Gay</span>
+                    <span class="events-item-category--guests">20</span>  
+                    <span class="events-item-category--date">6 Dec</span>  
+                    <span class="events-item-category--time">12:00</span>  
+                    <span class="events-item-category--type">Dinner</span>  
+                    <div class="events-item-category--status">
+                        <button class="events-item__btn events-item__btn--deposit">
+                            <span class="item--inprogress">
+                                In progress
+                            </span>
+                            <span class="item--deposit">
+                                Deposit
+                            </span>
+                            <span class="item--paid">
+                                Paid   
+                            </span>
+                            <span class="item--canceled">
+                                Canceled
+                            </span>
+                        </button>
+                    </div> 
+                    <a href="#" class="events-item__view">
+                        <i class="fas fa-eye events-item__icon"></i>
+                    </a>
+                </li>            
+                <li class="events-list__item">
+                    <span class="events-item-category--name">Charlie Gay</span>
+                    <span class="events-item-category--guests">20</span>  
+                    <span class="events-item-category--date">6 Dec</span>  
+                    <span class="events-item-category--time">12:00</span>  
+                    <span class="events-item-category--type">Dinner</span>  
+                    <div class="events-item-category--status">
+                        <button class="events-item__btn events-item__btn--paid">
+                            <span class="item--inprogress">
+                                In progress
+                            </span>
+                            <span class="item--deposit">
+                                Deposit
+                            </span>
+                            <span class="item--paid">
+                                Paid   
+                            </span>
+                            <span class="item--canceled">
+                                Canceled
+                            </span>
+                        </button>
+                    </div> 
+                    <a href="#" class="events-item__view">
+                        <i class="fas fa-eye events-item__icon"></i>
+                    </a>
+                </li>            
+                <li class="events-list__item">
+                    <span class="events-item-category--name">Charlie Gay</span>
+                    <span class="events-item-category--guests">20</span>  
+                    <span class="events-item-category--date">6 Dec</span>  
+                    <span class="events-item-category--time">12:00</span>  
+                    <span class="events-item-category--type">Dinner</span>  
+                    <div class="events-item-category--status">
+                        <button class="events-item__btn events-item__btn--canceled">
+                            <span class="item--inprogress">
+                                In progress
+                            </span>
+                            <span class="item--deposit">
+                                Deposit
+                            </span>
+                            <span class="item--paid">
+                                Paid   
+                            </span>
+                            <span class="item--canceled">
+                                Canceled
+                            </span>
+                        </button>
+                    </div> 
+                    <a href="#" class="events-item__view">
+                        <i class="fas fa-eye events-item__icon"></i>
+                    </a>
+                </li>              
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

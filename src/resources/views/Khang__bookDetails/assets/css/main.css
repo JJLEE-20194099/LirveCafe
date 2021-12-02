@@ -1069,21 +1069,30 @@ textarea {
 }
 
 .admin__content {
+    background-image: url(https://th.bing.com/th/id/R.8dfda863918ff0f5b696b06c35945d42?rik=Tk%2f25%2fivKntLiQ&riu=http%3a%2f%2fwww.zastavki.com%2fpictures%2f1280x1024%2f2011%2fFood_Drinks_Coffee__corn__refined_sugar_031838_.jpg&ehk=CrxlxjQZcrwCBMT%2f8CeqBkBd2l3cW3gK7%2fG5yBp6Qts%3d&risl=&pid=ImgRaw&r=0);
+    background-size: cover;
+    background-repeat: no-repeat;
     position: absolute;
     margin-left: 250px;
     top: 0;
-    padding: 72px 18px 18px 18px;
+    padding: 72px 18px 18px 60px;
     background-color: #f4f6f9;
     height: 100vh;
     box-sizing: border-box;
     width: calc(100% - 250px);
 }
 
+.admin__content--book {
+    background-image: url(https://www.mondiniarredamenti.it/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/b/o/bookself_riva_6.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
 .admin-forms-content__heading {
-    font-size: 24px;
+    font-size: 36px;
     display: block;
     margin: 16px 0 28px 0;
-    
+    color: white;
+    text-shadow: 2px 2px rgb(0 0 0 / 65%);
 }
 .admin-forms__products-wrap {
     display: flex;
@@ -1097,7 +1106,6 @@ textarea {
 }
 
 .admin-forms__item:first-child {
-    margin-right: 18px;
 }
 
 .forms__item-heading {
@@ -1111,7 +1119,7 @@ textarea {
 }
 
 .forms-action-wrap {
-    height: 224px;
+    height: 365px;
     overflow-y: auto;
 }
 
@@ -1207,4 +1215,358 @@ textarea {
 
 .forms-add-btn:hover {
     filter: brightness(0.8);
+}
+
+/* admin users */
+.admin__users {
+    position: absolute;
+    margin-left: 250px;
+    top: 0;
+    padding: 72px 18px 18px 18px;
+    background-color: #f4f6f9;
+    box-sizing: border-box;
+    width: calc(100% - 250px);
+}
+
+.users__heading {
+    font-size: 2rem;
+}
+
+.users__heading-count {
+
+}
+
+.users__content {
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-top: 24px;
+
+}
+
+.users__content-search {
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    height: 36px;
+}
+
+.users__content-search .users-search__icon {
+    width: 48px;
+    border-right: 1px solid #ccc;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.users-list {
+    list-style: none;
+    padding: 0px 0px 12px 0px;
+    margin-top: 0;
+}
+
+.users-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 12px 48px 12px 48px;
+}
+
+.users__profile {
+    display: flex;
+}
+
+.users__profile-img {
+    width: 72px;
+    height: 72px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 50%;
+}
+
+.users__profile-des {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12px;
+}
+
+.users__profile-name {
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.users__profile-status {
+    display: flex;
+    align-items: center;
+}
+
+.users-status--offline i{
+    color: #b02b2b;
+}
+
+.users-status--online i{
+    color: #2dbe05;
+}
+
+.users-status--offline .status--offline {
+    display: block;
+}
+
+.users-status--online .status--online {
+    display: block;
+}
+
+.status--offline {
+    display: none;
+}
+
+.status--online {
+    display: none;
+}
+
+
+.users-status__icon--active {
+
+}
+
+.users-status__icon {
+    font-size: 12px;
+    margin-right: 6px;
+}
+
+.users-item__des {
+
+}
+
+.users-item__des-email {
+    line-height: 32px;
+}
+
+.users__des-role {
+
+}
+
+.users-item__actions {
+    display: flex;
+}
+
+.users-item__btn {
+    height: 36px;
+    width: 72px;
+    background: var(--primary-color);
+    display: block;
+    line-height: 36px;
+    text-align: center;
+    border-radius: 2px;
+    color: white;
+}
+
+.users-item__btn:hover {
+    filter: brightness(0.8);
+}
+
+.users-item__btn--view {
+    margin-right: 12px;
+    background-color: #18b4de;
+}
+
+.users-item__btn-icon {
+
+}
+
+.users-item__btn--del {
+    border: none;
+    cursor: pointer;
+    background-color: #d04444;
+}
+
+/* admin events */
+.admin__events {
+    position: absolute;
+    margin-left: 250px;
+    top: 0;
+    padding: 72px 18px 18px 18px;
+    background-color: #f4f6f9;
+    box-sizing: border-box;
+    width: calc(100% - 250px);
+    height: 100%;
+}
+
+.events__heading {
+    font-size: 2rem;
+}
+
+.events__heading-count {
+
+}
+
+.events__content {
+    background-color: white;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-top: 24px;
+
+}
+
+.events__content-search {
+    border-radius: 2px;
+    border: 1px solid #ccc;
+    height: 36px;
+}
+
+.events__content-search .events-search__icon {
+    width: 48px;
+    border-right: 1px solid #ccc;
+    line-height: 35px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.events-list {
+    list-style: none;
+    padding: 0px 0px 12px 0px;
+    margin-top: 0;
+}
+
+.events-list__item {
+    height: 36px;
+    line-height: 36px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 24px 0 24px;
+    align-items: center;
+    color: #747474;
+}
+
+.events-item-category {
+    display: inline-block;
+}
+
+.events-list__item--heading {
+    font-size: 18px;
+    color: #000;
+}
+
+.events__heading-add {
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    left: 20px;
+    top: -6px;
+}
+
+.events-add__icon {
+
+}
+
+.events-item-category--name {
+    /* background: yellow; */
+    min-width: 200px;
+}
+
+.events-item-category--guests {
+    /* background: green; */
+    min-width: 64px;
+}
+
+.events-item-category--date {
+    /* background: red; */
+    min-width: 64px;
+}
+
+.events-item-category--time {
+    /* background: violet; */
+    min-width: 64px;
+}
+
+.events-item-category--type {
+    /* background: pink; */
+    min-width: 133px;
+}
+
+.events-item-category--status {
+    /* background: orange; */
+    min-width: 120px;
+}
+
+.events-item__btn {
+    height: 28px;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    min-width: 100px;
+    cursor: pointer;
+} 
+
+.events-item__btn:hover {
+    filter: brightness(0.8);
+}
+
+.events-item__btn--inprogress {
+    background-color: #fe6433;
+}
+.events-item__btn--deposit {
+    background-color: #dac041;
+}
+.events-item__btn--paid {
+    background-color: #45dc66;
+}
+.events-item__btn--canceled {
+    background-color: #cc49e4;
+}
+
+.events-list__item--heading .events-item__view {
+    background-color: transparent;
+    cursor: text;
+    text-align: left;
+}
+.events-item__view {
+    display: block;
+    height: 28px;
+    width: 56px;
+    background-color: rgb(69 161 218);
+    border-radius: 2px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.events-item__view:hover {
+    filter: brightness(0.8);
+}
+
+.events-item__view  .events-item__icon {
+    color: white;
+    position: relative;
+    top: -3px;
+}
+.events-item__btn--inprogress .item--inprogress{
+    display: block;
+}
+.events-item__btn--deposit .item--deposit{
+    display: block;
+}
+.events-item__btn--paid .item--paid{
+    display: block;
+}
+.events-item__btn--canceled .item--canceled{
+    display: block;
+}
+
+.item--inprogress {
+    display: none;
+}
+
+.item--deposit {
+    display: none;
+}
+
+.item--paid {
+    display: none;
+}
+
+.item--canceled {
+    display: none;
 }
