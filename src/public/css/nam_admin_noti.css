@@ -1,0 +1,148 @@
+#admin-noti-page * {
+  padding: 0;
+  box-sizing: content-box; }
+
+#admin-noti-page .row {
+  margin: 0; }
+
+#admin-noti-page .col {
+  padding: 0; }
+
+#admin-noti-page li {
+  list-style-type: none; }
+
+#admin-noti-page #ad-noti-header {
+  margin-bottom: 24px;
+  padding-top: 24px; }
+  #admin-noti-page #ad-noti-header .ad-noti-create {
+    padding: 8px 12px;
+    background-color: #c39e51;
+    color: #fff;
+    border-radius: 8px; }
+  #admin-noti-page #ad-noti-header .ad-noti-create:hover {
+    cursor: pointer;
+    border: 1px solid #c39e51;
+    color: #c39e51;
+    background-color: #fff; }
+
+#admin-noti-page #ad-noti-body .ad-noti-descrip {
+  text-align: center;
+  margin-bottom: 12px; }
+
+#admin-noti-page #ad-noti-body .ad-noti-descrip.gone {
+  display: none; }
+
+#admin-noti-page #ad-noti-body .ad-noti-noItem {
+  display: none; }
+
+#admin-noti-page #ad-noti-body .ad-noti-noItem.open {
+  display: block; }
+
+#admin-noti-page #ad-noti-body .noti-item {
+  border-radius: 4px;
+  margin-bottom: 16px; }
+  #admin-noti-page #ad-noti-body .noti-item .col {
+    padding: 8px 12px; }
+  #admin-noti-page #ad-noti-body .noti-item .user-id {
+    border: 1px solid #c39e51; }
+  #admin-noti-page #ad-noti-body .noti-item .noti-content {
+    margin-left: 24px;
+    border: 1px solid #c39e51; }
+  #admin-noti-page #ad-noti-body .noti-item .noti-delete {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #c39e51;
+    color: #fff;
+    width: 100%;
+    border: none; }
+  #admin-noti-page #ad-noti-body .noti-item .noti-delete:hover {
+    cursor: pointer;
+    opacity: 0.8; }
+  #admin-noti-page #ad-noti-body .noti-item .noti-delete:focus {
+    outline: none; }
+
+#admin-noti-page .noti-confirm-delete, #admin-noti-page .modal-noti-create {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+  justify-content: center;
+  align-items: center; }
+
+#admin-noti-page .noti-confirm-delete .confirm-delete-content {
+  background-color: #c39e51;
+  width: 30%;
+  position: relative;
+  padding: 8px 24px;
+  font-size: 20px;
+  border-radius: 8px;
+  color: #fff;
+  border: 1px solid #fff;
+  bottom: 15%; }
+  #admin-noti-page .noti-confirm-delete .confirm-delete-content .confirm-text {
+    text-align: center; }
+  #admin-noti-page .noti-confirm-delete .confirm-delete-content .confirm-btn {
+    border: 1px solid #fff;
+    padding: 2px 4px;
+    border-radius: 8px; }
+  #admin-noti-page .noti-confirm-delete .confirm-delete-content .confirm-btn:hover {
+    cursor: pointer;
+    color: #c39e51;
+    background-color: #fff; }
+
+#admin-noti-page .modal-noti-create.open,
+#admin-noti-page .noti-confirm-delete.open {
+  display: flex; }
+
+#admin-noti-page .modal-noti-create .modal-content {
+  width: 60%; }
+
+#admin-noti-page .modal-noti-create label {
+  color: #000; }
+
+#admin-noti-page .modal-noti-create .noti-header {
+  text-align: center;
+  font-size: 24px;
+  position: relative; }
+  #admin-noti-page .modal-noti-create .noti-header .modal-close {
+    display: inline-block;
+    padding: 6px 8px;
+    background-color: #FF424E;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0; }
+  #admin-noti-page .modal-noti-create .noti-header .modal-close:hover {
+    cursor: pointer;
+    opacity: 0.9; }
+
+#admin-noti-page .modal-noti-create .noti-target {
+  margin: 16px;
+  font-size: 20px; }
+  #admin-noti-page .modal-noti-create .noti-target .userId-input {
+    display: none; }
+  #admin-noti-page .modal-noti-create .noti-target .userId-input.open {
+    display: block; }
+
+#admin-noti-page .modal-noti-create .noti-content-input {
+  margin: 16px; }
+
+#admin-noti-page .modal-noti-create .noti-create-submit {
+  justify-content: center;
+  margin: 16px 0; }
+  #admin-noti-page .modal-noti-create .noti-create-submit button {
+    width: 90px;
+    color: #fff;
+    background-color: #c39e51;
+    border: none;
+    font-size: 20px;
+    border: 1px solid #c39e51; }
+  #admin-noti-page .modal-noti-create .noti-create-submit button:focus {
+    outline: none; }
+  #admin-noti-page .modal-noti-create .noti-create-submit button:hover {
+    cursor: pointer;
+    color: #c39e51;
+    background-color: #fff; }

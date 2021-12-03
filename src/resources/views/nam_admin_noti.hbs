@@ -1,0 +1,258 @@
+{{!-- admin nofi --}}
+
+<div id="admin-noti-page">
+
+  <div id="ad-noti-header" class="row">
+
+    <div class="ad-noti-title col col-9">
+      <h3>Danh sách thông báo</h3>
+    </div>
+
+    <div class="ad-noti-create col col-auto">
+      Tạo thông báo
+    </div>
+
+  </div>
+
+  <div id="ad-noti-body">
+
+    <div class="ad-noti-descrip col">
+      <ul class="row">
+        <li class="col col-2">ID khách hàng</li>
+        <li class="col col-8">Nội dung thông báo</li>
+      </ul>
+    </div>
+
+    <div class="ad-noti-noItem">
+      Hiện không có thông báo nào
+    </div>
+
+    <ul>
+
+      {{!-- thông báo 1 --}}
+      <li class="noti-item row">
+        <div class="user-id col col-2">
+          PTNam254687K20
+        </div>
+
+        <div class="noti-content col col">
+          Đã hủy đơn hàng "người yêu"
+        </div>
+
+        <button class="noti-delete col col-1"><i class="ti-trash"></i></button>
+      </li>
+
+      {{!-- thông báo 2 --}}
+      <li class="noti-item row">
+        <div class="user-id col col-2">
+          PTNam254687K20
+        </div>
+
+        <div class="noti-content col col">
+          Đã đặt đơn hàng "một vé đi tuổi thơ"
+        </div>
+
+        <button class="noti-delete col col-1"><i class="ti-trash"></i></button>
+      </li>
+
+      {{!-- thông báo 3 --}}
+      <li class="noti-item row">
+        <div class="user-id col col-2">
+          PTNam254687K20
+        </div>
+
+        <div class="noti-content col col">
+          Đã đặt đơn hàng capuchino
+        </div>
+
+        <button class="noti-delete col col-1"><i class="ti-trash"></i></button>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="noti-confirm-delete">
+
+    <div class="confirm-delete-content row">
+      <div class="confirm-text col col-8">Xác nhận xóa thông báo</div>
+      <div class="col col-4 d-flex justify-content-around">
+        <div class="confirm-btn oke-btn">Oke</div>
+        <div class="confirm-btn huy-btn">Hủy</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="modal-noti-create">
+    <div class="modal-content">
+
+      <div class="noti-header">
+
+        <div class="">
+          Tạo thông báo
+        </div>
+        <div class="modal-close">
+          <i class="ti-close"></i>
+        </div>
+      </div>
+
+        <div class="noti-target">
+
+          <form action="">
+            <label for="target">Chọn đối tượng</label>
+            <select id="target" name="target">
+              <option value="1" selected = "true">Tất cả người dùng</option>
+              <option value="2" >user cụ thể</option>
+              <option value="3" >Users rank vàng</option>
+              <option value="4">Users rank bạc</option>
+              <option value="5">Users rank đồng</option>
+            </select>
+          </form>
+
+          <div class="userId-input">
+            <label for="ususerId-inputerId">ID khách hàng</label>
+            <input type="text" id="userId" name="userId" placeholder="user ID">
+          </div>
+
+        </div>
+  
+      <div class="noti-content-input">
+
+        <label>Nhập thông báo tại đây</label><br>
+        <textarea name="content-text" cols="104" rows="6">
+
+       </textarea>
+      </div>
+
+      <div class="noti-create-submit d-flex">
+        <button type="submit">Gửi</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+{{!-- handel delete confirm --}}
+<script>
+  const $ = document.querySelector.bind(document);
+  const $$ = document.querySelectorAll.bind(document);
+
+
+  const confirmDelete = $('#admin-noti-page .noti-confirm-delete')
+
+  const deleteBtns = $$('#admin-noti-page #ad-noti-body .noti-delete')
+  const noItemNoti = $('#admin-noti-page .ad-noti-noItem')
+
+  const notiDescript = $('#admin-noti-page #ad-noti-body .ad-noti-descrip')
+
+  let notiItems = $$('#admin-noti-page #ad-noti-body .noti-item')
+
+
+  if (notiItems.length == 0) {
+    notiDescript.classList.add('gone')
+    noItemNoti.classList.add('open')
+  }
+
+  deleteBtns.forEach((item) => {
+    item.onclick = function () {
+      confirmDelete.classList.add('open')
+
+      const okeBtn = confirmDelete.querySelector('.oke-btn')
+      const huyBtn = confirmDelete.querySelector('.huy-btn')
+
+      okeBtn.onclick = function () {
+        notiItems = $$('#admin-noti-page #ad-noti-body .noti-item')
+
+        notiItems.forEach((notiItem) => {
+          if (notiItem.querySelector('.noti-delete') === item) {
+            notiItem.remove()
+            confirmDelete.classList.remove('open')
+          }
+        })
+
+        notiItems = $$('#admin-noti-page #ad-noti-body .noti-item')
+        if (notiItems.length == 0) {
+          noItemNoti.classList.add('open');
+          notiDescript.classList.add('gone');
+        }
+      }
+
+
+      huyBtn.onclick = function () {
+        confirmDelete.classList.remove('open')
+      }
+
+
+    }
+  })
+
+
+</script>
+
+{{!-- handle create modal --}}
+<script>
+  const createNotiBtn = $('#admin-noti-page #ad-noti-header .ad-noti-create')
+  const modalNotiInput = $('#admin-noti-page .modal-noti-create')
+
+  const closeModalBtn = $('#admin-noti-page .modal-noti-create .noti-header .modal-close')
+
+  const targetOption = $('#admin-noti-page .modal-noti-create #target')
+
+  const userIdInput = $('#admin-noti-page .userId-input')
+
+  const submitNotiBtn = $('#admin-noti-page .noti-create-submit button')
+
+  const contentInput= $('#admin-noti-page .noti-content-input textarea')
+
+  console.log(targetOption.children)
+
+  createNotiBtn.onclick = function () {
+    modalNotiInput.classList.add('open');
+  }
+
+  targetOption.addEventListener("click", function () {
+
+    let isUserIdOpen = userIdInput.classList.contains("open")
+
+    if (targetOption.selectedOptions[0].value == 2) {
+      if (!isUserIdOpen) {
+        userIdInput.classList.add("open")
+      }
+    }
+
+    else {
+      if (isUserIdOpen) {
+        userIdInput.classList.remove("open")
+      }
+    }
+
+  })
+
+  const clearInput = function () {
+    isUserIdOpen = userIdInput.classList.contains("open")
+
+    if (isUserIdOpen) {
+        userIdInput.classList.remove("open")
+    }
+    
+    targetOption.children[0].selected = true
+
+    userIdInput.querySelector('input').value = ""
+    contentInput.value = ""
+  }
+
+
+  closeModalBtn.onclick = function () {
+    clearInput()
+    modalNotiInput.classList.remove('open');
+  }
+
+  submitNotiBtn.onclick = function () {
+    clearInput()
+    modalNotiInput.classList.remove('open');
+  }
+
+</script>
