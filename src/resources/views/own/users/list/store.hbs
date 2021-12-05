@@ -1,6 +1,24 @@
+    <table class="table">
+        <thead>
+            <th scope="col" class="col-md-1">#</th>
+            <th scope="col" class="col-md-2">First name</th>
+            <th scope="col" class="col-md-2 table-light">Last name</th>
+            <th scope="col" class="col-md-3">Phone number</th>
+            <th scope="col" class="col-md-3 table-light">Email</th>
+            <th scope="col" class="col-md-1">Level</th>
+        </thead>
+</table>
 {{#each users}}
-    <div>
-        <img src="{{this.avatar}}" alt="" style="width: 50, height: 50, border: 50%">
-        <span>{{this.username}}</span>
-    </div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td class="col-md-1"><img src = "{{this.avatar}}"></td>
+                <td class="col-md-2">{{this.firstname}}</td>
+                <td class="col-md-2 table-light">{{this.lastname}}</td>
+                <td class="col-md-3">{{this.phone}}</td>
+                <td class="col-md-3 table-light">{{this.email}}</td>
+                <td class="col-md-1">{{this.level}}</td>
+            </tr>
+    </tbody>
+    </table>
 {{/each}}

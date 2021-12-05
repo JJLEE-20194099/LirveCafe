@@ -1,7 +1,7 @@
 <div class="mt-4">
     <h3>Cập nhật thoong tin ca nhan</h3>
 
-    <form class="mt-4" method="POST" action="/users/{{user._id}}?_method=PATCH" enctype='multipart/form-data'>
+    <form class="mt-4" method="POST" action="/users/{{user._id}}?_method=PATCH">
         <div class="form-group">
             <label>Firstname</label>
             <input type="text" class="form-control" value="{{user.firstname}}"  name="firstname">
