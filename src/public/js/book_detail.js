@@ -1,13 +1,8 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
 
-console.log($)
-console.log($$)
-
-const sliderItems = $$('.carousel-item')
+const sliderItems = document.querySelectorAll('.carousel-item')
 const prevSliderIcon = $('.carousel-control-prev')
 const nextSliderIcon = $('.carousel-control-next')
-const bookItems = $$('#home-books .carousel-item')
+const bookItems = document.querySelectorAll('#home-books .carousel-item')
 const prevbookIcon = $('#home-books .carousel-control-prev')
 const nextbookIcon = $('#home-books .carousel-control-next')
 
@@ -64,9 +59,9 @@ prevbookIcon.onclick = function () {
 nextbookIcon.onclick = function () {
     nextIconClick(bookItems);
 }
-prevdrinkIcon.onclick = function () {
-    prevIconClick(drinkItems);
-}
-nextdrinkIcon.onclick = function () {
-    nextIconClick(drinkItems);
-}
+// prevdrinkIcon.onclick = function () {
+//     prevIconClick(drinkItems);
+// }
+// nextdrinkIcon.onclick = function () {
+//     nextIconClick(drinkItems);
+// }
