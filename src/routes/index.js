@@ -11,6 +11,7 @@ import promoRoute from './promo.js';
 import cartRoute from './cart.js';
 import authMiddleware from '../app/middleware/AuthMiddleware.js';
 import orderRoute from './order.js';
+import notiRoute from './noti.js';
 
 const routeObj = {
     route: function (app) {
@@ -26,6 +27,7 @@ const routeObj = {
         app.use('/carts', cartRoute);
         app.use('/', authMiddleware.getCurrentUserInfo, homeRoute);
         app.use('/orders', authMiddleware.getCurrentUserInfo, orderRoute);
+        app.use('/notis', notiRoute);
     },
 }
 export default routeObj;

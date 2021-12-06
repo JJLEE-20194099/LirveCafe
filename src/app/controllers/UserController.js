@@ -27,9 +27,8 @@ const UserController = {
     show(req, res, next) {
         User.findOne({ _id: req.params.id })
             .then((user) => {
-                res.render('users/item/user_info.hbs', {
+                res.render('users/info/item/index.hbs', {
                     user: singleMongooseDocumentToObject(user),
-                    user: res.locals.user
                 })
             })
             .catch(next);

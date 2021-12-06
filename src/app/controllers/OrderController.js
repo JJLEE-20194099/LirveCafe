@@ -34,7 +34,7 @@ const OrderController = {
             .then((order) => {
                 
                 order = singleMongooseDocumentToObject(order);
-               console.log(order, "Lalala")
+               
                 res.render("orders/item/order_info.hbs", {
                     order: order,
                     user: res.locals.user,

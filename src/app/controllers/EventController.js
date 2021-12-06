@@ -31,6 +31,7 @@ const EventController = {
 
     // GET /events/create
     create(req, res, next) {
+        
         res.render('events/item/create.hbs', {
             user: res.locals.user
         })
