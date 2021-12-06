@@ -7,9 +7,6 @@ $itemSliderHeight: 500px;
 $valueColor: #FF424E;
 
 .app {
-    background-color: $boundColor;
-    height: auto;
-    scroll-behavior: smooth;
     
 }
 
@@ -206,7 +203,7 @@ body {
     padding: 0px 0px !important;
     justify-content: center;
     width: 84%;
-    margin-top: 126px;
+    margin-top: 150px;
 }
 
 // -----------Slider------------- 
@@ -413,6 +410,10 @@ body {
     height: 350px;
     background-color: $headerColor1;
     color: $textHeaderColor;
+    // position: fixed;
+    // left: 0;
+    // right: 0;
+    // bottom: 0;
     .brand-name {
         font-size: 24px;
         padding: 16px 0;

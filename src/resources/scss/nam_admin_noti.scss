@@ -1,9 +1,12 @@
 
 $mainColor: #c39e51;
 $valueColor: #FF424E; 
-
+body {
+    background-image: none;
+    background: white;
+}
 #admin-noti-page {
-
+    
     * {
         padding: 0;
         box-sizing: content-box;
@@ -20,11 +23,12 @@ $valueColor: #FF424E;
     li {
         list-style-type: none;
     }
+    
 
     #ad-noti-header{
         margin-bottom: 24px;
         padding-top: 24px;
-
+        justify-content: space-between;
         .ad-noti-create {
             padding: 8px 12px;
             background-color: $mainColor;
