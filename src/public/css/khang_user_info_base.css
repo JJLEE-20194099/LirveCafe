@@ -1,0 +1,118 @@
+/* cau hinh chung */
+:root {
+  --white-color: #fff;
+  --black-color: #000;
+  --text-color: #333;
+  --primary-color: rgb(195, 158, 81) ; }
+
+* {
+  box-sizing: inherit; }
+
+html {
+  font-size: 100%;
+  line-height: 1rem;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box; }
+
+/* responsive */
+.grid {
+  width: 86%;
+  max-width: 100%;
+  margin: 0 auto; }
+
+.grid__full-width {
+  width: 100%; }
+
+.grid__row {
+  display: flex;
+  /* nhay xuong dong */
+  flex-wrap: wrap;
+  margin-left: -16px;
+  margin-right: -16px; }
+
+/* Test */
+.grid__col-2 {
+  width: 16.67%;
+  padding-right: 16px;
+  padding-left: 16px; }
+
+.grid__col-3 {
+  width: 25%;
+  padding-left: 16px;
+  padding-right: 16px; }
+
+.grid__col-9 {
+  width: 75%;
+  padding-left: 16px;
+  padding-right: 16px; }
+
+.grid__col-10 {
+  width: 83.33%;
+  padding-left: 16px;
+  padding-right: 16px; }
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+/* table */
+table {
+  display: table;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  text-indent: initial;
+  border-spacing: 2px;
+  border-color: grey; }
+
+tbody {
+  display: table-row-group;
+  vertical-align: middle;
+  border-color: inherit; }
+
+tr td {
+  padding: 10px 15px; }
+
+tr {
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 2.6rem;
+  display: table-row;
+  vertical-align: inherit;
+  border-color: inherit; }
+
+td {
+  display: table-cell;
+  vertical-align: inherit;
+  border: 2px solid #ccc; }
+
+/* text area */
+textarea {
+  font-family: monospace;
+  text-rendering: auto;
+  color: -internal-light-dark(black, white);
+  letter-spacing: normal;
+  word-spacing: normal;
+  line-height: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  appearance: auto;
+  -webkit-rtl-ordering: logical;
+  resize: auto;
+  cursor: text;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  background-color: -internal-light-dark(white, #3b3b3b);
+  column-count: initial !important;
+  margin: 0em;
+  border-width: 1px;
+  border-style: solid;
+  border-color: -internal-light-dark(#767676, #858585);
+  border-image: initial;
+  padding: 2px;
+  border-radius: 2px; }

@@ -1,3 +1,7 @@
+body {
+  background-image: none;
+  background: white; }
+
 #admin-noti-page * {
   padding: 0;
   box-sizing: content-box; }
@@ -13,7 +17,8 @@
 
 #admin-noti-page #ad-noti-header {
   margin-bottom: 24px;
-  padding-top: 24px; }
+  padding-top: 24px;
+  justify-content: space-between; }
   #admin-noti-page #ad-noti-header .ad-noti-create {
     padding: 8px 12px;
     background-color: #c39e51;
