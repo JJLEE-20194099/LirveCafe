@@ -7,6 +7,10 @@ import {
 
 
 const NotificationController = {
+    index: function(req, res, next) {
+        res.render('users/noti/index.hbs')
+    },
+
     getCommentNotification: function(req, res, next) {
         const data = req.body;
         const parentCommentId = data.parentCommentId;
