@@ -65,25 +65,27 @@ io.on("connection", function(socket) {
     console.log("New: " + socket.id)
 
     socket.on("client_send_comment_to_coffee_item", function(data) {
-        socket.join(data.itemId)
+        // socket.join(data.itemId)
         socket.join(data._id)
+        socket.join(data.username)
         console.log(socket.adapter.rooms)
         // If not want to bother users
-        // io.sockets.in(data.itemId).emit("server_send_comment_to_coffee_item", data)
+        io.sockets.in(data._id).emit("server_send_comment_to_coffee_item", data)
 
         // whatever
-        io.sockets.emit("server_send_comment_to_coffee_item", data)
+        // io.sockets.emit("server_send_comment_to_coffee_item", data)
     })
 
     socket.on("client_send_comment_to_book_item", function(data) {
-        socket.join(data.itemId)
+        // socket.join(data.itemId)
         socket.join(data._id)
+        socket.join(data.username)
         console.log(socket.adapter.rooms)
         // If not want to bother users
-        // io.sockets.in(data.itemId).emit("server_send_comment_to_book_item", data)
+        io.sockets.in(data._id).emit("server_send_comment_to_book_item", data)
 
         // whatever
-        io.sockets.emit("server_send_comment_to_book_item", data)
+        // io.sockets.emit("server_send_comment_to_book_item", data)
 
     })
 
@@ -91,6 +93,7 @@ io.on("connection", function(socket) {
     socket.on("client_send_reply_comment", function(data) {
         socket.join(data.parentCommentId)
         console.log(data.parentCommentId)
+        socket.join(data.username)
         console.log(socket.adapter.rooms)
         console.log("haha")
         io.sockets.in(data.parentCommentId).emit("server_send_reply_comment", data)
