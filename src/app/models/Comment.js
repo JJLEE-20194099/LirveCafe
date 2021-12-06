@@ -9,6 +9,7 @@ mongoose.plugin(slug)
 const Comment = new Schema(
     {
         username: { type: String, required: true},
+        avatar: { type: String, required: true},
         content: { type: String, required: true},
         replyList: { type: Array, default: []},
         itemId: { type: String, required: true},
