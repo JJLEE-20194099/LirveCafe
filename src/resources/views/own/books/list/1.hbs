@@ -58,7 +58,6 @@
   </div>
 </div>
 
-<script src="/js/datetime_handling.js"></script>
 {{!-- Delete hidden form --}}
 <form name="delete-book-form" method="POST"></form>
 
@@ -72,14 +71,10 @@
         $('#delete-book-modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             bookId = button.data('id');
-            console.log(button)
         });
-
-        console.log(btnDeleteBook)
         
         // When delete book btn clicked
         btnDeleteBook.onclick = function () {
-          alert(1)
             deleteForm.action = '/books/' + bookId + '?_method=DELETE';
             deleteForm.submit();
         }
