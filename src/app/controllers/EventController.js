@@ -65,7 +65,7 @@ const EventController = {
             .catch(next)
     },
 
-    // SOFT DELETE /books/:id
+    // SOFT DELETE /events/:id
     softDelete(req, res, next) {
         Event.delete({_id: req.params.id})
         .then(() => res. redirect('back'))
