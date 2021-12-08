@@ -32,8 +32,6 @@ const AuthMiddleware = {
             })
     },
     getCurrentUserInfo: function (req, res, next) {
-
-        
         if (req.signedCookies.userId) {
             User.findOne({
                     _id: req.signedCookies.userId
