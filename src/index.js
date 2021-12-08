@@ -26,18 +26,12 @@ const __dirname = dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser(process.env.SESSION_SECRET));
-app.use(
-    express.urlencoded({
-        extended: true,
-    })
-);
-
 app.use(SortMiddleware);
-
-
 // parsing application/json
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true}))
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(methodOverride('_method'));
 
 app.engine(
