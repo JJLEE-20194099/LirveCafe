@@ -1,4 +1,4 @@
-.cart-container {
+.container {
   background-color: white;
   margin-left: 40px;
   margin-right: 40px;
@@ -6,3 +6,5 @@
   box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;
   border-radius: 12px;
   min-height: 700px; }
+  .container .header {
+    padding-top: 12px; }
