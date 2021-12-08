@@ -68,6 +68,13 @@ const UserController = {
 
     // PATCH /users/:id
     update(req, res, next) {
+
+        req.body.avatar = getAvatar(req);
+        if (!req.body.avatar || req.body.avatar == '') {
+            const name = req.body.firstname + ' ' + req.body.lastname;
+            req.body.avatar = '/img/' + name + '-default.jpg'; 
+        }
+        console.log(req.body)
         User.updateOne({_id: req.params.id}, req.body)
             .then(() => res.redirect('back'))
             .catch(next);

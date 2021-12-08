@@ -118,7 +118,7 @@ const OwnController = {
     storedEvents(req, res, next) {
         Promise.all([Event.find({}), Event.countDocumentsDeleted()])
             .then(([events, deletedCount]) => {
-                res.render('users/list/store.hbs', {
+                res.render('users/events/list/store.hbs', {
                     deletedCount,
                     events: mongooseDocumentsToObject(events),
                     user: res.locals.user
@@ -130,7 +130,7 @@ const OwnController = {
     trashEvents(req, res, next) {
         Event.findDeleted({})
             .then((events) => {
-                res.render('users/list/trash.hbs', {
+                res.render('users/events/list/trash.hbs', {
                     events: mongooseDocumentsToObject(events),
                     user: res.locals.user
                 })
