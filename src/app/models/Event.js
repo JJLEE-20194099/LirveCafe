@@ -8,17 +8,24 @@ const Event = new Schema(
     {   
         username: {type: String, required: true},
         eventBooker: {type: String, required: true},
-        name: {type: String, required: true},
+        title: {type: String, required: true},
         description: {type: String},
-        image: {type: String, default: "http://www.davidkrugler.com/s/River-Lights-8318.jpg"},
+        avatar: {type: String, default: "http://www.davidkrugler.com/s/River-Lights-8318.jpg"},
         no_seating: {type: Number, requiresd: true},
         email: {type: String, required: true},
-        total: {type: Number, requiresd: true},
+        total: {type: Number, required: true},
         promoId: {type: String},
         eventStartDate: {type: Date, required: true},
         eventEndDate: {type: Date, required: true},
-        foodAndDrinkList: {type: Array},
-        slug: {type: String, slug: 'name', unique: true}
+        foods: [new Schema({
+                    food_id: {type: String, required:true},
+                    quantity: {type: String, required: true, min: 1}
+                })],
+        drinks: [new Schema({
+            drink_id: {type: String, required:true},
+            quantity: {type: String, required: true, min: 1}
+        })],        
+        slug: {type: String, slug: 'title', unique: true}
 
     },
     {
@@ -28,7 +35,7 @@ const Event = new Schema(
 
 mongoose.plugin(slug);
 Event.plugin(mongooseDelete, {
-    deleteAt: true,
+    deletedAt: true,
     overrideMethods: 'all'
 });
 

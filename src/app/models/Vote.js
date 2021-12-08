@@ -18,7 +18,7 @@ const Vote = new Schema(
 )
 
 Vote.plugin(mongooseDelete, {
-    deleteAt: true,
+    deletedAt: true,
     overrideMethods: 'all'
 })
 

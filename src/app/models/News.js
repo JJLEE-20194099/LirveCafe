@@ -19,7 +19,7 @@ const News = new Schema(
 
 mongoose.plugin(slug)
 News.plugin(mongooseDelete, {
-    deleteAt: true,
+    deletedAt: true,
     overrideMethos: 'all'
 });
 

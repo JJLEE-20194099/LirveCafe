@@ -22,7 +22,7 @@ const Promo = new Schema(
 )
 
 Promo.plugin(mongooseDelete, {
-    deleteAt: true,
+    deletedAt: true,
     overrideMethods: 'all'
 })
 

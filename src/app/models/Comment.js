@@ -24,7 +24,7 @@ const Comment = new Schema(
 )
 
 Comment.plugin(mongooseDelete, {
-    deleteAt: true,
+    deletedAt: true,
     overrideMethods: 'all'
 })
 

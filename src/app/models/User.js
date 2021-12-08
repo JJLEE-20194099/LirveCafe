@@ -25,7 +25,7 @@ const User = new Schema(
 
 mongoose.plugin(slug);
 User.plugin(mongooseDelete, {
-    deleteAt: true,
+    deletedAt: true,
     overrideMethods: 'all'
 })
 

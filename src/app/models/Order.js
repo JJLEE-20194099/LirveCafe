@@ -22,7 +22,7 @@ const Order = new Schema(
 
 mongoose.plugin(slug)
 Order.plugin(mongooseDelete, {
-    deleteAt: true,
+    deletedAt: true,
     overrideMethos: 'all'
 });
 

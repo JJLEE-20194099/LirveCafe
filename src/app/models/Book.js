@@ -26,7 +26,7 @@ const Book = new Schema(
 );
 
 Book.plugin(mongooseDelete, {
-    deleteAt: true,
+    deletedAt: true,
     overrideMethods: 'all',
 })
 
