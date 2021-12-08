@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="/css/store_trash.css">
+<div class="container">
+    <div class="mt-4">
+        <div>
+            <a href="/own/stored/coffee">Danh sách nước uống</a>
+            <h3>Nước uống đã xóa</h3>
+        </div>
+
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col" colspan="2">Thời gian xóa</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each coffee}}
+                <tr>
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.price}}</td>
+                    <td class="date">{{this.deletedAt}}</td>
+                    <td>
+                        <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi phục</a>
+                        <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}"
+                            data-target="#delete-coffee-modal">Xóa vĩnh viễn</a>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="5" class="text-center">
+                        Thùng rác trống.
+                        <a href="/own/stored/coffee">Danh sách nước uống</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    {{!-- Confirm delete coffee --}}
+    <div id="delete-coffee-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa nước uống?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Hành động này không thể khôi phục. Bạn vẫn muốn xóa nước uống này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button id="btn-delete-coffee" type="button" class="btn btn-danger">Xóa vĩnh viễn</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form name="delete-coffee-form" method="POST"></form>
+    <form name="restore-coffee-form" method="POST"></form>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/datetime_handling.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var coffeeId;
+            var deleteForm = document.forms['delete-coffee-form'];
+            var restoreForm = document.forms['restore-coffee-form'];
+            var btnDeleteCoffee = document.getElementById('btn-delete-coffee');
+            var restoreBtn = $('.btn-restore');
+
+            // When dialog confirm clicked
+            $('#delete-coffee-modal').on('show.bs.modal', function (coffee) {
+                var button = $(coffee.relatedTarget);
+                coffeeId = button.data('id');
+            });
+
+            // When delete coffee btn clicked
+            btnDeleteCoffee.onclick = function () {
+                deleteForm.action = '/coffee/' + coffeeId + '/force?_method=DELETE';
+                deleteForm.submit();
+            }
+
+            // Restore btn clicked
+            restoreBtn.click(function (e) {
+                e.preventDefault();
+
+                var coffeeId = $(this).data('id');
+                restoreForm.action = '/coffee/' + coffeeId + '/restore?_method=PATCH';
+                restoreForm.submit();
+            });
+        });
+    </script>
+</div>

@@ -1,7 +1,6 @@
 <link rel="stylesheet" href="/css/khang_user_info_base.css">
 <link rel="stylesheet" href="/css/khang_user_info_main.css">
 <style>
-    
     body {
         font-weight: 400;
         font-size: 18px;
@@ -13,8 +12,10 @@
         padding: 8px 8px;
     }
 </style>
+
 <body>
-    <form class="user-info" method="post" action="/users/{{user._id}}/edit" enctype="multipart/form-data">
+    
+    <form class="user-info" method="POST" action="/users/{{user._id}}?_method=PUT">
         <div class="row justify-content-center">
             <div class="grid__row" style="width: 100%; margin-left: 24px; margin-right: 24px">
                 <div class="grid__col-2">
@@ -22,8 +23,8 @@
                         <div class="user-info__top">
                             <img src="{{user.avatar}}" alt="" class="user-info__img">
                             <div class="user-info__detail">
-                                <span class="user-info__name">{{user.username}}</span>
                                 
+
                                 <a href="#" class="user-info__action">
                                     <i class="fas fa-pen user-info__change-icon"></i>
                                     <span href="#" class="user-info__change">Sửa hồ sơ</span>
@@ -43,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-
+               
                 <div class="grid__col-10">
                     <div class="user-info__content">
                         <div class="user-info__content-top">
@@ -54,13 +55,33 @@
                             <div class="user__body-detail">
                                 <div class="user__body-detail-item">
                                     <div class="user-detail-item__left">Tên đăng nhập</div>
-                                    <div class="user-detail-item__right">{{user.username}}</div>
+                                    <input type="text" name="username" value="{{user.username}}" required
+                                        class="user-detail-item__right">
+
+                                 
+
                                 </div>
 
                                 <div class="user__body-detail-item">
-                                    <div class="user-detail-item__left">Tên</div>
+                                    <div class="user-detail-item__left">Mặt khẩu</div>
+                                    <input type="text" name="password" value="{{user.password}}"
+                                        class="user-detail-item__right" required>
+
+                                
+
+                                </div>
+
+                                <div class="user__body-detail-item">
+                                    <div class="user-detail-item__left">Firstname</div>
                                     <div class="user-detail-item__right">
-                                        <input type="text" value="{{user.firstname}} {{user.lastname}}"
+                                        <input type="text" name="firstname" value="{{user.firstname}}"
+                                            class="user-item__right-input" >
+                                    </div>
+                                </div>
+                                <div class="user__body-detail-item">
+                                    <div class="user-detail-item__left">Lastname</div>
+                                    <div class="user-detail-item__right">
+                                        <input type="text" name="lastname" value="{{user.lastname}}"
                                             class="user-item__right-input">
                                     </div>
                                 </div>
@@ -68,18 +89,20 @@
                                     <div class="user-detail-item__left">Email</div>
                                     <div class="user-detail-item__right">
                                         <div class="user-detail-item__right">
-                                            <input type="text" value="{{user.email}}" class="user-item__right-input">
+                                            <input type="email" name="email" value="{{user.email}}"
+                                                class="user-item__right-input" required>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="user__body-detail-item">
                                     <div class="user-detail-item__left">Số Điện Thoại</div>
                                     <div class="user-detail-item__right">
                                         <div class="user-detail-item__right">
-                                            <input type="text" value="{{user.phone}}" class="user-item__right-input">
+                                            <input type="text" name="phone" value="{{user.phone}}"
+                                                class="user-item__right-input" required>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="user__body-detail-item">
@@ -87,19 +110,20 @@
                                     <div class="user-detail-item__right">
                                         <div class="user-detail-item__gender">
                                             <div class="user__gender-item d-flex justify-content-center">
-                                                <input type="checkbox" style="margin-right: 4px">
+                                                <input name="gender" type="checkbox" style="margin-right: 4px">
                                                 Nam
                                             </div>
 
                                             <!-- selected -->
-                                            <div class="user__gender-item d-flex justify-content-center user__gender-item--selected">
-                                                <input type="checkbox" style="margin-right: 4px">
-                                                
+                                            <div
+                                                class="user__gender-item d-flex justify-content-center user__gender-item--selected">
+                                                <input name="gender" type="checkbox" style="margin-right: 4px">
+
                                                 Nữ
                                             </div>
                                             <div class="user__gender-item d-flex justify-content-center">
-                                               <input type="checkbox" style="margin-right: 4px">
-                                                
+                                                <input name="gender" type="checkbox" style="margin-right: 4px">
+
                                                 Khác
                                             </div>
                                         </div>
@@ -118,9 +142,8 @@
                             </div>
 
                             <div class="user__body-right">
-                                <img src="{{user.avatar}}" alt=""
-                                    class="user__body-right__img">
-                                <input class="user__body-right__btn" style="width: 120px" type="file">Chọn ảnh</input>
+                                <img src="{{user.avatar}}" alt="" class="user__body-right__img">
+                                <input class="user__body-right__btn" type="file" name="avatar" style="width: 120px">Chọn ảnh</input>
                                 <div class="body-right__des">
                                     <div class="body-right__des-item">Dung lượng tối đa 1MB</div>
                                     <div class="body-right__des-item">Định dạng: .JPEG, .PNG</div>
