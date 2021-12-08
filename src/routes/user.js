@@ -43,7 +43,7 @@ router.post('/save',
     controllers.save,
 );
 router.get('/:id/edit', controllers.edit);
-router.patch('/:id', controllers.update);
+router.put('/:id', controllers.update);
 router.patch('/:id/restore', controllers.restore);
 router.delete('/:id', controllers.softDelete);
 router.delete('/:id/force', controllers.deepDelete);

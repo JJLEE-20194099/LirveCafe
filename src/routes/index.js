@@ -25,7 +25,7 @@ const routeObj = {
         app.use('/email', authMiddleware.getCurrentUserInfo, emailRoute);
         app.use('/promos', authMiddleware.getCurrentUserInfo, promoRoute);
         app.use('/carts', cartRoute);
-        app.use('/', authMiddleware.getCurrentUserInfo, homeRoute);
+        app.use('/', homeRoute);
         app.use('/orders', authMiddleware.getCurrentUserInfo, orderRoute);
         app.use('/notis', notiRoute);
     },
