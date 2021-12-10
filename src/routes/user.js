@@ -47,6 +47,8 @@ router.put('/:id', controllers.update);
 router.patch('/:id/restore', controllers.restore);
 router.delete('/:id', controllers.softDelete);
 router.delete('/:id/force', controllers.deepDelete);
+router.get('/:username/register_loyal_member', controllers.registerLoyalMemeberIndex)
+router.post('/:username/register_loyal_member', controllers.postRegisterLoyalMemeber)
 
 router.get('/stored/events', ownControllers.storedEvents);
 router.get('/trash/events', ownControllers.trashEvents);

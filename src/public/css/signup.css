@@ -7,6 +7,7 @@ a,
 
 .signup__container {
   margin-top: 500px;
+  min-height: 560px;
   right: 0;
   left: 0;
   margin-right: auto;
@@ -131,3 +132,89 @@ label {
   color: #999; }
   .signup__link:focus, .signup__link:hover {
     color: #787878; }
+
+.rank-radio {
+  width: 20px; }
+
+.list-inline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.rank-label {
+  color: #530604;
+  font-weight: 400; }
+
+.profess-title {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 450px;
+  margin-top: 12px;
+  height: 333px; }
+  .profess-title .perspective-text {
+    color: white;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    text-transform: uppercase; }
+  .profess-title .perspective-line {
+    height: 50px;
+    overflow: hidden;
+    position: relative; }
+  .profess-title .perspective-line p {
+    color: #1c1b19; }
+  .profess-title p {
+    margin: 0;
+    height: 50px;
+    line-height: 50px;
+    transition: all 0.5s ease-in-out; }
+  .profess-title .perspective-line:nth-child(odd) {
+    transform: skew(60deg, -30deg) scaleY(0.667); }
+  .profess-title .perspective-line:nth-child(even) {
+    transform: skew(0deg, -30deg) scaleY(1.337); }
+  .profess-title .perspective-text:hover p {
+    transform: translate(0, -50px); }
+  .profess-title .perspective-line:nth-child(1) {
+    left: 29px; }
+  .profess-title .perspective-line:nth-child(2) {
+    left: 58px;
+    background: #f14e0d;
+    box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202; }
+  .profess-title .perspective-line:nth-child(3) {
+    left: 87px;
+    background: #c46b06;
+    box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202; }
+  .profess-title .perspective-line:nth-child(4) {
+    left: 116px;
+    background: #b7d15a;
+    box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202; }
+  .profess-title .perspective-line:nth-child(5) {
+    left: 145px; }
+
+#notice {
+  font-size: 16px; }
+  #notice .modal-content {
+    border-radius: 1rem; }
+  #notice .modal-content:hover {
+    box-shadow: 2px 2px 2px black; }
+  #notice .fa {
+    color: #2b84be;
+    font-size: 90px;
+    padding: 30px 0px; }
+  #notice .b1 {
+    background-color: #2b84be;
+    box-shadow: 0px 4px #337095;
+    font-size: 17px; }
+  #notice .r3 {
+    color: #c1c1c1;
+    font-weight: 500; }
+  #notice a,
+  #notice a:hover {
+    text-decoration: none; }
+  #notice #register-member-btn {
+    background-color: #dfa70a;
+    box-shadow: 0px 4px #d8ceab;
+    font-size: 17px; }

@@ -10,26 +10,20 @@ import Rank from '../constants/user.rank.js';
 import Comment from '../models/Comment.js';
 import Reply from '../models/Reply.js';
 
+
 import {
     singleMongooseDocumentToObject,
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
 
-const calculateUserLevel = ([singleOrderList, multiOrderList, user]) => {
-    if (!singleOrderList)
-        singleOrderList = []
-    else singleOrderList = mongooseDocumentsToObject(singleOrderList)
+const calculateUserLevel = ([multiOrderList, user]) => {
 
     if (!multiOrderList)
         multiOrderList = []
     else multiOrderList = mongooseDocumentsToObject(multiOrderList)
 
-    var total =
-        singleOrderList.reduce(function (acc, item) {
-            return acc + item.total
-        }, 0) +
-        multiOrderList.reduce(function (acc, item) {
+    var total = multiOrderList.reduce(function (acc, item) {
             return acc + item.total
         }, 0)
 
@@ -131,36 +125,6 @@ const BookController = {
 
     },
 
-    // POST: /book/buy
-
-    buy(req, res, next) {
-        const order = new Order(req.body)
-        order.save()
-            .then(() => {
-                return Promise.all([
-                    Order.find({
-                        username: order.username
-                    }),
-                    Orders.find({
-                        username: order.username
-                    }),
-                    User.findOne({
-                        username: order.username
-                    }),
-                ])
-            })
-            .then(([singleOrderList, multiOrderList, user]) => {
-                calculateUserLevel([singleOrderList, multiOrderList, user])
-            })
-            .then(() => {
-                res.send({
-                    order: singleMongooseDocumentToObject(order),
-                    user: res.locals.user,
-                    cart: res.locals.cart
-                })
-            }).catch(next);
-    },
-
     // POST: /books/buys
 
     buyAllCart(req, res, next) {
@@ -183,9 +147,6 @@ const BookController = {
                 })])
             }).then(([x, y]) => {
                 return Promise.all([
-                    Order.find({
-                        username: data.username
-                    }),
                     Orders.find({
                         username: data.username
                     }),
@@ -193,8 +154,8 @@ const BookController = {
                         username: data.username
                     }),
                 ])
-            }).then(([singleOrderList, multiOrderList, user]) => {
-                calculateUserLevel(([singleOrderList, multiOrderList, user]))
+            }).then(([multiOrderList, user]) => {
+                calculateUserLevel(([multiOrderList, user]))
             })
             .then(() => res.send("OK"))
             .catch(next)

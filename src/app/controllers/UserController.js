@@ -1,12 +1,14 @@
 import User from '../models/User.js';
 import Book from '../models/Book.js';
 import Coffee from '../models/Coffee.js';
+import Orders from '../models/Orders.js';
 import { 
     singleMongooseDocumentToObject,
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
 import { getAvatar } from '../../support_lib/avatar_processing.js';
+
 
 const UserController = {
 
@@ -27,7 +29,7 @@ const UserController = {
     show(req, res, next) {
         User.findOne({ _id: req.params.id })
             .then((user) => {
-                res.render('users/info/item/index.hbs', {
+                res.render('users/info/item/edit.hbs', {
                     user: singleMongooseDocumentToObject(user),
                 })
             })
@@ -59,11 +61,43 @@ const UserController = {
     edit(req, res, next) {
         User.findById(req.params.id)
             .then((user) => {
-                res.render('users/item/edit.hbs', {
+                res.render('users/item/index.hbs', {
                     user: singleMongooseDocumentToObject(user),
                 })
             })
             .catch(next);
+    },
+
+    // [GET] /users/:username/register_loyal_member
+    registerLoyalMemeberIndex(req, res, next) {
+        Promise.all([User.findOne({username: req.params.username}), Orders.find({username: req.params.username})])
+            .then(([user, orders]) => {
+                if (!orders)
+                orders = []
+                else orders = mongooseDocumentsToObject(orders)
+            
+                var total = orders.reduce(function (acc, item) {
+                        return acc + item.total
+                    }, 0)
+        
+                res.render('users/loyal_member/index.hbs', {
+                    user: singleMongooseDocumentToObject(user),
+                    orders: orders,
+                    total: total
+                })
+            })
+            .catch(next);
+    },
+
+    // [POST] /users/:username/register_loyal_member
+    postRegisterLoyalMemeber(req, res, next) {
+        User.updateOne({username: req.body.username}, req.body)
+            .then((user) => {
+                user = singleMongooseDocumentToObject(user)
+                res.render('users/info/item/edit.hbs', {
+                    user: singleMongooseDocumentToObject(user),
+                })
+            })
     },
 
     // PATCH /users/:id

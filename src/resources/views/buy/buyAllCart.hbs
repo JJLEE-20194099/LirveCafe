@@ -1,120 +1,143 @@
+<link rel="stylesheet" href="/css/buy.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</link>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <body>
-    <div id="booking" class="section">
-        <div class="section-center">
-            <div class="container">
-                <div class="row">
-                    <div class="booking-form">
-                        <div class="form-header">
-                            <h1>Make your payment</h1>
-                        </div>
-                        <div id="payment-form">
-
-                            <div class="form-group">
-                                <input class="form-control" id="name" name="name" type="text"
-                                    value="{{user.lastname}} {{user.firstname}}">
-                                <span class="form-label">Name: </span>
+    <div id="pay">
+        <div id="booking" class="section">
+            <div class="section-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="booking-form">
+                            <div class="form-header">
+                                <h1>Make your payment</h1>
                             </div>
+                            <div id="payment-form">
 
-                            <div class="form-group">
-                                <input class="form-control" id="username" name="username" type="text"
-                                    value="{{user.username}}">
-                                <span class="form-label"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <input class="form-control" id="address" name="address" type="text"
-                                    placeholder="Address">
-                                <span class="form-label">Address</span>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input class="form-control" id="email" name="email" id="email" type="email"
-                                            placeholder="Enter your Email" required>
-                                        <span class="form-label">Email</span>
-                                    </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="name" name="name" type="text"
+                                        value="{{user.lastname}} {{user.firstname}}">
+                                    <span class="form-label">Name: </span>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input class="form-control" id="token" name="token" 
-                                            type="text"
-                                            placeholder="Nhập mã xác thực chúng tôi vừa gửi bạn qua email này" required>
-                                        <span class="form-label">Mã xác thực</span>
-                                        <button id="getToken">Lấy mã xác thực</button>
-                                    </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="username" name="username" type="text"
+                                        value="{{user.username}}">
+                                    <span class="form-label"></span>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input class="form-control" id="phone" name="phone"
-                                            placeholder="Enter you Phone">
-                                        <span class="form-label">Phone</span>
-                                    </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="address" name="address" type="text"
+                                        placeholder="Address">
+                                    <span class="form-label">Address</span>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                
-                                        <span class="form-label">Total: </span>
-                                        <div class="form-control" id="old-total" style="text-decoration: line-through;"name="old-total">{{total}}</div>
-                                        <div class="form-control" id="new-total" name="new-total"></div>
-                                    </div>
+
+                                <div class="form-group">
+                                    <input class="form-control" id="phone" name="phone" placeholder="Enter you Phone">
+                                    <span class="form-label">Phone</span>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" id="promoId" value="{{promo._id}}" hidden>
-                                        {{#if promo.discountAmount}}
-                                            <input class="form-control" id="amount-promo" name="amount-promo" value={{promo.discountAmount}}>
-                                        {{/if}}
-                                        {{#if promo.discountPercentage}}
-                                            <input class="form-control" id="percentage-promo" name="percentage-promo" value={{promo.discountPercentage}}>
-                                        {{/if}}
-                                        
-                                        <span class="form-label">Discount: </span>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control" id="email" name="email" id="email" type="email"
+                                                placeholder="Enter your Email" required>
+                                            <span class="form-label">Email</span>
+                                        </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+
+                                            <div class="form-control d-flex align-items-center" id="new-total">
+                                            </div>
+
+                                            <span id="old-total" style="text-decoration: line-through;" name="old-total"
+                                                style="display: none">{{total}}</span>
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input type="text" id="promoId" value="{{promo._id}}" style="display: none">
+                                            {{#if promo.discountAmount}}
+                                            <input class="form-control" id="amount-promo" name="amount-promo"
+                                                value={{promo.discountAmount}}>
+                                            {{/if}}
+                                            {{#if promo.discountPercentage}}
+                                            <input class="form-control" id="percentage-promo" name="percentage-promo"
+                                                value={{promo.discountPercentage}}>
+                                            {{/if}}
+
+                                            <span class="form-label">Discount: </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control" id="itemId" name="itemId" value="{{cart._id}}"
+                                                style="display: none">
+                                            <span class="form-label"></span>
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input class="form-control" id="itemId" name="itemId" value="{{cart._id}}">
-                                        <span class="form-label"></span>
-                                    </div>
+                                <div class="form-group">
+                                    <input class="form-control" id="token" name="token" type="text"
+                                        placeholder="Nhập mã xác thực chúng tôi vừa gửi bạn qua email này" required>
+                                    <span class="form-label">Mã xác thực</span>
+                                    <button id="getToken" class="btn">Lấy mã xác thực</button>
                                 </div>
 
-                            </div>
-                            <div class="form-btn">
-                                <button class="submit-btn" id="purchaseBtn">Purchase Now</button>
+                                <div class="form-btn">
+                                    <button class="submit-btn" id="purchaseBtn">Purchase Now</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div id="notice">
+
+        </div>
     </div>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
 
     <script>
 
         $(document).ready(function () {
-
-            var total = $('#old-total').text();
+            var old_total = $('#old-total').text();
+            var new_total = old_total
             if ($("#amount-promo").val()) {
-                
-                total = parseInt(total) - parseInt($("#amount-promo").val())
+
+                new_total = parseInt(old_total) - parseInt($("#amount-promo").val())
             }
 
             if ($("#percentage-promo").val()) {
-                
-                total = parseInt(total) *  (100 - parseInt($("#percentage-promo").val())) / 100
+
+                new_total = parseInt(old_total) * (100 - parseInt($("#percentage-promo").val())) / 100
             }
 
-            $('#new-total').text(total);
-
+            $('#new-total').html(`Total: <span
+                                                margin-left: 6px; text-decoration: line-through;" name="new-total">${old_total}</span> <span id="old-total"
+                                                style="margin-left: 8px; text-decoration: line-through;" name="old-total">${old_total}</span>`);
 
             var validToken = ''
 
@@ -135,9 +158,12 @@
                     method: 'POST',
                     data: data,
                     success: function (res) {
+                        alert('Please check valid otp in your email')
                         if (!res.isError) {
                             validToken = res.token
+                            
                         }
+                        
                     },
                     error: function (error) {
                         console.log(error)
@@ -146,11 +172,9 @@
             })
 
             $('#purchaseBtn').click(function () {
+                $('#purchaseBtn')
                 const userToken = $('#token').val()
-                
 
-
-                
                 if (userToken == '' || userToken != validToken) {
                     alert("Mã xác thực không hợp lệ");
                 } else {
@@ -160,18 +184,39 @@
                         address: $('#address').val(),
                         email: $('#email').val(),
                         phone: $('#phone').val(),
-                        total: total,
+                        total: new_total,
                         itemId: $('#itemId').val(),
                         promoId: $('#promoId').val()
                     }
+
+                    console.log(data)
 
                     $.ajax({
                         url: '/books/buys',
                         method: 'POST',
                         data: data,
                         success: function (res) {
-                            alert("Bạn đặt hàng thành công")
-                            location.href=`/books/list`
+                            $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
+                                                <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: #837542;">
+                                                            <h3 style="text-align: center">Your order is complete</h3>
+                                                            <h3 style="text-align: center">Thank you for using our service</h3> <i style="text-align: center; color: #b78908; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);" class="fa fa-bell"></i>
+                                                            <p class="r3 px-md-5 px-sm-1" style="text-align: center">Register as a member to receive more incentives for your next purchases</p>
+                                                            <div class="text-center mb-3"> <button id="register-member-btn" class="btn w-50 rounded-pill b1">Register member now</button> </div> <a style="text-align:center; color: #c18e00; font-weight: 700" href="/">Not now</a>
+                                                        </div>
+                                                    </div>
+                                                </div>`)
+
+                            $("#notice-btn").click()
+                            $("#register-member-btn").click(function () {
+                                location.href = `/users/${data.username}/register_loyal_member`
+                            })
+
+                            $("#form").on("hidden.bs.modal", function () {
+                                location.href = '/'
+                            });
+
                         },
 
                     })

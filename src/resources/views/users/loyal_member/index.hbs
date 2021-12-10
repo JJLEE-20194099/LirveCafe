@@ -1,0 +1,195 @@
+<link rel="stylesheet" href="/css/signup.css">
+{{#each errors}}
+<p>{{this}}</p>
+{{/each}}
+
+
+<div class="signup__container" style="width: 62rem">
+    <div class="container__child signup__thumbnail">
+        <div class="thumbnail__logo d-flex align-items-center">
+          <img src="/img/brand-logo.png" alt="logo-brand" class="logo__shape" width="80px" height="80px">
+             <h1 class="logo__text" style="margin-bottom: -20px">LivreCafe is all you need for a long day</h1>
+
+        </div>
+        <div class="thumbnail__content text-center">
+
+            <h1 class="heading--primary" style="color: #8f7529; font-weight: 600; text-shadow: 2px 2px 4px #000000;">Welcome to LivreCafe</h1>
+
+            <div class="profess-title">
+                <div class="perspective-text">
+                    <div class="perspective-line">
+                        <p></p>
+                        <p>Are you ready</p>
+                    </div>
+                    <div class="perspective-line">
+                        <p>Are you ready</p>
+                        <p>to join</p>
+                    </div>
+                    <div class="perspective-line">
+                        <p>to join</p>
+                        <p>the loyal</p>
+                    </div>
+                    <div class="perspective-line">
+                        <p>the loyal</p>
+                        <p>livrecafe group ?</p>
+                    </div>
+                    <div class="perspective-line">
+                        <p>livrecafe group ?</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="thumbnail__links">
+            <ul class="list-inline m-b-0 text-center">
+                <li><a href="http://alexdevero.com/" target="_blank"><i class="fa fa-globe"></i></a></li>
+                <li><a href="https://www.behance.net/alexdevero" target="_blank">
+                        <fa class="fa fa-behance"></fa>
+                    </a></li>
+                <li><a href="https://github.com/alexdevero" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://twitter.com/alexdevero" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            </ul>
+        </div>
+        <div class="signup__overlay" style=""></div>
+    </div>
+    <div class="container__child signup__form">
+
+        <form action="/users/{{user.username}}/register_loyal_member" method="POST" enctype="multipart/form-data">
+            <input type="text" id="total" value={{total}} style="display: none">
+            <input type="text" id="level" value={{total}} style="display: none">
+            <div class="form-group">
+                <label for="firstname">Firstname</label>
+                <input class="form-control" type="text" name="firstname" id="firstname" value={{user.firstname}}
+                    required />
+            </div>
+            <div class="form-group">
+                <label for="lastname">Lastname</label>
+                <input class="form-control" type="text" name="lastname" id="lastname" value={{user.lastname}}
+                    required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" name="email" id="email" value={{user.email}} required />
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input class="form-control" type="text" name="username" id="username" value={{user.username}}
+                    required />
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input class="form-control" type="text" name="phone" id="phone" value={{user.phone}} required />
+            </div>
+
+            <div class="form-group" style="border-bottom: 0.3px solid #ccc;">
+                <label style="text-align: center; color: #845930; font-weight: 700">What rank do you want to register as
+                    a loyal member?</label>
+                <div class="rank-box d-flex align-items-center justify-content-between">
+                    <label class="rank-label">Bronze</label>
+                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="1" required />
+
+
+                </div>
+                <div class="rank-box d-flex align-items-center justify-content-between">
+                    <label class="rank-label">Silver</label>
+                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="2" />
+
+
+                </div>
+
+                <div class="rank-box d-flex align-items-center justify-content-between">
+                    <label class="rank-label">Gold</label>
+                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="3" />
+
+
+                </div>
+
+                <div class="rank-box d-flex align-items-center justify-content-between">
+                    <label class="rank-label">Plantinum</label>
+                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="4" />
+
+
+                </div>
+
+                <div class="rank-box d-flex align-items-center justify-content-between">
+                    <label class="rank-label">Dimonad</label>
+                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="5" />
+
+
+                </div>
+
+                <div class="rank-box d-flex align-items-center justify-content-between">
+                    <label class="rank-label">Master</label>
+                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="6" />
+
+                </div>
+            </div>
+
+            <div>
+                
+            </div>
+
+
+
+
+
+            <div class="m-t-lg">
+                <ul class="list-inline">
+                    <li>
+                        <input class="btn btn--form" type="submit" value="Submit"
+                            style="background-color: #530604; margin-bottom: 8px" />
+                    </li>
+                    <li>
+                        <a class="signup__link" href="#">I am already a loyal member</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    
+</div>
+ <div id="notice">
+
+    </div>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function () {
+        condition_list = [300, 500, 1000, 2000, 5000, 10000]
+        total = $("#total").val()
+        level = $("#level").val()
+        username = $("#username").val()
+
+        $('input[name="registerd_level"]').click(function() {
+            me_tick = $('input:radio[name=registerd_level]:checked').val() 
+            if (level < me_tick) {
+                $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
+                                                <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" style="width: 550px"; role="document">
+                                                        <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: #837542;">
+                                                            <h3 style="text-align: center; color: #300c0c">You have not met the requirements about loyal member</h3>
+                                                            <i style="text-align: center; color: white; font-size: 120px; border:none; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);" class="ti ti-bell"></i>
+                                                            <a href=""
+                    style="display: flex;margin-bottom: 12px; text-align: center; color: white; font-weight: 600; font-size:15px">You
+                    can read more sepecific terms of loyal members by click_<span class="text-decoration: underline; margin-left: 4px; color: black; cursor: pointer">here</span></a>
+                                                            <p class="r3 px-md-5 px-sm-1" style="text-align: center"></span></p>
+                                                            <div class="text-center mb-3"> <button id="register-member-btn" class="btn w-50 rounded-pill b1">Back home page</button> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`)
+
+                $("#notice-btn").click()
+                $('input:radio[name=registerd_level]:checked').prop('checked', false)
+                $("#register-member-btn").click(function () {
+                                location.href = `/`
+                            });
+
+            }
+        })
+
+    })
+
+</script>

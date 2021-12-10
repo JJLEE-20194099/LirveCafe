@@ -12,6 +12,7 @@ import cartRoute from './cart.js';
 import authMiddleware from '../app/middleware/AuthMiddleware.js';
 import orderRoute from './order.js';
 import notiRoute from './noti.js';
+import workingspaceRoute from './workingspace.js';
 
 const routeObj = {
     route: function (app) {
@@ -28,6 +29,7 @@ const routeObj = {
         app.use('/', homeRoute);
         app.use('/orders', authMiddleware.getCurrentUserInfo, orderRoute);
         app.use('/notis', notiRoute);
+        app.use('/workingspace', workingspaceRoute);
     },
 }
 export default routeObj;

@@ -123,3 +123,6 @@
     color: #b51717;
     font-size: 20px;
     font-weight: 400; }
+
+.feedback-container {
+  min-height: 140px; }

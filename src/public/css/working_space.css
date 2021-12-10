@@ -1,0 +1,143 @@
+#working-space {
+  height: 2000px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;
+  border-radius: 12px; }
+  #working-space #basic-info {
+    font-size: 20px;
+    margin-top: 24px; }
+    #working-space #basic-info .col {
+      margin-bottom: 16px; }
+    #working-space #basic-info .row {
+      margin: 0; }
+    #working-space #basic-info .line {
+      height: 2px;
+      background-color: #c39e51;
+      margin-bottom: 8px; }
+    #working-space #basic-info .header {
+      padding: 16px 0;
+      color: #c39e51;
+      font-weight: bold;
+      margin-left: 12px; }
+    #working-space #basic-info span {
+      display: inline-block;
+      min-width: 170px; }
+    #working-space #basic-info .seat-num input {
+      width: 44px;
+      text-align: center; }
+    #working-space #basic-info .one-day, #working-space #basic-info .multi-days {
+      display: none; }
+    #working-space #basic-info .one-day.active, #working-space #basic-info .multi-days.active {
+      display: block; }
+  #working-space .food-drink-confirm {
+    padding: 24px 0;
+    font-size: 20px; }
+    #working-space .food-drink-confirm span {
+      margin-right: 24px; }
+    #working-space .food-drink-confirm input[type=checkbox] {
+      transform: scale(1.4); }
+  #working-space #food-drink-order {
+    display: none;
+    font-size: 18px;
+    margin-bottom: 32px; }
+    #working-space #food-drink-order li {
+      list-style-type: none; }
+    #working-space #food-drink-order ul {
+      padding: 0; }
+    #working-space #food-drink-order .fodr-list {
+      margin-top: 12px;
+      background-color: #fff; }
+      #working-space #food-drink-order .fodr-list .fodr-item {
+        margin-bottom: 12px;
+        box-shadow: 0 1px 3px 0 black, 0 1px 9px 0 #220202; }
+        #working-space #food-drink-order .fodr-list .fodr-item img {
+          object-fit: cover;
+          width: 100px;
+          height: 80px; }
+        #working-space #food-drink-order .fodr-list .fodr-item .fodr-name, #working-space #food-drink-order .fodr-list .fodr-item .fodr-cost {
+          padding-left: 24px;
+          display: inline-block; }
+        #working-space #food-drink-order .fodr-list .fodr-item .fodr-name {
+          width: 45%; }
+        #working-space #food-drink-order .fodr-list .fodr-item .fodr-cost {
+          width: 25%;
+          color: #FF424E;
+          font-weight: bold; }
+        #working-space #food-drink-order .fodr-list .fodr-item input[type=checkbox] {
+          transform: scale(1.7); }
+    #working-space #food-drink-order #ordering {
+      position: relative;
+      border-bottom: 2px solid #c39e51;
+      background-color: #c39e51; }
+      #working-space #food-drink-order #ordering #ordering-nav .navbar-brand {
+        margin: 0; }
+      #working-space #food-drink-order #ordering #ordering-nav .nav-pills {
+        border: 1px solid #c39e51;
+        margin-right: 4px;
+        border-radius: 8px; }
+      #working-space #food-drink-order #ordering #ordering-nav .nav-item {
+        border-radius: 8px;
+        width: 150px;
+        text-align: center; }
+      #working-space #food-drink-order #ordering #ordering-nav .nav-item:hover {
+        cursor: pointer; }
+      #working-space #food-drink-order #ordering #ordering-nav .nav-item.active {
+        background-color: #c39e51; }
+        #working-space #food-drink-order #ordering #ordering-nav .nav-item.active a {
+          color: #fff; }
+      #working-space #food-drink-order #ordering #ws-food-scroll, #working-space #food-drink-order #ordering #ws-drink-scroll {
+        display: none;
+        overflow-y: scroll;
+        height: 430px; }
+      #working-space #food-drink-order #ordering #ws-food-scroll.active, #working-space #food-drink-order #ordering #ws-drink-scroll.active {
+        display: block; }
+    #working-space #food-drink-order #ordered .fodr-item {
+      display: none; }
+      #working-space #food-drink-order #ordered .fodr-item .fodr-name {
+        width: 40%; }
+      #working-space #food-drink-order #ordered .fodr-item .fodr-cost {
+        width: 20%; }
+      #working-space #food-drink-order #ordered .fodr-item .fodr-number {
+        width: 20%;
+        line-height: 1.3;
+        display: inline-block; }
+        #working-space #food-drink-order #ordered .fodr-item .fodr-number input {
+          width: 44px;
+          padding: 1px 2px;
+          text-align: center;
+          border: none;
+          margin: 0 -4px;
+          border: 1px solid #ececec;
+          height: 24px; }
+        #working-space #food-drink-order #ordered .fodr-item .fodr-number input:focus-visible {
+          outline: none;
+          border: 1px solid #c39e51; }
+        #working-space #food-drink-order #ordered .fodr-item .fodr-number .buy-btn {
+          cursor: pointer;
+          height: 24px; }
+        #working-space #food-drink-order #ordered .fodr-item .fodr-number .buy-btn:focus {
+          outline: none; }
+    #working-space #food-drink-order #ordered .fodr-item.active {
+      display: block; }
+    #working-space #food-drink-order #ordered #ws-ordered-scroll {
+      overflow-y: scroll;
+      height: 390px; }
+    #working-space #food-drink-order #ordered .fodr-total {
+      margin-top: 16px; }
+      #working-space #food-drink-order #ordered .fodr-total span {
+        color: #FF424E;
+        font-weight: bold; }
+  #working-space #food-drink-order.active {
+    display: flex; }
+  #working-space .submit-order {
+    display: flex;
+    justify-content: center; }
+    #working-space .submit-order button {
+      width: 160px;
+      font-size: 20px;
+      background-color: #c39e51;
+      color: #fff;
+      border: 2px solid #c39e51; }
+    #working-space .submit-order button:hover {
+      border: 2px solid #000;
+      opacity: 0.9; }

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <a class="navbar-brand" href="#" style="font-size: 200%;color:black">
+      <img src="{{user.avatar}}" class="img-fluid" alt="" width="100" height="100">
+      User info
+    </a>
+</div>
+<table class="table">
+    <tbody>
+        <tr>
+            <th scope="row">First name</th>
+            <td class="table-light">{{user.firstname}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Last name</th>
+            <td class="table-light">{{user.lastname}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Phone number</th>
+            <td class="table-light">{{user.phone}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Email</th>
+            <td class="table-light">{{user.email}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Level</th>
+            <td class="table-light">{{user.level}}</td>
+        </tr>
+    </tbody>
+</table>
