@@ -6,15 +6,17 @@ const increSeat = $('#basic-info .seat-num .incre-btn')
 
 const inputSeat = $('#basic-info .seat-num input')
 
-decreSeat.onclick = function () { 
+decreSeat.onclick = function (e) {
+    e.preventDefault()
     let a = parseInt(inputSeat.value)
-    
-    if(a > 1){
+
+    if (a > 1) {
         inputSeat.value = a - 1;
-    } 
+    }
 }
 
-increSeat.onclick = function () {
+increSeat.onclick = function (e) {
+    e.preventDefault()
     let a = parseInt(inputSeat.value)
     inputSeat.value = a + 1;
 
@@ -23,33 +25,41 @@ increSeat.onclick = function () {
 inputSeat.onchange = (e) => {
 
     let a = parseInt(e.target.value)
- 
-    if(Number.isInteger(a) && a > 0){
+
+    if (Number.isInteger(a) && a > 0) {
         e.target.value = a
     }
-    else{
+    else {
         e.target.value = 1
     }
 }
 
 // ----------------------------------------------------------------
+var nowTime = function () {
 
-// const oneDayBtn = $('#basic-info .date-time #one-day') 
-// const multiDaysBtn = $('#basic-info .date-time #multi-days') 
+    var today = new Date();
+    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-// const oneDayDiv = $('#basic-info .one-day')
-// const multiDaysDiv = $('#basic-info .multi-days')
+    var minute = today.getMinutes()
+    minute = (minute >= 10) ? minute : '0' + minute
+    var time = today.getHours() + ":" + minute
 
-// oneDayBtn.onchange = function (e) {
-//     if(e.target.checked) {
-//         oneDayDiv.classList.add('active')
-//         multiDaysDiv.classList.remove('active')
-//     }
-// }
+    var dateTime = date + 'T' + time;
 
-// multiDaysBtn.onchange = function (e) {
-//     if(e.target.checked) {
-//         oneDayDiv.classList.remove('active')
-//         multiDaysDiv.classList.add('active')
-//     }
-// }
+    return dateTime
+}
+
+
+const startTimeInput = $('#basic-info .start-time input')
+const endTimeInput = $('#basic-info .end-time input')
+
+startTimeInput.onclick = (e) => {
+    dateTime = nowTime()
+    e.target.min = dateTime
+
+}
+
+endTimeInput.onclick = (e) => {
+    e.target.min = startTimeInput.value
+}
+

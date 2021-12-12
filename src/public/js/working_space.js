@@ -59,28 +59,6 @@ let foodOrderedItems = $$('#food-drink-order #ordered #food-ordered .fodr-item')
 let drinkOrderedList = $('#food-drink-order #ordered #drink-ordered') 
 let drinkOrderedItems = $$('#food-drink-order #ordered #drink-ordered .fodr-item')
 
-var handleUnChecked = function(index, list) {
-
-
-    list.forEach(function(fodrItem) {
-        
-        if(fodrItem.id == index){
-            fodrItem.classList.remove('active')
-        }
-    })  
-
-}
-
-var handleChecked = function(index, list) {
-
-    list.forEach(function(fodrItem) {
-        
-        if(fodrItem.id == index){
-            fodrItem.classList.add('active')
-        }
-    })  
-}
-
 
 // reset total money 
 
@@ -104,11 +82,11 @@ foodOrderingItems.forEach((item, index) => {
         
         const valueItem = parseInt(item.querySelector('.fodr-cost span').innerText.replaceAll('.',''))
         if(e.target.checked === true){
-            handleChecked(index, foodOrderedItems)
+            foodOrderedItems[index].classList.add('active')
             resetTotalMoney()
         }
         else{
-            handleUnChecked(index, foodOrderedItems)
+            foodOrderedItems[index].classList.remove('active')
             resetTotalMoney()
         }
     }
@@ -121,19 +99,20 @@ drinkOrderingItems.forEach((item, index) => {
     input.onchange = (e) => {
         const valueItem = parseInt(item.querySelector('.fodr-cost span').innerText.replaceAll('.',''))
         if(e.target.checked === true){
-            handleChecked(index, drinkOrderedItems)
+            drinkOrderedItems[index].classList.add('active')
             resetTotalMoney()
         }
         else{
-            handleUnChecked(index, drinkOrderedItems)
+            drinkOrderedItems[index].classList.remove('active')
             resetTotalMoney()
         }
     }
 })
 
-// toàn bộ các sản phẩm bên đã chọn, kể cả sản phẩm ko hiện lên 
+// toàn bộ các sản phẩm bên đã chọn, kể cả sản phẩm ko hiện lên (display :none) 
 const allOrderedItems = $$('#food-drink-order #ordered .fodr-item')
 
+// toàn bộ các sản phẩm bên đã chọn thực (được hiện lên)
 let allOrderedRealItems = $$('#food-drink-order #ordered .fodr-item.active')
 
 
@@ -151,7 +130,8 @@ allOrderedItems.forEach((item, index) => {
     const baseValue = parseInt(costSpan.innerText.replaceAll('.',''))
     let oldValue = 0;
 
-    decreBtn.onclick = function () { 
+    decreBtn.onclick = function (e) { 
+        e.preventDefault()
         let a = parseInt(input.value)
         
         if(a > 1){
@@ -162,7 +142,8 @@ allOrderedItems.forEach((item, index) => {
         } 
     }
 
-    increBtn.onclick = function () {
+    increBtn.onclick = function (e) {
+        e.preventDefault()
         let a = parseInt(input.value)
         input.value = a + 1;
         costSpan.innerText  = resetValue(baseValue, a+1)

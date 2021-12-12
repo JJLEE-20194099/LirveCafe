@@ -554,9 +554,11 @@ textarea {
   padding-top: 24px; }
 
 .user-info__img {
-  width: 60px;
   border-radius: 50%;
-  border: 1px solid #eee; }
+  width: 60px;
+  height: 60px;
+  border: 1px solid #eee;
+  object-fit: cover; }
 
 .user-info__detail {
   display: flex;
@@ -759,7 +761,8 @@ textarea {
     filter: brightness(0.8); }
 
 .user__body-right__img {
-  object-fit: contain;
+  object-fit: cover;
+  height: 105px;
   width: 105px;
   border-radius: 50%;
   border: 1px solid var(--primary-color); }

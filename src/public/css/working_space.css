@@ -1,13 +1,21 @@
 #working-space {
-  height: 2000px;
-  background-color: #fff;
+  height: auto;
+  background-color: white;
   box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;
-  border-radius: 12px; }
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  border: 0.5px solid #c39e51; }
+  #working-space input {
+    background-color: rgba(255, 255, 255, 0.4); }
   #working-space #basic-info {
-    font-size: 20px;
-    margin-top: 24px; }
+    border: 2px solid #c39e51;
+    font-size: 20px; }
     #working-space #basic-info .col {
-      margin-bottom: 16px; }
+      margin-bottom: 16px;
+      background-color: rgba(195, 158, 81, 0.8);
+      border: 1px solid #fff;
+      padding: 6px 12px; }
     #working-space #basic-info .row {
       margin: 0; }
     #working-space #basic-info .line {
@@ -15,23 +23,27 @@
       background-color: #c39e51;
       margin-bottom: 8px; }
     #working-space #basic-info .header {
-      padding: 16px 0;
+      padding: 16px 15px;
       color: #c39e51;
       font-weight: bold;
-      margin-left: 12px; }
+      background-color: rgba(255, 255, 255, 0.8);
+      text-align: center; }
     #working-space #basic-info span {
       display: inline-block;
-      min-width: 170px; }
+      min-width: 170px;
+      text-align: left;
+      font-weight: bold;
+      font-size: 18px; }
     #working-space #basic-info .seat-num input {
       width: 44px;
       text-align: center; }
-    #working-space #basic-info .one-day, #working-space #basic-info .multi-days {
-      display: none; }
-    #working-space #basic-info .one-day.active, #working-space #basic-info .multi-days.active {
-      display: block; }
   #working-space .food-drink-confirm {
-    padding: 24px 0;
-    font-size: 20px; }
+    background-color: rgba(195, 158, 81, 0.8);
+    padding: 8px 15px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 2px;
+    margin-right: 2px; }
     #working-space .food-drink-confirm span {
       margin-right: 24px; }
     #working-space .food-drink-confirm input[type=checkbox] {
@@ -39,11 +51,14 @@
   #working-space #food-drink-order {
     display: none;
     font-size: 18px;
-    margin-bottom: 32px; }
+    margin: 32px 0px 32px; }
     #working-space #food-drink-order li {
       list-style-type: none; }
     #working-space #food-drink-order ul {
       padding: 0; }
+    #working-space #food-drink-order #ordering,
+    #working-space #food-drink-order #ordered {
+      background-color: rgba(255, 255, 255, 0.8); }
     #working-space #food-drink-order .fodr-list {
       margin-top: 12px;
       background-color: #fff; }
@@ -54,7 +69,8 @@
           object-fit: cover;
           width: 100px;
           height: 80px; }
-        #working-space #food-drink-order .fodr-list .fodr-item .fodr-name, #working-space #food-drink-order .fodr-list .fodr-item .fodr-cost {
+        #working-space #food-drink-order .fodr-list .fodr-item .fodr-name,
+        #working-space #food-drink-order .fodr-list .fodr-item .fodr-cost {
           padding-left: 24px;
           display: inline-block; }
         #working-space #food-drink-order .fodr-list .fodr-item .fodr-name {
@@ -85,11 +101,13 @@
         background-color: #c39e51; }
         #working-space #food-drink-order #ordering #ordering-nav .nav-item.active a {
           color: #fff; }
-      #working-space #food-drink-order #ordering #ws-food-scroll, #working-space #food-drink-order #ordering #ws-drink-scroll {
+      #working-space #food-drink-order #ordering #ws-food-scroll,
+      #working-space #food-drink-order #ordering #ws-drink-scroll {
         display: none;
         overflow-y: scroll;
         height: 430px; }
-      #working-space #food-drink-order #ordering #ws-food-scroll.active, #working-space #food-drink-order #ordering #ws-drink-scroll.active {
+      #working-space #food-drink-order #ordering #ws-food-scroll.active,
+      #working-space #food-drink-order #ordering #ws-drink-scroll.active {
         display: block; }
     #working-space #food-drink-order #ordered .fodr-item {
       display: none; }
@@ -123,7 +141,7 @@
       overflow-y: scroll;
       height: 390px; }
     #working-space #food-drink-order #ordered .fodr-total {
-      margin-top: 16px; }
+      margin: 12px 0; }
       #working-space #food-drink-order #ordered .fodr-total span {
         color: #FF424E;
         font-weight: bold; }
@@ -131,13 +149,29 @@
     display: flex; }
   #working-space .submit-order {
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    border: 0.5px solid #c39e51; }
     #working-space .submit-order button {
       width: 160px;
       font-size: 20px;
       background-color: #c39e51;
       color: #fff;
-      border: 2px solid #c39e51; }
+      border: 2px solid #c39e51;
+      margin: 24px 0;
+      border-radius: 8px;
+      height: 50px; }
     #working-space .submit-order button:hover {
-      border: 2px solid #000;
       opacity: 0.9; }
+  #working-space input {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: none; }
+  #working-space input:focus {
+    outline: none;
+    border: 0.5px solid white; }
+  #working-space .seat-btn {
+    border: none;
+    background-color: white;
+    border-radius: 4px; }
+  #working-space button:hover {
+    opacity: 0.9; }
