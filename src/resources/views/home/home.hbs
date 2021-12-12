@@ -1,7 +1,8 @@
 <!--Carousel Wrapper-->
 <div id="home-slider">
 
-  <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel" style="margin-left: 0; margin-right: 0">
+  <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel"
+    style="margin-left: 0; margin-right: 0">
     <!--Indicators-->
     <ol class="carousel-indicators">
       <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
@@ -44,6 +45,61 @@
   <!--/.Carousel Wrapper-->
 </div>
 
+{{!-- home food --}}
+<div class="home-product" id="home-foods">
+
+  <div class="product-header" id="books-header">
+    <span>Đồ ăn và hơn thế</span>
+    <i class="product-icon ti-cup"></i>
+  </div>
+
+  <div class="carousel slide" data-ride="carousel" data-interval="5000">
+
+    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+
+      {{#each food}}
+      {{!-- drink item1 --}}
+      <a href="/food/{{this.slug}}" class="carousel-item col-md-3">
+
+        <div class="panel panel-default">
+          <div class="panel-thumbnail">
+            <div title="image 1" class="thumb">
+              <img class="img-fluid mx-auto d-block" src="{{this.image}}" alt="slide 1">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            {{!-- <div class="book-author"><span>Tác giả: </span><span>Riot</span></div> --}}
+            <p class="card-text">{{this.description}}</p>
+
+            <div class="item-price flex">
+              <div class="price-value">{{this.price}} VNĐ</div>
+            </div>
+          </div>
+        </div>
+
+      </a>
+      {{/each}}
+
+
+    </div>
+    {{!-- book prev icon --}}
+    <a class="carousel-control-prev" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+
+    {{!-- book next icon --}}
+    <a class="carousel-control-next text-faded" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+</div>
 
 {{!-- home books --}}
 <div class="home-product" id="home-books">
@@ -72,7 +128,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{this.title}}</h5>
-            
+
             <p class="card-text">{{this.body}}</p>
 
             <div class="item-price flex">
@@ -115,7 +171,7 @@
 
       {{#each coffee}}
       {{!-- drink item1 --}}
-      <a  href="/coffee/{{this.slug}}" class="carousel-item col-md-3">
+      <a href="/coffee/{{this.slug}}" class="carousel-item col-md-3">
 
         <div class="panel panel-default">
           <div class="panel-thumbnail">
@@ -157,7 +213,6 @@
 
 </div>
 
-
 {{!-- home image --}}
 <div id="home-image">
 
@@ -178,11 +233,17 @@
   const prevdrinkIcon = $('#home-drinks .carousel-control-prev')
   const nextdrinkIcon = $('#home-drinks .carousel-control-next')
 
+  const foodItems = $$('#home-foods .carousel-item')
+  const prevfoodIcon = $('#home-foods .carousel-control-prev')
+  const nextfoodIcon = $('#home-foods .carousel-control-next')
+
   if (bookItems.length > 0)
     bookItems[0].classList.add('active')
-  
+
   if (drinkItems.length > 0)
     drinkItems[0].classList.add('active')
+  if (foodItems.length > 0)
+    foodItems[0].classList.add('active')
 
   function prevIconClick(items) {
     var activeIndex;
@@ -239,5 +300,12 @@
   }
   nextdrinkIcon.onclick = function () {
     nextIconClick(drinkItems);
+  }
+
+    prevfoodIcon.onclick = function () {
+    prevIconClick(foodItems);
+  }
+  nextfoodIcon.onclick = function () {
+    nextIconClick(foodItems);
   }
 </script>

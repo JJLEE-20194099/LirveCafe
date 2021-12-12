@@ -1,0 +1,413 @@
+<link rel="stylesheet" href="/css/nam_book_detail.css">
+<link rel="stylesheet" href="/css/jjlee_book_detail.css">
+<link rel="stylesheet" href="/css/khang_book_detail_base.css">
+<link rel="stylesheet" href="/css/khang_book_detail_main.css">
+<body>
+
+    <div id="product-detail-page">
+
+        <div id="detail-and-buy" class="d-flex justify-content-center">
+
+            <img class="product-img col col-6 d-flex justify-content-center" src="{{food.image}}">
+
+
+
+            <div id="product-buy-detail" class="col col-6">
+
+                <div class="detail-header">
+                    <h2 class="detail-title" style="color: black; font-weight: 600">{{food.name}}</h2>
+                    <div class="detail-rating">
+
+                        {{!-- light star --}}
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
+                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
+                            style="color: rgb(253, 216, 54);">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                            </path>
+                        </svg>
+
+                        {{!-- light star --}}
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
+                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
+                            style="color: rgb(253, 216, 54);">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                            </path>
+                        </svg>
+
+                        {{!-- light star --}}
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
+                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
+                            style="color: rgb(253, 216, 54);">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                            </path>
+                        </svg>
+
+                        {{!-- light star --}}
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
+                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
+                            style="color: rgb(253, 216, 54);">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                            </path>
+                        </svg>
+
+                        {{!-- dark star --}}
+                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
+                            color="#c7c7c7" style="color:#c7c7c7" height="16" width="16"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                            </path>
+                        </svg>
+
+                    </div>
+                    <a href="#">(Xem <span>44</span> đánh giá)</a>
+                    <div class="detail-sold">Đã bán <span>888</span></div>
+                </div>
+
+                <div class="detail-cost">
+                    {{food.price}} VNĐ
+                </div>
+
+                <div class="detail-coupon">
+                    <div class="coupon-text">Mã giảm giá</div>
+                    <ul class="coupon-tags">
+                        <li class="coupon-tag">Giảm 5k</li>
+                        <li class="coupon-tag">Giảm 10k</li>
+                        <li class="coupon-tag">Giảm 15k</li>
+                        <a href="#"><i class="coupon-detail-icon ti-angle-right"></i></a>
+                    </ul>
+
+                </div>
+
+                <div class="detail-buy">
+                    {{!-- <p class="label">Số lượng</p> --}}
+
+                    <div class="group-input">
+                        {{!-- <button class="change-btn buy-btn" id="decre-btn"><i class="ti-minus"></i></button>
+                        <input type="text" value="1" class="input">
+                        <button class="change-btn buy-btn" id="incre-btn"><i class="ti-plus"></i></button> --}}
+
+                        <div>
+                            <button class="submit-btn buy-btn" id="buyItem">Chọn mua</button>
+                            <button id="addItemToCart" class="submit-btn buy-btn">Add to cart</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="">
+            <div class="">
+                {{!-- <div class="detail__container">
+                    <div class="detail__heading">
+                        Thông tin chi tiết
+                    </div>
+                    <div class="detail__table">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Công ty phát hành</td>
+                                    <td>Gubooks</td>
+                                </tr>
+                                <tr>
+                                    <td>Ngày xuất bản</td>
+                                    <td>2021-06-01 00:00:00</td>
+                                </tr>
+                                <tr>
+                                    <td>Kích thước</td>
+                                    <td>13.5 x 20 cm</td>
+                                </tr>
+                                <tr>
+                                    <td>Dịch giả</td>
+                                    <td>Đặng Quân</td>
+                                </tr>
+                                <tr>
+                                    <td>Loại bìa</td>
+                                    <td>Bìa mềm</td>
+                                </tr>
+                                <tr>
+                                    <td>Số trang</td>
+                                    <td>{{book.no}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Nhà xuất bản</td>
+                                    <td>Nhà xuất bản Nhi đồng</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> --}}
+                <div class="detail__description">
+                    <div class="detail__description-heading">
+                        Mô Tả Sản Phẩm
+                    </div>
+                    <div class="detail__description-content">
+                        {{food.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- home books --}}
+        <div class="home-product" style="margin-left: 18px; margin-right: 18px; border-bottom: 0px, solid, #fff"
+            id="home-books">
+
+            <div class="product-header" id="books-header">
+                <span>Có thể bạn thích</span>
+                <i class="product-icon ti-book"></i>
+            </div>
+
+            <div class="carousel slide" style="height: 400px" data-ride="carousel" data-interval="5000">
+
+                <div class="carousel-inner row w-100 mx-auto" style="height: 100%; box-shadow: none" role="listbox">
+
+                    {{#each foods}}
+
+                    <a href="/food/{{this.slug}}" class="carousel-item col-md-3">
+
+                        <div class="panel panel-default">
+                            <div class="panel-thumbnail">
+                                <div title="image 1" class="thumb">
+                                    <img class="img-fluid mx-auto d-block" src="{{this.image}}" alt="slide 1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{this.name}}</h5>
+
+                                <p class="card-text">{{this.description}}</p>
+
+                                <div class="item-price flex">
+                                    <div class="price-value">{{this.price}} VNĐ</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </a>
+                    {{/each}}
+
+                </div>
+                {{!-- book prev icon --}}
+                <a class="carousel-control-prev" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                {{!-- book next icon --}}
+                <a class="carousel-control-next text-faded" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="feedback-container">
+
+            <h2 class="feedback-title" style="margin-left: 16px">Feedback</h2>
+
+            <div>
+                <div id="commentForm">
+
+                    {{#if user}}
+                    <input type="text" name="username" id="username" value={{user.username}} readonly>
+                    <input type="text" name="content" id="content">
+                    <input name="itemId" id="itemId" value="{{book._id}}">
+                    <button type="button" id="commentSendBtn">Submit</button>
+                    {{/if}}
+                </div>
+            </div>
+            {{#if commentList.length}}
+            <h1>Comment ({{commentList.length}})</h1>
+            {{/if}}
+            <div id="commentBox">
+                {{#each commentList}}
+                <div id="{{this._id}}" class="each_comment_box">
+                    <div class="media d-flex align-items-center">
+                        <span class="round"><img src="https://img.icons8.com/bubbles/100/000000/groups.png"
+                            class="align-self-start mr-3"></span>
+                        <div class="d-flex flex-column align-items-start justify-content-evenly">
+                            <h6 class="user pt-2">{{this.username}}</h6>
+                            <div class="ml-auto">
+                                <div class="d-flex justify-content-between">
+                                    <p class="content">{{this.content}}</p>
+                                    <span class="date">{{this.updatedAt}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    
+                    <ul class="replyList">
+                        {{#each this.replyList}}
+                        <li>
+                            {{this.username}}: {{this.content}}
+                            <span class="date">{{this.updatedAt}}</span>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    <div class="replyForm">
+                        Reply:
+                        <input type="text" name="me" id="me" value={{../user.username}}>
+                        <input type="text" name="reply" id="reply">
+                        <input name="commentId" id="commentId" value="{{this._id}}">
+                        <button type="button" class="replySendBtn" onClick="sendReply(this)">Reply</button>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../socket.io/socket.io.js"></script>
+    <script src="/js/datetime_handling.js"></script>
+    <script src="/js/book_detail.js"></script>
+
+    <script>
+        var socket = io("http://localhost:3000")
+
+        function sendReply(replyButton) {
+            const commentId = replyButton.parentElement.parentElement.id
+            const data = {
+                username: $(`#${commentId} .replyForm #me`).val(),
+                content: $(`#${commentId} .replyForm #reply`).val(),
+                parentCommentId: commentId,
+            }
+            alert(data)
+
+            $.ajax({
+                url: '/books/reply-comment',
+                method: 'POST',
+                data: data,
+                success: function (res) {
+                    socket.emit("client_send_reply_comment", res)
+                }
+            });
+            return false;
+        }
+
+
+
+        $(document).ready(function () {
+            $("#commentSendBtn").click(function () {
+
+                var data = {
+                    username: $("#username").val(),
+                    content: $("#content").val(),
+                    itemId: $("#itemId").val(),
+                }
+
+
+
+                $.ajax({
+                    url: "/books/do-comment",
+                    method: "POST",
+                    data: data,
+                    success: function (res) {
+                        socket.emit("client_send_comment_to_book_item", res)
+                    }
+                });
+
+                return false;
+            });
+
+            const data = {
+                username: $("#username").val(),
+                itemId: $("#itemId").val(),
+            }
+
+
+
+            $("#addItemToCart").click(function () {
+
+
+                $.ajax({
+                    url: '/carts/add-book-to-cart',
+                    method: "POST",
+                    data: data,
+                    success: function (res) {
+
+                        $("#cart-number").text(res.itemList.length);
+                    }
+                })
+
+            })
+
+            $("#buyItem").click(function () {
+
+
+                $.ajax({
+                    url: '/carts/add-book-to-cart',
+                    method: "POST",
+                    data: data,
+                    success: function (res) {
+
+                        location.href = `/carts/${res.username}?level=${res.level}`
+                    }
+                })
+
+
+            })
+
+
+            socket.on("server_send_comment_to_book_item", function (data) {
+
+
+                alert(data)
+                var html =
+                    `<div id="${data._id} class="each_comment_box">
+                            <p class="content">${data.username}: ${data.content}</p>
+                            <span class="date">${convert(data.updatedAt)}</span>
+                            <ul class="replyList">
+                            </ul>
+                            <div class="replyForm">
+                                Reply:
+                                <input type="text" name="me" id="me" value=${$("#username").val()}>
+                                <input type="text" name="reply" id="reply">
+                                <input name="commentId" id="commentId" value="${data._id}">
+                                <button type="button" class="replySendBtn" onClick="sendReply(this)">Reply</button>
+                            </div>
+                        </div>`
+                var commentBox = $("#commentBox")
+
+                commentBox.html(html + commentBox.html())
+
+            })
+
+            socket.on("server_send_reply_comment", function (data) {
+
+                var html = `
+                    <li>${data.username}: ${data.content}</li>
+                     <span class="date">${convert(data.updatedAt)}</span>
+                `
+                var replyList = $(`#${data.parentCommentId} .replyList`)
+                replyList.html(html + replyList.html())
+
+            })
+
+
+
+
+        })
+
+
+    </script>
+
+
+</body>

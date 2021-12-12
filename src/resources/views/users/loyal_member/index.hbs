@@ -54,7 +54,7 @@
     </div>
     <div class="container__child signup__form">
 
-        <form action="/users/{{user.username}}/register_loyal_member" method="POST" enctype="multipart/form-data">
+        <form action="/users/{{user.username}}/register_loyal_member" method="POST">
             <input type="text" id="total" value={{total}} style="display: none">
             <input type="text" id="level" value={{total}} style="display: none">
             <div class="form-group">
@@ -87,41 +87,41 @@
                     a loyal member?</label>
                 <div class="rank-box d-flex align-items-center justify-content-between">
                     <label class="rank-label">Bronze</label>
-                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="1" required />
+                    <input type="radio" class="form-control rank-radio" type="text" name="registered_level" value="1" required />
 
 
                 </div>
                 <div class="rank-box d-flex align-items-center justify-content-between">
                     <label class="rank-label">Silver</label>
-                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="2" />
+                    <input type="radio" class="form-control rank-radio" type="text" name="registered_level" value="2" />
 
 
                 </div>
 
                 <div class="rank-box d-flex align-items-center justify-content-between">
                     <label class="rank-label">Gold</label>
-                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="3" />
+                    <input type="radio" class="form-control rank-radio" type="text" name="registered_level" value="3" />
 
 
                 </div>
 
                 <div class="rank-box d-flex align-items-center justify-content-between">
                     <label class="rank-label">Plantinum</label>
-                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="4" />
+                    <input type="radio" class="form-control rank-radio" type="text" name="registered_level" value="4" />
 
 
                 </div>
 
                 <div class="rank-box d-flex align-items-center justify-content-between">
                     <label class="rank-label">Dimonad</label>
-                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="5" />
+                    <input type="radio" class="form-control rank-radio" type="text" name="registered_level" value="5" />
 
 
                 </div>
 
                 <div class="rank-box d-flex align-items-center justify-content-between">
                     <label class="rank-label">Master</label>
-                    <input type="radio" class="form-control rank-radio" type="text" name="registerd_level" value="6" />
+                    <input type="radio" class="form-control rank-radio" type="text" name="registered_level" value="6" />
 
                 </div>
             </div>
@@ -163,8 +163,8 @@
         level = $("#level").val()
         username = $("#username").val()
 
-        $('input[name="registerd_level"]').click(function() {
-            me_tick = $('input:radio[name=registerd_level]:checked').val() 
+        $('input[name="registered_level"]').click(function() {
+            me_tick = $('input:radio[name=registered_level]:checked').val() 
             if (level < me_tick) {
                 $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
                                                 <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -182,7 +182,7 @@
                                                 </div>`)
 
                 $("#notice-btn").click()
-                $('input:radio[name=registerd_level]:checked').prop('checked', false)
+                $('input:radio[name=registered_level]:checked').prop('checked', false)
                 $("#register-member-btn").click(function () {
                                 location.href = `/`
                             });

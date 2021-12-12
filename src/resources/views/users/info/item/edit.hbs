@@ -14,8 +14,8 @@
 </style>
 
 <body>
-    
-    <form class="user-info" method="POST" action="/users/{{user._id}}?_method=PUT">
+
+    <form class="user-info" method="POST" action="/users/{{user._id}}?_method=PATCH" enctype="multipart/form-data">
         <div class="row justify-content-center">
             <div class="grid__row" style="width: 100%; margin-left: 24px; margin-right: 24px">
                 <div class="grid__col-2">
@@ -23,7 +23,7 @@
                         <div class="user-info__top">
                             <img src="{{user.avatar}}" alt="" class="user-info__img">
                             <div class="user-info__detail">
-                                
+
 
                                 <a href="#" class="user-info__action">
                                     <i class="fas fa-pen user-info__change-icon"></i>
@@ -43,16 +43,32 @@
                             </div>
                         </div>
 
+                        <input type="text" value="{{user.registered_level}}" id="registered_level"
+                            style="display: none">
+                        <input type="text" value="{{user.activating_loyalty}}" id="activating_loyalty"
+                            style="display: none">
+
                         <div class="user-info__myaccount">
-                           
-                            <div class="d-flex flex-column align-items-center justify-content-center" style="border-top: 0.5px solid #ccc">
-                                <span style="margin-bottom: 12px">Loyal Member</span>
-                               <img src="/img/platinum.jpg" alt="">
+
+                            {{#if user.activating_loyalty}}
+                            <div class="d-flex flex-column align-items-center justify-content-center"
+                                style="border-top: 0.5px solid #ccc" id="membership-container">
+                                <span style="margin-bottom: 12px; color: #422f0b; font-weight: 600">Loyal Member</span>
+                                <img src="" alt="" id="loyal-member-avatar" style="border-radius: 50%;height: 135px;">
+                                
+
                             </div>
+                            {{else}}
+                            <div class="d-flex flex-column align-items-center justify-content-center"
+                                style="border-top: 0.5px solid #ccc">
+                                <span style="margin-bottom: 12px">LivreCafe Member</span>
+                                <img src="/img/normal.jpg" alt="" style="border-radius:50%">
+                            </div>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="grid__col-10">
                     <div class="user-info__content">
                         <div class="user-info__content-top">
@@ -66,7 +82,7 @@
                                     <input type="text" name="username" value="{{user.username}}" required
                                         class="user-detail-item__right">
 
-                                 
+
 
                                 </div>
 
@@ -75,7 +91,7 @@
                                     <input type="text" name="password" value="{{user.password}}"
                                         class="user-detail-item__right" required>
 
-                                
+
 
                                 </div>
 
@@ -83,7 +99,7 @@
                                     <div class="user-detail-item__left">Firstname</div>
                                     <div class="user-detail-item__right">
                                         <input type="text" name="firstname" value="{{user.firstname}}"
-                                            class="user-item__right-input" >
+                                            class="user-item__right-input">
                                     </div>
                                 </div>
                                 <div class="user__body-detail-item">
@@ -150,8 +166,9 @@
                             </div>
 
                             <div class="user__body-right">
-                                <img src="{{user.avatar}}" alt="" class="user__body-right__img">
-                                <input class="user__body-right__btn" type="file" name="avatar" style="width: 120px">Chọn ảnh</input>
+                                <img src="{{user.avatar}}" alt="" id="preview-avatar" class="user__body-right__img">
+                                <input class="user__body-right__btn" type="file" name="avatar" id="avatar" onchange="change_avatar(this)" style="width: 120px">Chọn
+                                ảnh</input>
                                 <div class="body-right__des">
                                     <div class="body-right__des-item">Dung lượng tối đa 1MB</div>
                                     <div class="body-right__des-item">Định dạng: .JPEG, .PNG</div>
@@ -163,5 +180,56 @@
             </div>
         </div>
     </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        function change_avatar(input) {
+
+            
+            const [file] = input.files
+            if (file) {
+                blah.src = URL.createObjectURL(file)
+            }
+            
+            name = document.getElementById("avatar").value;
+            path = `/uploads/img/${name}`;
+
+        }
+
+        $(document).ready(function () {
+
+            activating_loyalty = $("#activating_loyalty").val();
+            registered_level = $("#registered_level").val();
+            html = $("#membership-container").html();
+            new_html = ''
+            if (activating_loyalty) {
+
+                if (parseInt(registered_level) == 1) {
+                    $("#loyal-member-avatar").attr("src", "/img/bronze.png")
+                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Bronze Membership</p>`
+                } else if (parseInt(registered_level) == 2) {
+                    $("#loyal-member-avatar").attr("src", "/img/silver.jpg")
+                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Silver Membership</p>`
+                } else if (parseInt(registered_level) == 3) {
+                    $("#loyal-member-avatar").attr("src", "/img/gold.jpg")
+                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Gold Membership</p>`
+                } else if (parseInt(registered_level) == 4) {
+                    $("#loyal-member-avatar").attr("src", "/img/platinum.jpg")
+                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Platinum Membership</p>`
+                } else if (parseInt(registered_level) == 5) {
+                    $("#loyal-member-avatar").attr("src", "/img/dimond.jpg")
+                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Dimond Membership</p>`
+                } else if (parseInt(registered_level) == 6) {
+                    $("#loyal-member-avatar").attr("src", "/img/master.jpg")
+                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Master Membership</p>`
+                }
+                
+                new_html = $.parseHTML(new_html),
+                $("#membership-container").append(new_html);
+
+            }
+
+        })
+    </script>
 
 </body>

@@ -30,13 +30,13 @@
 
                                 <div class="form-group">
                                     <input class="form-control" id="address" name="address" type="text"
-                                        placeholder="Address">
+                                        placeholder="Address" value="{{user.address}}">
                                     <span class="form-label">Address</span>
                                 </div>
 
 
                                 <div class="form-group">
-                                    <input class="form-control" id="phone" name="phone" placeholder="Enter you Phone">
+                                    <input class="form-control" id="phone" name="phone" placeholder="Enter you Phone" value="{{user.phone}}">
                                     <span class="form-label">Phone</span>
                                 </div>
 
@@ -45,7 +45,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <input class="form-control" id="email" name="email" id="email" type="email"
-                                                placeholder="Enter your Email" required>
+                                                placeholder="Enter your Email" value="{{user.email}}" required>
                                             <span class="form-label">Email</span>
                                         </div>
                                     </div>
@@ -144,6 +144,8 @@
             $('#getToken').click(function () {
 
                 var email = $('#email').val()
+                var username = $('#username').val()
+                var address = $('#address').val()
 
                 if (email.length == 0) {
                     alert("Vui lòng nhập email để lấy mã xác thực qua email này")
@@ -151,8 +153,11 @@
                 }
 
                 const data = {
-                    email: email
+                    email: email,
+                    username: username, 
+                    address: address
                 }
+                console.log(data)
                 $.ajax({
                     url: '/email/send-token',
                     method: 'POST',
@@ -161,6 +166,7 @@
                         alert('Please check valid otp in your email')
                         if (!res.isError) {
                             validToken = res.token
+                            
                             
                         }
                         
@@ -174,6 +180,7 @@
             $('#purchaseBtn').click(function () {
                 $('#purchaseBtn')
                 const userToken = $('#token').val()
+                console.log(userToken, validToken)
 
                 if (userToken == '' || userToken != validToken) {
                     alert("Mã xác thực không hợp lệ");
