@@ -1,8 +1,16 @@
 import express from 'express';
 const router = express.Router();
 
-import workingspaceController from '../app/controllers/WorkingspaceController.js';
+import controllers from '../app/controllers/WorkingspaceController.js';
 
-router.get('/index', workingspaceController.index);
+router.get('/list', controllers.index);
+router.get('/create', controllers.create);
+router.get('/:slug', controllers.show);
+router.post('/save', controllers.save);
+router.get('/:id/edit', controllers.edit);
+router.patch('/:id', controllers.update);
+router.delete('/:id', controllers.softDelete);
+router.delete('/:id/force', controllers.deepDelete);
+router.patch('/:id/restore', controllers.restore);
 
 export default router;

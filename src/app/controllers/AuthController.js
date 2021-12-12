@@ -1,6 +1,7 @@
 import User from '../models/User.js'
 import Book from '../models/Book.js';
 import Coffee from '../models/Coffee.js';
+import Food from '../models/Food.js';
 import { 
     mongooseDocumentsToObject,
     singleMongooseDocumentToObject,
@@ -87,7 +88,7 @@ const AuthController = {
                         // validToken: otpGenerator.generate(6, { upperCase: false, specialChars: false})
                     }
 
-                    return Promise.all([Book.find({}), Coffee.find({}), User.findOne({username: key})])
+                    return Promise.all([Book.find({}), Coffee.find({}), Food.find({}), User.findOne({username: key})])
                        // res.render('auth/2fa', {data: data});                    
                 } else {
                     errors.push('username or phone or email or password is not correct');
@@ -97,13 +98,15 @@ const AuthController = {
                        values: req.body
                     });
                 }
-            }).then(([books, coffee, user]) => {
+            }).then(([books, coffee, food, user]) => {
                 books = mongooseDocumentsToObject(books)
                 coffee = mongooseDocumentsToObject(coffee)
+                food = mongooseDocumentsToObject(food)
                 res.render('home/home.hbs', {
                     user: singleMongooseDocumentToObject(user),
                     books: books,
                     coffee: coffee,
+                    food: food
                 });
             })
             .catch(next)

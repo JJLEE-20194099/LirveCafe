@@ -18,7 +18,7 @@ const User = new Schema(
         role: {type: String, default: "guest"},
         level: {type: Number, default: 0},
         activating_loyalty: {type: Number, default: 0, min: 0, max: 1},
-        registerd_level: {type: Number, default: 0}
+        registered_level: {type: Number, default: 0}
     },
     {
         timestamps: true,

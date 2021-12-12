@@ -21,6 +21,68 @@ def get_header():
     headers['User-Agent'] = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.82 Safari/537.36'
     return headers
 
+
+def get_content_by_link(url):
+    r = requests.get(url, headers=get_header(), timeout=10)
+    r.encoding = 'utf-8'
+    r.close()
+    return str(r.text)
+
+def crawl_food_slugs(url):
+    item_slugs = []
+    try:
+        raw_content = get_content_by_link(url)
+        beautiful_soup = BeautifulSoup(raw_content, 'html.parser')
+        
+        available_boxes = beautiful_soup.find_all('div', class_="block_menu_item")
+        for available_box in available_boxes[7:10]:
+            food_boxes = available_box.find_all('div', class_='menu_item_image')
+            for food_box in food_boxes:
+                food_url = food_box.find('a', href=True)['href']
+                slug = food_url.split('/')[2]
+                item_slugs.append(slug)
+            
+        return item_slugs
+    except Exception:
+        return []
+
+def crawl_food_detail_by_slug(detail_url, slug):
+    id = -1
+    name = -1
+    description = -1
+    image = -1
+    price = -1
+    createdAt = time.time()
+    updatedAt = time.time()
+    meta = {
+        "votes": 0,
+        'favs': 0
+    }
+    url = detail_url.format(slug)
+    raw_content = get_content_by_link(url)
+    beautiful_soup = BeautifulSoup(raw_content, 'html.parser')
+    
+    name = beautiful_soup.find('h1', class_="info_product_title line_after_heading").text
+    description = beautiful_soup.find('div', class_="product_info_tab").find('p').text
+    image = beautiful_soup.find('img', class_="product_featured_image").get('src')
+    id = image.split('/')[3]
+    price = beautiful_soup.find('span', class_="price")['data-price']
+
+        
+    item_detail = {
+        "id": id,
+        "name": name,
+        "description": description,
+        "image": image,
+        "price": price,
+        "slug": slug,
+        "createdAt": createdAt,
+        "updatedAt": updatedAt,
+        "meta": meta
+    }
+
+    return item_detail
+
 # Số trang cần lấy với từng category
 
 

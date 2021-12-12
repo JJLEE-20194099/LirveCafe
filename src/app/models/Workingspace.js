@@ -4,7 +4,7 @@ import mongooseDelete from 'mongoose-delete';
 
 const {Schema} = mongoose;
 
-const Event = new Schema(
+const Workingspace = new Schema(
     {   
         username: {type: String, required: true},
         eventBooker: {type: String, required: true},
@@ -13,6 +13,7 @@ const Event = new Schema(
         avatar: {type: String, default: "http://www.davidkrugler.com/s/River-Lights-8318.jpg"},
         no_seating: {type: Number, requiresd: true},
         email: {type: String, required: true},
+        phone: {type: String, required: true},
         total: {type: Number, required: true},
         promoId: {type: String},
         eventStartDate: {type: Date, required: true},
@@ -34,9 +35,9 @@ const Event = new Schema(
 );
 
 mongoose.plugin(slug);
-Event.plugin(mongooseDelete, {
+Workingspace.plugin(mongooseDelete, {
     deletedAt: true,
     overrideMethods: 'all'
 });
 
-export default mongoose.model('Event', Event);
+export default mongoose.model('Workingspace', Workingspace);

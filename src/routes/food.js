@@ -1,10 +1,15 @@
 import express from 'express';
-import controllers from '../app/controllers/UserController.js';
-import ownControllers from '../app/controllers/OwnController.js';
+const router = express.Router();
+
 import multer from 'multer';
 import path from 'path';
 
-import validate from '../app/validate/user.validate.js';
+import controllers from '../app/controllers/FoodController.js';
+import commentControllers from '../app/controllers/CommentController.js';
+import notificationController from '../app/controllers/NotificationController.js';
+
+import validate from '../app/validate/coffee.validate.js';
+import checkUser from '../app/middleware/AuthMiddleware.js'
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -32,30 +37,26 @@ var upload = multer({
     }
 })
 
-const router = express.Router();
-
 router.get('/list', controllers.index);
 router.get('/create', controllers.create);
-router.get('/:id', controllers.show);
-router.post('/save', 
-    upload.single('avatar'),
-    validate.postSignup,
-    controllers.save,
+router.get('/buy/:id', controllers.showPayForm)
+router.post('/buy', controllers.buy)
+router.get('/:slug', controllers.show);
+router.post('/save',  
+    upload.single('image'),
+    validate.postCreateCoffee,
+    controllers.save
 );
 router.get('/:id/edit', controllers.edit);
-router.patch('/:id',  upload.single('avatar'), controllers.update);
-router.patch('/:id/restore', controllers.restore);
+router.patch('/:id', controllers.update);
 router.delete('/:id', controllers.softDelete);
 router.delete('/:id/force', controllers.deepDelete);
-router.get('/:username/register_loyal_member', controllers.registerLoyalMemeberIndex)
-router.post('/:username/register_loyal_member', controllers.postRegisterLoyalMemeber)
+router.patch('/:id/restore', controllers.restore);
 
-router.get('/stored/workingspaces', ownControllers.storedWorkingspaces);
-router.get('/trash/workingspaces', ownControllers.trashWorkingspaces);
+router.post('/do-comment', commentControllers.doComment)
+router.post('/reply-comment', commentControllers.replyComment)
 
-router.get('/stored/Orders', ownControllers.storedOrders);
-router.get('/trash/Orders', ownControllers.trashOrders);
-
+router.post('/get-comment-notification', notificationController.getCommentNotification)
 
 
 export default router;

@@ -2,7 +2,7 @@ import Coffee from '../models/Coffee.js';
 import Book from '../models/Book.js';
 import News from '../models/News.js';
 import User from '../models/User.js';
-import Event from '../models/Event.js';
+import Workingspace from '../models/Workingspace.js';
 import Promo from '../models/Promo.js';
 import Orders from '../models/Orders.js';
 
@@ -112,26 +112,26 @@ const OwnController = {
             }).catch(next);
     },
 
-    // 5. Events warehouse
+    // 5. Workingspaces warehouse
 
-    // GET own/stored/events
-    storedEvents(req, res, next) {
+    // GET own/stored/workingspaces
+    storedWorkingspaces(req, res, next) {
         Promise.all([Event.find({}), Event.countDocumentsDeleted()])
-            .then(([events, deletedCount]) => {
-                res.render('users/events/list/store.hbs', {
+            .then(([workingspaces, deletedCount]) => {
+                res.render('users/workingspaces/list/store.hbs', {
                     deletedCount,
-                    events: mongooseDocumentsToObject(events),
+                    workingspaces: mongooseDocumentsToObject(workingspaces),
                     user: res.locals.user
                 })
             }).catch(next);
     },
 
-    // GET own/trash/events
-    trashEvents(req, res, next) {
+    // GET own/trash/workingspaces
+    trashWorkingspaces(req, res, next) {
         Event.findDeleted({})
-            .then((events) => {
-                res.render('users/events/list/trash.hbs', {
-                    events: mongooseDocumentsToObject(events),
+            .then((workingspaces) => {
+                res.render('users/workingspaces/list/trash.hbs', {
+                    workingspaces: mongooseDocumentsToObject(workingspaces),
                     user: res.locals.user
                 })
             }).catch(next);

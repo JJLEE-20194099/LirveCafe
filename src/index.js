@@ -40,7 +40,11 @@ app.engine(
         extname: '.hbs',
         helpers: {
             sum: (a, b) => a + b,
-            multiply: (a, b) => a * b
+            multiply: (a, b) => a * b,
+            compare: (a, b) => {
+                if (a == b) return true;
+                return false
+            }
         }
     }),
 );

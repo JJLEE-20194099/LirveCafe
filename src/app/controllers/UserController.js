@@ -91,9 +91,12 @@ const UserController = {
 
     // [POST] /users/:username/register_loyal_member
     postRegisterLoyalMemeber(req, res, next) {
+        req.body.activating_loyalty = 1
         User.updateOne({username: req.body.username}, req.body)
+            .then(() => User.findOne({username: req.body.username}))
             .then((user) => {
-                user = singleMongooseDocumentToObject(user)
+                console.log(user)
+                console.log(req.body)
                 res.render('users/info/item/edit.hbs', {
                     user: singleMongooseDocumentToObject(user),
                 })
@@ -102,7 +105,7 @@ const UserController = {
 
     // PATCH /users/:id
     update(req, res, next) {
-
+        console.log(req)
         req.body.avatar = getAvatar(req);
         if (!req.body.avatar || req.body.avatar == '') {
             const name = req.body.firstname + ' ' + req.body.lastname;

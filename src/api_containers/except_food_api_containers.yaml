@@ -1,0 +1,4 @@
+do-an: [
+  'https://thecoffeehouse.com/collections/banh',
+  'https://thecoffeehouse.com/products/{}'
+]
