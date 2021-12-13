@@ -30,7 +30,8 @@ tr {
   justify-content: center;
   align-items: flex-start; }
   .item-info .img-admin {
-    width: 134px; }
+    width: 134px;
+    margin-right: 34px; }
 
 .date {
   width: 130px; }
