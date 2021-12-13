@@ -11,7 +11,8 @@ a, a:visited {
   text-decoration: none;
   display: block;
   margin: 10px 0;
-  border-radius: 8px; }
+  border-radius: 8px;
+  margin-bottom: 12px; }
 
 .item-for-loadmore {
   display: none;
@@ -34,8 +35,7 @@ a, a:visited {
   transition: all 600ms ease-in-out;
   -webkit-transition: all 600ms ease-in-out;
   -moz-transition: all 600ms ease-in-out;
-  -o-transition: all 600ms ease-in-out;
-  margin-bottom: 12px; }
+  -o-transition: all 600ms ease-in-out; }
 
 #loadMore:hover {
   background-color: #fff;

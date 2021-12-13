@@ -12,7 +12,7 @@ a, a:visited {
     display: block;
     margin: 10px 0;
     border-radius: 8px;
-    
+    margin-bottom: 12px;
 }
 
 .item-for-loadmore {
@@ -39,7 +39,6 @@ a, a:visited {
     -webkit-transition: all 600ms ease-in-out;
     -moz-transition: all 600ms ease-in-out;
     -o-transition: all 600ms ease-in-out;
-    margin-bottom: 12px;
 }
 #loadMore:hover {
     background-color: #fff;
