@@ -89,11 +89,11 @@ io.on("connection", function(socket) {
 
     
     socket.on("client_send_reply_comment", function(data) {
+        io.sockets.in(data.parentCommentId).emit("server_send_notice", data)
         socket.join(data.parentCommentId)
         console.log(data.parentCommentId)
         socket.join(data.username)
         console.log(socket.adapter.rooms)
-        console.log("haha")
         io.sockets.in(data.parentCommentId).emit("server_send_reply_comment", data)
     })
 
