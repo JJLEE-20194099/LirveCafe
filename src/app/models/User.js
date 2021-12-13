@@ -14,6 +14,8 @@ const User = new Schema(
         username: {type: String},
         password: {type: String, required: true},
         avatar: {type: String},
+        birthdaty: {type: String},
+        gender: {type: String},
         star_no: {type: Number, default: 0},
         role: {type: String, default: "guest"},
         level: {type: Number, default: 0},
