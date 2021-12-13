@@ -132,7 +132,8 @@ body {
   width: 84%;
   margin-top: 150px; }
 
-.carousel-control-next, .carousel-control-prev {
+.carousel-control-next,
+.carousel-control-prev {
   top: 170px;
   bottom: 170px;
   color: #c39e51; }
@@ -196,7 +197,8 @@ body {
       position: absolute;
       z-index: 2;
       bottom: 4%; }
-      .home-product .carousel-item .item-price .price-value, .home-product .carousel-item .item-price .discount-value {
+      .home-product .carousel-item .item-price .price-value,
+      .home-product .carousel-item .item-price .discount-value {
         display: inline-block;
         color: #FF424E;
         font-weight: 500; }
@@ -314,3 +316,33 @@ a {
 .carousel.slide {
   margin-left: 0;
   margin-right: 0; }
+
+.noti-container {
+  background-color: white;
+  width: 350px;
+  box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;
+  border-radius: 12px;
+  top: 73px;
+  position: absolute;
+  right: -96px; }
+  .noti-container .noti-each {
+    background-color: white;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    padding: 12px 8px; }
+  .noti-container .noti-each:hover {
+    background-color: #d5c6a6; }
+  .noti-container .noti-img {
+    width: 58px;
+    background-color: black;
+    height: 58px;
+    object-fit: scale-down;
+    border-radius: 50%;
+    margin-right: 12px; }
+  .noti-container .noti-time {
+    margin-top: 8px; }
+  .noti-container .noti-username {
+    font-weight: 600; }
+  .noti-container .noti-where {
+    font-weight: 600; }

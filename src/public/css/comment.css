@@ -126,3 +126,27 @@
 
 .feedback-container {
   min-height: 140px; }
+
+.noti-each {
+  background-color: white;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  padding: 12px 8px; }
+
+.noti-img {
+  width: 58px;
+  background-color: black;
+  height: 58px;
+  object-fit: scale-down;
+  border-radius: 50%;
+  margin-right: 12px; }
+
+.noti-time {
+  margin-top: 8px; }
+
+.noti-username {
+  font-weight: 600; }
+
+.noti-where {
+  font-weight: 600; }
