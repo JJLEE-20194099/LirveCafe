@@ -118,8 +118,10 @@ let allOrderedRealItems = $$('#food-drink-order #ordered .fodr-item.active')
 
 const resetValue = function(baseValue, number){
     a = baseValue*number
-    return(new Intl.NumberFormat().format(a))
+    // return(new Intl.NumberFormat().format(a))
+    return a;
 }
+
 
 // render picked item
 allOrderedItems.forEach((item, index) => {
@@ -128,6 +130,8 @@ allOrderedItems.forEach((item, index) => {
     const input = item.querySelector('input')
     const costSpan = item.querySelector('.fodr-cost span')
     const baseValue = parseInt(costSpan.innerText.replaceAll('.',''))
+    const noFood = foodOrderedItems.length
+
     let oldValue = 0;
 
     decreBtn.onclick = function (e) { 
@@ -137,9 +141,17 @@ allOrderedItems.forEach((item, index) => {
         if(a > 1){
             input.value = a - 1;
             costSpan.innerText = resetValue(baseValue, a-1)
-
-            resetTotalMoney()
         } 
+        else{
+            if(index < noFood ) {
+                foodOrderingItems[index].querySelector('input').checked = false
+                }
+            else {  
+                drinkOrderingItems[index-noFood].querySelector('input').checked = false  
+            }
+            item.classList.remove('active')
+        }
+        resetTotalMoney()
     }
 
     increBtn.onclick = function (e) {
@@ -174,8 +186,37 @@ allOrderedItems.forEach((item, index) => {
 
 })
 
+const submitBtn = $('#working-space .submit-order button')
 
- 
+submitBtn.onclick = function (e) {
 
+    e.preventDefault();
+    allOrderedRealItems = $$('#food-drink-order #ordered .fodr-item.active')
+    let foodAndDrinklist = [];
+    allOrderedRealItems.forEach((item) => {
+        let a = {
+            itemName: item.querySelector('.fodr-name span').innerText,
+            number: item.querySelector('.fodr-number input').value
+        }
+        foodAndDrinklist.push(a)
+        
+    })
 
+    const dataWS = {
+        username: "",
+        email: $('#basic-info .email input').value,
+        eventBooker: $('#basic-info .name input').value,
+        name: $('#basic-info .event-title input').value,
+        no_seating: $('#basic-info .seat-num input').value,
+        image: $('#basic-info .image input').value,
+        description: $('#basic-info .description textarea').value,
+        eventStartDate: $('#basic-info .start-time input').value.substring(0,10),
+        eventStartTime: $('#basic-info .start-time input').value.substring(11,17),
+        eventEndDate: $('#basic-info .end-time input ').value.substring(0,10),
+        eventEndTime: $('#basic-info .end-time input ').value.substring(11,17),
+        foodAndDrinkList: foodAndDrinklist,
+        total: parseInt($('#ordered .fodr-total span').innerText.replaceAll('.',''))
+    }
+    console.log(dataWS)
+}   
 

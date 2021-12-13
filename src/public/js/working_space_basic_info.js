@@ -60,6 +60,8 @@ startTimeInput.onclick = (e) => {
 }
 
 endTimeInput.onclick = (e) => {
-    e.target.min = startTimeInput.value
+
+    e.target.min = (startTimeInput.value === '') ? nowTime() : startTimeInput.value
 }
+
 
