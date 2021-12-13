@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/css/load_more.css">
 <div id="header">
 
     <div id="main-header" class="row navbar d-flex flex-row justify-content-start align-items-center">
@@ -44,7 +45,7 @@
                 <div class="noti-box" id="noti-box">
 
                     {{#each notis}}
-                    <div class="noti-each">
+                    <div class="noti-each item-for-loadmore">
                         <a href="{{this.where_url}}">
                             <img src="{{this.avatar}}" class="noti-img" alt="logo-brand">
                         </a>
@@ -53,16 +54,21 @@
                             <div class="noti-content">
                                 <a href="{{this.where_url}}">
                                     <span class="noti-username">{{this.sender}}</span> <span class="noti-type">đã
-                                        nhắc đến bạn </span> trong <a href="{{this.where_url}}" class="noti-where">trang này</a>
+                                        nhắc đến bạn </span> trong <a href="{{this.where_url}}" class="noti-where">trang
+                                        này</a>
                                 </a>
                             </div>
                             <div class="noti-time date">
-                               {{this.createdAt}}
+                                {{this.createdAt}}
                             </div>
                         </div>
                     </div>
                     {{/each}}
+                      <a href="#" id="loadMore">Load More</a>
 
+                <p class="totop btn btn-danger">
+                    <a href="#top" id="top" style="color: #fff">Back to top</a>
+                </p>
 
 
 
@@ -110,9 +116,9 @@
 <script>
 
     $(document).ready(function () {
-        
+
         $("#noti-toggle").click(function () {
-            
+
             if ($("#noti-container").css("display") == "block") {
 
                 $("#noti-container").css("display", "none")
@@ -124,7 +130,7 @@
 
         let notis = $('.noti-each')
         if (notis.length > 3) {
-            for(var i = 3; i < notis.length; i++) {
+            for (var i = 3; i < notis.length; i++) {
 
                 notis[i].style.display = "none"
             }
@@ -133,5 +139,32 @@
             $('#noti-box').html(html + `<div class="d-flex justify-content-center align-items-center" style="border-top: 0.5px solid #ccc"><a style="color: #c39e51; margin-top: 8px; margin-bottom: 8px" href="/notis/${$("#user-name").text()}">Xem tất cả</a></div>`)
         }
 
+        $(".item-for-loadmore").slice(0, 4).show();
+        $("#loadMore").on('click', function (e) {
+            e.preventDefault();
+            $(".item-for-loadmore:hidden").slice(0, 4).slideDown();
+            if ($(".item-for-loadmore:hidden").length == 0) {
+                $("#load").fadeOut('slow');
+            }
+            $('html,body').animate({
+                scrollTop: $(this).offset().top
+            }, 1500);
+        });
+
+        $('#top').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
     })
+
+      $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.totop a').fadeIn();
+            } else {
+                $('.totop a').fadeOut();
+            }
+        });
 </script>
