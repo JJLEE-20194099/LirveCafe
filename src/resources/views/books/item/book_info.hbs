@@ -7,17 +7,16 @@
 <body>
 
     <div id="product-detail-page">
-
         <div id="detail-and-buy" class="d-flex justify-content-center">
 
             <img class="product-img col col-6 d-flex justify-content-center" src="{{book.image}}">
 
-
+            <input type="text" value="{{book.slug}}" id="slug" style="display: none">
 
             <div id="product-buy-detail" class="col col-6">
 
                 <div class="detail-header">
-                    <h2 class="detail-title" style="color: black; font-weight: 600">{{book.title}}</h2>
+                    <h2 class="detail-title" id="item_name" style="color: black; font-weight: 600">{{book.title}}</h2>
                     <div class="detail-rating">
 
                         {{!-- light star --}}
@@ -337,10 +336,10 @@
                             </div>
 
                             {{else}}
-                                <div class="replyList-body">
-                                    
-                            </h3>
-                                </div>
+                            <div class="replyList-body">
+
+                                </h3>
+                            </div>
                             {{/if}}
 
                         </div>
@@ -358,6 +357,10 @@
 
     </div>
 
+    <div id="notice">
+
+    </div>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../socket.io/socket.io.js"></script>
@@ -366,6 +369,10 @@
     <script src="/js/book_detail.js"></script>
     <script>
         var socket = io("http://localhost:3000")
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
         function showSendBox(input) {
             console.log(input.value)
@@ -414,6 +421,9 @@
                 content: $(`#${commentId} .replyForm #reply`).val(),
                 avatar: $(`#${commentId} .replyForm #me_avatar`).val(),
                 parentCommentId: commentId,
+                itemId: $("#itemId").val(),
+                receiver: $(`#${commentId} .username`).text(),
+                slug: $(`#slug`).val()
             }
 
 
@@ -422,7 +432,7 @@
                 method: 'POST',
                 data: data,
                 success: function (res) {
-                    socket.emit("client_send_reply_comment", res)
+                    socket.emit("client_send_reply_comment", data)
                 }
             });
             return false;
@@ -614,13 +624,93 @@
 
             })
 
+            socket.on("server_send_notice", function (data) {
+
+                notice_data = {
+                    sender: data.username,
+                    receiver: data.receiver,
+                    where_url: `http://localhost:3000/books/${data.slug}`,
+                    itemId: data.itemId,
+                    avatar: data.avatar
+                }
+
+                if (sender != receiver) {
+                    $.ajax({
+                        url: '/books/post-notice',
+                        method: "POST",
+                        data: notice_data,
+                        success: function (res) {
+
+                            notice_data._id = res._id
+                        }
+                    })
 
 
 
+                    noti_box = $("#noti-box")
+                    new_noti = `<div class="noti-each" style="background-color: #d5c6a6">
+                        <a href="${notice_data.where_url}">
+                            <img src="${notice_data.avatar}" class="noti-img"alt="logo-brand">
+                        </a>
+                        
+                        <div class="noti-main">
+                            <div class="noti-content">
+                                <a href="${notice_data.where_url}">
+                                    <span class="noti-username">${notice_data.sender}</span> <span class="noti-type">đã nhắc đến bạn </span> trong <a href="${notice_data.where_url}" class="noti-where">${$('#item_name').text()}</a>
+                                </a>
+                            </div>
+                            <div class="noti-time date">
+                                ${convert(notice_data.createdAt)}
+                            </div>
+                        </div>
+                    </div>`
+
+
+                    html = new_noti + noti_box.html()
+                    noti_box.html(html)
+
+                    if ($('#noti-number').text() == '') {
+                        $('#noti-number').html(1)
+                    } else {
+                        console.log(parseInt($('#noti-number').text() + 1))
+                        $('#noti-number').html(parseInt($('#noti-number').text()) + 1)
+                    }
+
+                    $("#notice").html(`
+                                        
+                                            
+                                                <div class="noti-each" style="background-color: #d5c6a6; width: 374px; height: 110px; position: fixed; right: -374px; bottom: 0; box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;">
+                                                    <a href="${notice_data.where_url}">
+                                                        <img src="${notice_data.avatar}" class="noti-img"alt="logo-brand">
+                                                    </a>
+                                                    
+                                                    <div class="noti-main">
+                                                        <div class="noti-content">
+                                                            <a href="${notice_data.where_url}" style="color: black">
+                                                                <span class="noti-username" style="color: black">${notice_data.sender}</span> <span class="noti-type" style="color: black">đã nhắc đến bạn </span> trong <a href="${notice_data.where_url}" class="noti-where" style="color: black">${$('#item_name').text()}</a>
+                                                            </a>
+                                                        </div>
+                                                        <div class="noti-time date">
+                                                            ${convert(notice_data.createdAt)}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                           
+                                        `)
+
+                    $("#notice .noti-each").animate({ "right": "+=374px" }, 3000);
+                    setTimeout(function () {
+                        $("#notice .noti-each").animate({ "right": "-=374px" }, 3000);
+
+                    }, 10000)
+
+                }
+
+
+
+
+
+            })
         })
-
-
     </script>
-
-
 </body>

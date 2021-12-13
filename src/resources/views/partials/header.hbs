@@ -2,66 +2,103 @@
 
     <div id="main-header" class="row navbar d-flex flex-row justify-content-start align-items-center">
 
-       <div class="d-flex justify-content-start align-items-center" style="flex: 3">
+        <div class="d-flex justify-content-start align-items-center" style="flex: 3">
             <a href="/" class="navbar-brand mx-0 d-flex align-items-center justify-content-between">
                 <img src="/img/brand-logo.png" alt="logo-brand" width="80px" height="80px">
                 <span id="name-brand">LivreCafé</span>
             </a>
 
-        <div class="header-menu d-flex mx-3 align-items-center">
-            <i class="header-icon ti-menu"></i>
-            <div class= "link-tri"></div>
+            <div class="header-menu d-flex mx-3 align-items-center">
+                <i class="header-icon ti-menu"></i>
+                <div class="link-tri"></div>
 
-            <div id = "menu-list" class= "header-list">
-                <ul>
-                    <li><a href = '/books/list'>Sách</a></li>
-                    <li><a href = '/coffee/list'>Coffee</a></li>
-                    <li><a href = '#'>Working space</a></li>
-                    
-                </ul>
+                <div id="menu-list" class="header-list">
+                    <ul>
+                        <li><a href='/books/list'>Sách</a></li>
+                        <li><a href='/coffee/list'>Coffee</a></li>
+                        <li><a href='/food/list'>Đồ ăn</a></li>
+                    </ul>
+                </div>
+
             </div>
 
+            <form class="form-inline col col-9 row header-form">
+                <input class="col-9 form-control " type="search" placeholder="Nhập để tìm kiếm..." aria-label="Search"
+                    style="background-color: white">
+                <button class="btn col-2 search-btn" type="submit">Search</button>
+            </form>
         </div>
 
-        <form class="form-inline col col-9 row header-form">
-            <input class="col-9 form-control " type="search" placeholder="Nhập để tìm kiếm..." aria-label="Search" style="background-color: white">
-            <button class="btn col-2 search-btn" type="submit">Search</button>
-        </form>
-       </div>
 
-    
-       <div class="d-flex justify-content-between .align-items-center">
-            <a href = '#'>
+        <div class="d-flex justify-content-between .align-items-center">
+            <a href='#' id="noti-toggle">
                 <i class="noti-icon ti-bell header-icon">
-                    <span id = "noti-number" class = "header-number">2</span>
+                    {{#if notis.length}}
+                    <span id="noti-number" class="header-number">{{notis.length}}</span>
+                    {{else}}
+                    <span id="noti-number"></span>
+                    {{/if}}
                 </i>
             </a>
+            <div class="noti-container" id="noti-container" style="display: none">
+                <div class="noti-box" id="noti-box">
+
+                    {{#each notis}}
+                    <div class="noti-each">
+                        <a href="{{this.where_url}}">
+                            <img src="{{this.avatar}}" class="noti-img" alt="logo-brand">
+                        </a>
+
+                        <div class="noti-main">
+                            <div class="noti-content">
+                                <a href="{{this.where_url}}">
+                                    <span class="noti-username">{{this.sender}}</span> <span class="noti-type">đã
+                                        nhắc đến bạn </span> trong <a href="{{this.where_url}}" class="noti-where">trang này</a>
+                                </a>
+                            </div>
+                            <div class="noti-time date">
+                               {{this.createdAt}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+
+
+
+
+
+                </div>
+            </div>
         </div>
+
+
 
         <div id="header-cart" class="col-1 text-center .align-items-center">
-            <a href = '#'>
+            <a href='#'>
                 <i class="header-icon ti-shopping-cart-full">
-                    <span id = "cart-number" class = "header-number">3</span>
+                    <span id="cart-number" class="header-number">3</span>
                 </i>
             </a>
         </div>
 
-         <div class="header-user d-flex .align-items-center">
+        <div class="header-user d-flex .align-items-center">
             <i class="header-icon ti-user ml-3 mr-1"></i>
             <div class="header-des d-flex align-items-center">
-                {{#if user}}   
-                    <span class="header-text" id="user-name">{{user.username}}</span>
+                {{#if user}}
+                <span class="header-text" id="user-name">{{user.username}}</span>
                 {{else}}
-                    <a class="header-text" id = "login-text" href="/auth/index">Đăng nhập</a>
+                <a class="header-text" id="login-text" href="/auth/index">Đăng nhập</a>
                 {{/if}}
             </div>
             <div class="link-tri"></div>
-            <div id = "user-list" class= "func-list">
+            <div id="user-list" class="func-list">
                 <ul>
-                    <li ><a href = '/users/{{user._id}}'>Tài khoản</a></li>
-                    <li style="border-top: 1px solid white"><a href = '/auth/logout'>Đăng xuất</a></li>
-                    <li style="height: 60px; border-top: 1px solid white"><a href = '/users/{{user.username}}/register_loyal_member'>Đăng ký thành viên thân thiết</a></li>
-                    
+                    {{#if user}}
+                    <li><a href='/users/{{user._id}}'>Tài khoản</a></li>
+                    <li style="border-top: 1px solid white"><a href='/auth/logout'>Đăng xuất</a></li>
+                    <li style="height: 60px; border-top: 1px solid white"><a
+                            href='/users/{{user.username}}/register_loyal_member'>Đăng ký thành viên thân thiết</a></li>
+                    {{/if}}
                 </ul>
             </div>
 
@@ -70,3 +107,31 @@
     </div>
 </div>
 
+<script>
+
+    $(document).ready(function () {
+        
+        $("#noti-toggle").click(function () {
+            
+            if ($("#noti-container").css("display") == "block") {
+
+                $("#noti-container").css("display", "none")
+            } else {
+                $("#noti-container").css("display", "block")
+            }
+        })
+
+
+        let notis = $('.noti-each')
+        if (notis.length > 3) {
+            for(var i = 3; i < notis.length; i++) {
+
+                notis[i].style.display = "none"
+            }
+
+            html = $('#noti-box').html();
+            $('#noti-box').html(html + `<div class="d-flex justify-content-center align-items-center" style="border-top: 0.5px solid #ccc"><a style="color: #c39e51; margin-top: 8px; margin-bottom: 8px" href="/notis/${$("#user-name").text()}">Xem tất cả</a></div>`)
+        }
+
+    })
+</script>
