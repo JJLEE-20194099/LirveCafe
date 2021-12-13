@@ -1,12 +1,54 @@
 .container {
-    background-color: white;
+    background-color: #f1f1f1;
     margin-left: 40px;
     margin-right: 40px;
     margin-bottom: 40px;
     box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);
     border-radius: 12px;
     min-height: 700px;
+
     .header {
         padding-top: 12px;
     }
+}
+
+.btn-group {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+
+    .btn {
+        width: 50px;
+        margin: 4px;
+        border-radius: 4px;
+    }
+
+}
+
+tr:hover {
+    background-color: #fbfbfb;
+}
+
+tr {
+    background-color:#f1f1f1;
+}
+
+
+.item-info {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .img-admin {
+        width: 134px;
+    }
+}
+
+.date {
+    width: 130px;
+}
+
+td, th {
+    vertical-align: baseline!important;
 }

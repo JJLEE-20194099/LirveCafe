@@ -489,17 +489,20 @@ a {
     background-color: white;
     width: 350px;
     box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;
-    border-radius: 12px;
     top: 73px;
     position: absolute;
     right: -96px;
+    height: 500px;
+    overflow-y: scroll;
 
     .noti-each {
-        background-color:white;
+        background-color:#f1f1f1;
         list-style-type: none;
         display: flex;
         align-items: center;
         padding: 12px 8px;
+        margin-bottom: 0!important;
+        
     }
 
     .noti-each:hover {
