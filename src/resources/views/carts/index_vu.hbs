@@ -1,0 +1,252 @@
+<link rel="stylesheet" href="/css/signup.css">
+<link rel="stylesheet" href="/css/cartVu.css">
+
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+<br>  <br>
+  <br>
+  <br>
+<div class="bigbox">
+  <div class="box1">
+    <div class="sp">Sản Phẩm </div>
+    <div class="dongia">Đơn giá(đ) </div>
+    <div class="soluong">Số lượng </div>
+    <div class="thanhtien">Thành tiền(đ)</div>
+  </div>
+  <div class="box2">
+    <div id="them"></div>
+    {{#if cart.itemList}}
+        {{#each cart.itemList}}
+    <div class="list">
+      <input type="checkbox" class="check">
+      <div class="img_box2">
+        <img src="{{this.book.image}}" alt="">
+      </div>
+      <div class="mota_box2"> {{this.book.description}}</div>
+      <div class="gia_box2">{{this.book.price}}</div>
+      <div  class="soluong_box2">
+        <div class="sub">-</div>
+        <input type="number" class="number" value="0">
+        <div class="add">+</div>
+      </div>
+      <div class="thanhtien_box2">0</div>
+    </div>
+        {{/each}}
+    {{else}}
+        <div style="text-align: center;">Giỏ hàng trống</div>
+    {{/if}}
+    <div class="muahang">
+          <input type="checkbox" class="checkall" >
+          <div class="chonall">Chọn tất cả</div>
+          <div class="dell" >Xóa</div>
+          <div class="tongsp"> Tổng số sản phẩm: </div>
+          <div class="tongsanpham">0</div>
+          <div class="tongsotien"> Tổng số tiền phải trả:(đ)</div>
+          <div class="tongsotienphaitra">0</div>
+          {{#if cart.itemList.length}}
+          <div  id="buy" class='fab'>
+            <a href="/books/buys/{{cart._id}}" style="width: 100%; height:100%; display:block;">&#xf42d;</a> </div>
+          {{/if}}
+
+    </div>
+
+
+  <br>
+    
+  <div class="vunggiam"> Bạn hãy chọn 1 mã giảm giá của bạn:
+    <div class="magiamgia">
+        
+      <div class="giam" > Trừ: 30%</div>
+      <div class="giam" > Trừ: 50000</div>   
+      <div class="giam" > Trừ: 30000</div>   
+      <div class="giam" > Trừ: 20000</div>   
+      <div class="giam" > Trừ: 10%</div>   
+      <div class="giam" > Trừ: 5000</div>   
+      <div class="giam" > Trừ: 20%</div>   
+    </div>
+  </div>
+
+
+
+
+
+  </div>
+</div>  
+<br><br>
+
+
+<script>
+  var loaigiamgia = new Array;
+  loaigiamgia.push('','');
+  var checkbox = document.querySelector('.checkall');
+  var dell =document.querySelector('.dell');
+  var count = 0;
+function  load(){
+    const list = document.querySelectorAll('.list');      
+
+
+    for (let i = 0; i < list.length; i++) {
+    const thanhtien = list[i].querySelector('.thanhtien_box2'); 
+    const gia = list[i].querySelector('.gia_box2');    
+    const number =list[i].querySelector('.number');
+
+    number.addEventListener('change', (e)=>{
+            thanhtien.innerHTML=new Intl.NumberFormat().format(parseInt(gia.innerHTML.replace(',', ''))* number.value);
+      tinhtien();
+      tinhtongsanpham();    
+        })
+
+// cộng số lượng
+    const add = list[i].querySelector('.add');
+    add.addEventListener('click',(e)=>{
+      number.value =parseInt(number.value)+1;
+      thanhtien.innerHTML= new Intl.NumberFormat().format(parseInt(gia.innerHTML.replace(',', ''))* number.value);
+      tinhtien();
+      tinhtongsanpham();
+    })
+
+// trừ số lượng
+    const sub = list[i].querySelector('.sub');
+    sub.addEventListener('click', (e)=>{
+      if(parseInt(number.value) > 0){
+      number.value =parseInt(number.value)-1;
+
+      thanhtien.innerHTML= new Intl.NumberFormat().format(parseInt(gia.innerHTML.replace(',', ''))* number.value);
+      tinhtien();
+      tinhtongsanpham();      
+    }
+
+    })
+
+    const check = list[i].querySelector('.check');
+    check.addEventListener('click', (e)=>{
+            tinhtien();
+      tinhtongsanpham();
+    })
+
+    }
+
+
+
+  }
+  load();
+
+  checkbox.addEventListener('click', (e)=>{
+    if( checkbox.checked == true){
+    const list =document.querySelectorAll('.list');
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        check.checked = true;
+     }
+      tinhtien();
+      tinhtongsanpham();
+    } 
+    if( checkbox.checked == false){
+    const list =document.querySelectorAll('.list');
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        check.checked = false;
+     }
+      tinhtien();
+      tinhtongsanpham();
+    } 
+
+  });
+
+  dell.addEventListener('click', (e)=>{
+    const list =document.querySelectorAll('.list');
+    const x =window.confirm('Bạn chắc chắn muốn xóa');
+    if(x == true)
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        if(check.checked == true){
+          list[i].remove();
+        }
+     }
+     tinhtien();
+     tinhtongsanpham();
+  });
+
+  function tinhtien(){
+   const list =document.querySelectorAll('.list');
+   var sum = 0;
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        if(check.checked == true){
+          const thanhtien = list[i].querySelector('.thanhtien_box2');
+          sum=sum+(parseInt(thanhtien.innerHTML.replace(',', '')));
+        }
+     }
+      const tongsotienphaitra = document.querySelector('.tongsotienphaitra');
+          if(a[0]==1 ){
+            sum= sum*(1 - (loaigiamgia[0] /100));
+          }
+
+          else if (a[1] == 1){
+            sum = sum  - loaigiamgia[1];
+          }
+ 
+ 
+          tongsotienphaitra.innerHTML =new Intl.NumberFormat().format(sum);
+
+
+
+  }
+  function tinhtongsanpham(){
+   const list =document.querySelectorAll('.list');
+   let count = 0;
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        if(check.checked == true){
+          const soluong = list[i].querySelector('.number');
+          if (soluong.value*1 != 0)
+          count =count +1;
+        }
+         
+    
+      const tongsosanpham = document.querySelector('.tongsanpham');
+          tongsosanpham.innerHTML =count;   
+     }
+
+  }
+
+
+  var a = new Array;
+  a.push(0, 0);
+  var dem = 0;
+  giam = document.querySelectorAll('.giam');
+  for (let i =0 ; i<giam.length; i++){
+    giam[i].addEventListener('click', (e)=>{
+      if(dem == 0 ){
+
+      giam[i].style.backgroundColor = "gold";
+      a[i]=1;
+      dem =1;
+    }
+    else if (a[i]== 1 & dem ==1 ){
+        giam[i].style.background = "none";
+        a[i]=0;
+        dem =0;
+
+
+      }
+    else{
+      window.alert('Bạn chỉ được chọn tối đa 1 mã giảm giá!');
+    }
+    loaigiamgia[i] =giam[i].innerHTML.replace('Trừ: ','');
+    loaigiamgia[i] =loaigiamgia[i].replace('đ','');
+    loaigiamgia[i] =loaigiamgia[i].replace('%','');
+    loaigiamgia[i] =loaigiamgia[i].replace('.','');
+    loaigiamgia[i] =parseInt(loaigiamgia[i]);
+    tinhtien();
+    tinhtongsanpham();
+    
+    
+    
+    });
+
+  }
+
+ 
+
+</script>

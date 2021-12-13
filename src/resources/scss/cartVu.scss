@@ -1,0 +1,309 @@
+.box1{
+    width: 100%;
+    height: 70pt;
+    background-color: rgb(195 ,158 ,81);
+    display: flex;
+    font-size: 15pt;
+    color: white;
+    box-shadow: 1px 1px 1px 2px rgb(0, 0, 0);
+  
+    text-align: center;
+    border-radius: 5pt;
+  
+  }
+  
+  .sp{
+    margin-left: 5%;
+    width:40%;
+    height: 70pt;
+    padding-top: 25pt; 
+    background: transparent;
+  }
+  
+  .dongia{
+    padding-top: 25pt; 
+     width: 20%;
+     height: 70pt;
+  
+  }
+  
+  .thanhtien{
+    margin-left: 0%;
+    padding-top: 25pt; 
+    height: 70pt;
+    height: 55pt;
+  }
+  .soluong{
+    padding-top: 25pt; 
+    width: 20%;
+    float: left;
+    height: 70pt;
+  
+  
+  }
+  .sub{
+    margin-left: 50pt;
+    // margin-top: 15pt;
+    width: 20%;
+    height: 20pt;
+    box-shadow: -1px -1px 1px 1px rgb(241, 229, 229);
+    cursor: pointer;
+    transition: 2s;
+    border-radius: 3pt;
+    color: blue;
+  
+  }
+  
+  .add{
+    // margin-top: 15pt;
+    width: 20%;
+    height: 20pt;
+    box-shadow: 1px 1px 1px 1px rgb(241, 229, 229);
+    cursor: pointer;
+    border-radius: 3pt;
+    color: blue;
+  
+    .add :hover{
+      color: blue;
+    }
+  
+  }
+  .number{
+    // margin-top: 15pt;
+    width: 20%;
+    height: 20pt;
+    border: none;
+    text-align: center;
+  
+  }
+  
+  
+  .box2{
+    margin-top: 5pt;
+    width: 100%;
+    height: auto;
+    box-shadow: 1px 1px 1px 1px rgb(0, 0, 0);
+    background-color: white;
+  
+  }
+  
+  
+  .list{
+    margin-bottom: 5pt;
+    margin-top: 5pt;
+    width: 100%;
+    height: 70pt;
+    background-color: whitesmoke;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    border: solid 1px;
+    border-color: black;
+    border-radius: 2pt;
+  
+  }
+  
+  .check{
+    // margin-top: 28pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 3%;
+    height: 15pt;
+    cursor: pointer;
+  }
+  .img_box2{
+    // margin-top: 10pt;
+    // padding-top: 10pt;
+    margin-right: 1%;
+    width: 6%;
+    height: 66px;
+    border-radius: 50%;
+    overflow: hidden;
+
+  }
+  .img_box2 img {
+      display: block;
+      width: 100%;
+      height: 100%;
+  }
+  
+  .mota_box2{
+    // margin-top: 16pt;
+    margin-left: 5pt;
+    width: 40%;
+    height: 36pt;
+    text-align: left;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  
+  }
+  .gia_box2 {
+    // margin-top: 10pt;
+  
+    padding-top: 15pt;
+    width: 20%;
+    height: 50pt;
+  }
+  
+  .soluong_box2{
+    // margin-top: 10pt;
+  
+    width: 20%;
+  
+    display: flex;
+  }
+  
+  .thanhtien_box2{
+    // margin-top: 10pt;
+  
+    // padding-top: 15pt;
+    width: 20%;
+  }
+  
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  
+  .muahang{
+    width: 100%;
+    height: 70pt;
+    background-color: wheat;
+    display: flex;
+    background-color: rgb(195 ,158 ,81);
+    color: white;
+    box-shadow: 1px 1px 1px 1px rgb(241, 229, 229);
+    border-radius: 5pt;
+  
+  }
+  
+  .checkall{
+    margin-top: 26pt;
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 3%;
+    height: 15pt;
+    cursor: pointer;
+  }
+  
+  .chonall{
+    padding-left: 1%;
+    padding-top: 25pt;
+    width: auto;
+    height: 70pt;
+  }
+  
+  .tongsp{
+    padding-left: 3%;
+    padding-top: 25pt;
+    margin-left: 15%;
+  
+    width: auto;
+    height: 70pt;
+  
+  }
+  .tongsanpham{
+    width: 20%;
+    height: 70pt;
+    text-align: left;
+    padding-top: 25pt;
+    padding-left: 5pt;
+  }
+  
+  .tongsotien{
+    width: auto;
+    height: 70pt;
+    text-align: center;
+    padding-top: 25pt;
+  }
+  
+  .tongsotienphaitra{
+    width: 90pt;
+    height: 70pt;
+    text-align: left;
+    padding-top: 25pt;
+    padding-left: 5pt;
+  
+  }
+  .dell{
+    padding-left: 3%;
+    padding-top: 25pt;
+    width: auto;
+    height: 70pt;
+    cursor: pointer;
+  }
+  .dell:hover{
+    color: red;
+  }
+  
+  
+  
+  #buy{
+  font-size:50pt; 
+  color:rgb(150, 127, 99);
+   float:right; 
+     cursor: pointer;   
+     margin-top: 10pt;
+  }
+  
+  #buy:hover{
+    color: blue;
+  }
+  #them{
+    width: 100%;
+    height: 5pt;
+    background-color: rgb(241, 229, 229);
+    // display: block;
+  }
+  
+  .sub:hover{
+    color: gold;
+    background-color: rgb(150, 85, 31);
+    transition: 1s;
+  }
+  
+  .add:hover{
+    color: gold;
+    background-color: rgb(150, 85, 31);
+    transition: 1s;
+  
+  }
+  
+  
+  .bigbox{
+    box-shadow: -1px -1px 5px 7px rgba(195, 58, 81, 0.3);
+    // box-shadow  ;
+    border-radius: 5pt;
+    border-style: solid;
+    border-color: black;
+    height: auto;
+  }
+  
+  .magiamgia{
+    width: 100%;
+    height: 50pt;
+    border: solid 1px;
+    border-color: black;
+      display: flex;
+      text-align: center;
+  }
+  
+  .giam{
+    margin: auto;
+    width: 100pt;
+    cursor: pointer;
+    padding: 5pt;
+    border-radius: 2pt;
+  }
+  
+  .giam:hover{
+    box-shadow: -1px -1px 2px 1px rgba(195, 58, 81, 0.3);
+  
+  }
+  
+  .vunggiam{
+    width: 100%;
+    text-align: center;
+  } 
+  
