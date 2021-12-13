@@ -6,6 +6,7 @@ import path from 'path';
 
 import controllers from '../app/controllers/BookController.js';
 import commentControllers from '../app/controllers/CommentController.js';
+import notiControllers from '../app/controllers/NotificationController.js';
 import validate from '../app/validate/book.validate.js';
 
 import authMiddleware from '../app/middleware/AuthMiddleware.js';
@@ -57,5 +58,6 @@ router.patch('/:id/restore', controllers.restore);
 
 router.post('/do-comment', commentControllers.doComment)
 router.post('/reply-comment', commentControllers.replyComment)
+router.post('/post-notice', notiControllers.postNotice)
 
 export default router;
