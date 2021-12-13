@@ -25,20 +25,22 @@ const HomeController = {
                 } else {
                     u = res.locals.user
                 }
-                console.log(food)
+               
                 if (!u) {
                     res.clearCookie("userId");
                     res.render('./home/home.hbs', {
                         books: books,
                         coffee: coffee,
-                        food: food
+                        food: food,
+                        notis: res.locals.notis
                     });
                 } else {
                     res.render('./home/home.hbs', {
                         user: u,
                         books: books,
                         coffee: coffee,
-                        food: food
+                        food: food,
+                        notis: res.locals.notis
                     });
                 }
 

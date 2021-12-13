@@ -1,5 +1,6 @@
 import Comment from '../models/Comment.js';
 import Reply from '../models/Reply.js';
+import Noti from '../models/Noti.js';
 
 import { 
     singleMongooseDocumentToObject,
@@ -41,7 +42,8 @@ const CommentControllers = {
                 })
             })
             .catch(next)
-    }
+    },
+
 }
 
 export default CommentControllers;

@@ -5,6 +5,7 @@ import User from '../models/User.js';
 import Workingspace from '../models/Workingspace.js';
 import Promo from '../models/Promo.js';
 import Orders from '../models/Orders.js';
+import Noti from '../models/Noti.js';
 
 import {
     mongooseDocumentsToObject
@@ -184,6 +185,33 @@ const OwnController = {
             .then((orders) => {
                 res.render('orders/list/trash.hbs', {
                     orders: mongooseDocumentsToObject(orders),
+                    user: res.locals.user
+                })
+            }).catch(next);
+    },
+
+    // 8. Notis warehouse
+
+    // GET own/stored/notis
+    storedNotis(req, res, next) {
+        Promise.all([Noti.find({}), Noti.countDocumentsDeleted()])
+            .then(([orders, deletedCount]) => {
+                res.render('notis/list/store.hbs', {
+                    deletedCount,
+                    notis: mongooseDocumentsToObject(notis),
+                    user: res.locals.user
+                })
+            }).catch(next);
+    },
+
+    // GET own/trash/notis
+    trashNotis(req, res, next) {
+        Noti.findDeleted({
+                username: res.locals.user.username
+            })
+            .then((notis) => {
+                res.render('notis/list/trash.hbs', {
+                    notis: mongooseDocumentsToObject(notis),
                     user: res.locals.user
                 })
             }).catch(next);

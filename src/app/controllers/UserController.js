@@ -51,7 +51,7 @@ const UserController = {
             req.body.avatar = '/img/' + name + '-default.jpg'; 
         }
         let user = new User(req.body);
-        
+        console.log(user)
         user.save()
             .then(() => res.render('auth/index', { user: singleMongooseDocumentToObject(user)}))
             .catch(next);

@@ -99,15 +99,10 @@ const AuthController = {
                     });
                 }
             }).then(([books, coffee, food, user]) => {
-                books = mongooseDocumentsToObject(books)
-                coffee = mongooseDocumentsToObject(coffee)
-                food = mongooseDocumentsToObject(food)
-                res.render('home/home.hbs', {
-                    user: singleMongooseDocumentToObject(user),
-                    books: books,
-                    coffee: coffee,
-                    food: food
-                });
+                // books = mongooseDocumentsToObject(books)
+                // coffee = mongooseDocumentsToObject(coffee)
+                // food = mongooseDocumentsToObject(food)
+                res.redirect('/');
             })
             .catch(next)
 
