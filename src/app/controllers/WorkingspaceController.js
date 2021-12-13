@@ -51,13 +51,13 @@ const WorkingspaceController = {
                 console.log(food)
                 if (!u) {
                     res.clearCookie("userId");
-                    res.render('users/workingspaces/item/create.hbs', {
+                    res.render('workingspaces/item/create.hbs', {
                         
                         coffee: coffee,
                         food: food
                     });
                 } else {
-                    res.render('users/workingspaces/item/create.hbs', {
+                    res.render('workingspaces/item/create.hbs', {
                         user: u,
                         
                         coffee: coffee,
