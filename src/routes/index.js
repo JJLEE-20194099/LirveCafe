@@ -31,7 +31,6 @@ const routeObj = {
         app.use('/', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, homeRoute);
         app.use('/orders', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, orderRoute);
         app.use('/notis', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,notiRoute);
-        app.use('/workingspace', workingspaceRoute);
     },
 }
 export default routeObj;
