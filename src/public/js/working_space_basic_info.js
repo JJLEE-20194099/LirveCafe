@@ -1,10 +1,10 @@
-const $ = document.querySelector.bind(document)
-const $$ = document.querySelectorAll.bind(document)
+const $_1 = document.querySelector.bind(document)
+const $$_1 = document.querySelectorAll.bind(document)
 
-const decreSeat = $('#basic-info .seat-num .decre-btn')
-const increSeat = $('#basic-info .seat-num .incre-btn')
+const decreSeat = $_1('#basic-info .seat-num .decre-btn')
+const increSeat = $_1('#basic-info .seat-num .incre-btn')
 
-const inputSeat = $('#basic-info .seat-num input')
+const inputSeat = $_1('#basic-info .seat-num input')
 
 decreSeat.onclick = function (e) {
     e.preventDefault()
@@ -50,8 +50,8 @@ var nowTime = function () {
 }
 
 
-const startTimeInput = $('#basic-info .start-time input')
-const endTimeInput = $('#basic-info .end-time input')
+const startTimeInput = $_1('#basic-info .start-time input')
+const endTimeInput = $_1('#basic-info .end-time input')
 
 startTimeInput.onclick = (e) => {
     dateTime = nowTime()

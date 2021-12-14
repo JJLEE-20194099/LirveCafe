@@ -5,7 +5,9 @@
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
 <div id="working-space">
-  <form>
+
+  <input type="text" id="username" value="{{user.username}}" style="display:none">
+  <form id="workingspace-form" enctype="multipart/form-data">
     {{! chon chỗ ngồi }}
     <div id="basic-info">
       <div class="header">Vui lòng nhập đầy đủ thông tin để đặt chỗ</div>
@@ -24,12 +26,12 @@
         
         <div class = "event-title col col-6">
           <span>Tiêu đề</span>
-          <input type = "text">
+          <input type = "text" required>
         </div>
 
         <div class = "email col col-6">
           <span>Email</span>
-          <input type= "email" accept="email/*">
+          <input type= "email" accept="email/*" required>
         </div>
         
         <div class="line col-12"></div>
@@ -48,7 +50,7 @@
         <div class="line col-12"></div>
         <div class = "image col col-6">
           <span>Ảnh sự kiện</span>
-          <input type = "file" accept="image/*">
+          <input type = "file"  name="avatar" id="avatar" accept="image/*">
         </div>
 
 
@@ -145,6 +147,7 @@
             <li class="fodr-item">
               <img src="{{this.image}}" />
               <div class="fodr-name"><span>{{this.name}}</span></div>
+              <div class="fodr-id" style="display: none"><span>{{this._id}}</span></div>
               <div class="fodr-number">
 
                 <button class="change-btn buy-btn" id="decre-btn"><i class="ti-minus"></i></button>
@@ -166,6 +169,7 @@
             <li class="fodr-item">
               <img src="{{this.image}}" />
               <div class="fodr-name"><span>{{this.name}}</span></div>
+              <div class="fodr-id" style="display: none"><span>{{this._id}}</span></div>
               <div class="fodr-number">
 
                 <button class="change-btn buy-btn" id="decre-btn"><i class="ti-minus"></i></button>
@@ -197,5 +201,8 @@
 </div>
 
 <script src="/js/working_space_basic_info.js"></script>
-
 <script src="/js/working_space.js"></script>
+
+<script>
+ 
+</script>
