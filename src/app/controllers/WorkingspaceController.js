@@ -48,16 +48,16 @@ const WorkingspaceController = {
                 } else {
                     u = res.locals.user
                 }
-                console.log(food)
+                
                 if (!u) {
                     res.clearCookie("userId");
-                    res.render('users/workingspaces/item/create.hbs', {
+                    res.render('workingspaces/item/create.hbs', {
                         
                         coffee: coffee,
                         food: food
                     });
                 } else {
-                    res.render('users/workingspaces/item/create.hbs', {
+                    res.render('workingspaces/item/create.hbs', {
                         user: u,
                         
                         coffee: coffee,
@@ -71,10 +71,17 @@ const WorkingspaceController = {
 
     //POST /workingspaces/save
     save(req, res, next) {
-        req.body.image = "http://www.davidkrugler.com/s/River-Lights-8318.jpg";
-        const workingspace = new workingspace(req.body);
-        Workingspace.save()
-            .then(() => res.redirect('/users/stored/workingspaces'))
+
+        if (!req.body.image || req.body.image == '') {
+            req.body.image = "http://www.davidkrugler.com/s/River-Lights-8318.jpg"; 
+        }
+
+        
+        req.body.image = "http://www.davidkrugler.com/s/River-Lights-8318.jpg"; 
+        const workingspace = new Workingspace(req.body);
+        console.log(workingspace)
+        workingspace.save()
+            .then(() => res.send(workingspace))
             .catch(next)
     },
 

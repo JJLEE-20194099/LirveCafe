@@ -14,7 +14,7 @@ $valueColor: #FF424E;
     border: 0.5px solid $mainColor;
 
     input {
-        background-color: rgba($color: #fff, $alpha: 0.4)
+        background-color: rgba($color: #fff, $alpha: 0.4);
     }
 
     #basic-info {
@@ -23,14 +23,17 @@ $valueColor: #FF424E;
 
         font-size: 20px;
 
-
-
         .col {
             margin-bottom: 16px;
             background-color: rgba($color: $mainColor, $alpha: 0.8);
             border: 1px solid #fff;
             padding: 6px 12px;
-
+            input {
+                border: 0.5px solid rgba($color: $mainColor, $alpha: 1);
+            }
+            input:hover {
+                border: 0.5px solid rgba($color: #fff, $alpha: 1);
+            }
         }
 
         .row {
@@ -64,13 +67,27 @@ $valueColor: #FF424E;
 
         .name {}
 
+        .image input {
+            width: 68%;
+        }
+
         .seat-num {
             input {
                 width: 44px;
                 text-align: center;
             }
         }
-
+        .description {
+            display: flex;
+            align-items: center;
+            textarea {
+                width: 100%;
+                padding: 4px 12px;
+                font-size: 16px;
+                border-radius: 4px;
+                height: 80px;   
+            }
+        }
     }
 
     .food-drink-confirm {
@@ -212,7 +229,7 @@ $valueColor: #FF424E;
                 }
 
                 .fodr-cost {
-                    width: 20%;
+                    width: 15%;
                 }
 
                 .fodr-number {
@@ -228,6 +245,7 @@ $valueColor: #FF424E;
                         margin: 0 -4px;
                         border: 1px solid rgb(236, 236, 236);
                         height: 24px;
+                        background-color: rgba($color: $mainColor, $alpha: 0.4);
                     }
 
                     input:focus-visible {
@@ -238,13 +256,13 @@ $valueColor: #FF424E;
                     .buy-btn {
                         cursor: pointer;
                         height: 24px;
-
-
+                        background-color: rgba($color: $mainColor, $alpha: 0.4);
+                        border-radius: 4px;
+                        border: none;
                     }
 
                     .buy-btn:focus {
                         outline: none;
-
                     }
                 }
             }

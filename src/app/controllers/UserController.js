@@ -45,6 +45,7 @@ const UserController = {
 
     // POST : /users/save
     save(req, res, next) {
+        console.log(req.file.path)
         req.body.avatar = getAvatar(req);
         if (!req.body.avatar || req.body.avatar == '') {
             const name = req.body.firstname + ' ' + req.body.lastname;

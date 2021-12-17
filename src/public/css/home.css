@@ -324,7 +324,9 @@ a {
   border-radius: 12px;
   top: 73px;
   position: absolute;
-  right: -96px; }
+  right: -96px;
+  height: 600px;
+  overflow-y: scroll; }
   .noti-container .noti-each {
     background-color: white;
     list-style-type: none;
