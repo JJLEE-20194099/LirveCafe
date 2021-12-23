@@ -96,14 +96,14 @@
             </div>
             <div class="link-tri"></div>
             <div id="user-list" class="func-list">
-                <ul>
                     {{#if user}}
+                <ul>
                     <li><a href='/users/{{user._id}}'>Tài khoản</a></li>
                     <li style="border-top: 1px solid white"><a href='/auth/logout'>Đăng xuất</a></li>
                     <li style="height: 60px; border-top: 1px solid white"><a
                             href='/users/{{user.username}}/register_loyal_member'>Đăng ký thành viên thân thiết</a></li>
-                    {{/if}}
                 </ul>
+                    {{/if}}
             </div>
 
         </div>
