@@ -17,12 +17,16 @@ body {
     font-size: 18px;
     margin-left: 8px;
     line-height: 38px; }
+  #header .header-form input {
+    width: 100%; }
+  #header .header-form div {
+    padding: 0; }
   #header .func-list {
     z-index: 2;
     display: none;
     position: absolute;
-    top: 75%;
-    right: 4px; }
+    top: 74%;
+    right: 2px; }
     #header .func-list ul {
       padding-left: 0px;
       margin-bottom: 0;
@@ -48,7 +52,7 @@ body {
     z-index: 2;
     display: none;
     position: absolute;
-    top: 75%;
+    top: 64%;
     left: 200px; }
     #header .header-list ul {
       padding-left: 0px;
@@ -72,6 +76,7 @@ body {
       font-weight: bold;
       font-size: 16px; }
   #header .header-menu:hover #menu-list {
+    padding-top: 12px;
     display: block; }
   #header .header-user:hover #user-list {
     display: block; }
@@ -278,6 +283,11 @@ body {
   #footer .contact {
     width: 300px;
     margin: 0 auto; }
+    #footer .contact .des {
+      min-width: 54px;
+      display: inline-block; }
+    #footer .contact a {
+      color: #8f0277; }
   #footer .footer-icon {
     margin-right: 10px; }
 
