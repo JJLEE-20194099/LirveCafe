@@ -1,0 +1,67 @@
+
+<style>
+    .mt-4 {
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0 2px 12px #090d11;
+        margin-bottom: 24px;
+        padding: 24px 24px 24px 24px;
+    }
+
+    .mt-4 .form-group input:focus {
+        border-color: unset;
+        box-shadow: unset;
+    }
+
+     .form-group #videoId {
+        border: none;
+        position: relative;
+        transform: translateX(-12px);
+        width: 230px;
+    }
+    
+</style>
+{{#each errors}}
+    <p>{{this}}</p>
+{{/each}}
+
+<div class="mt-4">
+    <h3>Thêm đồ ăn mới</h3>
+
+    <form method="POST" action="/food/save" enctype='multipart/form-data'>
+        <div class="form-group">
+            <label for="name">Tên</label>
+            <input type="text" class="form-control" id="name" name="title">
+        </div>
+        {{!-- <div class="form-group">
+            <label for="author-name">Tác giả</label>
+            <input type="text" class="form-control" id="author-name" name="author">
+        </div> --}}
+        <div class="form-group">
+            <label for="description">Mô tả</label>
+            <br>
+            {{!-- <input type="text" class="form-control" id="description" name="description"> --}}
+            <textarea id="description" name="description" rows="8" cols="150" style="resize: none; border: 1px solid #ccc; outline: none;border-radius: 4px; "></textarea>
+        </div>
+        <div class="form-group">
+            <label for="videoId">Hình ảnh</label>
+            <input type="file" class="form-control" id="videoId" name="image">
+        </div>
+
+        <div class="form-group">
+            <label for="">Giá</label>
+            <input type="text" class="form-control" id="" name="price">
+        </div>
+
+        {{!-- <div class="form-group">
+            <label for="level">Nội dung</label>
+            <input type="text" class="form-control" id="level" name="body">
+        </div> --}}
+         {{!-- <div class="form-group">
+            <label for="level">Số trang</label>
+            <input type="text" class="form-control" id="level" name="no">
+        </div> --}}
+
+        <button type="submit" class="btn btn-primary">Thêm mới đồ ăn</button>
+    </form>
+</div>
