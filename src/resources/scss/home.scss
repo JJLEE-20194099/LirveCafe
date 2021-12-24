@@ -50,7 +50,7 @@ body {
         display: none;
         position: absolute;
         top: 74%;
-        right: 2px;
+        right: -87px;
 
         ul {
             padding-left: 0px;
@@ -67,7 +67,7 @@ body {
 
             height: 40px;
             padding: 4px 16px;
-            width: 150px;
+            width: 210px;
         }
 
         li:hover {
@@ -83,6 +83,8 @@ body {
             color: $textHeaderColor;
             font-weight: bold;
             font-size: 16px;
+            display: inline-block;
+            width: 100%;
         }
 
     }
@@ -102,11 +104,12 @@ body {
             text-align: center;
             border-radius: 6px;
             box-shadow: 0 0 8px $textHeaderColor;
+            border-bottom: none;
         }
 
         li {
             list-style-type: none;
-
+            border-bottom: 1px solid #fff;
             height: 40px;
             padding: 4px 16px;
             width: 150px;
@@ -125,6 +128,8 @@ body {
             color: $textHeaderColor;
             font-weight: bold;
             font-size: 16px;
+            display: inline-block;
+            width: 100%;
         }
 
     }
