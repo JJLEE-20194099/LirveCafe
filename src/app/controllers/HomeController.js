@@ -9,6 +9,10 @@ import {
     singleMongooseDocumentToObject
 } from '../../support_lib/mongoose.js';
 
+import {
+    getNoNewNotis
+} from '../../support_lib/noti.js'
+
 const HomeController = {
     index: function (req, res, next) {
         console.log(req.signedCookies.userId)
@@ -25,14 +29,18 @@ const HomeController = {
                 } else {
                     u = res.locals.user
                 }
-               
+
+            
+                    
+
                 if (!u) {
                     res.clearCookie("userId");
                     res.render('./home/home.hbs', {
                         books: books,
                         coffee: coffee,
                         food: food,
-                        notis: res.locals.notis
+                        notis: res.locals.notis,
+                        no_new_notis: getNoNewNotis(res.locals.notis)
                     });
                 } else {
                     res.render('./home/home.hbs', {
@@ -40,7 +48,8 @@ const HomeController = {
                         books: books,
                         coffee: coffee,
                         food: food,
-                        notis: res.locals.notis
+                        notis: res.locals.notis,
+                        no_new_notis: getNoNewNotis(res.locals.notis)
                     });
                 }
 

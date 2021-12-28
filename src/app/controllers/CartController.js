@@ -8,11 +8,15 @@ import {
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
+import {
+    getNoNewNotis
+} from '../../support_lib/noti.js'
+
 const CartController = {
 
 
     addBookToCart(req, res, next) {
-        
+
         const itemId = req.body.itemId;
         const username = req.body.username;
         var userCart = [];
@@ -23,8 +27,7 @@ const CartController = {
                 _id: itemId
             }), User.findOne({
                 username: username
-            })   
-        ])
+            })])
             .then(([cart, book, user]) => {
                 user = singleMongooseDocumentToObject(user)
                 if (!cart) {
@@ -37,9 +40,9 @@ const CartController = {
                         itemList: userCart,
                         level: user.level
                     }
-                    
+
                     cart = new Cart(data);
-                
+
                     return cart.save(data)
                 } else {
                     cart = singleMongooseDocumentToObject(cart);
@@ -60,7 +63,7 @@ const CartController = {
                         level: user.level
                     }
 
-                   
+
                     if (!flag) {
                         userCart.push({
                             book: singleMongooseDocumentToObject(book),
@@ -81,20 +84,24 @@ const CartController = {
     },
 
     showCart(req, res, next) {
-       
+
         const username = req.params.username;
         let level = parseInt(req.query.level)
         level = level || 0
         console.log(username, level)
-        
+        var total = 0
+
         Cart.findOne({
                 username: username
             })
             .then((cart) => {
                 cart = singleMongooseDocumentToObject(cart)
                 console.log(cart)
-                if (!cart) cart = {username: username, itemList: []}
-                var total = cart.itemList.reduce(function (acc, item) {
+                if (!cart) cart = {
+                    username: username,
+                    itemList: []
+                }
+                total = cart.itemList.reduce(function (acc, item) {
                     let price = item.book.price
                     if (price.includes("$"))
                         price = price.slice(1)
@@ -102,7 +109,7 @@ const CartController = {
                 }, 0)
 
                 console.log(total)
-                
+
                 return Promise.all([Promo.find({
                     condition: {
                         $lte: total
@@ -120,47 +127,49 @@ const CartController = {
                             a.disCountAmount = 0;
                         if (!b.disCountAmount)
                             b.disCountAmount = 0;
-    
+
                         if (!a.discountPercentage)
                             a.disCountPercentage = 0;
                         if (!b.disCountPercentage)
                             b.disCountPercentage = 0;
-    
+
                         if (a.discountAmount && b.discountAmount) {
                             if (a.discountAmount == b.discountAmount)
                                 return b.condition - a.condition
                             return a.discountAmount - b.discountAmount
                         }
-    
+
                         if (a.discountPercentage && b.discountPercentage) {
                             if (a.discountPercentage == b.discountPercentage)
                                 return b.condition - a.condition
                             return a.discountPercentage - b.discountPercentage
                         }
-                        
+
                         if (a.discountPercentage && b.discountAmount)
                             return 1;
-                        
-                
-                        
+
+
+
                         return -1;
-    
-                        
+
+
                     })
-                    
-                    const limitPromo = parseInt(level * promoList.length / 6) 
-                   
+
+                    const limitPromo = parseInt(level * promoList.length / 6)
+
                     promoList = promoList.slice(0, limitPromo)
                 }
-                
-                
-                
-                
+
+
+
+
                 cart = singleMongooseDocumentToObject(cart)
                 res.render('carts/index.hbs', {
                     cart,
-                    total:
-                    promoList
+                    total: total,
+                    promoList,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             })
     },
@@ -186,7 +195,7 @@ const CartController = {
                 })
             }).then(() => {
                 res.locals.cart = userCart;
-                
+
                 res.send(userCart)
             })
             .catch(next)
@@ -217,7 +226,7 @@ const CartController = {
                 })
             }).then(() => {
                 res.locals.cart = userCart;
-             
+
                 res.send({
                     itemList: userCart
                 })
@@ -226,7 +235,7 @@ const CartController = {
     },
 
     addPromoToCart(req, res, next) {
-        
+
         const data = req.body;
         Promise.all([
             Cart.findOne({
@@ -237,7 +246,7 @@ const CartController = {
             }),
 
         ]).then(([cart, promo]) => {
-           
+
         }).catch(next)
     }
 

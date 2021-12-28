@@ -16,6 +16,10 @@ import {
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
+import {
+    getNoNewNotis
+} from '../../support_lib/noti.js'
+
 
 const calculateUserLevel = ([multiOrderList, user]) => {
 
@@ -24,8 +28,8 @@ const calculateUserLevel = ([multiOrderList, user]) => {
     else multiOrderList = mongooseDocumentsToObject(multiOrderList)
 
     var total = multiOrderList.reduce(function (acc, item) {
-            return acc + item.total
-        }, 0)
+        return acc + item.total
+    }, 0)
 
     var level = 0;
     for (var i = Rank.totalAmountPurchased.length - 1; i >= 0; i--) {
@@ -49,7 +53,9 @@ const BookController = {
                 res.render('books/list/list.hbs', {
                     books: mongooseDocumentsToObject(books),
                     user: res.locals.user,
-                    cart: res.locals.cart
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             }).catch(next);
     },
@@ -74,7 +80,9 @@ const BookController = {
                             commentList: mongooseDocumentsToObject(commentList),
                             books: books,
                             user: res.locals.user,
-                            cart: res.locals.cart
+                            cart: res.locals.cart,
+                            notis: res.locals.notis,
+                            no_new_notis: getNoNewNotis(res.locals.notis)
                         })
                     })
 
@@ -93,7 +101,9 @@ const BookController = {
                 res.render('buy/buyOneItem.hbs', {
                     book: book,
                     user: res.locals.user,
-                    cart: res.locals.cart
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             })
     },
@@ -119,6 +129,8 @@ const BookController = {
                     user: res.locals.user,
                     total: total,
                     promo: singleMongooseDocumentToObject(promo),
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             })
 
@@ -185,7 +197,9 @@ const BookController = {
                 res.render('own/books/item/edit.hbs', {
                     book: singleMongooseDocumentToObject(book),
                     user: res.locals.user,
-                    cart: res.locals.cart
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             })
             .catch(next);

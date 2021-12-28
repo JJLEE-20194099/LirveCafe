@@ -7,6 +7,10 @@ import {
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
+import {
+    getNoNewNotis
+} from '../../support_lib/noti.js'
+
 const SearchController = {
     multiSearch(req, res, next) {
         const key = req.body.searchTxt;

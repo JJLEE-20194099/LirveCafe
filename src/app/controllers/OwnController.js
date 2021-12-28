@@ -11,6 +11,10 @@ import {
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
+import {
+    getNoNewNotis
+} from '../../support_lib/noti.js'
+
 const OwnController = {
 
     // 1. coffee warehouse
@@ -22,7 +26,9 @@ const OwnController = {
                 res.render('own/drink/list/store.hbs', {
                     deletedCount,
                     coffee: mongooseDocumentsToObject(coffee),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -33,7 +39,9 @@ const OwnController = {
             .then((coffee) => {
                 res.render('own/drink/list/trash.hbs', {
                     coffee: mongooseDocumentsToObject(coffee),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -47,7 +55,9 @@ const OwnController = {
                 res.render('own/books/list/store.hbs', {
                     deletedCount,
                     books: mongooseDocumentsToObject(books),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -58,7 +68,9 @@ const OwnController = {
             .then((books) => {
                 res.render('own/books/list/trash.hbs', {
                     books: mongooseDocumentsToObject(books),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -72,7 +84,9 @@ const OwnController = {
                 res.render('own/users/list/store.hbs', {
                     deletedCount,
                     users: mongooseDocumentsToObject(users),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -83,7 +97,9 @@ const OwnController = {
             .then((users) => {
                 res.render('own/users/list/trash.hbs', {
                     users: mongooseDocumentsToObject(users),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -97,7 +113,9 @@ const OwnController = {
                 res.render('own/news/list/store.hbs', {
                     deletedCount,
                     news: mongooseDocumentsToObject(news),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -108,7 +126,9 @@ const OwnController = {
             .then((news) => {
                 res.render('own/news/list/store.hbs', {
                     news: mongooseDocumentsToObject(news),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -122,7 +142,9 @@ const OwnController = {
                 res.render('users/workingspaces/list/store.hbs', {
                     deletedCount,
                     workingspaces: mongooseDocumentsToObject(workingspaces),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -133,7 +155,9 @@ const OwnController = {
             .then((workingspaces) => {
                 res.render('users/workingspaces/list/trash.hbs', {
                     workingspaces: mongooseDocumentsToObject(workingspaces),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -147,7 +171,9 @@ const OwnController = {
                 res.render('own/promos/list/store.hbs', {
                     deletedCount,
                     promos: mongooseDocumentsToObject(promos),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -158,7 +184,9 @@ const OwnController = {
             .then((promos) => {
                 res.render('own/promos/list/trash.hbs', {
                     promos: mongooseDocumentsToObject(promos),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -172,7 +200,9 @@ const OwnController = {
                 res.render('own/orders/list/store.hbs', {
                     deletedCount,
                     orders: mongooseDocumentsToObject(orders),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -185,7 +215,9 @@ const OwnController = {
             .then((orders) => {
                 res.render('orders/list/trash.hbs', {
                     orders: mongooseDocumentsToObject(orders),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -199,7 +231,9 @@ const OwnController = {
                 res.render('notis/list/store.hbs', {
                     deletedCount,
                     notis: mongooseDocumentsToObject(notis),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },
@@ -212,7 +246,9 @@ const OwnController = {
             .then((notis) => {
                 res.render('notis/list/trash.hbs', {
                     notis: mongooseDocumentsToObject(notis),
-                    user: res.locals.user
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
     },

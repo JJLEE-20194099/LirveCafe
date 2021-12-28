@@ -6,6 +6,10 @@ import {
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
+import {
+    getNoNewNotis
+} from '../../support_lib/noti.js'
+
 
 const NotificationController = {
 
@@ -24,16 +28,30 @@ const NotificationController = {
         
     },
 
+    getNotiById: function (req, res, next) {
+        const data = req.body;
+        const id = data.id;
+
+        
+        console.log(data)
+        Noti.updateOne({_id: id}, {isRead: 1})
+            .then(() => Noti.findOne({_id: id}))
+            .then((noti) => {
+                noti = singleMongooseDocumentToObject(noti)
+               
+                res.send(noti)
+            })
+    },
+
    
  // POST /post-notice
 
     postNotice(req, res, next) {
         const noti = new Noti(req.body)
         noti.save()
-            .then((noti) => {
-                noti = singleMongooseDocumentToObject(noti);
-                req.body._id = noti._id;
-                res.send(req.body)
+            .then((n) => {
+                n = singleMongooseDocumentToObject(n);
+                res.send(n)
             })
             .catch(next)
     }

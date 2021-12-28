@@ -5,7 +5,9 @@ import {
     mongooseDocumentsToObject 
 } from '../../support_lib/mongoose.js';
 
-
+import {
+    getNoNewNotis
+} from '../../support_lib/noti.js'
 
 
 const OrderController = {
@@ -20,7 +22,9 @@ const OrderController = {
                 res.render('orders/list/list.hbs', {
                     orders: mongooseDocumentsToObject(orders),
                     user: res.locals.user,
-                    cart: res.locals.cart
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                        no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             }).catch(next);
     },
@@ -38,6 +42,8 @@ const OrderController = {
                 res.render("orders/item/order_info.hbs", {
                     order: order,
                     user: res.locals.user,
+                    notis: res.locals.notis,
+                        no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next)
     },
