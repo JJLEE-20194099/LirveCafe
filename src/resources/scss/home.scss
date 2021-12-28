@@ -493,8 +493,9 @@ a {
     top: 73px;
     position: absolute;
     right: -96px;
-    height: 400px;
     overflow-y: scroll;
+    flex-direction: column;
+    justify-content: center;
 
     .noti-each {
         background-color:white;
@@ -502,6 +503,7 @@ a {
         display: flex;
         align-items: center;
         padding: 12px 8px;
+        cursor: pointer;
     }
 
     .noti-each:hover {
