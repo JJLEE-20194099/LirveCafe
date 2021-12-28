@@ -12,6 +12,7 @@ const Noti = new Schema(
         receiver: {type: String, required: true},
         where_url: {type: String, required: true},
         avatar: {type: String, required: true},
+        isRead: {type: Number, default: 0},
     },
     {
         timestamps: true
