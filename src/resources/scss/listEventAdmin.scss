@@ -1,0 +1,230 @@
+$mainColor: #c39e51;
+$valueColor: #ff424e;
+
+#admin-event-list {
+    * {
+        padding: 0;
+        box-sizing: content-box;
+    }
+
+    .row {
+        margin: 0;
+    }
+
+    .col {
+        padding: 0;
+    }
+
+    li {
+        list-style-type: none;
+    }
+
+    #ad-noti-header {
+        margin-bottom: 24px;
+        padding-top: 24px;
+
+        .ad-noti-create {
+            padding: 8px 12px;
+            background-color: $mainColor;
+            color: #fff;
+            border-radius: 8px;
+        }
+
+        .ad-noti-create:hover {
+            cursor: pointer;
+            border: 1px solid $mainColor;
+            color: $mainColor;
+            background-color: #fff;
+        }
+    }
+
+    #ad-noti-body {
+        .ad-noti-descrip {
+            background-color: $mainColor;
+            color: #fff;
+            padding: 8px 0;
+            border-radius: 4px;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .ad-noti-descrip.gone {
+            display: none;
+        }
+
+        .ad-noti-noItem {
+            display: none;
+        }
+        .ad-noti-noItem.open {
+            display: block;
+        }
+
+        .noti-item {
+            border-radius: 4px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px 0 rgb(0, 0, 0 / 20%), 0 1px 9px 0 rgb(34, 2, 2);
+
+            .col {
+                padding: 8px 12px;
+            }
+
+            .user-id {
+                border-right: 1px solid $mainColor;
+                width: 40px;
+                display: flex;
+                align-items: center;
+            }
+
+            .event-content {
+                li {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                }
+                span {
+                    font-weight: 600;
+                }
+            }
+
+            .event-btn {
+                text-align: center;
+                font-weight: bold;
+                font-size: 20px;
+                background-color: #c39e51;
+                color: #fff;
+                width: 60px;
+                border: none;
+                border-left: 1px solid #fff;
+            }
+
+            .event-btn:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
+
+            .event-btn:focus {
+                outline: none;
+            }
+        }
+    }
+
+    .noti-confirm-delete,
+    .modal-noti-create {
+        position: fixed;
+        // background-color: pink;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .noti-confirm-delete {
+        .confirm-delete-content {
+            background-color: $mainColor;
+            width: 30%;
+            position: relative;
+            padding: 8px 24px;
+            font-size: 20px;
+            border-radius: 8px;
+            color: #fff;
+            border: 1px solid #fff;
+            bottom: 15%;
+
+            .confirm-text {
+                text-align: center;
+            }
+
+            .confirm-btn {
+                border: 1px solid #fff;
+                padding: 2px 4px;
+                border-radius: 8px;
+            }
+
+            .confirm-btn:hover {
+                cursor: pointer;
+                color: $mainColor;
+                background-color: #fff;
+            }
+        }
+    }
+
+    .modal-noti-create.open,
+    .noti-confirm-delete.open {
+        display: flex;
+    }
+
+    .modal-noti-create {
+        .modal-content {
+            width: 60%;
+        }
+
+        label {
+            color: #000;
+        }
+
+        .noti-header {
+            text-align: center;
+            font-size: 24px;
+            position: relative;
+
+            .modal-close {
+                display: inline-block;
+                padding: 6px 8px;
+                background-color: $valueColor;
+                color: #fff;
+                position: absolute;
+                top: 0;
+                right: 0;
+            }
+
+            .modal-close:hover {
+                cursor: pointer;
+                opacity: 0.9;
+            }
+        }
+
+        .noti-target {
+            margin: 16px;
+
+            font-size: 20px;
+
+            .userId-input {
+                display: none;
+            }
+            .userId-input.open {
+                display: block;
+            }
+        }
+
+        .noti-content-input {
+            margin: 16px;
+        }
+
+        .noti-create-submit {
+            justify-content: center;
+            margin: 16px 0;
+
+            button {
+                width: 90px;
+                color: #fff;
+                background-color: $mainColor;
+                border: none;
+                font-size: 20px;
+                border: 1px solid $mainColor;
+            }
+            button:focus {
+                outline: none;
+            }
+
+            button:hover {
+                cursor: pointer;
+                color: $mainColor;
+                background-color: #fff;
+            }
+        }
+    }
+}

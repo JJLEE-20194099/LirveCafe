@@ -12,25 +12,32 @@ const WorkingspaceController = {
     // GET /workingspaces/list
 
     index(req, res, next) {
-        Workingspace.find({})
-            .then((workingspaces) => {
-                res.render('workingspaces/list/list.hbs', {
-                    workingspaces: mongooseDocumentsToObject(workingspaces),
-                    user: res.locals.user
-                })
-            }).catch(next);
+        // Workingspace.find({})
+        //     .then((workingspaces) => {
+        //         res.render('workingspaces/list/list.hbs', {
+        //             workingspaces: mongooseDocumentsToObject(workingspaces),
+        //             user: res.locals.user
+        //         })
+        //     }).catch(next);
+        
+        res.render('workingspaces/list/admin/listEventAdmin.hbs')
+        
     },
     
     // GET /workingspaces/:slug
     show(req, res, next) {
-        Workingspace.findOne({slug: req.params.slug})
-            .then((workingspace) => {
-                res.render('workingspaces/item/workingspace_info.hbs' , {
-                    workingspace: singleMongooseDocumentToObject(workingspace),
-                    user: res.locals.user
-                })
-            }).catch(next)
+        // Workingspace.findOne({slug: req.params.slug})
+        //     .then((workingspace) => {
+        //         res.render('workingspaces/item/workingspace_info.hbs' , {
+        //             workingspace: singleMongooseDocumentToObject(workingspace),
+        //             user: res.locals.user
+        //         })
+        //     }).catch(next)
+
+        res.render('workingspaces/item/event_detail.hbs')
     },
+
+      
 
     // GET /workingspaces/create
     create(req, res, next) {

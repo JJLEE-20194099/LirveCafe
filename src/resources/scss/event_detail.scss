@@ -1,0 +1,296 @@
+$mainColor: #c39e51;
+$valueColor: #FF424E;
+
+#working-space {
+    height: auto;
+
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 48px;
+
+
+    border: 0.5px solid $mainColor;
+
+    input {
+        background-color: rgba($color: #fff, $alpha: 0.4);
+    }
+
+    #basic-info {
+
+        font-size: 20px;
+
+        .col {
+            margin-bottom: 16px;
+            background-color: rgba($color: $mainColor, $alpha: 0.8);
+            border: 1px solid #fff;
+            padding: 6px 12px;
+            input {
+                border: 0.5px solid rgba($color: $mainColor, $alpha: 1);
+            }
+            input:hover {
+                border: 0.5px solid rgba($color: #fff, $alpha: 1);
+            }
+        }
+
+        .row {
+            margin: 0;
+
+        }
+
+        .line {
+            height: 2px;
+            background-color: $mainColor;
+            margin-bottom: 8px;
+        }
+
+        .header {
+            padding: 16px 15px;
+            color: $mainColor;
+            font-weight: bold;
+            background-color: rgba($color: #fff, $alpha: 0.8);
+            text-align: center;
+        }
+
+        span {
+            display: inline-block;
+            min-width: 170px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .name {}
+
+        .image input {
+            width: 68%;
+        }
+
+        .seat-num {
+            input {
+                width: 44px;
+                text-align: center;
+            }
+        }
+        .description {
+            display: flex;
+            align-items: center;
+            textarea {
+                width: 100%;
+                padding: 4px 12px;
+                font-size: 16px;
+                border-radius: 4px;
+                height: 80px;   
+            }
+        }
+    }
+
+    .food-drink-confirm {
+        background-color: rgba($color: $mainColor, $alpha: 0.8);
+        padding: 8px 15px;
+        font-size: 18px;
+        font-weight: bold;
+        margin-left: 2px;
+        margin-right: 2px;
+
+        span {
+            margin-right: 24px;
+        }
+
+        input[type=checkbox] {
+            transform: scale(1.4)
+        }
+    }
+
+    #food-drink-order-and-image {
+        display: flex;
+        font-size: 18px;
+        margin: 0px 0px 32px;
+
+
+        li {
+            list-style-type: none;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        #ordered {
+            background-color: rgba($color: #fff, $alpha: 0.8);
+        }
+
+        .fodr-list {
+            margin-top: 12px;
+            background-color: #fff;
+
+            .fodr-item {
+
+                margin-bottom: 12px;
+                // border: 1px solid $mainColor;
+                box-shadow: 0 1px 3px 0 rgb(0, 0, 0 / 20%), 0 1px 9px 0 rgb(34, 2, 2);
+
+                img {
+                    object-fit: cover;
+                    width: 100px;
+                    height: 80px;
+                }
+
+                .fodr-name,
+                .fodr-cost {
+                    padding-left: 24px;
+                    display: inline-block;
+
+                }
+
+                .fodr-name {
+                    width: 45%;
+                }
+
+                .fodr-cost {
+                    width: 25%;
+                    color: $valueColor;
+                    font-weight: bold;
+                }
+
+                input[type=checkbox] {
+                    transform: scale(1.7);
+                }
+
+            }
+
+        }
+
+
+        #ordered {
+
+            .fodr-item {
+                display: block;
+
+                .fodr-name {
+                    width: 40%;
+                }
+
+                .fodr-cost {
+                    width: 15%;
+                }
+
+                .fodr-number {
+                    width: 20%;
+                    line-height: 1.3;
+                    display: inline-block;
+
+                    input {
+                        width: 44px;
+                        padding: 1px 2px;
+                        text-align: center;
+                        border: none;
+                        margin: 0 -4px;
+                        border: 1px solid rgb(236, 236, 236);
+                        height: 24px;
+                        background-color: rgba($color: $mainColor, $alpha: 0.4);
+                    }
+
+                    input:focus-visible {
+                        outline: none;
+                        border: 1px solid $mainColor;
+                    }
+
+                    .buy-btn {
+                        cursor: pointer;
+                        height: 24px;
+                        background-color: rgba($color: $mainColor, $alpha: 0.4);
+                        border-radius: 4px;
+                        border: none;
+                    }
+
+                    .buy-btn:focus {
+                        outline: none;
+                    }
+                }
+            }
+
+            .fodr-item.active {
+                display: block;
+            }
+
+            #ws-ordered-scroll {
+                overflow-y: scroll;
+                height: 390px;
+            }
+
+            .fodr-total {
+                margin: 12px 0;
+
+                span {
+                    color: $valueColor;
+                    font-weight: bold;
+                }
+            }
+
+
+        }
+
+        .event-image {
+            img {
+                object-fit: cover;
+                width: 100%;
+            }
+        }
+
+    }
+
+
+    .update-event {
+        display: flex;
+        justify-content: center;
+
+
+        button {
+            width: 210px;
+            font-size: 20px;
+            background-color: $mainColor;
+            color: #fff;
+            border: 2px solid $mainColor;
+            margin: 24px 0;
+            border-radius: 8px;
+            height: 50px;
+            &:hover {
+                background-color: #e4a41f;
+                border: 2px solid #fff; 
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+
+    }
+
+    input {
+        color: #000;
+        padding: 4px 8px;
+        border-radius: 4px;
+        border: none;
+        width: 64%;
+    }
+    textarea {
+        color: #000;
+    }
+
+    input:focus {
+        outline: none;
+        border: 0.5px solid white;
+    }
+
+    .seat-btn {
+        border: none;
+        background-color: white;
+        border-radius: 4px;
+
+    }
+
+    button:hover {
+        opacity: 0.9;
+    }
+}
