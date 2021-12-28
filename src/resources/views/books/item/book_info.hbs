@@ -251,7 +251,8 @@
             </div>
             <div id="commentBox">
                 {{#if commentList.length}}
-                <h3 style="margin-left: 28px; margin-bottom: 24px">Comment ({{commentList.length}})</h3>
+                <h3 style="height: 70px; margin-top: 12; margin-bottom: 12; display: flex; align-items: center">Comment
+                    (<span id="no_comment">{{commentList.length}}</span>)</h3>
                 <div id="commentBox-content">
                     {{#each commentList}}
                     <div id="{{this._id}}" class="each_comment_box">
@@ -302,7 +303,9 @@
 
                         <div class="replyList">
                             {{#if this.replyList.length}}
-                            <h3 style="margin-left: 55px; margin-right: 12px; cursor: pointer" onClick="toggleReplyList(this)">Xem {{this.replyList.length}} câu trả lời
+                            <h3 class="replyList-title"
+                                style="margin-left: 31px; margin-right: 12px; height: 60px; cursor: pointer"
+                                onClick="toggleReplyList(this)">Xem {{this.replyList.length}} phản hồi
                             </h3>
 
                             <div class="replyList-body" style="display: none">
@@ -313,7 +316,7 @@
                                     <div class="container">
                                         <div class="d-flex flex-column align-items-stretch justify-content-evenly comment-container"
                                             style="flex: 1">
-                                            <span class="user pt-2 username">{{this.username}}</span>
+                                            <span class="user pt-2 username-reply">{{this.username}}</span>
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex justify-content-betweens align-items-center">
                                                     <div class="content">{{this.content}}</div>
@@ -338,7 +341,7 @@
                             {{else}}
                             <div class="replyList-body" style="display: none">
 
-                           
+
                             </div>
                             {{/if}}
 
@@ -347,6 +350,13 @@
                     {{/each}}
                 </div>
                 {{else}}
+                <h3 id="zero_comment_title_format"
+                    style="height: 70px; margin-top: 12; margin-bottom: 12; display: none; align-items: center">Comment
+                    (<span id="no_comment">0</span>)</h3>
+                <input type="text" id="no-comment" value="0" hidden>
+                <h3 id="zero_comment_title"
+                    style="height: 70px; margin-top: 12; margin-bottom: 12; display: flex; align-items: center">Chưa có
+                    đánh giá cho sản phẩm này</h3>
                 <div id="commentBox-content">
 
                 </div>
@@ -375,7 +385,7 @@
         }
 
         function showSendBox(input) {
-            console.log(input.value)
+
             if (input.value == '') {
                 document.getElementById("commentSendBtn").style.backgroundColor = "#ccc"
                 document.getElementById("commentSendBtn").disabled = true
@@ -404,7 +414,7 @@
             const commentId = tag.parentElement.parentElement.id
             if ($(`#${commentId} .replyList-body`).css('display') == 'none') {
                 $(`#${commentId} .replyList-body`).css('display', 'block')
-                save_text = tag.innerHTML 
+                save_text = tag.innerHTML
                 tag.innerHTML = "Ẩn"
             } else {
                 $(`#${commentId} .replyList-body`).css('display', 'none')
@@ -414,7 +424,7 @@
         }
 
         function changeBtnStatus(input) {
-            console.log(input.value)
+
             const commentId = input.parentElement.parentElement.parentElement.parentElement.id
             if (input.value == '') {
                 $(`#${commentId} .replySendBtn`).css('background-color', "#ccc")
@@ -448,7 +458,7 @@
                 receiver: $(`#${commentId} .username`).text(),
                 slug: $(`#slug`).val()
             }
-            
+
 
 
             $.ajax({
@@ -456,11 +466,24 @@
                 method: 'POST',
                 data: data,
                 success: function (res) {
-                    console.log(data)
+
                     socket.emit("client_send_reply_comment", data)
                 }
             });
             return false;
+        }
+
+        function read_info(tag) {
+            id = tag.id
+            $.ajax({
+                url: `/notis/index/:${id}`,
+                method: 'POST',
+                data: { id: id },
+                success: function (res) {
+                    where_url = res.where_url
+                    window.location.href = where_url
+                }
+            });
         }
 
 
@@ -499,6 +522,8 @@
                     }
                 });
 
+                quantity = parseInt($('#no_comment').text()) + 1
+                $('#no_comment').text(quantity)
                 return false;
             });
 
@@ -583,7 +608,7 @@
                                     style="border-radius: 50%; height: 36px"></span>
                             <div class="reply-input">
                                 <input type="text" name="me" id="me" value=${data.username} style="display: none">
-                                <input type="text" name="reply" id="reply">
+                                <input type="text" name="reply" id="reply" onkeyup="changeBtnStatus(this)">
                                 <input name="commentId" id="commentId" value="${data._id}" style="display: none">
 
                             </div>
@@ -606,6 +631,14 @@
                     
                 </div>`
 
+                var quantity = parseInt($('#no_comment').html())
+                if (quantity == 1) {
+
+                    $('#no_comment').html(1)
+                    $('#zero_comment_title_format').css('display', 'flex')
+                    $('#zero_comment_title').css('display', 'none')
+                }
+
                 var commentBox = $("#commentBox-content")
 
                 commentBox.html(html + commentBox.html())
@@ -613,6 +646,7 @@
             })
 
             socket.on("server_send_reply_comment", function (data) {
+
                 var html = `<div class="media d-flex align-items-start">
                       <input type="text" name="me_avatar" id="me_avatar" value="${data.avatar}" style="display: none">
                                 <span class="round"><img src="${data.avatar}" class="align-self-start mr-3"
@@ -620,7 +654,7 @@
                                 <div class="container">
                                     <div class="d-flex flex-column align-items-stretch justify-content-evenly comment-container"
                                         style="flex: 1">
-                                        <span class="user pt-2 username"> ${data.username}</span>
+                                        <span class="user pt-2 username-reply"> ${data.username}</span>
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex justify-content-betweens align-items-center">
                                                 <div class="content">${data.content}</div>
@@ -637,11 +671,15 @@
                                     </p>
                                 </div>
                             </div>`
-                console.log(data.parentCommentId)
-          
+
+
+
+
+                $(`#${data.parentCommentId} .replyList-title`).css('display', 'none')
+                $(`#${data.parentCommentId} #reply`).val('')
                 var replyList = $(`#${data.parentCommentId} .replyList-body`)
-                console.log(replyList)
                 replyList.html(html + replyList.html())
+                replyList.css("display", "block")
 
 
             })
@@ -656,30 +694,26 @@
                     avatar: data.avatar
                 }
 
+
                 if (notice_data.sender != notice_data.receiver) {
                     $.ajax({
                         url: '/books/post-notice',
                         method: "POST",
                         data: notice_data,
                         success: function (res) {
-
                             notice_data._id = res._id
-                        }
-                    })
-
-
-
-                    noti_box = $("#noti-box")
-                    new_noti = `<div class="noti-each" style="background-color: #d5c6a6">
-                        <a href="${notice_data.where_url}">
+                            noti_box = $("#noti-box")
+                            new_noti = `<div class="noti-each" onClick="read_info(this)" id="${notice_data._id}" style="background-color: #d5c6a6">
+                        <div>
+                           
                             <img src="${notice_data.avatar}" class="noti-img"alt="logo-brand">
-                        </a>
+                        </div>
                         
                         <div class="noti-main">
-                            <div class="noti-content">
-                                <a href="${notice_data.where_url}">
-                                    <span class="noti-username">${notice_data.sender}</span> <span class="noti-type">đã nhắc đến bạn </span> trong <a href="${notice_data.where_url}" class="noti-where">${$('#item_name').text()}</a>
-                                </a>
+                            <div class="noti-content" >
+                                <div>
+                                    <span class="noti-username" style="font-weight: bold!important;">${notice_data.sender}</span> <span class="noti-type" style="font-weight: bold!important;">đã nhắc đến bạn </span> <span style="font-weight: bold!important;">trong</span> <span class="noti-where" style="font-weight: bold!important;">${$('#item_name').text()}</span>
+                                </div>
                             </div>
                             <div class="noti-time date">
                                 ${convert(notice_data.createdAt)}
@@ -688,29 +722,30 @@
                     </div>`
 
 
-                    html = new_noti + noti_box.html()
-                    noti_box.html(html)
+                            html = new_noti + noti_box.html()
+                            noti_box.html(html)
 
-                    if ($('#noti-number').text() == '') {
-                        $('#noti-number').html(1)
-                    } else {
-                        console.log(parseInt($('#noti-number').text() + 1))
-                        $('#noti-number').html(parseInt($('#noti-number').text()) + 1)
-                    }
+                            if ($('#noti-number').text() == '') {
+                                $('#noti-number').addClass("header-number")
+                                $('#noti-number').html(1)
+                            } else {
 
-                    $("#notice").html(`
+                                $('#noti-number').html(parseInt($('#noti-number').text()) + 1)
+                            }
+
+                            $("#notice").html(`
                                         
                                             
-                                                <div class="noti-each" style="background-color: #d5c6a6; width: 374px; height: 110px; position: fixed; right: -374px; bottom: 0; box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;">
-                                                    <a href="${notice_data.where_url}">
+                                                <div class="noti-each" id="${notice_data._id}"  onClick="read_info(this)" style="background-color: #d5c6a6; width: 374px; height: 110px; position: fixed; right: -374px; bottom: 0; box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202; cursor: pointer">
+                                                    <div href="${notice_data.where_url}">
                                                         <img src="${notice_data.avatar}" class="noti-img"alt="logo-brand">
-                                                    </a>
+                                                    </div>
                                                     
                                                     <div class="noti-main">
-                                                        <div class="noti-content">
-                                                            <a href="${notice_data.where_url}" style="color: black">
-                                                                <span class="noti-username" style="color: black">${notice_data.sender}</span> <span class="noti-type" style="color: black">đã nhắc đến bạn </span> trong <a href="${notice_data.where_url}" class="noti-where" style="color: black">${$('#item_name').text()}</a>
-                                                            </a>
+                                                        <div class="noti-content" >
+                                                            <div href="${notice_data.where_url}" style="color: black">
+                                                                <span class="noti-username" style="color: black">${notice_data.sender}</span> <span class="noti-type" style="color: black">đã nhắc đến bạn </span> trong <span href="${notice_data.where_url}" class="noti-where" style="color: black">${$('#item_name').text()}</span>
+                                                            </div>
                                                         </div>
                                                         <div class="noti-time date">
                                                             ${convert(notice_data.createdAt)}
@@ -720,11 +755,17 @@
                                            
                                         `)
 
-                    $("#notice .noti-each").animate({ "right": "+=374px" }, 3000);
-                    setTimeout(function () {
-                        $("#notice .noti-each").animate({ "right": "-=374px" }, 3000);
+                            $("#notice .noti-each").animate({ "right": "+=374px" }, 3000);
+                            setTimeout(function () {
+                                $("#notice .noti-each").animate({ "right": "-=374px" }, 3000);
 
-                    }, 10000)
+                            }, 10000)
+                        }
+                    })
+
+
+
+
 
                 }
             })
