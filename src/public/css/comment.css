@@ -12,7 +12,7 @@
     min-width: 120px;
     line-break: auto;
     max-width: 586px; }
-    .container .comment-container .username {
+    .container .comment-container .username, .container .comment-container .username-reply {
       font-size: 20px;
       color: #000;
       margin: 0;

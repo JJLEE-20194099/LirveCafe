@@ -325,14 +325,16 @@ a {
   top: 73px;
   position: absolute;
   right: -96px;
-  height: 400px;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  flex-direction: column;
+  justify-content: center; }
   .noti-container .noti-each {
     background-color: white;
     list-style-type: none;
     display: flex;
     align-items: center;
-    padding: 12px 8px; }
+    padding: 12px 8px;
+    cursor: pointer; }
   .noti-container .noti-each:hover {
     background-color: #d5c6a6; }
   .noti-container .noti-img {
