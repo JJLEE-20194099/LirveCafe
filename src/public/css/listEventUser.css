@@ -1,0 +1,190 @@
+#user-event-list * {
+  padding: 0;
+  box-sizing: content-box; }
+
+#user-event-list .row {
+  margin: 0; }
+
+#user-event-list .col {
+  padding: 0; }
+
+#user-event-list li {
+  list-style-type: none; }
+
+#user-event-list #ad-noti-header {
+  margin-bottom: 24px;
+  padding-top: 24px; }
+  #user-event-list #ad-noti-header .ad-noti-create {
+    padding: 8px 12px;
+    background-color: #c39e51;
+    color: #fff;
+    border-radius: 8px; }
+  #user-event-list #ad-noti-header .ad-noti-create:hover {
+    cursor: pointer;
+    border: 1px solid #c39e51;
+    color: #c39e51;
+    background-color: #fff; }
+
+#user-event-list #ad-noti-body .ad-noti-descrip {
+  background-color: #c39e51;
+  color: #fff;
+  padding: 8px 0;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: 700; }
+  #user-event-list #ad-noti-body .ad-noti-descrip .tomtat {
+    width: calc(100% - 324px);
+    line-height: 47px; }
+  #user-event-list #ad-noti-body .ad-noti-descrip .task {
+    width: 60px;
+    padding: 0 24px;
+    text-align: center;
+    display: flex;
+    align-items: center; }
+
+#user-event-list #ad-noti-body .ad-noti-descrip.gone {
+  display: none; }
+
+#user-event-list #ad-noti-body .ad-noti-noItem {
+  display: none; }
+
+#user-event-list #ad-noti-body .ad-noti-noItem.open {
+  display: block; }
+
+#user-event-list #ad-noti-body .noti-item {
+  border-radius: 4px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px 0 black, 0 1px 9px 0 #220202; }
+  #user-event-list #ad-noti-body .noti-item .col {
+    padding: 8px 24px; }
+  #user-event-list #ad-noti-body .noti-item .user-id {
+    border-right: 1px solid #c39e51;
+    width: 40px;
+    display: flex;
+    align-items: center; }
+  #user-event-list #ad-noti-body .noti-item .event-content li {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden; }
+  #user-event-list #ad-noti-body .noti-item .event-content span {
+    font-weight: 600; }
+  #user-event-list #ad-noti-body .noti-item .event-btn {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #c39e51;
+    color: #fff;
+    width: 60px;
+    border: none;
+    border-left: 1px solid #fff; }
+  #user-event-list #ad-noti-body .noti-item .event-btn:hover {
+    cursor: pointer;
+    opacity: 0.8; }
+  #user-event-list #ad-noti-body .noti-item .event-btn:focus {
+    outline: none; }
+
+#user-event-list .noti-confirm-delete,
+#user-event-list .modal-noti-create {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+  justify-content: center;
+  align-items: center; }
+
+#user-event-list .noti-confirm-delete .confirm-delete-content {
+  background-color: #c39e51;
+  width: 30%;
+  position: relative;
+  padding: 8px 24px;
+  font-size: 20px;
+  border-radius: 8px;
+  color: #fff;
+  border: 1px solid #fff;
+  bottom: 15%; }
+  #user-event-list .noti-confirm-delete .confirm-delete-content .confirm-text {
+    text-align: center; }
+  #user-event-list .noti-confirm-delete .confirm-delete-content .confirm-btn {
+    border: 1px solid #fff;
+    padding: 2px 4px;
+    border-radius: 8px; }
+  #user-event-list .noti-confirm-delete .confirm-delete-content .confirm-btn:hover {
+    cursor: pointer;
+    color: #c39e51;
+    background-color: #fff; }
+
+#user-event-list .modal-noti-create.open,
+#user-event-list .noti-confirm-delete.open {
+  display: flex; }
+
+#user-event-list .modal-noti-create .modal-content {
+  width: 60%; }
+
+#user-event-list .modal-noti-create label {
+  color: #000; }
+
+#user-event-list .modal-noti-create .noti-header {
+  text-align: center;
+  font-size: 24px;
+  position: relative; }
+  #user-event-list .modal-noti-create .noti-header .modal-close {
+    display: inline-block;
+    padding: 6px 8px;
+    background-color: #ff424e;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0; }
+  #user-event-list .modal-noti-create .noti-header .modal-close:hover {
+    cursor: pointer;
+    opacity: 0.9; }
+
+#user-event-list .modal-noti-create .noti-target {
+  margin: 16px;
+  font-size: 20px; }
+  #user-event-list .modal-noti-create .noti-target .userId-input {
+    display: none; }
+  #user-event-list .modal-noti-create .noti-target .userId-input.open {
+    display: block; }
+
+#user-event-list .modal-noti-create .noti-content-input {
+  margin: 16px; }
+
+#user-event-list .modal-noti-create .noti-create-submit {
+  justify-content: center;
+  margin: 16px 0; }
+  #user-event-list .modal-noti-create .noti-create-submit button {
+    width: 90px;
+    color: #fff;
+    background-color: #c39e51;
+    border: none;
+    font-size: 20px;
+    border: 1px solid #c39e51; }
+  #user-event-list .modal-noti-create .noti-create-submit button:focus {
+    outline: none; }
+  #user-event-list .modal-noti-create .noti-create-submit button:hover {
+    cursor: pointer;
+    color: #c39e51;
+    background-color: #fff; }
+
+#user-event-list .createEvent {
+  display: flex;
+  justify-content: center; }
+  #user-event-list .createEvent button {
+    width: 200px;
+    padding: 8px 0;
+    background-color: #c39e51;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-bottom: 24px; }
+    #user-event-list .createEvent button:hover {
+      cursor: pointer;
+      background-color: #e4a41f; }
+    #user-event-list .createEvent button:focus {
+      outline: none; }

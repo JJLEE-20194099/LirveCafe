@@ -1,0 +1,162 @@
+#admin-event-list * {
+  padding: 0;
+  box-sizing: content-box; }
+
+#admin-event-list .row {
+  margin: 0; }
+
+#admin-event-list .col {
+  padding: 0; }
+
+#admin-event-list li {
+  list-style-type: none; }
+
+#admin-event-list #ad-noti-header {
+  margin-bottom: 24px;
+  padding-top: 24px; }
+  #admin-event-list #ad-noti-header .ad-noti-create {
+    padding: 8px 12px;
+    background-color: #c39e51;
+    color: #fff;
+    border-radius: 8px; }
+  #admin-event-list #ad-noti-header .ad-noti-create:hover {
+    cursor: pointer;
+    border: 1px solid #c39e51;
+    color: #c39e51;
+    background-color: #fff; }
+
+#admin-event-list #ad-noti-body .ad-noti-descrip {
+  background-color: #c39e51;
+  color: #fff;
+  padding: 8px 0;
+  border-radius: 4px;
+  text-align: center;
+  margin-bottom: 12px; }
+
+#admin-event-list #ad-noti-body .ad-noti-descrip.gone {
+  display: none; }
+
+#admin-event-list #ad-noti-body .ad-noti-noItem {
+  display: none; }
+
+#admin-event-list #ad-noti-body .ad-noti-noItem.open {
+  display: block; }
+
+#admin-event-list #ad-noti-body .noti-item {
+  border-radius: 4px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px 0 black, 0 1px 9px 0 #220202; }
+  #admin-event-list #ad-noti-body .noti-item .col {
+    padding: 8px 12px; }
+  #admin-event-list #ad-noti-body .noti-item .user-id {
+    border-right: 1px solid #c39e51;
+    width: 40px;
+    display: flex;
+    align-items: center; }
+  #admin-event-list #ad-noti-body .noti-item .event-content li {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden; }
+  #admin-event-list #ad-noti-body .noti-item .event-content span {
+    font-weight: 600; }
+  #admin-event-list #ad-noti-body .noti-item .event-btn {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #c39e51;
+    color: #fff;
+    width: 60px;
+    border: none;
+    border-left: 1px solid #fff; }
+  #admin-event-list #ad-noti-body .noti-item .event-btn:hover {
+    cursor: pointer;
+    opacity: 0.8; }
+  #admin-event-list #ad-noti-body .noti-item .event-btn:focus {
+    outline: none; }
+
+#admin-event-list .noti-confirm-delete,
+#admin-event-list .modal-noti-create {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: none;
+  justify-content: center;
+  align-items: center; }
+
+#admin-event-list .noti-confirm-delete .confirm-delete-content {
+  background-color: #c39e51;
+  width: 30%;
+  position: relative;
+  padding: 8px 24px;
+  font-size: 20px;
+  border-radius: 8px;
+  color: #fff;
+  border: 1px solid #fff;
+  bottom: 15%; }
+  #admin-event-list .noti-confirm-delete .confirm-delete-content .confirm-text {
+    text-align: center; }
+  #admin-event-list .noti-confirm-delete .confirm-delete-content .confirm-btn {
+    border: 1px solid #fff;
+    padding: 2px 4px;
+    border-radius: 8px; }
+  #admin-event-list .noti-confirm-delete .confirm-delete-content .confirm-btn:hover {
+    cursor: pointer;
+    color: #c39e51;
+    background-color: #fff; }
+
+#admin-event-list .modal-noti-create.open,
+#admin-event-list .noti-confirm-delete.open {
+  display: flex; }
+
+#admin-event-list .modal-noti-create .modal-content {
+  width: 60%; }
+
+#admin-event-list .modal-noti-create label {
+  color: #000; }
+
+#admin-event-list .modal-noti-create .noti-header {
+  text-align: center;
+  font-size: 24px;
+  position: relative; }
+  #admin-event-list .modal-noti-create .noti-header .modal-close {
+    display: inline-block;
+    padding: 6px 8px;
+    background-color: #ff424e;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0; }
+  #admin-event-list .modal-noti-create .noti-header .modal-close:hover {
+    cursor: pointer;
+    opacity: 0.9; }
+
+#admin-event-list .modal-noti-create .noti-target {
+  margin: 16px;
+  font-size: 20px; }
+  #admin-event-list .modal-noti-create .noti-target .userId-input {
+    display: none; }
+  #admin-event-list .modal-noti-create .noti-target .userId-input.open {
+    display: block; }
+
+#admin-event-list .modal-noti-create .noti-content-input {
+  margin: 16px; }
+
+#admin-event-list .modal-noti-create .noti-create-submit {
+  justify-content: center;
+  margin: 16px 0; }
+  #admin-event-list .modal-noti-create .noti-create-submit button {
+    width: 90px;
+    color: #fff;
+    background-color: #c39e51;
+    border: none;
+    font-size: 20px;
+    border: 1px solid #c39e51; }
+  #admin-event-list .modal-noti-create .noti-create-submit button:focus {
+    outline: none; }
+  #admin-event-list .modal-noti-create .noti-create-submit button:hover {
+    cursor: pointer;
+    color: #c39e51;
+    background-color: #fff; }
