@@ -1,0 +1,209 @@
+<link rel="stylesheet" href="/css/event_detail.css" />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<div id="working-space">
+  <form>
+    {{! chon chỗ ngồi }}
+    <div id="basic-info">
+      <div class="header">Thông tin chi tiết</div>
+      <div class="line w-100"></div>
+
+      <div class="info row">
+        <div class="name col col-6">
+          <span>Họ và tên</span>
+          <input type="text" value = "Phạm Thế Nam" disabled/>
+        </div>
+        <div class="phoneNum col col-6">
+          <span>Số điện thoại</span>
+          <input type="tel"  value = 0358736675 disabled/>
+        </div>
+        <div class="line col-12"></div>
+        
+        <div class = "event-title col col-6">
+          <span>Tiêu đề</span>
+          <input type = "text" value = "Sinh nhật con gái tôi" disabled>
+        </div>
+
+        <div class = "email col col-6">
+          <span>Email</span>
+          <input type= "email" accept="email/*" disabled value = "thenamk20@gmail.com">
+        </div>
+        
+        <div class="line col-12"></div>
+
+        <div class="start-time col col-6">
+          <span>Bắt đầu</span>
+          <input type="text" value = "14-12-2021 20h00" disabled />
+
+        </div>
+        <div class="end-time col col-6">
+          <span>Kết thúc</span>
+          <input type="text" value = "14-12-2021 22h00" disabled />
+
+        </div>
+
+        <div class="line col-12"></div>
+
+        <div class="seat-num col col-6">
+          <span>Số lượng ghế</span>
+          {{!-- <button class="seat-btn decre-btn"><i class="ti-minus" disabled></i></button> --}}
+          <input type="text" value = 3 class="input" disabled/>
+          {{!-- <button class="seat-btn incre-btn"><i class="ti-plus" disabled></i></button> --}}
+        </div>
+
+        <div class="total-amount col col-6">
+          <span>Tổng chi phí:</span>
+          <input type="text" value= "1200000 Đ" class="input" disabled/>
+        </div>
+
+        <div class="line col-12"></div>
+
+        <div class = "description col col-12">
+          <span>Thông tin mô tả</span>
+          <textarea type="text" disabled>Mn đến mừng sinh nhật con gái tớ nhé</textarea>
+        </div>
+        <div class="line col-12"></div>
+        <div class="col col-6">
+          <span>Danh sách thức ăn và đồ uống đã đặt</span>
+        </div>
+        <div class="col col-6">
+          <span>Ảnh sự kiện</span>
+        </div>
+      </div>
+    </div>
+
+    {{! chọn thức ăn, đồ uống }}
+    <div id="food-drink-order-and-image" class="row">
+
+      {{! danh sách đã được chọn }}
+      <div id="ordered" class="col col-6">
+
+        <div id="ws-ordered-scroll" class="fodr-list-div" data-spy="scroll" data-target="#ordering-nav" data-offset="0">
+
+          {{! food ordered }}
+          <ul class="fodr-list" id="food-ordered">
+
+            {{! item 1 }}
+            <li class="fodr-item">
+              <img src="/img/lisa.jpg " />
+              <div class="fodr-name"><span>Poster: Lalisa Manobal </span></div>
+              <div class="fodr-number">
+                <label>SL:</label>
+                <input type="text" value="1" class="input"  disabled/>
+              </div>
+              <div class="fodr-cost"><span>100000</span>đ</div>
+            </li>
+
+            {{! item 2 }}
+
+            <li class="fodr-item">
+              <img src="/img/rose.jpg " />
+              <div class="fodr-name"><span>Poster: Roseanne Park </span></div>
+              <div class="fodr-number">
+                <label>SL:</label>
+                <input type="text" value="1" class="input" disabled />
+    
+              </div>
+              <div class="fodr-cost"><span>100000</span>đ</div>
+            </li>
+            {{! item 3 }}
+
+            <li class="fodr-item">
+              <img src="/img/jisoo.jpg " />
+              <div class="fodr-name"><span>Poster: Kim Ji-soo </span></div>
+              <div class="fodr-number">
+                <label>SL:</label>
+
+                <input type="text" value="1" class="input" disabled />
+               
+              </div>
+              <div class="fodr-cost"><span>96500</span>đ</div>
+            </li>
+            
+            {{! item 5 }}
+            <li class="fodr-item">
+              <img src="/img/nanakomatsu1.jpg " />
+              <div class="fodr-name"><span>Poster: Nana Komatsu </span></div>
+              <div class="fodr-number">
+                <label>SL:</label>
+
+                <input type="text" value="1" class="input" disabled />
+              
+              </div>
+              <div class="fodr-cost"><span>96500</span>đ</div>
+            </li>
+
+          </ul>
+
+          {{! drink ordered }}
+          <ul class="fodr-list" id="drink-ordered">
+            {{! item 1 }}
+            <li class="fodr-item">
+              <img src="/img/amumu.jpg " />
+              <div class="fodr-name"><span>Poster: Amumu </span></div>
+              <div class="fodr-number">
+
+                <label>SL:</label>
+                
+                <input type="text" value="1" class="input"  disabled/>
+                
+              </div>
+              <div class="fodr-cost"><span>90500</span>đ</div>
+            </li>
+
+            <li class="fodr-item">
+              <img src="/img/gwen.jpg " />
+              <div class="fodr-name"><span>Poster: Gwen </span></div>
+              <div class="fodr-number">
+                <label>SL:</label>
+
+                <input type="text" value="1" class="input" disabled />
+
+              </div>
+              <div class="fodr-cost"><span>90500</span>đ</div>
+            </li>
+
+            <li class="fodr-item">
+              <img src="/img/jhin.jpg " />
+              <div class="fodr-name"><span>Poster: Jhin cowboy </span></div>
+              <div class="fodr-number">
+                <label>SL:</label>
+
+                <input type="text" value="1" class="input" disabled />
+                
+              </div>
+              <div class="fodr-cost"><span>96500</span>đ</div>
+            </li>
+
+            <li class="fodr-item">
+              <img src="/img/pikachu.png" />
+              <div class="fodr-name"><span>Poster: Pikachu </span></div>
+              <div class="fodr-number">
+                <label>SL:</label>
+
+                <input type="text" value="1" class="input" disabled />
+
+              </div>
+              <div class="fodr-cost"><span>96500</span>đ</div>
+            </li>
+          </ul>
+
+        </div>
+
+        <div class="fodr-total">
+          Chi phí thức ăn và đồ uống đã đặt
+          <span>1000000</span><span>đ</span>
+        </div>
+      </div>
+
+      <div class = "event-image col col-6">
+        <img src = "/img/nanakomatsu1.jpg" alt = "ảnh sự kiện">
+      </div>
+
+    </div>
+
+    <div class="update-event">
+      <button>Chỉnh sửa thông tin</button>
+    </div>
+  </form>
+</div>

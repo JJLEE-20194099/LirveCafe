@@ -31,7 +31,7 @@
 
 
         <div class="d-flex justify-content-between .align-items-center">
-            <a href='#' id="noti-toggle">
+            <a href='#' id="noti-toggle" onclick="noti_toggle()">
                 <i class="noti-icon ti-bell header-icon">
                     {{#if notis.length}}
                     <span id="noti-number" class="header-number">{{notis.length}}</span>
@@ -42,7 +42,7 @@
             </a>
             <div class="noti-container" id="noti-container" style="display: none">
                 <div class="noti-box" id="noti-box">
-
+                    
                     {{#each notis}}
                     <div class="noti-each">
                         <a href="{{this.where_url}}">
@@ -63,7 +63,7 @@
                     </div>
                     {{/each}}
 
-
+                    <div id="see-all" class="d-flex justify-content-center align-items-center" style="border-top: 0.5px solid #ccc; display: none"><a style="color: #c39e51; margin-top: 8px; margin-bottom: 8px" href="/notis/{{user.username}}">Xem tất cả</a></div>
 
 
 
@@ -109,29 +109,24 @@
 
 <script>
 
-    $(document).ready(function () {
-        
-        $("#noti-toggle").click(function () {
-            
-            if ($("#noti-container").css("display") == "block") {
 
-                $("#noti-container").css("display", "none")
-            } else {
-                $("#noti-container").css("display", "block")
-            }
-        })
+    function noti_toggle() {
+        if (document.getElementById("noti-container").style.display == "none") {
+            document.getElementById("noti-container").style.display = "block"
+            document.getElementById('see-all').style.display = 'block'
+        } else {
+            document.getElementById("noti-container").style.display = "none"
+            document.getElementById('see-all').style.display = 'none'
+        }
+        let notis = document.getElementsByClassName("noti-each")
 
-
-        let notis = $('.noti-each')
         if (notis.length > 3) {
             for(var i = 3; i < notis.length; i++) {
 
                 notis[i].style.display = "none"
             }
-
-            html = $('#noti-box').html();
-            $('#noti-box').html(html + `<div class="d-flex justify-content-center align-items-center" style="border-top: 0.5px solid #ccc"><a style="color: #c39e51; margin-top: 8px; margin-bottom: 8px" href="/notis/${$("#user-name").text()}">Xem tất cả</a></div>`)
+            html = document.getElementById('noti-box').innerHTML
+            
         }
-
-    })
+    }
 </script>

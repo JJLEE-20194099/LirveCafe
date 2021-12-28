@@ -1,0 +1,169 @@
+
+
+<link rel="stylesheet" href="/css/listEventAdmin.css">
+{{!-- admin event list--}}
+
+<div id="admin-event-list">
+
+  <div id="ad-noti-header" class="row">
+
+    <div class="ad-noti-title col col-9">
+      <h3>Danh sách sự kiện</h3>
+    </div>
+
+  </div>
+
+  <div id="ad-noti-body">
+
+    <div class="ad-noti-descrip col">
+      <ul class="row">
+        <li class="col col-2">ID khách hàng</li>
+        <li class="col col-8">Thông tin tóm tắt</li>
+      </ul>
+    </div>
+
+    <div class="ad-noti-noItem">
+      Hiện không có sự kiện nào
+    </div>
+
+    <ul>
+
+      {{!-- sự kiện 1 --}}
+      <li class="noti-item row">
+        <div class="user-id col col-2">
+          PTNam254687K20
+        </div>
+
+        <div class="event-content col col">
+           <ul class = "row">
+             <li class = "booker col-4">Người đặt: <span>Phạm Thế Nam</span></li>
+             <li class = "title col-4">Tiêu đề: <span>Sinh nhật con gái tôi</span></li>
+             <li class = "number col-4">Số ghế: <span>3</span></li>
+             <li class = "date-start col-4">Bắt đầu: <span>14-12-2021 20h00</span></li>
+             <li class = "date-end col-4">Kết thúc: <span>14-12-2021 22h00</span></li>
+             <li class = "total col-4">Tổng phí: <span>1000000</span><span>đ</span></li>
+           </ul>
+        </div>
+        
+        <button title = "xem chi tiết" class="event-btn detail col col-auto"><i class="ti-eye"></i></button>
+        <button title = "xóa" class="event-btn noti-delete col col-auto"><i class="ti-trash"></i></button>
+      </li>
+
+      {{!-- sự kiện 2 --}}
+      <li class="noti-item row">
+        <div class="user-id col col-2">
+          longxamleNA0385
+        </div>
+
+        <div class="event-content col col">
+           <ul class = "row">
+             <li class = "booker col-4">Người đặt: <span>Lê Thành Long</span></li>
+             <li class = "title col-4">Tiêu đề: <span>Đi chill với bồ nhí</span></li>
+             <li class = "number col-4">Số ghế: <span>2</span></li>
+             <li class = "date-start col-4">Bắt đầu: <span>14-12-2021 20h00</span></li>
+             <li class = "date-end col-4">Kết thúc: <span>14-12-2021 22h00</span></li>
+             <li class = "total col-4">Tổng phí: <span>2000000</span><span>đ</span></li>
+           </ul>
+        </div>
+        
+        <button title = "xem chi tiết" class="event-btn detail col col-auto"><i class="ti-eye"></i></button>
+        <button title = "xóa" class="event-btn noti-delete col col-auto"><i class="ti-trash"></i></button>
+      </li>
+
+      {{!-- sự kiện 3 --}}
+      <li class="noti-item row">
+        <div class="user-id col col-2">
+          LyNKskjhs89
+        </div>
+
+        <div class="event-content col col">
+           <ul class = "row">
+             <li class = "booker col-4">Người đặt: <span>Ngô Khánh Ly</span></li>
+             <li class = "title col-4">Tiêu đề: <span>Đi đánh ghen</span></li>
+             <li class = "number col-4">Số ghế: <span>1</span></li>
+             <li class = "date-start col-4">Bắt đầu: <span>14-12-2021 20h00</span></li>
+             <li class = "date-end col-4">Kết thúc: <span>14-12-2021 22h00</span></li>
+             <li class = "total col-4">Tổng phí: <span>500000</span><span>đ</span></li>
+           </ul>
+        </div>
+        
+        <button title = "xem chi tiết" class="event-btn detail col col-auto"><i class="ti-eye"></i></button>
+        <button title = "xóa" class="event-btn noti-delete col col-auto"><i class="ti-trash"></i></button>
+      </li>
+
+      
+
+     
+    </ul>
+  </div>
+
+  <div class="noti-confirm-delete">
+
+    <div class="confirm-delete-content row">
+      <div class="confirm-text col col-8">Xác nhận xóa sự kiện</div>
+      <div class="col col-4 d-flex justify-content-around">
+        <div class="confirm-btn oke-btn">Oke</div>
+        <div class="confirm-btn huy-btn">Hủy</div>
+      </div>
+    </div>
+
+  </div>
+
+ 
+</div>
+
+
+{{!-- handel delete confirm --}}
+<script>
+  const $ = document.querySelector.bind(document);
+  const $$ = document.querySelectorAll.bind(document);
+
+
+  const confirmDelete = $('#admin-event-list .noti-confirm-delete')
+
+  const deleteBtns = $$('#admin-event-list #ad-noti-body .noti-delete')
+  const noItemNoti = $('#admin-event-list .ad-noti-noItem')
+
+  const notiDescript = $('#admin-event-list #ad-noti-body .ad-noti-descrip')
+
+  let notiItems = $$('#admin-event-list #ad-noti-body .noti-item')
+
+
+  if (notiItems.length == 0) {
+    notiDescript.classList.add('gone')
+    noItemNoti.classList.add('open')
+  }
+
+  deleteBtns.forEach((item) => {
+    item.onclick = function () {
+      confirmDelete.classList.add('open')
+
+      const okeBtn = confirmDelete.querySelector('.oke-btn')
+      const huyBtn = confirmDelete.querySelector('.huy-btn')
+
+      okeBtn.onclick = function () {
+        notiItems = $$('#admin-event-list #ad-noti-body .noti-item')
+
+        notiItems.forEach((notiItem) => {
+          if (notiItem.querySelector('.noti-delete') === item) {
+            notiItem.remove()
+            confirmDelete.classList.remove('open')
+          }
+        })
+
+        notiItems = $$('#admin-event-list #ad-noti-body .noti-item')
+        if (notiItems.length == 0) {
+          noItemNoti.classList.add('open');
+          notiDescript.classList.add('gone');
+        }
+      }
+
+      huyBtn.onclick = function () {
+        confirmDelete.classList.remove('open')
+      }
+
+    }
+  })
+
+
+</script>

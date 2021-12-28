@@ -1,187 +1,337 @@
+<link rel="stylesheet" href="/css/signup.css">
+<link rel="stylesheet" href="/css/cartVu.css">
 
-<body>
-    <div class="cart-container">
-        <p id="username">{{cart.username}}</p>
-    <input type="text" id="cartId" value="{{cart._id}}">
-    {{#each cart.itemList}}
-    <div id="{{this.book._id}}">
-        {{this.book.title}}
-        <button class="btn btn-primary" onclick="subtract(this)">-</button>
-        Quantity: <span class="quantity">{{this.quantity}}</span>
-        <input type="text" class="priceEachItem" value="{{this.book.price}}">
-        <button class="btn btn-primary" onclick="add(this)">+</button>
-        <p class="priceEachItemTotal">{{multiply this.quantity this.book.price}}</p>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+
+<br>  <br>
+  <br>
+  <br>
+<div class="bigbox">
+  <div class="box1">
+    <div class="sp">Sản Phẩm </div>
+    <div class="dongia">Đơn giá(đ) </div>
+    <div class="soluong">Số lượng </div>
+    <div class="thanhtien">Thành tiền(đ)</div>
+  </div>
+  <div class="box2" data-user="{{username}}">
+    <div id="them"></div>
+    {{#if cart.itemList}}
+        {{#each cart.itemList}}
+    <div class="list" data-id="{{this.book._id}}">
+      <input type="checkbox" class="check">
+      <div class="img_box2">
+        <img src="{{this.book.image}}" alt="">
+      </div>
+      <div class="mota_box2"> {{this.book.description}}</div>
+      <div class="gia_box2">{{this.book.price}}</div>
+      <div  class="soluong_box2">
+        <div class="sub">-</div>
+        <input type="number" class="number" name="number" value="{{this.quantity}}">
+        <div class="add">+</div>
+      </div>
+      <div class="thanhtien_box2">0</div>
     </div>
-
-    {{/each}}
-    <label id="totalLabel">Total</label>
-    <div id="total"></div>
-    <div id="promoList">
-        {{#each promoList}}
-            <div id="{{this._id}}">
-                <a href="/promos/{{this._id}}">{{this.name}}</a>
-                <input type="text" class="promoId" value="{{this._id}}" hidden>
-                <input type="text" class="condition" value="{{this.condition}}" hidden></input>
-                <button class="btn btn-primary promo-btn" onmouseover="noticeDisabledBtn(this)"
-                    onclick="clickPromotionBtn(this)">Add this promo</button>
-            </div>
         {{/each}}
-    </div>
-    <div id="promoId"></div>
-    {{#if cart.itemList.length}}
-    <a href="/books/buys/{{cart._id}}" id="purchaseBtn">Purchase now</a>
+    {{else}}
+        <div style="text-align: center;">Giỏ hàng trống</div>
     {{/if}}
+    <div class="muahang">
+          <input type="checkbox" class="checkall" >
+          <div class="chonall">Chọn tất cả</div>
+          <div class="dell" >Xóa</div>
+          <div class="tongsp"> Tổng số sản phẩm: </div>
+          <div class="tongsanpham">0</div>
+          <div class="tongsotien"> Tổng số tiền phải trả:(đ)</div>
+          <div class="tongsotienphaitra">0</div>
+          {{#if cart.itemList.length}}
+          <button  id="buy" class='fab' style="border: none; background-color: #C39E51">
+            <a href="/books/buys/{{cart._id}}" style="width: 100%; height:100%; display:block;">&#xf42d;</a> </button>
+          {{/if}}
+
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-         function calculateTotal() {
-            var priceList = $(".priceEachItemTotal")
-            var total = 0
-            for (price of priceList) {
-                total += parseInt(price.innerHTML)
-            }
 
-            if (total == 0) {
-                $("#totalLabel").hide()
-                return "Empty Cart"
-            }
 
-            return total;
-        }
-
-        function noticeDisabledBtn(btn) {
-            console.log(btn.disabled)
-            if (btn.disabled == true)
-                alert("You can only apply 1 discount code")
-        }
-        var cartId = $("#cartId").val()
+  <br>
+    
+  <div class="vunggiam"> Bạn hãy chọn 1 mã giảm giá của bạn:
+    <div class="magiamgia">
         
+      <div class="giam" >Trừ: 30%</div>
+      <div class="giam" >Trừ: 5.000đ</div> 
 
-        function clickPromotionBtn(btn) {
-            var promoId = btn.parentElement.id;
-            let total = $("#total").text();
-            total = parseInt(total);
-            
-            let condition = parseInt($(`#${promoId} .condition`).val())
-            if (condition > total) {
-                
-                alert("Bạn chưa đáp ứng đủ điểu kiện, vui lòng đọc chi tiết mã giảm giá");
-                return ;
+
+
+      <div class="dk" style="display: none;">0</div>
+      <div class="dk" style="display: none;">0</div>
+            <div class="giam" >Trừ: 30%</div>
+      <div class="giam" >Trừ: 5.000đ</div> 
+
+
+
+      <div class="dk" style="display: none;">0</div>
+      <div class="dk" style="display: none;">1000000</div>
+    </div>
+  </div>
+
+
+  
+
+
+  </div>
+</div>  
+<br><br>
+
+
+<script>
+  var dk = document.querySelectorAll('.dk');
+
+
+  var loaigiamgia = new Array;
+  loaigiamgia.push('','');
+  var checkbox = document.querySelector('.checkall');
+  var dell =document.querySelector('.dell');
+  var count = 0;
+function  load(){
+    const list = document.querySelectorAll('.list');      
+
+
+    for (let i = 0; i < list.length; i++) {
+    const thanhtien = list[i].querySelector('.thanhtien_box2'); 
+    const gia = list[i].querySelector('.gia_box2');    
+    const number =list[i].querySelector('.number');
+
+    thanhtien.innerHTML = parseInt(number.value) * parseInt(gia.innerHTML)
+    number.addEventListener('change', (e)=>{
+            thanhtien.innerHTML=new Intl.NumberFormat().format(parseInt(gia.innerHTML.replace(',', ''))* number.value);
+      tinhtien();
+      tinhtongsanpham();    
+        })
+
+// cộng số lượng
+    const add = list[i].querySelector('.add');
+    add.addEventListener('click',(e)=>{
+      number.value =parseInt(number.value)+1;
+      thanhtien.innerHTML= new Intl.NumberFormat().format(parseInt(gia.innerHTML.replace(',', ''))* number.value);
+      tinhtien();
+      tinhtongsanpham();
+    })
+
+// trừ số lượng
+    const sub = list[i].querySelector('.sub');
+    sub.addEventListener('click', (e)=>{
+      if(parseInt(number.value) > 0){
+      number.value =parseInt(number.value)-1;
+
+      thanhtien.innerHTML= new Intl.NumberFormat().format(parseInt(gia.innerHTML.replace(',', ''))* number.value);
+      tinhtien();
+      tinhtongsanpham();      
+    }
+
+    })
+
+    const check = list[i].querySelector('.check');
+    check.addEventListener('click', (e)=>{
+            tinhtien();
+      tinhtongsanpham();
+    })
+
+    }
+
+
+
+  }
+  load();
+
+  checkbox.addEventListener('click', (e)=>{
+    if( checkbox.checked == true){
+    const list =document.querySelectorAll('.list');
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        check.checked = true;
+     }
+      tinhtien();
+      tinhtongsanpham();
+    } 
+    if( checkbox.checked == false){
+    const list =document.querySelectorAll('.list');
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        check.checked = false;
+     }
+      tinhtien();
+      tinhtongsanpham();
+    } 
+
+  });
+
+  // Xóa sản phẩm ra khỏi cart
+  dell.addEventListener('click', (e)=>{
+    const list =document.querySelectorAll('.list');
+    const x =window.confirm('Bạn chắc chắn muốn xóa');
+    var data = {
+          username: document.querySelector('.box2').dataset.user,
+        };
+    var cartList = [];
+    if(x == true)
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        if(check.checked == true){
+          list[i].remove();
+        } else {
+          var itemOne = {
+            itemId: itemList[i].dataset.id,
+            quantity: itemList[i].querySelector('input[name=number]').value,
+          }
+            cartList.push(itemOne);
+          }
+        }
+      
+    data.itemList = cartList;
+
+    tinhtien();
+    tinhtongsanpham();
+
+    $.ajax({
+            url: '/carts/finish-cart',
+            method: "POST",
+            data: data,
+            success: function (res) {
+
+              $("#cart-number").text(res.itemList.length);
+            }
+          })
+  });
+
+  function tinhtien(){
+   const list =document.querySelectorAll('.list');
+   var sum = 0;
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        if(check.checked == true){
+          const thanhtien = list[i].querySelector('.thanhtien_box2');
+          sum=sum+(parseInt(thanhtien.innerHTML.replace(',', '')));
+        }
+     }
+      const tongsotienphaitra = document.querySelector('.tongsotienphaitra');
+// sửa
+          for(let i =0; i < a.length; i++){
+            if(a[i] ==1 ){
+              let x = loaigiamgia[i];
+              if(x[x.length-1] == '%'){
+                  if(sum >= dk[i].innerHTML){
+                    x =x.replace('%','');
+                    sum = sum *(1-(x*1)/100);
+                  
+                  } else {
+                    window.alert( 'Giá trị đơn hàng phải lớn hơn '+new Intl.NumberFormat().format(dk[i].innerHTML) +' để được áp mã này ');
+                            giam[i].style.background = "none";
+                            a[i]=0;
+                            dem =0;
+                  }
+              }
+              else {
+                  if(sum >= dk[i].innerHTML & sum >= loaigiamgia[i] ){
+                    x =x.replace('%','');
+                    sum = sum - loaigiamgia[i];
+                  } else {
+                            window.alert( 'Giá trị đơn hàng phải lớn hơn '+new Intl.NumberFormat().format(dk[i].innerHTML)+' để được áp mã này ');
+                            giam[i].style.background = "none";
+                            a[i]=0;
+                            dem =0;
+                  }              }
             }
 
+          }
+  //
+          tongsotienphaitra.innerHTML =new Intl.NumberFormat().format(sum);
 
 
-
-            if (btn.classList.contains("btn-success")) {
-                btn.classList.remove("btn-success")
-                btn.innerHTML = "Add this promo"
-                
-                var promoList = document.getElementsByClassName('promo-btn');
-
-                for (item of promoList) {
-                    if (item !== btn)
-                        item.removeAttribute("disabled")
-                }
-
-                $("#purchaseBtn").attr('href', `/books/buys/${cartId}`)
-
-
-            } else {
-
-                btn.classList.add("btn-success")
-                btn.innerHTML = "Remove this promo"
-                var promoId = btn.parentElement.id;
-
-                var promoList = document.getElementsByClassName('promo-btn');
-
-                for (item of promoList) {
-                    if (item !== btn)
-                        item.setAttribute("disabled", true)
-                }
-
-                const data = {
-                    cartId, promoId
-                }
-
-                $("#promoId").text(promoId)
-                $("#purchaseBtn").attr('href', `/books/buys/${cartId}?promoId=${promoId}`);
-
-                $.ajax({
-                    url: '/carts/add-promo-to-cart',
-                    method: "POST",
-                    data: data,
-                    success: function (res) {
-                        console.log(res)
-                    }
-                })
-            }
-
-
+  }
+  function tinhtongsanpham(){
+   const list =document.querySelectorAll('.list');
+   let count = 0;
+     for( let i = 0; i< list.length; i++){
+        const check = list[i].querySelector('.check');
+        if(check.checked == true){
+          const soluong = list[i].querySelector('.number');
+          if (soluong.value*1 != 0)
+          count =count +1;
         }
+         
+    
+      const tongsosanpham = document.querySelector('.tongsanpham');
+          tongsosanpham.innerHTML =count;   
+     }
+
+  }
 
 
-       
+  var a = new Array;
+  a.push(0, 0);
+  var dem = 0;
+  giam = document.querySelectorAll('.giam');
+  for (let i =0 ; i<giam.length; i++){
+    giam[i].addEventListener('click', (e)=>{
+      if(dem == 0 ){
+
+      giam[i].style.backgroundColor = "gold";
+      a[i]=1;
+      dem =1;
+    }
+    else if (a[i]== 1 & dem ==1 ){
+        giam[i].style.background = "none";
+        a[i]=0;
+        dem =0;
 
 
-        function subtract(btn) {
-            const bookId = btn.parentElement.id;
+      }
+    else{
+      window.alert('Bạn chỉ được chọn tối đa 1 mã giảm giá!');
+    }
+    loaigiamgia[i] =giam[i].innerHTML.replace('Trừ: ','');
+    loaigiamgia[i] =loaigiamgia[i].replace('đ','');
+    //loaigiamgia[i] =loaigiamgia[i].replace('%','');
+    loaigiamgia[i] =loaigiamgia[i].replace('.','');
+    loaigiamgia[i] =parseInt(loaigiamgia[i]);
+    tinhtien();
+    tinhtongsanpham();
+    
+    
+    
+    });
 
+  }
+  // Hoàn thành cart cuối cùng để thanh toán
+  const itemList = document.querySelectorAll('.list');
+  
 
+  $("#buy").click(function () {
+    var data = {
+      username: document.querySelector('.box2').dataset.user,
+    };
+    var cartList = [];
 
-            var quantity = parseInt($(`#${bookId} .quantity`).text());
-            var price = parseInt($(`#${bookId} .priceEachItem`).val());
-            var username = $('#username').text();
-            const data = { bookId: bookId, quantity: quantity, username: username }
-            $.ajax({
-                url: '/carts/subtract-by-one',
-                method: "POST",
-                data: data,
-                success: function (res) {
-                    $("#cart-number").text(res.itemList.length);
-                    if (res.itemList.length == 0) {
-                         $('#purchaseBtn').hide()
-                    }
-                }
-            })
+    for(let i = 0; i < itemList.length; i++) {
+      
+      var itemOne = {
+        itemId: itemList[i].dataset.id,
+        quantity: itemList[i].querySelector('input[type=checkbox]').checked ? itemList[i].querySelector('input[name=number]').value : 0,
+      }
 
-            if (quantity - 1 == 0) {
-                $(`#${bookId}`).hide()
-                $('#promoList').hide()
-                
-               
-            }
+      cartList.push(itemOne);
+    }
+    data.itemList = cartList;
 
-            $(`#${bookId} .quantity`).text(quantity - 1)
-            $(`#${bookId} .priceEachItemTotal`).text((quantity - 1) * price)
-            
-            $("#total").html(calculateTotal())
+    $.ajax({
+        url: '/carts/finish-cart',
+        method: "POST",
+        data: data,
+        success: function (res) {
+
+          $("#cart-number").text(res.itemList.length);
         }
+      })
+  })
+ 
 
-        function add(btn) {
-            const bookId = btn.parentElement.id;
-            var quantity = parseInt($(`#${bookId} .quantity`).text());
-            var price = parseInt($(`#${bookId} .priceEachItem`).val());
-            var username = $('#username').text();
-            const data = { bookId: bookId, quantity: quantity, username: username }
-            $.ajax({
-                url: '/carts/add-by-one',
-                method: "POST",
-                data: data,
-                success: function (res) {
-                    
-                    $("#cart-number").text(res.itemList.length);
-                }
-            })
-
-            $(`#${bookId} .quantity`).text(quantity + 1)
-            $(`#${bookId} .priceEachItemTotal`).text((quantity + 1) * price)
-             
-            $("#total").html(calculateTotal())
-
-        }
-
-        $("#total").html(calculateTotal())
-
-
-    </script>
-</body>
+</script>

@@ -302,10 +302,10 @@
 
                         <div class="replyList">
                             {{#if this.replyList.length}}
-                            <h3 style="margin-left: 55px; margin-right: 12px">Xem {{this.replyList.length}} câu trả lời
+                            <h3 style="margin-left: 55px; margin-right: 12px; cursor: pointer" onClick="toggleReplyList(this)">Xem {{this.replyList.length}} câu trả lời
                             </h3>
 
-                            <div class="replyList-body">
+                            <div class="replyList-body" style="display: none">
                                 {{#each this.replyList}}
                                 <div class="media d-flex align-items-start">
                                     <span class="round"><img src="{{this.avatar}}" class="align-self-start mr-3"
@@ -336,9 +336,9 @@
                             </div>
 
                             {{else}}
-                            <div class="replyList-body">
+                            <div class="replyList-body" style="display: none">
 
-                                </h3>
+                           
                             </div>
                             {{/if}}
 
@@ -389,6 +389,28 @@
         function showReplyBox(btn) {
             const commentId = btn.parentElement.parentElement.parentElement.parentElement.id
             $(`#${commentId} .reply-container`).css('display', 'block')
+            var check = $(`#${commentId} .reply-container #reply`).val()
+            if (check == '') {
+                $(`#${commentId} .replySendBtn`).css('background-color', "#ccc")
+                $(`#${commentId} .replySendBtn`).prop('disabled', true)
+            } else {
+                $(`#${commentId} .replySendBtn`).css('background-color', "#c39e51")
+                $(`#${commentId} .replySendBtn`).prop('disabled', false)
+            }
+        }
+
+        var save_text = ''
+        function toggleReplyList(tag) {
+            const commentId = tag.parentElement.parentElement.id
+            if ($(`#${commentId} .replyList-body`).css('display') == 'none') {
+                $(`#${commentId} .replyList-body`).css('display', 'block')
+                save_text = tag.innerHTML 
+                tag.innerHTML = "Ẩn"
+            } else {
+                $(`#${commentId} .replyList-body`).css('display', 'none')
+                tag.innerHTML = save_text
+            }
+
         }
 
         function changeBtnStatus(input) {
@@ -416,6 +438,7 @@
 
         function sendReply(replyButton) {
             const commentId = replyButton.parentElement.parentElement.parentElement.id
+            $(`#${commentId} .reply-container`).css('display', 'none')
             const data = {
                 username: $(`#${commentId} .replyForm #me`).val(),
                 content: $(`#${commentId} .replyForm #reply`).val(),
@@ -425,6 +448,7 @@
                 receiver: $(`#${commentId} .username`).text(),
                 slug: $(`#slug`).val()
             }
+            
 
 
             $.ajax({
@@ -432,6 +456,7 @@
                 method: 'POST',
                 data: data,
                 success: function (res) {
+                    console.log(data)
                     socket.emit("client_send_reply_comment", data)
                 }
             });
@@ -442,9 +467,6 @@
 
 
         $(document).ready(function () {
-
-
-
 
             $("#content").focus(function () {
                 $("#send-box").css("display", "flex")
@@ -465,8 +487,6 @@
                     itemId: $("#itemId").val(),
                     avatar: $("#user_avatar").val()
                 }
-
-                console.log(data)
 
 
 
@@ -522,6 +542,10 @@
 
 
             socket.on("server_send_comment_to_book_item", function (data) {
+                $("#send-box").css("display", "none")
+                $("#content").val('')
+                $("#commentSendBtn").css("background-color", "#ccc");
+
 
                 var html = `
                 <div id="${data._id}" class="each_comment_box">
@@ -572,13 +596,11 @@
                         </div>
                     </div>
 
-                     <div class="replyList">
+                    <div class="replyList">
                        
-                        
+                        <div class="replyList-body">
 
-                    <div class="replyList-body">
-
-                    </div>
+                        </div>
 
                     </div>
                     
@@ -591,7 +613,6 @@
             })
 
             socket.on("server_send_reply_comment", function (data) {
-                console.log("here" + data)
                 var html = `<div class="media d-flex align-items-start">
                       <input type="text" name="me_avatar" id="me_avatar" value="${data.avatar}" style="display: none">
                                 <span class="round"><img src="${data.avatar}" class="align-self-start mr-3"
@@ -617,6 +638,7 @@
                                 </div>
                             </div>`
                 console.log(data.parentCommentId)
+          
                 var replyList = $(`#${data.parentCommentId} .replyList-body`)
                 console.log(replyList)
                 replyList.html(html + replyList.html())
@@ -634,7 +656,7 @@
                     avatar: data.avatar
                 }
 
-                if (sender != receiver) {
+                if (notice_data.sender != notice_data.receiver) {
                     $.ajax({
                         url: '/books/post-notice',
                         method: "POST",
@@ -705,11 +727,6 @@
                     }, 10000)
 
                 }
-
-
-
-
-
             })
         })
     </script>

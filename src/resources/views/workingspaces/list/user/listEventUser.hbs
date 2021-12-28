@@ -1,0 +1,128 @@
+
+
+<link rel="stylesheet" href="/css/listEventUser.css">
+{{!-- user nofi list --}}
+
+<div id="user-event-list">
+
+  <div id="ad-noti-header" class="row">
+
+    <div class="ad-noti-title col col-9">
+      <h3>Danh sách sự kiện của bạn</h3>
+    </div>
+
+  </div>
+
+  <div id="ad-noti-body">
+
+    <div class="ad-noti-descrip col">
+      <ul class="row justify-content-end">
+        <li class="col col-auto tomtat">Thông tin tóm tắt</li>
+        <li class="col-auto task">Chi tiết</li>
+        <li class="col-auto task">Chỉnh sửa</li>
+        <li class="col-auto task">Xóa</li>
+      </ul>
+    </div>
+
+    <div class="ad-noti-noItem">
+      Hiện tại bạn chưa đặt sự kiện nào, click để đặt ngay
+    </div>
+
+    <ul>
+
+      {{!-- sự kiện 1 --}}
+      <li class="noti-item row">
+        <div class="event-content col col">
+           <ul class = "row">
+             <li class = "booker col-4">Người đặt: <span>Phạm Thế Nam</span></li>
+             <li class = "title col-4">Tiêu đề: <span>Sinh nhật con gái tôi</span></li>
+             <li class = "number col-4">Số ghế: <span>3</span></li>
+             <li class = "date-start col-4">Bắt đầu: <span>14-12-2021 20h00</span></li>
+             <li class = "date-end col-4">Kết thúc: <span>14-12-2021 22h00</span></li>
+             <li class = "total col-4">Tổng phí: <span>1000000</span><span>đ</span></li>
+           </ul>
+        </div>
+        
+        <button title = "xem chi tiết" class="event-btn detail col col-auto"><i class="ti-eye"></i></button>
+        <button title = "sửa thông tin" class="event-btn update col col-auto"><i class="ti-reload"></i></button>
+        <button title = "xóa" class="event-btn noti-delete col col-auto"><i class="ti-trash"></i></button>
+      </li>
+
+
+    </ul>
+
+    <div class = "createEvent" >
+      <button>Đặt sự kiện</button>
+    </div>
+  </div>
+
+  <div class="noti-confirm-delete">
+
+    <div class="confirm-delete-content row">
+      <div class="confirm-text col col-8">Xác nhận xóa sự kiện</div>
+      <div class="col col-4 d-flex justify-content-around">
+        <div class="confirm-btn oke-btn">Oke</div>
+        <div class="confirm-btn huy-btn">Hủy</div>
+      </div>
+    </div>
+
+  </div>
+
+ 
+</div>
+
+
+{{!-- handel delete confirm --}}
+<script>
+  const $ = document.querySelector.bind(document);
+  const $$ = document.querySelectorAll.bind(document);
+
+
+  const confirmDelete = $('#user-event-list .noti-confirm-delete')
+
+  const deleteBtns = $$('#user-event-list #ad-noti-body .noti-delete')
+  const noItemNoti = $('#user-event-list .ad-noti-noItem')
+
+  const notiDescript = $('#user-event-list #ad-noti-body .ad-noti-descrip')
+
+  let notiItems = $$('#user-event-list #ad-noti-body .noti-item')
+
+
+  if (notiItems.length == 0) {
+    notiDescript.classList.add('gone')
+    noItemNoti.classList.add('open')
+  }
+
+  deleteBtns.forEach((item) => {
+    item.onclick = function () {
+      confirmDelete.classList.add('open')
+
+      const okeBtn = confirmDelete.querySelector('.oke-btn')
+      const huyBtn = confirmDelete.querySelector('.huy-btn')
+
+      okeBtn.onclick = function () {
+        notiItems = $$('#user-event-list #ad-noti-body .noti-item')
+
+        notiItems.forEach((notiItem) => {
+          if (notiItem.querySelector('.noti-delete') === item) {
+            notiItem.remove()
+            confirmDelete.classList.remove('open')
+          }
+        })
+
+        notiItems = $$('#user-event-list #ad-noti-body .noti-item')
+        if (notiItems.length == 0) {
+          noItemNoti.classList.add('open');
+          notiDescript.classList.add('gone');
+        }
+      }
+
+      huyBtn.onclick = function () {
+        confirmDelete.classList.remove('open')
+      }
+
+    }
+  })
+
+
+</script>
