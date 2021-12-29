@@ -1,9 +1,9 @@
 const Rank = {
-    totalAmountPurchased: [300, 500, 1000, 2000, 5000, 10000]
+    totalAmountPurchased: [1000, 2000, 5000, 10000, 25000, 50000]
 }
 
 function rank() {
-    return [300, 500, 1000, 2000, 5000, 10000]
+    return [1000, 2000, 5000, 10000, 25000, 50000]
 }
 
 export default Rank;
