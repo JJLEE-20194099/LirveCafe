@@ -21,10 +21,9 @@ function getTimeFormat(year, month, day, hour, minute, second) {
 }
 
 function convert(timeString) {
-    var start = new Date(timeString).getTime() / 1000;
-    if (!isNaN(timeString) && timeString.toString().indexOf('.') != -1) start = timeString / 1000
+    const start = new Date(timeString).getTime() / 1000;
     var no_year = (end - start) / (60 * 60 * 24 * 365)
-    console.log(start, end, timeString)
+    console.log(start, " ", end, " ", no_year)
     var no_month = (end - start) / (60 * 60 * 24 * 30)
     var no_day = (end - start) / (60 * 60 * 24)
     var no_hour = (end - start) / (60 * 60)
@@ -35,6 +34,23 @@ function convert(timeString) {
 
 }
 
+var localdate_txt_list = document.getElementsByClassName('local-date');
+
+
 for (var txt of date_txt_list) {
     txt.innerHTML = convert(txt.innerHTML)
+}
+
+
+function getDateByLocalDate(timString) {
+    var datum = Date.parse(timString);
+    var date = new Date(datum)
+    return date.toLocaleString().split(',')[0]
+}
+
+console.log(localdate_txt_list)
+
+for (var local_txt of localdate_txt_list) {
+    console.log(getDateByLocalDate(local_txt.innerHTML))
+    local_txt.innerHTML = getDateByLocalDate(local_txt.innerHTML)
 }

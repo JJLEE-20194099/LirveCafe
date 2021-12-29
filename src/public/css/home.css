@@ -97,7 +97,8 @@ body {
   width: 84%;
   background-color: #c39e51;
   height: 100px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  padding: 0; }
   #main-header #name-brand {
     color: #fff; }
 

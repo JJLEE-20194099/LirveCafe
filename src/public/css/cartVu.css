@@ -5,7 +5,6 @@
   display: flex;
   font-size: 15pt;
   color: white;
-  box-shadow: 1px 1px 1px 2px black;
   text-align: center;
   border-radius: 5pt; }
 
@@ -37,7 +36,6 @@
   margin-left: 50pt;
   width: 20%;
   height: 20pt;
-  box-shadow: -1px -1px 1px 1px #f1e5e5;
   cursor: pointer;
   transition: 2s;
   border-radius: 3pt;
@@ -46,12 +44,8 @@
 .add {
   width: 20%;
   height: 20pt;
-  box-shadow: 1px 1px 1px 1px #f1e5e5;
   cursor: pointer;
-  border-radius: 3pt;
-  color: blue; }
-  .add .add :hover {
-    color: blue; }
+  border-radius: 3pt; }
 
 .number {
   width: 20%;
@@ -63,7 +57,6 @@
   margin-top: 5pt;
   width: 100%;
   height: auto;
-  box-shadow: 1px 1px 1px 1px black;
   background-color: white; }
 
 .list {
@@ -75,8 +68,6 @@
   display: flex;
   text-align: center;
   align-items: center;
-  border: solid 1px;
-  border-color: black;
   border-radius: 2pt; }
 
 .check {
@@ -126,11 +117,9 @@ input::-webkit-inner-spin-button {
 .muahang {
   width: 100%;
   height: 70pt;
-  background-color: wheat;
   display: flex;
   background-color: #c39e51;
   color: white;
-  box-shadow: 1px 1px 1px 1px #f1e5e5;
   border-radius: 5pt; }
 
 .checkall {
@@ -191,9 +180,6 @@ input::-webkit-inner-spin-button {
   cursor: pointer;
   margin-top: 10pt; }
 
-#buy:hover {
-  color: blue; }
-
 #them {
   width: 100%;
   height: 5pt;
@@ -210,19 +196,18 @@ input::-webkit-inner-spin-button {
   transition: 1s; }
 
 .bigbox {
-  box-shadow: -1px -1px 5px 7px rgba(195, 58, 81, 0.3);
+  box-shadow: 0 4px 8px 0 black, 0 6px 20px 0 #220202;
   border-radius: 5pt;
-  border-style: solid;
-  border-color: black;
   height: auto; }
 
 .magiamgia {
   width: 100%;
   height: 50pt;
-  border: solid 1px;
-  border-color: black;
+  margin-top: 12;
   display: flex;
-  text-align: center; }
+  text-align: center;
+  overflow: hidden;
+  background-color: #fff; }
 
 .giam {
   margin: auto;
