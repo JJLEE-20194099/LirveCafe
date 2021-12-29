@@ -30,7 +30,6 @@ const sendMail = (to, subject, htmlContent) => {
         subject: subject,
         html: htmlContent
     }
-    console.log(options)
     return transporter.sendMail(options);
 }
 
