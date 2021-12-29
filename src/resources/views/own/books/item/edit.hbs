@@ -1,37 +1,67 @@
-<div class="mt-4">
-    <h3>Cập nhật sách</h3>
 
-    <form class="mt-4" method="POST" action="/books/{{book._id}}?_method=PATCH" enctype='multipart/form-data'>
+<style>
+    .mt-4 {
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0 2px 12px #090d11;
+        margin-bottom: 24px;
+        padding: 24px 24px 24px 24px;
+    }
+
+    .mt-4 .form-group input:focus {
+        border-color: unset;
+        box-shadow: unset;
+    }
+
+     .form-group #videoId {
+        border: none;
+        position: relative;
+        transform: translateX(-12px);
+        width: 230px;
+    }
+    
+</style>
+{{#each errors}}
+    <p>{{this}}</p>
+{{/each}}
+
+<div class="mt-4">
+    <h3>Chỉnh sửa sách</h3>
+
+    <form method="POST" action="/books/{{book._id}}?_method=PATCH" enctype='multipart/form-data'>
         <div class="form-group">
-            <label for="name">Tên sach</label>
-            <input type="text" class="form-control" value="{{book.title}}" id="name" name="title">
+            <label for="name">Tiêu đề</label>
+            <input type="text" class="form-control" value="{{book.title}}"  id="name" name="title">
         </div>
-         <div class="form-group">
-            <label for="name">Tác giả</label>
-            <input type="text" class="form-control"value="{{book.author}}"  id="" name="author">
+        <div class="form-group">
+            <label for="author-name">Tác giả</label>
+            <input type="text" class="form-control" id="author-name"  name="author" value="{{book.author}}"> 
         </div>
         <div class="form-group">
             <label for="description">Mô tả</label>
-            <textarea class="form-control" id="description" name="description">{{coffee.description}}</textarea>
+            <br>
+            
+            <textarea id="description" name="description"  rows="8" cols="150" style="resize: none; border: 1px solid #ccc; outline: none;border-radius: 4px; ">{{book.description}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="videoId">Hình ảnh</label>
+            <input type="file" class="form-control" id="videoId" name="image">
         </div>
 
         <div class="form-group">
-            <label for="level">Demo</label>
-            <input type="text" class="form-control"value="{{book.body}}" id="level" name="body">
+            <label for="">Giá</label>
+            <input type="text" class="form-control" id="" name="price" value="{{book.price}}"> 
+        </div>
+
+        <div class="form-group">
+            <label for="level">Nội dung</label>
+            <input type="text" class="form-control" id="level" name="body" value="{{book.body}}"> 
         </div>
          <div class="form-group">
             <label for="level">Số trang</label>
-            <input type="text" class="form-control" value="{{book.no}}" id="level" name="no">
-        </div>
-        <div class="form-group">
-            <label for="">Image</label>
-           <img src="{{book.image}}" alt="">
+            <input type="text" class="form-control" id="level" name="no" value="{{book.no}}"> 
         </div>
 
-         <div class="form-group">
-            <label for=""> Bạn có thể cập nhật image</label>
-            <input type="file" class="form-control" id="" name="image">
-        </div>
-        <button type="submit" class="btn btn-primary">Lưu lại</button>
+        <button type="submit" class="btn btn-primary">Chỉnh sửa sách</button>
     </form>
 </div>

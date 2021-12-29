@@ -130,10 +130,23 @@ const BookController = {
 
     // PATCH /books/:id
     update(req, res, next) {
-        Book.updateOne({
+
+        var image = ''
+
+        Book.findOne({
                 _id: req.params.id
-            }, req.body)
-            .then(() => res.redirect('back'))
+            })
+            .then((book) => {
+                book = singleMongooseDocumentToObject(book)
+                image = book.image
+                if (req && req.file && req.file.path) {
+                    image = '/' + req.file.path.split('\\').slice(2).join('/');
+                }
+                req.body.image = image;
+                return Book.updateOne({
+                    _id: req.params.id
+                }, req.body)
+            }).then(() => res.redirect('back'))
             .catch(next);
     },
 

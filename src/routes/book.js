@@ -12,10 +12,10 @@ import validate from '../app/validate/book.validate.js';
 import authMiddleware from '../app/middleware/AuthMiddleware.js';
 
 var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
+    destination: function (req, file, cb) {
         cb(null, "src/public/uploads/img");
     },
-    filename: function(req, file, cb) {
+    filename: function (req, file, cb) {
         cb(null, file.fieldname + "-" + Date.now() + ".jpg")
     }
 })
@@ -23,8 +23,10 @@ var storage = multer.diskStorage({
 const maxSize = 1 * 1000 * 1000 * 1000 * 1000 * 1000;
 var upload = multer({
     storage: storage,
-    limits: { fileSize: maxSize},
-    fileFilter: function(req, file, cb) {
+    limits: {
+        fileSize: maxSize
+    },
+    fileFilter: function (req, file, cb) {
         var filetypes = /jpeg|jpg|png|gif/;
         var mimetype = filetypes.test(file.mimetype);
 
@@ -40,13 +42,15 @@ var upload = multer({
 router.get('/list', controllers.index);
 router.get('/create', controllers.create);
 router.get('/:slug', controllers.show);
-router.post('/save', 
+router.post('/save',
     upload.single('image'),
     validate.postCreateBook,
     controllers.save,
 );
 router.get('/:id/edit', controllers.edit);
-router.patch('/:id', controllers.update);
+router.patch('/:id',
+    upload.single('image'),
+    controllers.update);
 router.delete('/:id', controllers.softDelete);
 router.delete('/:id/force', controllers.deepDelete);
 router.patch('/:id/restore', controllers.restore);
