@@ -13,6 +13,7 @@ const Noti = new Schema(
         where_url: {type: String, required: true},
         avatar: {type: String, required: true},
         isRead: {type: Number, default: 0},
+        type: {type: Number, default: 0}
     },
     {
         timestamps: true

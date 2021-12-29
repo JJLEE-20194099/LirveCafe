@@ -34,6 +34,21 @@ function convert(timeString) {
 
 }
 
+var localdate_txt_list = document.getElementsByClassName('local-date');
+
+
 for (var txt of date_txt_list) {
     txt.innerHTML = convert(txt.innerHTML)
+}
+
+
+function getDateByLocalDate(timString) {
+    var datum = Date.parse(strDate);
+    var date = new Date(datum)
+    return date.ustomFormat( "#DD#/#MM#/#YYYY#" )
+}
+
+
+for (var local_txt of localdate_txt_list) {
+    local_txt.innerHTML = getDateByLocalDate(local_txt.innerHTML)
 }

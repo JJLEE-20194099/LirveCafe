@@ -5,10 +5,8 @@ import authMiddleware from '../app/middleware/AuthMiddleware.js';
 
 const router = express.Router();
 
+router.get('/show/:username', authMiddleware.requireAuth, authMiddleware.getCurrentUserInfo, controllers.showCart)
 router.post('/add-book-to-cart', controllers.addBookToCart)
-
-router.get('/:username', authMiddleware.requireAuth, authMiddleware.getCurrentUserInfo, controllers.showCart)
-
 router.post('/add-by-one', controllers.addByOne)
 router.post('/subtract-by-one', controllers.subtractByOne)
 
