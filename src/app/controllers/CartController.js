@@ -38,7 +38,9 @@ const CartController = {
                     data = {
                         username: username,
                         itemList: userCart,
-                        level: user.level
+                        level: user.registered_level,
+                        activating: user.activating_loyalty
+
                     }
 
                     cart = new Cart(data);
@@ -60,7 +62,8 @@ const CartController = {
                     data = {
                         username: username,
                         itemList: userCart,
-                        level: user.level
+                        level: user.registered_level,
+                        activating: user.activating_loyalty
                     }
 
 
@@ -87,9 +90,14 @@ const CartController = {
 
         const username = req.params.username;
         let level = parseInt(req.query.level)
+        let activating = 0
+        if (req.query.activating) {
+            activating = parseInt(req.query.activating)
+        }
         level = level || 0
-        console.log(username, level)
         var total = 0
+
+        if (activating == 0) level = 0
 
         Cart.findOne({
                 username: username
@@ -248,7 +256,17 @@ const CartController = {
         ]).then(([cart, promo]) => {
 
         }).catch(next)
+    },
+
+    finishCart(req, res, next) {
+        
+        const itemList = req.body.itemList;
+
+        var userCart = [];
+        var data = {};
+        console.log(itemList)
     }
+
 
 }
 
