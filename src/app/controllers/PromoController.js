@@ -1,4 +1,6 @@
 import Promo from '../models/Promo.js';
+import User from '../models/User.js';
+import Noti from '../models/Noti.js';
 
 import {
     singleMongooseDocumentToObject,
@@ -6,7 +8,8 @@ import {
 } from '../../support_lib/mongoose.js';
 
 import {
-    getNoNewNotis
+    getNoNewNotis,
+    createNotiOrNot
 } from '../../support_lib/noti.js'
 
 const PromoController = {
@@ -76,7 +79,40 @@ const PromoController = {
             .then((promo) => {
                 if (!promo) {
                     newPromo.save()
-                        .then(() => res.redirect('/own/stored/promos'))
+                        .then((pro) => {
+                            return Promise.all([Promo.find(), User.find()])
+                        })
+                        .then(([promos, users]) => {
+                            promos = mongooseDocumentsToObject(promos);
+                            users = mongooseDocumentsToObject(users);
+                            var pro = singleMongooseDocumentToObject(newPromo)
+                            var user_list_noticed = createNotiOrNot(users, promos, pro)
+                            if (user_list_noticed.length) {
+                                var us = user_list_noticed
+                                var noti_promises = []
+                                for (var u of us) {
+                                    const notice_data = {
+                                        sender: res.locals.user.username,
+                                        receiver: u.username,
+                                        where_url: `http://localhost:3000/promos/${pro._id}`,
+                                        itemId: pro._id,
+                                        avatar: u.avatar,
+                                        type: 1
+                                    }
+                                    var noti_model = new Noti(notice_data)
+                                    noti_promises.push(noti_model.save())
+                                }
+                                Promise.all(noti_promises).then((data) => {
+                                        res.redirect('/own/stored/promos')
+                                    })
+                                    .catch(next)
+
+
+                            } else {
+                                res.redirect('/own/stored/promos')
+                            }
+                        })
+
                 } else {
                     errors.push("Đã tồn tại mã giảm giá")
                     res.render('own/promos/item/create.hbs', {

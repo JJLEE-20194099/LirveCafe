@@ -40,6 +40,7 @@ const HomeController = {
                         coffee: coffee,
                         food: food,
                         notis: res.locals.notis,
+                        
                         no_new_notis: getNoNewNotis(res.locals.notis)
                     });
                 } else {
@@ -49,6 +50,7 @@ const HomeController = {
                         coffee: coffee,
                         food: food,
                         notis: res.locals.notis,
+                        cart: res.locals.cart,
                         no_new_notis: getNoNewNotis(res.locals.notis)
                     });
                 }

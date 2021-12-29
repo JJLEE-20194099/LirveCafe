@@ -16,9 +16,16 @@ import {
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
+
+import emailController from './EmailController.js';
+
 import {
     getNoNewNotis
 } from '../../support_lib/noti.js'
+
+import {
+    calculateRemainingCart
+} from '../../support_lib/cart.js'
 
 
 const calculateUserLevel = ([multiOrderList, user]) => {
@@ -33,7 +40,7 @@ const calculateUserLevel = ([multiOrderList, user]) => {
 
     var level = 0;
     for (var i = Rank.totalAmountPurchased.length - 1; i >= 0; i--) {
-        if (total >= Rank.totalAmountPurchased[i]) {
+        if (total >= Rank.totalAmountPurchased[i] * 1000) {
             level = i + 1;
             break;
         }
@@ -120,15 +127,37 @@ const BookController = {
             })])
             .then(([cart, promo]) => {
                 cart = singleMongooseDocumentToObject(cart)
-
+                promo =  singleMongooseDocumentToObject(promo)
                 var total = cart.itemList.reduce(function (acc, item) {
-                    return acc + parseInt(item.book.price) * parseInt(item.quantity);
+                    if (item.book)
+                        return acc + parseInt(item.book.price) * parseInt(item.quantity)
+                    else if (item.food)
+                        return acc + parseInt(item.food.price) * parseInt(item.quantity)
+                    else if (item.coffee)
+                        return acc + parseInt(item.coffee.price) * parseInt(item.quantity)
+                    
                 }, 0)
+                var new_total = total
+               if (promo) {
+                if (promo.discountAmount) {
+
+                    new_total = new_total - parseInt(promo.discountAmount) * 1000
+                    
+                }
+                else {
+                    new_total = new_total - (new_total) * parseInt(promo.discountPercentage) / 100
+                    
+                }
+               }
+           
+
+
                 res.render('buy/buyAllCart.hbs', {
                     cart: cart,
                     user: res.locals.user,
                     total: total,
-                    promo: singleMongooseDocumentToObject(promo),
+                    promo: promo,
+                    new_total: new_total,
                     notis: res.locals.notis,
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 })
@@ -146,6 +175,8 @@ const BookController = {
         data.itemList = []
         var orders = new Orders(data);
 
+        
+
         Cart.findOne({
                 _id: itemId
             })
@@ -153,6 +184,8 @@ const BookController = {
 
                 data.itemList = singleMongooseDocumentToObject(cart).itemList;
                 orders = new Orders(data);
+
+                
 
                 return Promise.all([orders.save(), Cart.deleteOne({
                     _id: itemId
@@ -169,7 +202,10 @@ const BookController = {
             }).then(([multiOrderList, user]) => {
                 calculateUserLevel(([multiOrderList, user]))
             })
-            .then(() => res.send("OK"))
+            .then(() => {
+                emailController.sendOrderNotice(req, orders)
+                    res.send("Ok")
+            })
             .catch(next)
     },
 
