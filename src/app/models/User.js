@@ -17,7 +17,7 @@ const User = new Schema(
         birthdaty: {type: String},
         gender: {type: String},
         star_no: {type: Number, default: 0},
-        role: {type: String, default: "guest"},
+        role: {type: Number, default: 0},
         level: {type: Number, default: 0},
         activating_loyalty: {type: Number, default: 0, min: 0, max: 1},
         registered_level: {type: Number, default: 0}
