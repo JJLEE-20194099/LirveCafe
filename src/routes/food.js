@@ -6,10 +6,10 @@ import path from 'path';
 
 import controllers from '../app/controllers/FoodController.js';
 import commentControllers from '../app/controllers/CommentController.js';
-import notificationController from '../app/controllers/NotificationController.js';
+import notiControllers from '../app/controllers/NotificationController.js';
+import validate from '../app/validate/food.validate.js';
 
-import validate from '../app/validate/coffee.validate.js';
-import checkUser from '../app/middleware/AuthMiddleware.js'
+import authMiddleware from '../app/middleware/AuthMiddleware.js';
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -40,12 +40,13 @@ var upload = multer({
 router.get('/list', controllers.index);
 router.get('/create', controllers.create);
 router.get('/buy/:id', controllers.showPayForm)
-router.post('/buy', controllers.buy)
+router.get('/buys/:id', controllers.showAllCartPayForm)
+router.post('/buys', controllers.buyAllCart)
 router.get('/:slug', controllers.show);
-router.post('/save',  
+router.post('/save', 
     upload.single('image'),
-    validate.postCreateCoffee,
-    controllers.save
+    validate.postCreateFood,
+    controllers.save,
 );
 router.get('/:id/edit', controllers.edit);
 router.patch('/:id', controllers.update);
@@ -53,10 +54,10 @@ router.delete('/:id', controllers.softDelete);
 router.delete('/:id/force', controllers.deepDelete);
 router.patch('/:id/restore', controllers.restore);
 
+
+
 router.post('/do-comment', commentControllers.doComment)
 router.post('/reply-comment', commentControllers.replyComment)
-
-router.post('/get-comment-notification', notificationController.getCommentNotification)
-
+router.post('/post-notice', notiControllers.postNotice)
 
 export default router;

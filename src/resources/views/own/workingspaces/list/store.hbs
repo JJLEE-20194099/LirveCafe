@@ -3,9 +3,7 @@
 <div class="container">
     <div class="mt-4">
         <div class="header">
-            <h3>Mã giá của tôi</h3>
-            <span><a href="/promos/create" style="font-size: 16px; font-weight: 500;">Tạo mã giảm giá</a></span>
-            <a href="/own/trash/promos">Thùng rác ({{deletedCount}})</a>
+            <h3>Workingspaces in LivreCafé</h3>
         </div>
 
         <table class="table mt-4">
@@ -13,17 +11,17 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Ngày hết hạn</th>
+                    <th scope="col">Price</th>
                     <th scope="col" colspan="2">Thời gian tạo</th>
                 </tr>
             </thead>
             <tbody>
-                {{#each promos}}
+                {{#each workingspaces}}
                 <tr class="item-for-loadmore">
                     <th scope="row">{{sum @index 1}}</th>
-                    <td>{{this.name}}</td>
+                    <td>{{this.title}}</td>
                     <td>
-                        {{this.expirationDate}}
+                        {{this.total}}đ
                     </td>
                     <td class="date">{{this.createdAt}}</td>
                     <td class="btn-group">
@@ -35,36 +33,32 @@
                                 <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: white;">
                                     <div class="item-info">
                                         <div>
-                                            <img src="{{this.image}}" alt="" class="img-admin">
+                                            <img src="{{this.avatar}}" alt="" class="img-admin">
                                         </div>
 
                                         <div>
                                             <div>
-                                                <h3>{{this.name}}</h3>
+                                                <h3>{{this.title}}</h3>
                                             </div>
                                             <div>
-                                                  {{#if this.discountPercentage}}
-                                                    <p>Giảm {{this.discountPercentage}}%</p>
-                                                  {{else}}
-                                                    <p>Giảm {{this.discountAmount}}K</p>
-                                                  {{/if}}
-                                                <p>{{this.description}}</p>
+                                                <p>Giá: {{this.total}}đ</p>
+                                                <p>Số chỗ ngồi: {{this.no_seating}}</p>
+                                                <p>Ngày bắt đầu: {{this.eventStartTime}} {{this.eventStartDate}}</p>
+                                                <p>Ngày kết thúc: {{this.eventEndTime}} {{this.eventEndDate}}</p>
+                                                <a href="/workingspaces/{{this.slug}}">Xem chi tiết tại đây</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <a href="/promos/{{this._id}}/edit" class="btn btn-outline-primary">Sửa</a>
-                        <button href="" class="btn btn-outline-warning" data-toggle="modal" data-id="{{this._id}}"
-                            data-target="#delete-book-modal">Xóa</button>
                     </td>
                 </tr>
                 {{else}}
                 <tr>
                     <td colspan="5" class="text-center">
-                        Bạn chưa có mã giám giá nào.
-                        <a href="/promos/create">Tạo mã giảm giá</a>
+                        Quán chưa có sự kiện nào.
+                        <a href="/">Quay về trang chủ</a>
                     </td>
                 </tr>
                 {{/each}}
@@ -87,13 +81,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Xóa mã giảm giá?</h5>
+                    <h5 class="modal-title">Xóa book?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn chắc chắn muốn xóa mã giảm giá này?</p>
+                    <p>Bạn chắc chắn muốn xóa cuốn sách này?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
@@ -130,7 +124,7 @@
 
             // When delete book btn clicked
             btnDeleteBook.onclick = function () {
-                deleteForm.action = '/promos/' + bookId + '?_method=DELETE';
+                deleteForm.action = '/workingspaces/' + bookId + '?_method=DELETE';
                 deleteForm.submit();
             }
 

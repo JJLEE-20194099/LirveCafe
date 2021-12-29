@@ -21,8 +21,9 @@ body {
     z-index: 2;
     display: none;
     position: absolute;
-    top: 75%;
-    right: 4px; }
+    top: 70%;
+    right: 4px;
+    width: 250px; }
     #header .func-list ul {
       padding-left: 0px;
       margin-bottom: 0;
@@ -35,7 +36,7 @@ body {
       list-style-type: none;
       height: 40px;
       padding: 4px 16px;
-      width: 150px; }
+      width: 100%; }
     #header .func-list li:hover {
       background-color: #fff; }
       #header .func-list li:hover a {
@@ -62,7 +63,10 @@ body {
       list-style-type: none;
       height: 40px;
       padding: 4px 16px;
-      width: 150px; }
+      width: 150px;
+      align-items: center;
+      display: flex;
+      justify-content: center; }
     #header .header-list li:hover {
       background-color: #fff; }
       #header .header-list li:hover a {
@@ -72,7 +76,9 @@ body {
       font-weight: bold;
       font-size: 16px; }
   #header .header-menu:hover #menu-list {
-    display: block; }
+    display: block;
+    margin-left: -15px;
+    margin-top: -2px; }
   #header .header-user:hover #user-list {
     display: block; }
   #header .header-icon {

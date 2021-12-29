@@ -180,8 +180,18 @@ allOrderedItems.forEach((item, index) => {
 
 // const submitBtn = $_1('#working-space .submit-order button')
 
+var avatar = ''
+
+function uploadImage(e) {
+    var e = e || window.event;
+    var files = e.target.files;
+    console.log(files)
+    avatar = files[0];
+}
+
 
 $_1('#working-space .submit-order button').onclick = function (e) {
+    e.preventDefault()
 
     var check = {
         username: $_1('#username').value,
@@ -225,13 +235,14 @@ $_1('#working-space .submit-order button').onclick = function (e) {
 
         })
 
+        total_nums = $_1('#ordered .fodr-total span').innerText.replaceAll('.', '').split(',').join("")
         const dataWS = {
             username: $_1('#username').value,
             email: $_1('#basic-info .email input').value,
             eventBooker: $_1('#basic-info .name input').value,
             title: $_1('#basic-info .event-title input').value,
             no_seating: $_1('#basic-info .seat-num input').value,
-            image: $_1('#basic-info .image input').value,
+            avatar: avatar,
             phone: $_1('.phoneNum input').value,
             description: $_1('#basic-info .description textarea').value,
             eventStartDate: $_1('#basic-info .start-time input').value.substring(0, 10),
@@ -240,17 +251,45 @@ $_1('#working-space .submit-order button').onclick = function (e) {
             eventEndTime: $_1('#basic-info .end-time input ').value.substring(11, 17),
             foods: foods,
             drinks: drinks,
-            total: parseInt(parseInt($_1('#ordered .fodr-total span').innerText.replaceAll('.', '')) * 1000)
+            total: parseInt($_1('#ordered .fodr-total span').innerText.replaceAll('.', '').split(',').join(""))
         }
 
+        var formData = new FormData()
+        formData.append('username', dataWS.username)
+        formData.append('email', dataWS.email)
+        formData.append('eventBooker', dataWS.eventBooker)
+        formData.append('title', dataWS.title)
+        formData.append('no_seating', dataWS.no_seating)
+        formData.append('avatar', dataWS.avatar)
+        formData.append('phone', dataWS.phone)
+        formData.append('description', dataWS.description)
+        formData.append('eventStartDate', dataWS.eventStartDate)
+        formData.append('eventStartTime', dataWS.eventStartTime)
+        formData.append('eventEndDate', dataWS.eventEndDate)
+        formData.append('eventEndTime', dataWS.eventEndTime)
+        for (var food of foods) {
+            formData.append(food.food_id, food.quantity)
+    
+        }
+        for (var drink of drinks) {
+            formData.append(drink.drink_id, drink.quantity)
+    
+        }
+        formData.append('split', foods.length)
+        formData.append('total', dataWS.total)
+
+        console.log(formData)
 
         $(document).ready(function () {
             $.ajax({
                 url: "/workingspaces/save",
                 method: "POST",
-                data: dataWS,
+                data: formData,
+                processData: false,
+                contentType: false,
                 success: function (res) {
-                    console.log(res)
+                    console.log(1)
+                    window.location.href =`/workingspaces/${res.slug}`;
                 }
             })
         })

@@ -40,8 +40,9 @@ body {
         z-index: 2;
         display: none;
         position: absolute;
-        top: 75%;
+        top: 70%;
         right: 4px;
+        width: 250px;
 
         ul {
             padding-left: 0px;
@@ -58,7 +59,7 @@ body {
 
             height: 40px;
             padding: 4px 16px;
-            width: 150px;
+            width: 100%;
         }
 
         li:hover {
@@ -102,6 +103,9 @@ body {
             height: 40px;
             padding: 4px 16px;
             width: 150px;
+            align-items: center;
+            display: flex;
+            justify-content: center;
         }
 
         li:hover {
@@ -123,6 +127,8 @@ body {
 
     .header-menu:hover #menu-list {
         display: block;
+        margin-left: -15px;
+        margin-top: -2px;
     }
 
     .header-user:hover #user-list {
@@ -499,7 +505,7 @@ a {
     justify-content: center;
 
     .noti-each {
-        background-color:white;
+        background-color: white;
         list-style-type: none;
         display: flex;
         align-items: center;
@@ -508,7 +514,7 @@ a {
     }
 
     .noti-each:hover {
-        background-color:#d5c6a6;
+        background-color: #d5c6a6;
     }
 
     .noti-img {

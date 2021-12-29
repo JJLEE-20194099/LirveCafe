@@ -55,7 +55,6 @@ export const createNotiOrNot = function(users, promos, promo) {
                 break
             }
         }
-        console.log(check)
         if (check) res.push(user)
 
     }

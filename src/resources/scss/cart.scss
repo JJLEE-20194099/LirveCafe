@@ -30,7 +30,11 @@
 
 .cart_quantity_box {
     margin-right: 32px;
-    width: 150px;
+    width: 180px;
+}
+
+.cart_quantity_box_title {
+    width: 180px;
 }
 
 .total_per_item {
@@ -207,4 +211,18 @@
     color: #fff;
     font-weight: 700;
     padding: 4px 12px;
+}
+
+.box-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 32px;
+    margin-right: 32px;
+    height: 60px;
+}
+
+.cart-title{
+    font-weight: bold;
+    font-size: 16px;
 }

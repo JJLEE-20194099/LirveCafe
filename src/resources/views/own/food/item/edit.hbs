@@ -26,17 +26,17 @@
 {{/each}}
 
 <div class="mt-4">
-    <h3>Thêm sách mới</h3>
+    <h3>Thêm đồ ăn mới</h3>
 
-    <form method="POST" action="/books/save" enctype='multipart/form-data'>
+    <form method="POST" action="/food/save" enctype='multipart/form-data'>
         <div class="form-group">
-            <label for="name">Tiêu đề</label>
+            <label for="name">Tên</label>
             <input type="text" class="form-control" id="name" name="title">
         </div>
-        <div class="form-group">
+        {{!-- <div class="form-group">
             <label for="author-name">Tác giả</label>
             <input type="text" class="form-control" id="author-name" name="author">
-        </div>
+        </div> --}}
         <div class="form-group">
             <label for="description">Mô tả</label>
             <br>
@@ -53,15 +53,15 @@
             <input type="text" class="form-control" id="" name="price">
         </div>
 
-        <div class="form-group">
+        {{!-- <div class="form-group">
             <label for="level">Nội dung</label>
             <input type="text" class="form-control" id="level" name="body">
-        </div>
-         <div class="form-group">
+        </div> --}}
+         {{!-- <div class="form-group">
             <label for="level">Số trang</label>
             <input type="text" class="form-control" id="level" name="no">
-        </div>
+        </div> --}}
 
-        <button type="submit" class="btn btn-primary">Thêm mới sách</button>
+        <button type="submit" class="btn btn-primary">Thêm mới đồ ăn</button>
     </form>
 </div>

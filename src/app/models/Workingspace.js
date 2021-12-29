@@ -10,7 +10,7 @@ const Workingspace = new Schema(
         eventBooker: {type: String, required: true},
         title: {type: String, required: true},
         description: {type: String},
-        image: {type: String, default: "http://www.davidkrugler.com/s/River-Lights-8318.jpg"},
+        avatar: {type: String, default: "http://www.davidkrugler.com/s/River-Lights-8318.jpg"},
         no_seating: {type: Number, requiresd: true},
         email: {type: String, required: true},
         phone: {type: String, required: true},

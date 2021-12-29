@@ -39,9 +39,6 @@ var upload = multer({
 
 router.get('/list', controllers.index);
 router.get('/create', controllers.create);
-router.get('/buy/:id', controllers.showPayForm)
-router.get('/buys/:id', controllers.showAllCartPayForm)
-router.post('/buys', controllers.buyAllCart)
 router.get('/:slug', controllers.show);
 router.post('/save', 
     upload.single('image'),

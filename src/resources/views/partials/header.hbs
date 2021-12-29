@@ -95,7 +95,7 @@
                     {{else}}
                     <div id="no-noti-title" class="justify-content-center align-items-center"
                         style="border-top: 0.5px solid #ccc; display: flex; padding-top: 12; padding-bottom: 12">
-                        <div style="color: #c39e51; margin-top: 8px; margin-bottom: 8px"
+                        <div style="color: #75736e; margin-top: 8px; margin-bottom: 8px"
                             href="/notis/{{user.username}}">Bạn chưa có thông báo nào cả</div>
                     </div>
                     {{/if}}
@@ -108,7 +108,10 @@
 
 
         <div id="header-cart" class="col-1 text-center .align-items-center">
-            <a href='#'>
+
+            {{#if user}}
+            <a
+                href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>
                 <i class="header-icon ti-shopping-cart-full">
                     {{#if cart.itemList.length}}
                     <span id="cart-number" class="header-number">{{cart.itemList.length}}</span>
@@ -116,6 +119,15 @@
                     {{/if}}
                 </i>
             </a>
+
+            {{else}}
+            <a
+                href='/auth/index'>
+                <i class="header-icon ti-shopping-cart-full">
+                  
+                </i>
+            </a>
+            {{/if}}
         </div>
 
         <div class="header-user d-flex .align-items-center">
@@ -132,25 +144,45 @@
                 <ul>
                     {{#if user}}
                     <li><a style="font-size: 16px" href='/users/{{user._id}}'>Tài khoản</a></li>
-                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/auth/logout'>Đăng xuất</a></li>
-                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/books'>Quản lý sách</a></li>
-                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/coffee'>Quản lý nước uống</a></li>
-                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/foods'>Quản lý đồ ăn</a></li>
-                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/promos'>Quản lý mã giảm giá</a></li>
-                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/workingspaces'>Quản lý workingspace</a></li>
-                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/users'>Quản lý người dùng</a></li>
-                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/orders'>Quản lý đơn hàng</a></li>
+                    <li
+                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                        <a style="font-size: 16px" href='/auth/logout'>Đăng xuất</a></li>
+
                     {{#if user.role}}
+                    <li
+                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                        <a style="font-size: 16px" href='/own/stored/books'>Quản lý sách</a></li>
+                    <li
+                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                        <a style="font-size: 16px" href='/own/stored/coffee'>Quản lý nước uống</a></li>
+                    <li
+                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                        <a style="font-size: 16px" href='/own/stored/food'>Quản lý đồ ăn</a></li>
+                    <li
+                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                        <a style="font-size: 16px" href='/own/stored/promos'>Quản lý mã giảm giá</a></li>
+                    <li
+                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                        <a style="font-size: 16px" href='/own/stored/workingspaces'>Quản lý workingspace</a></li>
+                    <li
+                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                        <a style="font-size: 16px" href='/own/stored/users'>Quản lý người dùng</a></li>
+                    <li
+                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                        <a style="font-size: 16px" href='/own/stored/orders'>Quản lý đơn hàng</a></li>
                     {{else}}
 
                     <li style="height: 60px; border-top: 1px solid white"><a
                             href='/users/{{user.username}}/register_loyal_member'>Đăng ký thành viên thân thiết</a></li>
                     <li style="height: 60px; border-top: 1px solid white"><a
-                            href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Giỏ hàng của tôi</a></li>
-                        <li style="height: 60px; border-top: 1px solid white"><a
-                        href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Đơn hàng của tôi</a></li>
-                        <li style="height: 60px; border-top: 1px solid white"><a
-                        href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Sự kiện của tôi</a></li>
+                            href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Giỏ
+                            hàng của tôi</a></li>
+                    <li style="height: 60px; border-top: 1px solid white"><a
+                            href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Đơn
+                            hàng của tôi</a></li>
+                    <li style="height: 60px; border-top: 1px solid white"><a
+                            href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Sự
+                            kiện của tôi</a></li>
                     {{/if}}
 
 

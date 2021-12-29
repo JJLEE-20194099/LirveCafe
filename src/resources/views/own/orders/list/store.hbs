@@ -1,83 +1,189 @@
-<div class="mt-4">
-  <div>
-    <h3>Danh sách đơn hàng của {{username}}</h3>
-    <a href="/own/trash/orders">Thùng rác ({{deletedCount}})</a>
+<link rel="stylesheet" href="/css/store_trash.css">
+<link rel="stylesheet" href="/css/load_more.css">
+<div class="container">
+  <div class="mt-4">
+    <div class="header">
+      <h3>Đơn hàng của quán</h3>
+      <a href="/own/trash/orders">Thùng rác ({{deletedCount}})</a>
+    </div>
+
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Username</th>
+          <th scope="col">Total</th>
+          <th scope="col" colspan="2">Thời gian mua</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each orders}}
+        <tr class="item-for-loadmore">
+          <th scope="row">{{sum @index 1}}</th>
+          <td>{{this.name}}</td>
+          <td>
+            {{this.total}}đ
+          </td>
+          <td class="date">{{this.createdAt}}</td>
+          <td class="btn-group">
+            <button type="button" class="btn btn-outline-success" data-toggle="modal"
+              data-target="#{{this._id}}">Xem</button>
+            <div class="modal fade" id="{{this._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: white;">
+                  <div class="item-info">
+                    <div>
+
+                      <div>
+                        <p style="font-size: 17px; font-weight: bold; color: #000">Purchaser: {{this.name}}</p>
+                        <p style="font-size: 16px; font-weight: bold; color: #767676">Phone: {{this.phone}}</p>
+                        <p style="font-size: 16px; font-weight: bold; color: #767676">Total: {{this.total}}đ</p>
+                        <p style="font-size: 16px; font-weight: bold; color: #767676">Item_no: {{this.itemList.length}}</p>
+                      </div>
+                      <div>
+                        {{#each this.itemList}}
+                        {{#if this.food}}
+                        <div style="display: flex; justify-content: space-evenly; align-items: center; margin-bottom: 12px">
+                          <img src="{{this.food.image}}" style="height: 60px; width: 60px" alt="">
+                          <a href="/food/{{this.food.slug}}" style="flex: 1; margin: 12px; color: #c39e51; font-size: 16px; font-weight: bold">{{this.food.name}}</a>
+                          <span style="font-weight: bold; font-size: 16px; color: #c39e51">SL: {{this.quantity}}</span>
+                        </div>
+
+                        {{/if}}
+
+                         {{#if this.book}}
+                        <div style="display: flex; justify-content: space-evenly; align-items: center; margin-bottom: 12px">
+                          <img src="{{this.book.image}}" style="height: 60px; width: 60px" alt="">
+                          <a href="/books/{{this.book.slug}}" style="flex: 1; margin: 12px; color: #c39e51; font-size: 16px; font-weight: bold">{{this.book.title}}</a>
+                          <span style="font-weight: bold; font-size: 16px; color: #c39e51">SL: {{this.quantity}}</span>
+                        </div>
+
+                        {{/if}}
+
+                         {{#if this.coffee}}
+                        <div style="display: flex; justify-content: space-evenly; align-items: center; margin-bottom: 12px">
+                          <img src="{{this.coffee.image}}" style="height: 60px; width: 60px" alt="">
+                          <a href="/coffee/{{this.coffee.slug}}" style="flex: 1; margin: 12px; color: #c39e51; font-size: 16px; font-weight: bold">{{this.coffee.name}}</a>
+                          <span style="font-weight: bold; font-size: 16px; color: #c39e51">SL: {{this.quantity}}</span>
+                        </div>
+
+                        {{/if}}
+
+                        {{/each}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a href="/orders/{{this._id}}/edit" class="btn btn-outline-primary">Sửa</a>
+            <button href="" class="btn btn-outline-warning" data-toggle="modal" data-id="{{this._id}}"
+              data-target="#delete-book-modal">Xóa</button>
+          </td>
+        </tr>
+        {{else}}
+        <tr>
+          <td colspan="5" class="text-center">
+            Bạn chưa đơn hàng nào
+            <a href="/">Quay về trang chủ</a>
+          </td>
+        </tr>
+        {{/each}}
+
+
+
+      </tbody>
+
+    </table>
   </div>
 
-  <table class="table mt-4">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Mã đơn hàng</th>
-        <th scope="col">Tổng tiền</th>
-        <th scope="col" colspan="2">Thời gian tạo</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each orders}}
-      <tr>
-        <th scope="row">{{sum @index 1}}</th>
-        <td>{{this._id}}</td>
-        <td>{{this.total}}000 VNĐ</td>
-        <td><span class="date">{{this.createdAt}}</span></td>
-        <td>
-          <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}"
-            data-target="#delete-order-modal">Xóa</a>
-        </td>
-      </tr>
-      {{else}}
-      <tr>
-        <td colspan="5" class="text-center">
-          Trống
+  <a href="#" id="loadMore">Load More</a>
 
-        </td>
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
+  <p class="totop btn btn-danger">
+    <a href="#top" id="top" style="color: #fff">Back to top</a>
+  </p>
 
-{{!-- Confirm delete order --}}
-<div id="delete-order-modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Xóa sách?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Bạn chắc chắn muốn xóa đơn hàng này?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-        <button id="btn-delete-order" type="button" class="btn btn-danger">Xóa bỏ</button>
+  {{!-- Confirm delete book --}}
+  <div id="delete-book-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Xóa book?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>Bạn chắc chắn muốn xóa cuốn sách này?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+          <button id="btn-delete-book" type="button" class="btn btn-danger">Xóa bỏ</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-{{!-- Delete hidden form --}}
-<form name="delete-order-form" method="POST"></form>
+  {{!-- Delete hidden form --}}
+  <form name="delete-book-form" method="POST"></form>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/js/datetime_handling.js"></script>
+  <script>
 
-<script src="../../../../../support_lib/datetime_handling.js"></script>
 
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var orderId;
-    var deleteForm = document.forms['delete-order-form'];
-    var btnDeleteorder = document.getElementById('btn-delete-order');
-    // When dialog confirm clicked
-    $('#delete-order-modal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget);
-      orderId = button.data('id');
+
+    $(document).ready(function () {
+      var bookId;
+      var deleteForm = document.forms['delete-book-form'];
+      var btnDeleteBook = document.getElementById('btn-delete-book');
+
+
+      // When dialog confirm clicked
+      $('#delete-book-modal').on('show.bs.modal', function (book) {
+
+        var button = $(book.relatedTarget);
+        bookId = button.data('id');
+        console.log(bookId)
+      });
+
+      // When delete book btn clicked
+      btnDeleteBook.onclick = function () {
+        deleteForm.action = '/orders/' + bookId + '?_method=DELETE';
+        deleteForm.submit();
+      }
+
+      $(".item-for-loadmore").slice(0, 4).show();
+      $("#loadMore").on('click', function (e) {
+        e.preventDefault();
+        $(".item-for-loadmore:hidden").slice(0, 4).slideDown();
+        if ($(".item-for-loadmore:hidden").length == 0) {
+          $("#load").fadeOut('slow');
+        }
+        $('html,body').animate({
+          scrollTop: $(this).offset().top
+        }, 1500);
+      });
+
+      $('#top').click(function () {
+        $('body,html').animate({
+          scrollTop: 0
+        }, 600);
+        return false;
+      });
+
+
     });
 
-    // When delete order btn clicked
-    btnDeleteorder.onclick = function () {
-      deleteForm.action = '/orders/' + orderId + '?_method=DELETE';
-      deleteForm.submit();
-    }
-  });
-</script>
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 50) {
+        $('.totop a').fadeIn();
+      } else {
+        $('.totop a').fadeOut();
+      }
+    });
+  </script>
+</div>

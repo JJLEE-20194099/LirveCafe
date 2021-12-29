@@ -1,5 +1,6 @@
 import Coffee from '../models/Coffee.js';
 import Book from '../models/Book.js';
+import Food from '../models/Food.js';
 import News from '../models/News.js';
 import User from '../models/User.js';
 import Workingspace from '../models/Workingspace.js';
@@ -139,7 +140,7 @@ const OwnController = {
     storedWorkingspaces(req, res, next) {
         Promise.all([Event.find({}), Event.countDocumentsDeleted()])
             .then(([workingspaces, deletedCount]) => {
-                res.render('users/workingspaces/list/store.hbs', {
+                res.render('own/workingspaces/list/store.hbs', {
                     deletedCount,
                     workingspaces: mongooseDocumentsToObject(workingspaces),
                     user: res.locals.user,
@@ -252,6 +253,67 @@ const OwnController = {
                 })
             }).catch(next);
     },
+
+    // 9. food warehouse
+
+    // GET own/stored/food
+    storedFood(req, res, next) {
+        Promise.all([Food.find({}), Food.countDocumentsDeleted()])
+            .then(([food, deletedCount]) => {
+                res.render('own/food/list/store.hbs', {
+                    deletedCount,
+                    food: mongooseDocumentsToObject(food),
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                })
+            }).catch(next);
+    },
+
+    // GET own/trash/food
+    trashFood(req, res, next) {
+        Food.findDeleted({})
+            .then((food) => {
+                res.render('own/food/list/trash.hbs', {
+                    food: mongooseDocumentsToObject(food),
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                })
+            }).catch(next);
+    },
+
+
+    // 10. workingspaces warehouse
+
+    // GET own/stored/workingspaces
+    storedWorkingspaces(req, res, next) {
+        Promise.all([Workingspace.find({}), Workingspace.countDocumentsDeleted()])
+            .then(([workingspaces, deletedCount]) => {
+                res.render('own/workingspaces/list/store.hbs', {
+                    deletedCount,
+                    workingspaces: mongooseDocumentsToObject(workingspaces),
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                })
+            }).catch(next);
+    },
+
+    // GET own/trash/workingspaces
+    trashWorkingspaces(req, res, next) {
+        Workingspace.getfindDeleted({})
+            .then((workingspaces) => {
+                res.render('own/workingspace/list/trash.hbs', {
+                    workingspaces: mongooseDocumentsToObject(workingspaces),
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                })
+            }).catch(next);
+    },
+
+    
 
 
 

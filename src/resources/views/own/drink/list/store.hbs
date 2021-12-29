@@ -1,8 +1,10 @@
 <link rel="stylesheet" href="/css/store_trash.css">
+<link rel="stylesheet" href="/css/load_more.css">
 <div class="container">
     <div class="mt-4">
         <div class="header">
             <h3>Nước uống của tôi</h3>
+            <span><a href="/coffee/create" style="font-size: 16px; font-weight: 500;">Tạo nước uống</a></span>
             <a href="/own/trash/coffee">Thùng rác ({{deletedCount}})</a>
         </div>
 
@@ -10,40 +12,74 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
+                    <th scope="col">Title</th>
                     <th scope="col">Price</th>
                     <th scope="col" colspan="2">Thời gian tạo</th>
                 </tr>
             </thead>
             <tbody>
                 {{#each coffee}}
-                <tr>
+                <tr class="item-for-loadmore">
                     <th scope="row">{{sum @index 1}}</th>
                     <td>{{this.name}}</td>
                     <td>
-                      {{this.price}}
+                        {{this.price}}đ
                     </td>
                     <td class="date">{{this.createdAt}}</td>
-                    <td>
-                        <a href="/coffee/{{this._id}}/edit" class="btn btn-link">Sửa</a>
-                        <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}"
-                            data-target="#delete-coffee-modal">Xóa</a>
+                    <td class="btn-group">
+                        <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                            data-target="#{{this._id}}">Xem</button>
+                        <div class="modal fade" id="{{this._id}}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: white;">
+                                    <div class="item-info">
+                                        <div>
+                                            <img src="{{this.image}}" alt="" class="img-admin">
+                                        </div>
+
+                                        <div>
+                                            <div>
+                                                <h3>{{this.name}}</h3>
+                                            </div>
+                                            <div>
+                                                <p>Giá: {{this.price}}đ</p>
+                                                <p>{{this.description}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/coffee/{{this._id}}/edit" class="btn btn-outline-primary">Sửa</a>
+                        <button href="" class="btn btn-outline-warning" data-toggle="modal" data-id="{{this._id}}"
+                            data-target="#delete-book-modal">Xóa</button>
                     </td>
                 </tr>
                 {{else}}
                 <tr>
                     <td colspan="5" class="text-center">
-                        Bạn chưa có nước uống nào.
+                        Bạn chưa có thứ nước uống nào.
                         <a href="/coffee/create">Tạo nước uống</a>
                     </td>
                 </tr>
                 {{/each}}
+
+
+
             </tbody>
+
         </table>
     </div>
 
-    {{!-- Confirm delete coffee --}}
-    <div id="delete-coffee-modal" class="modal" tabindex="-1" role="dialog">
+    <a href="#" id="loadMore">Load More</a>
+
+    <p class="totop btn btn-danger">
+        <a href="#top" id="top" style="color: #fff">Back to top</a>
+    </p>
+
+    {{!-- Confirm delete book --}}
+    <div id="delete-book-modal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -53,42 +89,74 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn chắc chắn muốn xóa cuốn nước uống này?</p>
+                    <p>Bạn chắc chắn muốn xóa thứ nước uống này?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button id="btn-delete-coffee" type="button" class="btn btn-danger">Xóa bỏ</button>
+                    <button id="btn-delete-book" type="button" class="btn btn-danger">Xóa bỏ</button>
                 </div>
             </div>
         </div>
     </div>
 
     {{!-- Delete hidden form --}}
-    <form name="delete-coffee-form" method="POST"></form>
+    <form name="delete-book-form" method="POST"></form>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/js/datetime_handling.js"></script>
     <script>
+
+
+
         $(document).ready(function () {
-            var coffeeId;
-            var deleteForm = document.forms['delete-coffee-form'];
-            var btnDeletecoffee = document.getElementById('btn-delete-coffee');
+            var bookId;
+            var deleteForm = document.forms['delete-book-form'];
+            var btnDeleteBook = document.getElementById('btn-delete-book');
 
 
             // When dialog confirm clicked
-            $('#delete-coffee-modal').on('show.bs.modal', function (coffee) {
+            $('#delete-book-modal').on('show.bs.modal', function (book) {
 
-                var button = $(coffee.relatedTarget);
-                coffeeId = button.data('id');
-                console.log(coffeeId)
+                var button = $(book.relatedTarget);
+                bookId = button.data('id');
+                console.log(bookId)
             });
 
-            // When delete coffee btn clicked
-            btnDeletecoffee.onclick = function () {
-                deleteForm.action = '/coffee/' + coffeeId + '?_method=DELETE';
+            // When delete book btn clicked
+            btnDeleteBook.onclick = function () {
+                deleteForm.action = '/coffee/' + bookId + '?_method=DELETE';
                 deleteForm.submit();
+            }
+
+            $(".item-for-loadmore").slice(0, 4).show();
+            $("#loadMore").on('click', function (e) {
+                e.preventDefault();
+                $(".item-for-loadmore:hidden").slice(0, 4).slideDown();
+                if ($(".item-for-loadmore:hidden").length == 0) {
+                    $("#load").fadeOut('slow');
+                }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+            });
+
+            $('#top').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
+
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.totop a').fadeIn();
+            } else {
+                $('.totop a').fadeOut();
             }
         });
     </script>

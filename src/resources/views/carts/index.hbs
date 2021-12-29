@@ -9,7 +9,21 @@
     <p id="username" style="display: none">{{cart.username}}</p>
 
     <input type="text" id="cartId" value="{{cart._id}}" style="display:none">
+     <div class="box-title">
+      <div class="d-flex align-items-center" style="flex: 1">
+        <span class="cart-title">Tên sản phẩm</span>
+      </div>
+      <div class="d-flex align-items-center">
+        <p class="cart-title d-flex align-items-center" style="margin-right: 84px; margin-bottom: 0">Tổng đơn</p>
+      </div>
+      <div class="cart_quantity_box_title">
+        <span class="cart-title">Giảm</span>
+        <span class="cart-title">SoL</span>
+        <span class="cart-title">Tăng</span>
+      </div>
+    </div>
     {{#each cart.itemList}}
+    {{#if this.book}}
     <div id="{{this.book._id}}" class="cart_item">
       <div class="cart_item_title_box">
         <span> {{this.book.title}}</span>
@@ -24,7 +38,39 @@
         <button class="btn btn-warning" onclick="add(this)">+</button>
       </div>
     </div>
-
+    {{/if}}
+    {{#if this.food}}
+    <div id="{{this.food._id}}" class="cart_item">
+      <div class="cart_item_title_box">
+        <span> {{this.food.name}}</span>
+        (Đơn giá: <span type="text" class="priceEachItem">{{this.food.price}}</span>)
+      </div>
+      <div class="total_per_item">
+        <p class="priceEachItemTotal">{{multiply this.quantity this.food.price}}</p>
+      </div>
+      <div class="cart_quantity_box">
+        <button class="btn btn-warning" onclick="subtract(this)">-</button>
+        <span class="quantity btn btn-warning">{{this.quantity}}</span>
+        <button class="btn btn-warning" onclick="add(this)">+</button>
+      </div>
+    </div>
+    {{/if}}
+    {{#if this.coffee}}
+    <div id="{{this.coffee._id}}" class="cart_item">
+      <div class="cart_item_title_box">
+        <span> {{this.coffee.name}}</span>
+        (Đơn giá: <span type="text" class="priceEachItem">{{this.coffee.price}}</span>)
+      </div>
+      <div class="total_per_item">
+        <p class="priceEachItemTotal">{{multiply this.quantity this.coffee.price}}</p>
+      </div>
+      <div class="cart_quantity_box">
+        <button class="btn btn-warning" onclick="subtract(this)">-</button>
+        <span class="quantity btn btn-warning">{{this.quantity}}</span>
+        <button class="btn btn-warning" onclick="add(this)">+</button>
+      </div>
+    </div>
+    {{/if}}
     {{/each}}
 
     <div style="display: flex; justify-content: center; align-items: center; margin: 30px;" id="total-box"
@@ -56,7 +102,7 @@
     <div id="promoId" style="display: none"></div>
     {{#if cart.itemList.length}}
     <div style="display: flex; justify-content: center; align-items: center; margin-top: 32px"><a
-        href="/books/buys/{{cart._id}}" class="btn btn-warning" id="purchaseBtn">Purchase now</a></div>
+        href="/carts/buys/{{cart._id}}" class="btn btn-warning" id="purchaseBtn">Purchase now</a></div>
     {{/if}}
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -100,7 +146,7 @@
             item.parentElement.style.opacity = 1;
           }
         }
-        $("#purchaseBtn").attr('href', `/books/buys/${cartId}`)
+        $("#purchaseBtn").attr('href', `/carts/buys/${cartId}`)
       } else {
 
         var promoList = document.getElementsByClassName('promo-btn');
@@ -128,7 +174,7 @@
             cartId, promoId
           }
           $("#promoId").text(promoId)
-          $("#purchaseBtn").attr('href', `/books/buys/${cartId}?promoId=${promoId}`);
+          $("#purchaseBtn").attr('href', `/carts/buys/${cartId}?promoId=${promoId}`);
           $.ajax({
             url: '/carts/add-promo-to-cart',
             method: "POST",

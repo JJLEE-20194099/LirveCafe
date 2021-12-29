@@ -1,307 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- reset CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- link css -->
-    <link rel="stylesheet" href="/css/user_list_base.css">
-    <link rel="stylesheet" href="/css/user_list_main.css">
-    <link rel="stylesheet" href="/font/fontawesome/css/all.css">
-    <!-- link google font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap" rel="stylesheet">
-    
-    <!-- link image -->
-</head>
-<body>
-    <div class="admin__users">
-        <div class="users__heading">
-            Users: 
-            <span class="users__heading-count">26</span>
-            <a href="#">
-               
-            </a>
+<link rel="stylesheet" href="/css/store_trash.css">
+<link rel="stylesheet" href="/css/load_more.css">
+<div class="container">
+    <div class="mt-4">
+        <div class="header">
+            <h3>Người dùng trong hệ thống</h3>
+            <a href="/own/trash/users">Thùng rác ({{deletedCount}})</a>
         </div>
-        <div class="users__content">
-            <div class="users__content-search">
-                <i class="fas fa-search users-search__icon"></i>
+
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">username</th>
+                    <th scope="col">Cấp bậc thành viên</th>
+                    <th scope="col" colspan="2">Vai trò</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each users}}
+                <tr class="item-for-loadmore">
+                    <th scope="row" style="font-size: 16px; font-weight: bold; color: #c39e51">{{sum @index 1}}</th>
+                    <td style="font-size: 16px; font-weight: bold; color: #c39e51">{{this.username}}</td>
+                    
+                    <td class="level" style="font-size: 16px; font-weight: bold; color: #c39e51">
+                        {{this.registered_level}}
+                    </td>
+                    {{#if this.role}}
+                        <td style="font-size: 16px; font-weight: bold; color: #c39e51">Admin</td>
+                    {{else}}    
+                        <td style="font-size: 16px; font-weight: bold; color: #c39e51">System's user</td>
+                    {{/if}}
+                    <td class="btn-group">
+                        <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                            data-target="#{{this._id}}">Xem</button>
+                        <div class="modal fade" id="{{this._id}}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: white;">
+                                    <div class="item-info">
+                                        <div>
+                                            <img src="{{this.avatar}}" alt="" class="img-admin">
+                                        </div>
+
+                                        <div>
+                                            <div>
+                                                <h3>{{this.username}}</h3>
+                                            </div>
+                                            <div>
+                                                <p>Email: {{this.email}}</p>
+                                                <p>Phone: {{this.phone}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button href="" class="btn btn-outline-warning" data-toggle="modal" data-id="{{this._id}}"
+                            data-target="#delete-book-modal">Xóa</button>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="5" class="text-center">
+                        Hệ thống của bạn chưa có người dùng nào nào.
+                        <a href="/">Quay về trang chủ</a>
+                    </td>
+                </tr>
+                {{/each}}
+
+
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <a href="#" id="loadMore">Load More</a>
+
+    <p class="totop btn btn-danger">
+        <a href="#top" id="top" style="color: #fff">Back to top</a>
+    </p>
+
+    {{!-- Confirm delete book --}}
+    <div id="delete-book-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa người dùng?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn chắc chắn muốn xóa người dùng này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button id="btn-delete-book" type="button" class="btn btn-danger">Xóa bỏ</button>
+                </div>
             </div>
-            <ul class="users-list">
-                <li class="users-item">
-                    <div class="users__profile">
-                        <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="users__profile-img">
-                        <div class="users__profile-des">
-                            <div class="users__profile-name">DeathLikeAWind</div>
-                            <!-- add class users-status--active for online -->
-                            <!-- add class users-status--offline for offline -->
-                            <div class="users__profile-status users-status--offline">
-                                <i class="fas fa-circle users-status__icon"></i>
-                                <span class="status--offline">Offline</span>
-                                <span class="status--online">Online</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="users-item__des">
-                        <div class="users-item__des-email">loveleesn@gmail.com</div>
-                        Role: 
-                        <span class="users__des-role">Admin</span>
-                    </div>
-    
-                    <div class="users-item__actions">
-                        <a href="#" class="users-item__btn users-item__btn--view">
-                            <i class="fas fa-eye users-item__btn-icon"></i>
-                        </a>
-                        <button class="users-item__btn users-item__btn--del">
-                            <i class="fas fa-trash users-item__btn-icon"></i>
-                        </button>
-                    </div>
-                </li>
-                <li class="users-item">
-                    <div class="users__profile">
-                        <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="users__profile-img">
-                        <div class="users__profile-des">
-                            <div class="users__profile-name">DeathLikeAWind</div>
-                            <!-- add class users-status--active for online -->
-                            <!-- add class users-status--offline for offline -->
-                            <div class="users__profile-status users-status--online">
-                                <i class="fas fa-circle users-status__icon"></i>
-                                <span class="status--offline">Offline</span>
-                                <span class="status--online">Online</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="users-item__des">
-                        <div class="users-item__des-email">loveleesn@gmail.com</div>
-                        Role: 
-                        <span class="users__des-role">Admin</span>
-                    </div>
-    
-                    <div class="users-item__actions">
-                        <a href="#" class="users-item__btn users-item__btn--view">
-                            <i class="fas fa-eye users-item__btn-icon"></i>
-                        </a>
-                        <button class="users-item__btn users-item__btn--del">
-                            <i class="fas fa-trash users-item__btn-icon"></i>
-                        </button>
-                    </div>
-                </li>
-                <li class="users-item">
-                    <div class="users__profile">
-                        <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="users__profile-img">
-                        <div class="users__profile-des">
-                            <div class="users__profile-name">DeathLikeAWind</div>
-                            <!-- add class users-status--active for online -->
-                            <!-- add class users-status--offline for offline -->
-                            <div class="users__profile-status users-status--online">
-                                <i class="fas fa-circle users-status__icon"></i>
-                                <span class="status--offline">Offline</span>
-                                <span class="status--online">Online</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="users-item__des">
-                        <div class="users-item__des-email">loveleesn@gmail.com</div>
-                        Role: 
-                        <span class="users__des-role">Admin</span>
-                    </div>
-    
-                    <div class="users-item__actions">
-                        <a href="#" class="users-item__btn users-item__btn--view">
-                            <i class="fas fa-eye users-item__btn-icon"></i>
-                        </a>
-                        <button class="users-item__btn users-item__btn--del">
-                            <i class="fas fa-trash users-item__btn-icon"></i>
-                        </button>
-                    </div>
-                </li>
-                <li class="users-item">
-                    <div class="users__profile">
-                        <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="users__profile-img">
-                        <div class="users__profile-des">
-                            <div class="users__profile-name">DeathLikeAWind</div>
-                            <!-- add class users-status--active for online -->
-                            <!-- add class users-status--offline for offline -->
-                            <div class="users__profile-status users-status--online">
-                                <i class="fas fa-circle users-status__icon"></i>
-                                <span class="status--offline">Offline</span>
-                                <span class="status--online">Online</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="users-item__des">
-                        <div class="users-item__des-email">loveleesn@gmail.com</div>
-                        Role: 
-                        <span class="users__des-role">Admin</span>
-                    </div>
-    
-                    <div class="users-item__actions">
-                        <a href="#" class="users-item__btn users-item__btn--view">
-                            <i class="fas fa-eye users-item__btn-icon"></i>
-                        </a>
-                        <button class="users-item__btn users-item__btn--del">
-                            <i class="fas fa-trash users-item__btn-icon"></i>
-                        </button>
-                    </div>
-                </li>
-                <li class="users-item">
-                    <div class="users__profile">
-                        <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="users__profile-img">
-                        <div class="users__profile-des">
-                            <div class="users__profile-name">DeathLikeAWind</div>
-                            <!-- add class users-status--active for online -->
-                            <!-- add class users-status--offline for offline -->
-                            <div class="users__profile-status users-status--online">
-                                <i class="fas fa-circle users-status__icon"></i>
-                                <span class="status--offline">Offline</span>
-                                <span class="status--online">Online</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="users-item__des">
-                        <div class="users-item__des-email">loveleesn@gmail.com</div>
-                        Role: 
-                        <span class="users__des-role">Admin</span>
-                    </div>
-    
-                    <div class="users-item__actions">
-                        <a href="#" class="users-item__btn users-item__btn--view">
-                            <i class="fas fa-eye users-item__btn-icon"></i>
-                        </a>
-                        <button class="users-item__btn users-item__btn--del">
-                            <i class="fas fa-trash users-item__btn-icon"></i>
-                        </button>
-                    </div>
-                </li>
-                <li class="users-item">
-                    <div class="users__profile">
-                        <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="users__profile-img">
-                        <div class="users__profile-des">
-                            <div class="users__profile-name">DeathLikeAWind</div>
-                            <!-- add class users-status--active for online -->
-                            <!-- add class users-status--offline for offline -->
-                            <div class="users__profile-status users-status--offline">
-                                <i class="fas fa-circle users-status__icon"></i>
-                                <span class="status--offline">Offline</span>
-                                <span class="status--online">Online</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="users-item__des">
-                        <div class="users-item__des-email">loveleesn@gmail.com</div>
-                        Role: 
-                        <span class="users__des-role">Admin</span>
-                    </div>
-    
-                    <div class="users-item__actions">
-                        <a href="#" class="users-item__btn users-item__btn--view">
-                            <i class="fas fa-eye users-item__btn-icon"></i>
-                        </a>
-                        <button class="users-item__btn users-item__btn--del">
-                            <i class="fas fa-trash users-item__btn-icon"></i>
-                        </button>
-                    </div>
-                </li>
-                <li class="users-item">
-                    <div class="users__profile">
-                        <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="users__profile-img">
-                        <div class="users__profile-des">
-                            <div class="users__profile-name">DeathLikeAWind</div>
-                            <!-- add class users-status--active for online -->
-                            <!-- add class users-status--offline for offline -->
-                            <div class="users__profile-status users-status--offline">
-                                <i class="fas fa-circle users-status__icon"></i>
-                                <span class="status--offline">Offline</span>
-                                <span class="status--online">Online</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="users-item__des">
-                        <div class="users-item__des-email">loveleesn@gmail.com</div>
-                        Role: 
-                        <span class="users__des-role">Admin</span>
-                    </div>
-    
-                    <div class="users-item__actions">
-                        <a href="#" class="users-item__btn users-item__btn--view">
-                            <i class="fas fa-eye users-item__btn-icon"></i>
-                        </a>
-                        <button class="users-item__btn users-item__btn--del">
-                            <i class="fas fa-trash users-item__btn-icon"></i>
-                        </button>
-                    </div>
-                </li><li class="users-item">
-                    <div class="users__profile">
-                        <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="users__profile-img">
-                        <div class="users__profile-des">
-                            <div class="users__profile-name">DeathLikeAWind</div>
-                            <!-- add class users-status--active for online -->
-                            <!-- add class users-status--offline for offline -->
-                            <div class="users__profile-status users-status--offline">
-                                <i class="fas fa-circle users-status__icon"></i>
-                                <span class="status--offline">Offline</span>
-                                <span class="status--online">Online</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="users-item__des">
-                        <div class="users-item__des-email">loveleesn@gmail.com</div>
-                        Role: 
-                        <span class="users__des-role">Admin</span>
-                    </div>
-    
-                    <div class="users-item__actions">
-                        <a href="#" class="users-item__btn users-item__btn--view">
-                            <i class="fas fa-eye users-item__btn-icon"></i>
-                        </a>
-                        <button class="users-item__btn users-item__btn--del">
-                            <i class="fas fa-trash users-item__btn-icon"></i>
-                        </button>
-                    </div>
-                </li><li class="users-item">
-                    <div class="users__profile">
-                        <img src="https://i.9mobi.vn/cf/images/ba/2018/4/16/anh-avatar-dep-8.jpg" alt="" class="users__profile-img">
-                        <div class="users__profile-des">
-                            <div class="users__profile-name">DeathLikeAWind</div>
-                            <!-- add class users-status--active for online -->
-                            <!-- add class users-status--offline for offline -->
-                            <div class="users__profile-status users-status--offline">
-                                <i class="fas fa-circle users-status__icon"></i>
-                                <span class="status--offline">Offline</span>
-                                <span class="status--online">Online</span>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="users-item__des">
-                        <div class="users-item__des-email">loveleesn@gmail.com</div>
-                        Role: 
-                        <span class="users__des-role">Admin</span>
-                    </div>
-    
-                    <div class="users-item__actions">
-                        <a href="#" class="users-item__btn users-item__btn--view">
-                            <i class="fas fa-eye users-item__btn-icon"></i>
-                        </a>
-                        <button class="users-item__btn users-item__btn--del">
-                            <i class="fas fa-trash users-item__btn-icon"></i>
-                        </button>
-                    </div>
-                </li>
-            </ul>
         </div>
     </div>
-</body>
-</html>
+
+    {{!-- Delete hidden form --}}
+    <form name="delete-book-form" method="POST"></form>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/datetime_handling.js"></script>
+    <script>
+
+        levels = document.getElementsByClassName("level")
+        for (var level of levels) {
+            num = parseInt(level.innerHTML)
+              if (num == 1) {
+                    level.innerHTML = "Bronze Memmber"
+                } else if (num == 2) {
+                    level.innerHTML = "Silver Member"
+                } else if (num == 3) {
+                   level.innerHTML = "Gold Member"
+                } else if (num == 4) {
+                    level.innerHTML = "Platinum Member"
+                } else if (num == 5) {
+                    level.innerHTML = "Dimond Member"
+                } else if (num == 6) {
+                   level.innerHTML = "Master Member"
+                } else if (num == 0) {
+                    level.innerHTML = "Normal Member"
+                }
+        }
+
+
+
+        $(document).ready(function () {
+            var bookId;
+            var deleteForm = document.forms['delete-book-form'];
+            var btnDeleteBook = document.getElementById('btn-delete-book');
+
+
+            // When dialog confirm clicked
+            $('#delete-book-modal').on('show.bs.modal', function (book) {
+
+                var button = $(book.relatedTarget);
+                bookId = button.data('id');
+                console.log(bookId)
+            });
+
+            // When delete book btn clicked
+            btnDeleteBook.onclick = function () {
+                deleteForm.action = '/users/' + bookId + '?_method=DELETE';
+                deleteForm.submit();
+            }
+
+            $(".item-for-loadmore").slice(0, 4).show();
+            $("#loadMore").on('click', function (e) {
+                e.preventDefault();
+                $(".item-for-loadmore:hidden").slice(0, 4).slideDown();
+                if ($(".item-for-loadmore:hidden").length == 0) {
+                    $("#load").fadeOut('slow');
+                }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+            });
+
+            $('#top').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
+
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.totop a').fadeIn();
+            } else {
+                $('.totop a').fadeOut();
+            }
+        });
+    </script>
+</div>

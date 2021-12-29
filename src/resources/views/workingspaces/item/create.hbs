@@ -11,6 +11,9 @@
     {{! chon chỗ ngồi }}
     <div id="basic-info">
       <div class="header">Vui lòng nhập đầy đủ thông tin để đặt chỗ</div>
+       <div style="display: flex; justify-content: center; align-items: center; margin-top: 8px">
+    <p style="font-weight: bold; font-size: 16; color: #df7509">1 slot/hour: 25k</p>
+    </div>
       <div class="line w-100"></div>
 
       <div class="info row">
@@ -50,7 +53,7 @@
         <div class="line col-12"></div>
         <div class = "image col col-6">
           <span>Ảnh sự kiện</span>
-          <input type = "file"  name="avatar" id="avatar" accept="image/*">
+          <input type = "file" name="avatar" id="avatar" onchange="uploadImage(event)">
         </div>
 
 
@@ -81,7 +84,7 @@
       {{! danh sách đang chọn }}
       <div id="ordering" class="col col-6">
         <nav id="ordering-nav" class="row navbar navbar-light bg-light">
-          <span class="navbar-brand col col-3" href="#">Chọn đi ae</span>
+          <span class="navbar-brand col col-3" href="#" style="font-size: 16px; font-weight: bold; color: #df7509">Tích để chọn sản phẩm bạn muốn dùng</span>
           <ul class="nav nav-pills col col-auto d-flex justify-content-end">
             <li class="nav-item active" id="food-btn">
               <span>Snack-Food</span>

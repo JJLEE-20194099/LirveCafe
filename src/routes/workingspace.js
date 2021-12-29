@@ -39,7 +39,7 @@ router.get('/list', controllers.index);
 router.get('/create', controllers.create);
 router.get('/:slug', controllers.show);
 router.post('/save', 
-    upload.single('image'),
+upload.single('avatar'),
     controllers.save,
 );
 router.get('/:id/edit', controllers.edit);
