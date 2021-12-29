@@ -2,7 +2,7 @@
 
     <div id="main-header" class="row navbar d-flex flex-row justify-content-start align-items-center">
 
-        <div class="d-flex justify-content-start align-items-center" style="flex: 3">
+        <div class="d-flex justify-content-start align-items-center" style="flex: 3; height: 100%">
             <a href="/" class="navbar-brand mx-0 d-flex align-items-center justify-content-between">
                 <img src="/img/brand-logo.png" alt="logo-brand" width="80px" height="80px">
                 <span id="name-brand">LivreCafé</span>
@@ -50,20 +50,33 @@
                         </div>
 
                         <div class="noti-main">
-                            <div class="noti-content" >
+                            <div class="noti-content">
                                 <div>
-                                {{#if this.isRead}}
-                                     <span class="noti-username">{{this.sender}}</span> <span class="noti-type">đã
-                                        nhắc đến bạn </span> trong <span
-                                        class="noti-where">trang
+                                    {{#if this.isRead}}
+                                    {{#if this.type}}
+                                    <span class="noti-username">Bạn đã nhận đươc 1</span> <span class="noti-type">mã
+                                        giảm giá mới của LivreCafé </span> <span class="noti-where">tại đây</span>
+                                    {{else}}
+                                    <span class="noti-username">{{this.sender}}</span> <span class="noti-type">đã
+                                        nhắc đến bạn </span> trong <span class="noti-where">trang
                                         này hoặc có liên quan tới bạn</span>
-                                {{else}}
-                                     <span class="noti-username" style="font-weight: bold!important;">{{this.sender}}</span> <span class="noti-type" style="font-weight: bold!important;">đã
-                                        nhắc đến bạn </span> <span style="font-weight: bold!important;">trong</span> <span  style="font-weight: bold!important;"
-                                        class="noti-where">trang
+                                    {{/if}}
+                                    {{else}}
+                                    {{#if this.type}}
+                                    <span class="noti-username" style="font-weight: bold!important;">Bạn đã nhận đươc
+                                        1</span> <span style="font-weight: bold!important;" class="noti-type">mã giảm
+                                        giá mới của LivreCafé</span> <span style="font-weight: bold!important;"
+                                        class="noti-where">tạiđây</span>
+                                    {{else}}
+                                    <span class="noti-username"
+                                        style="font-weight: bold!important;">{{this.sender}}</span> <span
+                                        class="noti-type" style="font-weight: bold!important;">đã
+                                        nhắc đến bạn </span> <span style="font-weight: bold!important;">trong</span>
+                                    <span style="font-weight: bold!important;" class="noti-where">trang
                                         này hoặc có liên quan tới bạn</span>
-                                {{/if}}
-                                   
+                                    {{/if}}
+                                    {{/if}}
+
                                 </div>
                             </div>
                             <div class="noti-time date">
@@ -75,15 +88,16 @@
 
                     {{#if notis.length}}
 
-                    <div id="see-all" class="d-flex justify-content-center align-items-center"
+                    <div id="see-all" class="justify-content-center align-items-center"
                         style="border-top: 0.5px solid #ccc; display: none"><a
                             style="color: #c39e51; margin-top: 8px; margin-bottom: 8px"
                             href="/notis/{{user.username}}">Xem tất cả</a></div>
                     {{else}}
-                    <div id="see-all" class="d-flex justify-content-center align-items-center"
-                        style="border-top: 0.5px solid #ccc; display: none; padding-top: 12; padding-bottom: 12"><div
-                            style="color: #c39e51; margin-top: 8px; margin-bottom: 8px"
-                            href="/notis/{{user.username}}">Bạn chưa có thông báo nào cả</div></div>
+                    <div id="no-noti-title" class="justify-content-center align-items-center"
+                        style="border-top: 0.5px solid #ccc; display: flex; padding-top: 12; padding-bottom: 12">
+                        <div style="color: #c39e51; margin-top: 8px; margin-bottom: 8px"
+                            href="/notis/{{user.username}}">Bạn chưa có thông báo nào cả</div>
+                    </div>
                     {{/if}}
 
 
@@ -96,7 +110,10 @@
         <div id="header-cart" class="col-1 text-center .align-items-center">
             <a href='#'>
                 <i class="header-icon ti-shopping-cart-full">
-                    <span id="cart-number" class="header-number">3</span>
+                    {{#if cart.itemList.length}}
+                    <span id="cart-number" class="header-number">{{cart.itemList.length}}</span>
+
+                    {{/if}}
                 </i>
             </a>
         </div>
@@ -114,10 +131,29 @@
             <div id="user-list" class="func-list">
                 <ul>
                     {{#if user}}
-                    <li><a href='/users/{{user._id}}'>Tài khoản</a></li>
-                    <li style="border-top: 1px solid white"><a href='/auth/logout'>Đăng xuất</a></li>
+                    <li><a style="font-size: 16px" href='/users/{{user._id}}'>Tài khoản</a></li>
+                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/auth/logout'>Đăng xuất</a></li>
+                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/books'>Quản lý sách</a></li>
+                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/coffee'>Quản lý nước uống</a></li>
+                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/foods'>Quản lý đồ ăn</a></li>
+                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/promos'>Quản lý mã giảm giá</a></li>
+                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/workingspaces'>Quản lý workingspace</a></li>
+                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/users'>Quản lý người dùng</a></li>
+                    <li style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center"><a style="font-size: 16px" href='/own/stored/orders'>Quản lý đơn hàng</a></li>
+                    {{#if user.role}}
+                    {{else}}
+
                     <li style="height: 60px; border-top: 1px solid white"><a
                             href='/users/{{user.username}}/register_loyal_member'>Đăng ký thành viên thân thiết</a></li>
+                    <li style="height: 60px; border-top: 1px solid white"><a
+                            href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Giỏ hàng của tôi</a></li>
+                        <li style="height: 60px; border-top: 1px solid white"><a
+                        href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Đơn hàng của tôi</a></li>
+                        <li style="height: 60px; border-top: 1px solid white"><a
+                        href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Sự kiện của tôi</a></li>
+                    {{/if}}
+
+
                     {{/if}}
                 </ul>
             </div>
@@ -135,10 +171,10 @@
     function noti_toggle() {
         if (document.getElementById("noti-container").style.display == "none") {
             document.getElementById("noti-container").style.display = "flex"
-            document.getElementById('see-all').style.display = 'block'
+
         } else {
             document.getElementById("noti-container").style.display = "none"
-            document.getElementById('see-all').style.display = 'none'
+
         }
         let notis = document.getElementsByClassName("noti-each")
 
@@ -148,7 +184,7 @@
                 notis[i].style.display = "none"
             }
             html = document.getElementById('noti-box').innerHTML
-
+            document.getElementById('see-all').style.display = 'flex'
         }
     }
 

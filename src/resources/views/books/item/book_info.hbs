@@ -557,8 +557,8 @@
                     method: "POST",
                     data: data,
                     success: function (res) {
-
-                        location.href = `/carts/${res.username}?level=${res.level}`
+                            
+                        location.href = `/carts/show/${res.username}?level=${res.level}&activating=${res.activating}`
                     }
                 })
 
@@ -639,6 +639,7 @@
                     $('#zero_comment_title').css('display', 'none')
                 }
 
+
                 var commentBox = $("#commentBox-content")
 
                 commentBox.html(html + commentBox.html())
@@ -680,6 +681,7 @@
                 var replyList = $(`#${data.parentCommentId} .replyList-body`)
                 replyList.html(html + replyList.html())
                 replyList.css("display", "block")
+                $("#no-noti-title").css('display', 'none')
 
 
             })

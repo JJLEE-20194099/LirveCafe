@@ -36,7 +36,8 @@
 
 
                                 <div class="form-group">
-                                    <input class="form-control" id="phone" name="phone" placeholder="Enter you Phone" value="{{user.phone}}">
+                                    <input class="form-control" id="phone" name="phone" placeholder="Enter you Phone"
+                                        value="{{user.phone}}">
                                     <span class="form-label">Phone</span>
                                 </div>
 
@@ -54,6 +55,7 @@
                                         <div class="form-group">
 
                                             <div class="form-control d-flex align-items-center" id="new-total">
+                                                {{new_total}}
                                             </div>
 
                                             <span id="old-total" style="text-decoration: line-through;" name="old-total"
@@ -71,11 +73,11 @@
                                         <div class="form-group">
                                             <input type="text" id="promoId" value="{{promo._id}}" style="display: none">
                                             {{#if promo.discountAmount}}
-                                            <input class="form-control" id="amount-promo" name="amount-promo"
+                                            <input class="form-control" id="amount-promo" name="amount-promo" style="display: none"
                                                 value={{promo.discountAmount}}>
                                             {{/if}}
                                             {{#if promo.discountPercentage}}
-                                            <input class="form-control" id="percentage-promo" name="percentage-promo"
+                                            <input class="form-control" id="percentage-promo" name="percentage-promo"  style="display: none"
                                                 value={{promo.discountPercentage}}>
                                             {{/if}}
 
@@ -124,28 +126,19 @@
 
         $(document).ready(function () {
             var old_total = $('#old-total').text();
-            var new_total = old_total
-            if ($("#amount-promo").val()) {
-
-                new_total = parseInt(old_total) - parseInt($("#amount-promo").val())
-            }
-
-            if ($("#percentage-promo").val()) {
-
-                new_total = parseInt(old_total) * (100 - parseInt($("#percentage-promo").val())) / 100
-            }
-
+            var new_total = $('#new-total').text();
             $('#new-total').html(`Total: <span
-                                                margin-left: 6px; text-decoration: line-through;" name="new-total">${old_total}</span> <span id="old-total"
+                                                margin-left: 6px; text-decoration: line-through;" name="new-total">${new_total}</span> <span id="old-total"
                                                 style="margin-left: 8px; text-decoration: line-through;" name="old-total">${old_total}</span>`);
 
             var validToken = ''
+            var email = $('#email').val()
+            var username = $('#username').val()
+            var address = $('#address').val()
 
             $('#getToken').click(function () {
 
-                var email = $('#email').val()
-                var username = $('#username').val()
-                var address = $('#address').val()
+
 
                 if (email.length == 0) {
                     alert("Vui lòng nhập email để lấy mã xác thực qua email này")
@@ -154,7 +147,7 @@
 
                 const data = {
                     email: email,
-                    username: username, 
+                    username: username,
                     address: address
                 }
                 console.log(data)
@@ -166,10 +159,10 @@
                         alert('Please check valid otp in your email')
                         if (!res.isError) {
                             validToken = res.token
-                            
-                            
+
+
                         }
-                        
+
                     },
                     error: function (error) {
                         console.log(error)

@@ -1,337 +1,218 @@
-<link rel="stylesheet" href="/css/signup.css">
-<link rel="stylesheet" href="/css/cartVu.css">
+<link rel="stylesheet" href="/css/cart.css">
 
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<body>
 
-<br>  <br>
-  <br>
-  <br>
-<div class="bigbox">
-  <div class="box1">
-    <div class="sp">Sản Phẩm </div>
-    <div class="dongia">Đơn giá(đ) </div>
-    <div class="soluong">Số lượng </div>
-    <div class="thanhtien">Thành tiền(đ)</div>
-  </div>
-  <div class="box2" data-user="{{username}}">
-    <div id="them"></div>
-    {{#if cart.itemList}}
-        {{#each cart.itemList}}
-    <div class="list" data-id="{{this.book._id}}">
-      <input type="checkbox" class="check">
-      <div class="img_box2">
-        <img src="{{this.book.image}}" alt="">
-      </div>
-      <div class="mota_box2"> {{this.book.description}}</div>
-      <div class="gia_box2">{{this.book.price}}</div>
-      <div  class="soluong_box2">
-        <div class="sub">-</div>
-        <input type="number" class="number" name="number" value="{{this.quantity}}">
-        <div class="add">+</div>
-      </div>
-      <div class="thanhtien_box2">0</div>
+  <div class="cart-container" id="cart-container">
+    <div style="" id="notice-empty-cart">
+
     </div>
-        {{/each}}
-    {{else}}
-        <div style="text-align: center;">Giỏ hàng trống</div>
+    <p id="username" style="display: none">{{cart.username}}</p>
+
+    <input type="text" id="cartId" value="{{cart._id}}" style="display:none">
+    {{#each cart.itemList}}
+    <div id="{{this.book._id}}" class="cart_item">
+      <div class="cart_item_title_box">
+        <span> {{this.book.title}}</span>
+        (Đơn giá: <span type="text" class="priceEachItem">{{this.book.price}}</span>)
+      </div>
+      <div class="total_per_item">
+        <p class="priceEachItemTotal">{{multiply this.quantity this.book.price}}</p>
+      </div>
+      <div class="cart_quantity_box">
+        <button class="btn btn-warning" onclick="subtract(this)">-</button>
+        <span class="quantity btn btn-warning">{{this.quantity}}</span>
+        <button class="btn btn-warning" onclick="add(this)">+</button>
+      </div>
+    </div>
+
+    {{/each}}
+
+    <div style="display: flex; justify-content: center; align-items: center; margin: 30px;" id="total-box"
+      class="btn btn-warning">
+      <span id="total">Total: </span>
+    </div>
+
+
+    <div id="promoList">
+      {{#each promoList}}
+      <div id="{{this._id}}" class="promoItem btn">
+        <div class="promo-info">
+          <a href="/promos/{{this._id}}" class="promo-info-container">
+
+            <p href="/promos/{{this._id}}" class="promo-name">{{this._id}}</p>
+            <h4 href="/promos/{{this._id}}" class="promo-desc">{{this.name}}</h4>
+            <p href="/promos/{{this._id}}" class="promo-expiration local-date">{{this.expirationDate}}</p>
+          </a>
+
+        </div>
+        <input type="text" class="promoId" value="{{this._id}}" hidden>
+        <input type="text" class="condition" value="{{this.condition}}" hidden></input>
+        <div class="promo-btn-box box-norm">
+          <button class="promo-btn" onclick="clickPromotionBtn(this)">Add</button>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <div id="promoId" style="display: none"></div>
+    {{#if cart.itemList.length}}
+    <div style="display: flex; justify-content: center; align-items: center; margin-top: 32px"><a
+        href="/books/buys/{{cart._id}}" class="btn btn-warning" id="purchaseBtn">Purchase now</a></div>
     {{/if}}
-    <div class="muahang">
-          <input type="checkbox" class="checkall" >
-          <div class="chonall">Chọn tất cả</div>
-          <div class="dell" >Xóa</div>
-          <div class="tongsp"> Tổng số sản phẩm: </div>
-          <div class="tongsanpham">0</div>
-          <div class="tongsotien"> Tổng số tiền phải trả:(đ)</div>
-          <div class="tongsotienphaitra">0</div>
-          {{#if cart.itemList.length}}
-          <button  id="buy" class='fab' style="border: none; background-color: #C39E51">
-            <a href="/books/buys/{{cart._id}}" style="width: 100%; height:100%; display:block;">&#xf42d;</a> </button>
-          {{/if}}
-
-    </div>
-
-
-  <br>
-    
-  <div class="vunggiam"> Bạn hãy chọn 1 mã giảm giá của bạn:
-    <div class="magiamgia">
-        
-      <div class="giam" >Trừ: 30%</div>
-      <div class="giam" >Trừ: 5.000đ</div> 
-
-
-
-      <div class="dk" style="display: none;">0</div>
-      <div class="dk" style="display: none;">0</div>
-            <div class="giam" >Trừ: 30%</div>
-      <div class="giam" >Trừ: 5.000đ</div> 
-
-
-
-      <div class="dk" style="display: none;">0</div>
-      <div class="dk" style="display: none;">1000000</div>
-    </div>
   </div>
-
-
-  
-
-
-  </div>
-</div>  
-<br><br>
-
-
-<script>
-  var dk = document.querySelectorAll('.dk');
-
-
-  var loaigiamgia = new Array;
-  loaigiamgia.push('','');
-  var checkbox = document.querySelector('.checkall');
-  var dell =document.querySelector('.dell');
-  var count = 0;
-function  load(){
-    const list = document.querySelectorAll('.list');      
-
-
-    for (let i = 0; i < list.length; i++) {
-    const thanhtien = list[i].querySelector('.thanhtien_box2'); 
-    const gia = list[i].querySelector('.gia_box2');    
-    const number =list[i].querySelector('.number');
-
-    thanhtien.innerHTML = parseInt(number.value) * parseInt(gia.innerHTML)
-    number.addEventListener('change', (e)=>{
-            thanhtien.innerHTML=new Intl.NumberFormat().format(parseInt(gia.innerHTML.replace(',', ''))* number.value);
-      tinhtien();
-      tinhtongsanpham();    
-        })
-
-// cộng số lượng
-    const add = list[i].querySelector('.add');
-    add.addEventListener('click',(e)=>{
-      number.value =parseInt(number.value)+1;
-      thanhtien.innerHTML= new Intl.NumberFormat().format(parseInt(gia.innerHTML.replace(',', ''))* number.value);
-      tinhtien();
-      tinhtongsanpham();
-    })
-
-// trừ số lượng
-    const sub = list[i].querySelector('.sub');
-    sub.addEventListener('click', (e)=>{
-      if(parseInt(number.value) > 0){
-      number.value =parseInt(number.value)-1;
-
-      thanhtien.innerHTML= new Intl.NumberFormat().format(parseInt(gia.innerHTML.replace(',', ''))* number.value);
-      tinhtien();
-      tinhtongsanpham();      
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="/js/datetime_handling.js"></script>
+  <script>
+    function calculateTotal() {
+      var priceList = $(".priceEachItemTotal")
+      var total = 0
+      for (price of priceList) {
+        total += parseInt(price.innerHTML)
+      }
+      if (total == 0) {
+        $("#totalLabel").hide()
+        return "Empty Cart"
+      }
+      return total;
     }
 
-    })
+    var cartId = $("#cartId").val()
 
-    const check = list[i].querySelector('.check');
-    check.addEventListener('click', (e)=>{
-            tinhtien();
-      tinhtongsanpham();
-    })
+    function clickPromotionBtn(btn) {
+      var promoId = btn.parentElement.parentElement.id;
+      let total = $("#total").text().split(':')[1];
+      total = parseInt(total);
 
-    }
+      let condition = parseInt($(`#${promoId} .condition`).val()) * 1000
+      if (condition > total) {
 
+        alert("Bạn chưa đáp ứng đủ điểu kiện, vui lòng đọc chi tiết mã giảm giá");
+        return;
+      }
+      box = btn.parentElement
+      if (box.classList.contains("box-success")) {
+        box.classList.remove("box-success")
+        btn.innerHTML = "Add"
 
-
-  }
-  load();
-
-  checkbox.addEventListener('click', (e)=>{
-    if( checkbox.checked == true){
-    const list =document.querySelectorAll('.list');
-     for( let i = 0; i< list.length; i++){
-        const check = list[i].querySelector('.check');
-        check.checked = true;
-     }
-      tinhtien();
-      tinhtongsanpham();
-    } 
-    if( checkbox.checked == false){
-    const list =document.querySelectorAll('.list');
-     for( let i = 0; i< list.length; i++){
-        const check = list[i].querySelector('.check');
-        check.checked = false;
-     }
-      tinhtien();
-      tinhtongsanpham();
-    } 
-
-  });
-
-  // Xóa sản phẩm ra khỏi cart
-  dell.addEventListener('click', (e)=>{
-    const list =document.querySelectorAll('.list');
-    const x =window.confirm('Bạn chắc chắn muốn xóa');
-    var data = {
-          username: document.querySelector('.box2').dataset.user,
-        };
-    var cartList = [];
-    if(x == true)
-     for( let i = 0; i< list.length; i++){
-        const check = list[i].querySelector('.check');
-        if(check.checked == true){
-          list[i].remove();
-        } else {
-          var itemOne = {
-            itemId: itemList[i].dataset.id,
-            quantity: itemList[i].querySelector('input[name=number]').value,
-          }
-            cartList.push(itemOne);
+        var promoList = document.getElementsByClassName('promo-btn');
+        for (item of promoList) {
+          if (item !== btn) {
+            item.removeAttribute("disabled")
+            item.parentElement.style.opacity = 1;
           }
         }
-      
-    data.itemList = cartList;
+        $("#purchaseBtn").attr('href', `/books/buys/${cartId}`)
+      } else {
 
-    tinhtien();
-    tinhtongsanpham();
+        var promoList = document.getElementsByClassName('promo-btn');
+        var s_box = ''
+        for (item of promoList) {
+          if (item.parentElement.classList.contains('box-success')) {
+            s_box = item.parentElement
+            break;
+          }
+        }
 
-    $.ajax({
-            url: '/carts/finish-cart',
+        if (s_box == '') {
+          box.classList.add("box-success")
+          btn.innerHTML = "Remove"
+          var promoId = btn.parentElement.parentElement.id;
+          var promoList = document.getElementsByClassName('promo-btn');
+          for (item of promoList) {
+            if (item !== btn) {
+              item.setAttribute("disabled", true)
+              item.parentElement.style.opacity = 0.5;
+            }
+
+          }
+          const data = {
+            cartId, promoId
+          }
+          $("#promoId").text(promoId)
+          $("#purchaseBtn").attr('href', `/books/buys/${cartId}?promoId=${promoId}`);
+          $.ajax({
+            url: '/carts/add-promo-to-cart',
             method: "POST",
             data: data,
             success: function (res) {
-
-              $("#cart-number").text(res.itemList.length);
+              console.log(res)
             }
           })
-  });
-
-  function tinhtien(){
-   const list =document.querySelectorAll('.list');
-   var sum = 0;
-     for( let i = 0; i< list.length; i++){
-        const check = list[i].querySelector('.check');
-        if(check.checked == true){
-          const thanhtien = list[i].querySelector('.thanhtien_box2');
-          sum=sum+(parseInt(thanhtien.innerHTML.replace(',', '')));
+        } else {
+          alert('Bạn chỉ được chọn 1 mã giảm giá')
         }
-     }
-      const tongsotienphaitra = document.querySelector('.tongsotienphaitra');
-// sửa
-          for(let i =0; i < a.length; i++){
-            if(a[i] ==1 ){
-              let x = loaigiamgia[i];
-              if(x[x.length-1] == '%'){
-                  if(sum >= dk[i].innerHTML){
-                    x =x.replace('%','');
-                    sum = sum *(1-(x*1)/100);
-                  
-                  } else {
-                    window.alert( 'Giá trị đơn hàng phải lớn hơn '+new Intl.NumberFormat().format(dk[i].innerHTML) +' để được áp mã này ');
-                            giam[i].style.background = "none";
-                            a[i]=0;
-                            dem =0;
-                  }
-              }
-              else {
-                  if(sum >= dk[i].innerHTML & sum >= loaigiamgia[i] ){
-                    x =x.replace('%','');
-                    sum = sum - loaigiamgia[i];
-                  } else {
-                            window.alert( 'Giá trị đơn hàng phải lớn hơn '+new Intl.NumberFormat().format(dk[i].innerHTML)+' để được áp mã này ');
-                            giam[i].style.background = "none";
-                            a[i]=0;
-                            dem =0;
-                  }              }
-            }
 
+
+      }
+    }
+
+    function subtract(btn) {
+      const bookId = btn.parentElement.parentElement.id;
+      var quantity = parseInt($(`#${bookId} .quantity`).text());
+      var price = parseInt($(`#${bookId} .priceEachItem`).text());
+      var username = $('#username').text();
+      const data = { bookId: bookId, quantity: quantity, username: username }
+      $.ajax({
+        url: '/carts/subtract-by-one',
+        method: "POST",
+        data: data,
+        success: function (res) {
+          $("#cart-number").text(res.itemList.length);
+          if (res.itemList.length == 0) {
+            $('#purchaseBtn').hide()
           }
-  //
-          tongsotienphaitra.innerHTML =new Intl.NumberFormat().format(sum);
-
-
-  }
-  function tinhtongsanpham(){
-   const list =document.querySelectorAll('.list');
-   let count = 0;
-     for( let i = 0; i< list.length; i++){
-        const check = list[i].querySelector('.check');
-        if(check.checked == true){
-          const soluong = list[i].querySelector('.number');
-          if (soluong.value*1 != 0)
-          count =count +1;
         }
-         
-    
-      const tongsosanpham = document.querySelector('.tongsanpham');
-          tongsosanpham.innerHTML =count;   
-     }
-
-  }
-
-
-  var a = new Array;
-  a.push(0, 0);
-  var dem = 0;
-  giam = document.querySelectorAll('.giam');
-  for (let i =0 ; i<giam.length; i++){
-    giam[i].addEventListener('click', (e)=>{
-      if(dem == 0 ){
-
-      giam[i].style.backgroundColor = "gold";
-      a[i]=1;
-      dem =1;
-    }
-    else if (a[i]== 1 & dem ==1 ){
-        giam[i].style.background = "none";
-        a[i]=0;
-        dem =0;
-
+      })
+      if (quantity - 1 == 0) {
+        $(`#${bookId}`).hide()
+        $('#promoList').hide()
+        location.reload();
 
       }
-    else{
-      window.alert('Bạn chỉ được chọn tối đa 1 mã giảm giá!');
-    }
-    loaigiamgia[i] =giam[i].innerHTML.replace('Trừ: ','');
-    loaigiamgia[i] =loaigiamgia[i].replace('đ','');
-    //loaigiamgia[i] =loaigiamgia[i].replace('%','');
-    loaigiamgia[i] =loaigiamgia[i].replace('.','');
-    loaigiamgia[i] =parseInt(loaigiamgia[i]);
-    tinhtien();
-    tinhtongsanpham();
-    
-    
-    
-    });
+      $(`#${bookId} .quantity`).text(quantity - 1)
+      $(`#${bookId} .priceEachItemTotal`).text((quantity - 1) * price)
 
-  }
-  // Hoàn thành cart cuối cùng để thanh toán
-  const itemList = document.querySelectorAll('.list');
-  
-
-  $("#buy").click(function () {
-    var data = {
-      username: document.querySelector('.box2').dataset.user,
-    };
-    var cartList = [];
-
-    for(let i = 0; i < itemList.length; i++) {
-      
-      var itemOne = {
-        itemId: itemList[i].dataset.id,
-        quantity: itemList[i].querySelector('input[type=checkbox]').checked ? itemList[i].querySelector('input[name=number]').value : 0,
+      if (calculateTotal() == 'Empty Cart') {
+        $("#total").text(calculateTotal())
+        $('#total-box').css('display', 'none')
+        $('#notice-empty-cart').css('display', 'flex')
+        $('#cart-container').css('background-image', url('/img/empty_cart.jpg'))
+        $('#cart-container').css('background-position', 'center')
       }
+      else $("#total").text('Total: ' + calculateTotal())
 
-      cartList.push(itemOne);
     }
-    data.itemList = cartList;
-
-    $.ajax({
-        url: '/carts/finish-cart',
+    function add(btn) {
+      const bookId = btn.parentElement.parentElement.id;
+      var quantity = parseInt($(`#${bookId} .quantity`).text());
+      var price = parseInt($(`#${bookId} .priceEachItem`).text());
+      var username = $('#username').text();
+      const data = { bookId: bookId, quantity: quantity, username: username }
+      $.ajax({
+        url: '/carts/add-by-one',
         method: "POST",
         data: data,
         success: function (res) {
 
-          $("#cart-number").text(res.itemList.length);
         }
       })
-  })
- 
+      $(`#${bookId} .quantity`).text(quantity + 1)
+      console.log(price)
+      $(`#${bookId} .priceEachItemTotal`).text((quantity + 1) * price)
 
-</script>
+      $("#total").html('Total: ' + calculateTotal())
+    }
+
+    if (calculateTotal() == 'Empty Cart') {
+      $("#total").text(calculateTotal())
+      $('#total-box').css('display', 'none')
+      $('#notice-empty-cart').css('display', 'flex')
+      $('#cart-container').css('background-image', 'url(' + '/img/empty_cart.jpg' + ')')
+      $('#cart-container').css('background-position', 'center')
+    }
+    else $("#total").text('Total: ' + calculateTotal())
+
+
+
+  </script>
+
+</body>
