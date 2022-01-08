@@ -52,14 +52,14 @@ const UserController = {
 
     // POST : /users/save
     save(req, res, next) {
-        console.log(req.file.path)
+        
         req.body.avatar = getAvatar(req);
         if (!req.body.avatar || req.body.avatar == '') {
             const name = req.body.firstname + ' ' + req.body.lastname;
             req.body.avatar = '/img/' + name + '-default.jpg';
         }
         let user = new User(req.body);
-        console.log(user)
+      
         user.save()
             .then(() => res.render('auth/index', {
                 user: singleMongooseDocumentToObject(user),
@@ -119,8 +119,7 @@ const UserController = {
                 username: req.body.username
             }))
             .then((user) => {
-                console.log(user)
-                console.log(req.body)
+            
                 res.render('users/info/item/edit.hbs', {
                     user: singleMongooseDocumentToObject(user),
                     notis: res.locals.notis,
@@ -131,13 +130,13 @@ const UserController = {
 
     // PATCH /users/:id
     update(req, res, next) {
-        console.log(req)
+       
         req.body.avatar = getAvatar(req);
         if (!req.body.avatar || req.body.avatar == '') {
             const name = req.body.firstname + ' ' + req.body.lastname;
             req.body.avatar = '/img/' + name + '-default.jpg';
         }
-        console.log(req.body)
+       
         User.updateOne({
                 _id: req.params.id
             }, req.body)

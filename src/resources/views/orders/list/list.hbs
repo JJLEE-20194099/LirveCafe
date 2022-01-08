@@ -1,4 +1,314 @@
-{{#each orders}}
+<link rel="stylesheet" href="/css/store_trash.css">
+<link rel="stylesheet" href="/css/load_more.css">
+<div class="container">
+    <div class="mt-4">
+        <div class="header">
+            <h3>Đơn hàng của tôi</h3>
+            <a href="/own/trash_me/orders">Thùng rác ({{deletedCount}})</a>
+        </div>
 
-    <a href="/orders/detail/{{this._id}}">{{this._id}}</a>
-{{/each}}
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Tổng số sản phẩm</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col" colspan="2">Thời gian</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each orders}}
+                <tr class="item-for-loadmore">
+                    <th scope="row">{{sum @index 1}}</th>
+                    <td>{{this.itemList.length}}</td>
+                    <td>
+                        {{this.total}}đ
+                    </td>
+                    <td class="date">{{this.createdAt}}</td>
+                    <td class="btn-group">
+                        <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                            data-target="#{{this._id}}">Xem</button>
+                        <div class="modal fade" id="{{this._id}}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: white;">
+                                    <div class="item-info">
+                                        <div>
+                                            <a href="/orders/detail/{{this._id}}"
+                                                style="font-size:16px; font-weight: bold; color: #c39e51; text-align: center">Đơn
+                                                hàng #{{this._id}}</a>
+                                            {{#each this.itemList}}
+
+                                            {{#if this.food}}
+                                            <div style="margin-bottom: 24px">
+                                                <div class="item-info-box">
+                                                    <img src="{{this.food.image}}" alt="" class="item-info-img">
+                                                    <div class="item-info-text">
+                                                        <p style="font-weight: bold; font-size: 16px; color: #c5970d">
+                                                            {{this.food.name}}</p>
+                                                        <p style="font-weight: bold; font-size: 14px; color: #c5970d">
+                                                            Price-Each: {{this.food.price}}</p>
+                                                        <p style="font-weight: bold; font-size: 12px; color: #c5970d">
+                                                            Quantity: {{this.quantity}}</p>
+                                                        <a href="/food/{{this.food.slug}}" class="btn btn-warning"
+                                                            style="width: 120px; color: white">Xem chi tiết</a>
+                                                    </div>
+                                                </div>
+
+                                                {{#if this.status}}
+                                                <div style="margin-top: 24px; display: flex; justify-content: center">
+
+                                                    <button href="" class="btn btn-danger" data-toggle="modal"
+                                                        data-target="#update-order-status-modal"
+                                                        style="color: white; width: 300px"
+                                                        data-id="{{../this._id}}-{{this.food._id}}">Status:
+                                                        Processing</button>
+                                                </div>
+
+                                                {{else}}
+                                                <div style="margin-top: 24px; display: flex; justify-content: center">
+
+                                                    <button href="" class="btn btn-success"
+                                                        style="color: white; width: 300px">Status:
+                                                        Processing</button>
+                                                </div>
+                                                {{/if}}
+                                            </div>
+                                            {{/if}}
+
+                                            {{#if this.book}}
+                                            <div style="margin-bottom: 24px">
+                                                <div class="item-info-box">
+                                                    <img src="{{this.book.image}}" alt="" class="item-info-img">
+                                                    <div class="item-info-text">
+                                                        <p style="font-weight: bold; font-size: 16px; color: #c5970d">
+                                                            {{this.book.title}}</p>
+                                                        <p style="font-weight: bold; font-size: 14px; color: #c5970d">
+                                                            Price-Each: {{this.book.price}}</p>
+                                                        <p style="font-weight: bold; font-size: 12px; color: #c5970d">
+                                                            Quantity: {{this.quantity}}</p>
+                                                        <a href="/books/{{this.book.slug}}" class="btn btn-warning"
+                                                            style="width: 120px; color: white">Xem chi tiết</a>
+                                                    </div>
+                                                </div>
+
+                                                {{#if this.status}}
+                                                <div style="margin-top: 24px; display: flex; justify-content: center">
+
+                                                    <button href="" class="btn btn-danger" data-toggle="modal"
+                                                        data-target="#update-order-status-modal"
+                                                        style="color: white; width: 300px"
+                                                        data-id="{{../this._id}}-{{this.book._id}}">Status:
+                                                        Processing</button>
+                                                </div>
+                                                {{else}}
+                                                <div style="margin-top: 24px; display: flex; justify-content: center">
+
+                                                    <button href="" class="btn btn-success"
+                                                        style="color: white; width: 300px">Status:
+                                                        Processing</button>
+                                                </div>
+                                                {{/if}}
+                                            </div>
+                                            {{/if}}
+
+                                            {{#if this.coffee}}
+                                            <div style="margin-bottom: 24px">
+                                                <div class="item-info-box">
+                                                    <img src="{{this.coffee.image}}" alt="" class="item-info-img">
+                                                    <div class="item-info-text">
+                                                        <p style="font-weight: bold; font-size: 16px; color: #c5970d">
+                                                            {{this.coffee.name}}</p>
+                                                        <p style="font-weight: bold; font-size: 14px; color: #c5970d">
+                                                            Price-Each: {{this.coffee.price}}</p>
+                                                        <p style="font-weight: bold; font-size: 12px; color: #c5970d">
+                                                            Quantity: {{this.quantity}}</p>
+                                                        <a href="/coffee/{{this.coffee.slug}}" class="btn btn-warning"
+                                                            style="width: 120px; color: white">Xem chi tiết</a>
+                                                    </div>
+                                                </div>
+
+                                                {{#if this.status}}
+                                                <div style="margin-top: 24px; display: flex; justify-content: center">
+
+                                                    <button href="" class="btn btn-danger" data-toggle="modal"
+                                                        data-target="#update-order-status-modal"
+                                                        style="color: white; width: 300px"
+                                                        data-id="{{../this._id}}-{{this.coffee._id}}">Status:
+                                                        Processing</button>
+                                                </div>
+                                                {{else}}
+                                                <div style="margin-top: 24px; display: flex; justify-content: center">
+
+                                                    <button href="" class="btn btn-success"
+                                                        style="color: white; width: 300px">Status:
+                                                        Processing</button>
+                                                </div>
+                                                {{/if}}
+                                            </div>
+                                            {{/if}}
+
+
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/orders/{{this._id}}/edit" class="btn btn-outline-primary">Sửa</a>
+                        <button href="" class="btn btn-outline-warning" data-toggle="modal" data-id="{{this._id}}"
+                            data-target="#delete-order-modal">Xóa</button>
+                    </td>
+                </tr>
+                {{else}}
+                <tr>
+                    <td colspan="5" class="text-center">
+                        Bạn chưa có đơn hàng nào.
+                        <a href="/">Quay về trang chủ để mua những thứ bạn yêu thích nhé</a>
+                    </td>
+                </tr>
+                {{/each}}
+
+
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <a href="#" id="loadMore">Load More</a>
+
+    <p class="totop btn btn-danger">
+        <a href="#top" id="top" style="color: #fff">Back to top</a>
+    </p>
+
+    {{!-- Confirm delete order --}}
+    <div id="delete-order-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Xóa order?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn chắc chắn muốn xóa đơn hàng này?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button id="btn-delete-order" type="button" class="btn btn-danger">Xóa bỏ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{!-- Update order status--}}
+    <div id="update-order-status-modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="height: 666px!important">
+                <div class="modal-header">
+                    <h5 class="modal-title">Trạng thái sản phẩm?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h6 style="margin-top: 18px">Bạn có muốn xác nhận là đã nhận sản phẩm này?</h6>
+                    <h7 style="margin-top: 16px"><span style="font-weight: bold">Chú ý: </span>Bạn chọn xác nhận nghĩa
+                        là bạn đã nhận sản phẩm và
+                        bên chúng tôi xác nhận giao sản phẩm thành công</h7>
+                    <div style="display: flex; align-items: center; justify-content:center; margin-top: 77px">
+                        <img src="http://file.hstatic.net/200000315699/article/gia_hang_f853a27b7b8f4ef184df03764907c4d8.jpg"
+                            alt="" style="height: 300px;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button id="btn-update-order-status" type="button" class="btn btn-danger">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{!-- Delete hidden form --}}
+    <form name="delete-order-form" method="POST"></form>
+    <form name="update-order-form" method="POST"></form>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/js/datetime_handling.js"></script>
+    <script>
+
+
+
+        $(document).ready(function () {
+            var orderId;
+            var itemId;
+            var deleteForm = document.forms['delete-order-form'];
+            var updateForm = document.forms['update-order-form'];
+            var btnDeleteOrder = document.getElementById('btn-delete-order');
+            var btnUpdateOrder = document.getElementById('btn-update-order-status');
+
+
+            // When dialog confirm clicked
+            $('#delete-order-modal').on('show.bs.modal', function (order) {
+
+                var button = $(order.relatedTarget);
+                orderId = button.data('id');
+                console.log(orderId)
+            });
+
+            $('#update-order-status-modal').on('show.bs.modal', function (item) {
+                var button = $(item.relatedTarget);
+                console.log(button)
+                itemId = button.data('id');
+                console.log(itemId)
+            });
+
+
+
+
+            // When delete order btn clicked
+            btnDeleteOrder.onclick = function () {
+                deleteForm.action = '/orders/' + orderId + '?_method=DELETE';
+                deleteForm.submit();
+            }
+
+            btnUpdateOrder.onclick = function () {
+                updateForm.action = `/orders/update?itemId=${itemId}`;
+                updateForm.submit();
+            }
+
+            $(".item-for-loadmore").slice(0, 4).show();
+            $("#loadMore").on('click', function (e) {
+                e.preventDefault();
+                $(".item-for-loadmore:hidden").slice(0, 4).slideDown();
+                if ($(".item-for-loadmore:hidden").length == 0) {
+                    $("#load").fadeOut('slow');
+                }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+            });
+
+            $('#top').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
+
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.totop a').fadeIn();
+            } else {
+                $('.totop a').fadeOut();
+            }
+        });
+    </script>
+</div>

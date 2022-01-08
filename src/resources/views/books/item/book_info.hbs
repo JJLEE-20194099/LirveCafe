@@ -12,39 +12,12 @@
             <img class="product-img col col-6 d-flex justify-content-center" src="{{book.image}}">
 
             <input type="text" value="{{book.slug}}" id="slug" style="display: none">
-
+            <input type="text" id="avg_rating" value="{{avg_rating}}" style="display: none">>
             <div id="product-buy-detail" class="col col-6">
 
                 <div class="detail-header">
                     <h2 class="detail-title" id="item_name" style="color: black; font-weight: 600">{{book.title}}</h2>
-                    <div class="detail-rating">
-
-                        {{!-- light star --}}
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
-                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
-                            style="color: rgb(253, 216, 54);">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
-                            </path>
-                        </svg>
-
-                        {{!-- light star --}}
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
-                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
-                            style="color: rgb(253, 216, 54);">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
-                            </path>
-                        </svg>
-
-                        {{!-- light star --}}
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
-                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
-                            style="color: rgb(253, 216, 54);">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
-                            </path>
-                        </svg>
+                    <div class="detail-rating" id="detail-rating">
 
                         {{!-- light star --}}
                         <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
@@ -270,6 +243,10 @@
                                 <div class="d-flex flex-column align-items-stretch justify-content-evenly comment-container"
                                     style="flex: 1">
                                     <span class="user pt-2 username">{{this.username}}</span>
+                                    
+                                    {{#if this.rating}}
+                                        <span style="font-weight: bold; color: black;">đã đánh giá <span style="font-weight: bold; color: #f5ba3f">{{this.rating}} sao</span></span>
+                                    {{/if}}
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex justify-content-betweens align-items-center">
                                             <div class="content">{{this.content}}</div>
@@ -497,6 +474,9 @@
 
 
         $(document).ready(function () {
+
+            const avg_rating = $('#avg_rating').val()
+            
 
             $("#content").focus(function () {
                 $("#send-box").css("display", "flex")

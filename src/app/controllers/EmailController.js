@@ -52,9 +52,9 @@ const EmailController = {
             </div>
             <p style="font-size:1.1em; color: black">Hi ${username}</p>
             <p style="color: black">Thank you for choosing LivreCaféHust.</p>
-            <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">See yahhhhh</h2>
+            <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">Your order has been successfully created. Please wait a little while the order is being delivered to you by the shipper</h2>
+            <h3 style="color: black; font-weight: bold">Your address: ${address}</h3>
             <p style="font-size:0.9em;">Regards,<br />LivreCaféHust</p>
-            <p style="color: black">Your address: ${address}</p>
             <hr style="border:none;border-top:1px solid #eee" />
             <div style="padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
               <pLivreCaféHust Inc</p>

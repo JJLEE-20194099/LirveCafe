@@ -13,6 +13,7 @@ const Comment = new Schema(
         content: { type: String, required: true},
         replyList: { type: Array, default: []},
         itemId: { type: String, required: true},
+        rating: {type: Number},
         meta: {
             votes: {type: Number, default: 0},
             favs: {type: Number, default: 0}

@@ -44,8 +44,15 @@ app.engine(
             compare: (a, b) => {
                 if (a == b) return true;
                 return false
-            }
-        }
+            },
+            ifCond: function(v1, v2, options) {
+                if(v1 === v2) {
+                  return options.fn(this);
+                }
+                return options.inverse(this);
+            },
+        },
+        
     }),
 );
 
@@ -60,13 +67,12 @@ const io = new Server(server);
 
 io.on("connection", function(socket) {
 
-    console.log("New: " + socket.id)
 
     socket.on("client_send_comment_to_coffee_item", function(data) {
         // socket.join(data.itemId)
         socket.join(data._id)
         socket.join(data.username)
-        console.log(socket.adapter.rooms)
+        
         // If not want to bother users
         io.sockets.in(data._id).emit("server_send_comment_to_coffee_item", data)
 
@@ -78,7 +84,7 @@ io.on("connection", function(socket) {
         // socket.join(data.itemId)
         socket.join(data._id)
         socket.join(data.username)
-        console.log(socket.adapter.rooms)
+
         // If not want to bother users
         io.sockets.in(data._id).emit("server_send_comment_to_book_item", data)
 
@@ -93,8 +99,7 @@ io.on("connection", function(socket) {
         for (const room of socket.rooms) {
             if (room === socket.id) {
                 socket.leave(data.parentCommentId)
-                console.log(socket.adapter.rooms)
-                console.log('--------------------')
+                
             }
           }
 
@@ -102,7 +107,6 @@ io.on("connection", function(socket) {
         io.sockets.in(data.parentCommentId).emit("server_send_notice", data)
         socket.join(data.parentCommentId)
         socket.join(data.username)
-        console.log(socket.adapter.rooms)
         io.sockets.in(data.parentCommentId).emit("server_send_reply_comment", data)
     })
 

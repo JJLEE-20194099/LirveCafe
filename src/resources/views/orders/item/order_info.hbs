@@ -1,6 +1,379 @@
-<body>
+<link rel="stylesheet" href="/css/each_item_order.css">
+<div class="d-flex flex-column justify-content-center align-items-center" id="order-heading">
+    <div class="text-uppercase">
+        <p>Order Detail</p>
+    </div>
+    <div class="h4">{{order.createdAt}}</div>
+    <div class="pt-1">
+        <p>Products in order #{{order._id}}<b class="text-dark"></b></p>
+    </div>
 
-    <div>{{order.total}}</div>
-    <div>{{order.username}}</div>
+</div>
+<div class="wrapper bg-white">
+    <div class="table-responsive">
+        <table class="table table-borderless">
+            <thead>
+                <tr class="text-uppercase text-muted">
+                    <th scope="col">Your product</th>
+                    <th scope="col" class="text-right">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">#{{order._id}}</th>
+                    <td class="text-right"><b><span id="fake-total"></span>VNĐ</b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-</body>
+    <input type="text" id="order-id" value={{order._id}} hidden="true">
+
+    {{#each order.itemList}}
+    <div class="d-flex justify-content-between align-items-center list my-2 py-1">
+        <div class="d-flex justify-content-start align-items-center list my-2 py-1">
+            <div><b id="product-quantity">{{this.quantity}}</b></div>
+            {{#if this.food}}
+            <p id="product-price" style="display: none">{{this.food.price}}</p>
+            <div class="mx-3"> <img src="{{this.food.image}}" alt="apple" class="rounded-circle" width="30" height="30">
+            </div>
+            <div class="order-item">{{this.food.name}}</div>
+            {{/if}}
+
+            {{#if this.book}}
+            <p id="product-price" style="display: none">{{this.book.price}}</p>
+            <div class="mx-3"> <img src="{{this.book.image}}" alt="apple" class="rounded-circle" width="30" height="30">
+            </div>
+            <div class="order-item">{{this.book.title}}</div>
+            {{/if}}
+
+            {{#if this.coffee}}
+            <p id="product-price" style="display: none">{{this.coffee.price}}</p>
+            <div class="mx-3"> <img src="{{this.coffee.image}}" alt="apple" class="rounded-circle" width="30"
+                    height="30">
+            </div>
+            <div class="order-item">{{this.coffee.name}}</div>
+            {{/if}}
+        </div>
+
+
+        {{#if this.coffee}}
+        {{#if this.status}}
+        <div id="coffee" style="margin-top: 24px; display: flex; justify-content: center">
+
+            <button href="" class="btn btn-success" data-toggle="modal" data-target="#rating-item-modal"
+                style="color: white; font-size: 15px; font-weight: bold"
+                data-id="{{../order._id}}-{{this.coffee._id}}">Status: Successful</button>
+        </div>
+        {{else}}
+        <div style="margin-top: 24px; display: flex; justify-content: center">
+
+            <button href="" class="btn btn-danger" data-toggle="modal" data-target="#update-order-status-modal"
+                style="color: white; font-size: 15px; font-weight: bold"
+                data-id="{{../order._id}}-{{this.coffee._id}}">Status: Processing</button>
+        </div>
+        {{/if}}
+
+        {{/if}}
+
+        {{#if this.food}}
+        {{#if this.status}}
+        <div id="food" style="margin-top: 24px; display: flex; justify-content: center">
+
+            <button href="" class="btn btn-success" data-toggle="modal" data-target="#rating-item-modal"
+                style="color: white; font-size: 15px; font-weight: bold"
+                data-id="{{../order._id}}-{{this.food._id}}">Status: Successful</button>
+        </div>
+        {{else}}
+        <div style="margin-top: 24px; display: flex; justify-content: center">
+
+            <button href="" class="btn btn-danger" data-toggle="modal" data-target="#update-order-status-modal"
+                style="color: white; font-size: 15px; font-weight: bold"
+                data-id="{{../order._id}}-{{this.food._id}}">Status: Processing</button>
+        </div>
+        {{/if}}
+
+        {{/if}}
+
+        {{#if this.book}}
+        {{#if this.status}}
+        <div id="books" style="margin-top: 24px; display: flex; justify-content: center">
+
+            <button href="" class="btn btn-success" data-toggle="modal" data-target="#rating-item-modal"
+                style="color: white; font-size: 15px; font-weight: bold"
+                data-id="{{../order._id}}-{{this.book._id}}">Status: Successful</button>
+        </div>
+        {{else}}
+        <div style="margin-top: 24px; display: flex; justify-content: center">
+
+            <button href="" class="btn btn-danger" data-toggle="modal" data-target="#update-order-status-modal"
+                style="color: white; font-size: 15px; font-weight: bold"
+                data-id="{{../order._id}}-{{this.book._id}}">Status: Processing</button>
+        </div>
+        {{/if}}
+
+        {{/if}}
+
+
+    </div>
+    {{/each}}
+
+
+    <div class="pt-2 border-bottom mb-3"></div>
+    <div class="d-flex justify-content-start align-items-center pl-3">
+        <div class="text-muted">Payment Method</div>
+        <div class="ml-auto"> <img
+                src="https://i1.wp.com/www.worth.com/wp-content/uploads/2021/03/bermix-studio-aX1hN4uNd-I-unsplash-scaled-e1617884102155.jpg?fit=605%2C349&ssl=1"
+                alt="" width="30" height="30" style="border-radius: 50%;"> <label>Cash</label> </div>
+    </div>
+    <div class="d-flex justify-content-start align-items-center py-1 pl-3">
+        <div class="text-muted">Shipping</div>
+        <div class="ml-auto"> <label>Free</label> </div>
+    </div>
+    {{#if promo}}
+    <div class="d-flex justify-content-start align-items-center pb-4 pl-3 border-bottom">
+        {{#if promo.discountAmount}}
+        <div class="text-muted"> <button class="text-white btn btn-order"><span
+                    id="discount-vnd">{{promo.discountAmount}}</span>K Discount</button> </div>
+        <div class="ml-auto price"><span id="discount-amount">-{{promo.discountAmount}}K</span></div>
+
+        {{else}}
+        <div class="text-muted"> <button class="text-white btn btn-order"><span
+                    id="discount-percentage">{{promo.discountPercentage}}</span>% Dicount</button> </div>
+        <div class="ml-auto price"><span id="discount-amount"></span></div>
+        {{/if}}
+    </div>
+    {{else}}
+    <div class="d-flex justify-content-start align-items-center pb-4 pl-3 border-bottom">
+        <div class="text-muted"> <button class="text-white btn btn-secondary">NO PROMOTION</button> </div>
+        <div class="ml-auto price"> -0.000VNĐ </div>
+    </div>
+    {{/if}}
+
+    <div class="d-flex justify-content-start align-items-center pl-3 py-3 mb-4 border-bottom">
+        <div class="text-muted"> Total </div>
+        <div class="ml-auto h5"><span id="real-total">{{order.total}}</span>VNĐ</div>
+    </div>
+    <div class="row border rounded p-1 my-3">
+        <div class="col-md-6 py-3">
+            <div class="d-flex flex-column align-items start"> <b>Billing Address</b>
+                <p class="text-justify pt-2">{{order.address}}</p>
+            </div>
+        </div>
+        <div class="col-md-6 py-3">
+            <div class="d-flex flex-column align-items start"> <b>Shipping Address</b>
+                <p class="text-justify pt-2">{{order.address}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="pl-3 font-weight-bold">Related Subsriptions</div>
+    <div class="d-sm-flex justify-content-between rounded my-3 subscriptions">
+
+        <div> <b>#{{order._id}}</b> </div>
+
+        <div>Monday</div>
+
+
+
+        <div> Total: <b> {{order.total}}VNĐ for {{order.itemList.length}} items</b> </div>
+
+
+
+
+    </div>
+</div>
+
+<input type="text" id="username" value="{{user.username}}" hidden="true">
+<input type="text" id="user_avatar" value="{{user.avatar}}" hidden="true">
+
+{{!-- Update order status--}}
+
+<div id="update-order-status-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="height: 666px!important">
+            <div class="modal-header">
+                <h5 class="modal-title">Trạng thái sản phẩm?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6 style="margin-top: 18px">Bạn có muốn xác nhận là đã nhận sản phẩm này?</h6>
+                <h7 style="margin-top: 16px"><span style="font-weight: bold">Chú ý: </span>Bạn chọn xác nhận nghĩa là
+                    bạn đã nhận sản phẩm và
+                    bên chúng tôi xác nhận giao sản phẩm thành công</h7>
+                <div style="display: flex; align-items: center; justify-content:center; margin-top: 77px">
+                    <img src="http://file.hstatic.net/200000315699/article/gia_hang_f853a27b7b8f4ef184df03764907c4d8.jpg"
+                        alt="" style="height: 300px;">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button id="btn-update-order-status" type="button" class="btn btn-danger">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{!-- rating item status--}}
+
+<div id="rating-item-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="text-align: center; color: #d7a510">Hãy cho LivreCafé biết để có thể phục
+                    vụ bạn
+                    ngày càng tốt hơn !!!</h5>
+                <button type="button" class="close" id="close-rating-comment-btn" data-dismiss="modal"
+                    aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body rating-box">
+                <input type="text" name="" id="rating-comment-input" placeholder="Bạn cảm thấy sản phẩm như thế nào?"
+                    style="" required>
+                <div class="container d-flex justify-content-center mt-5">
+                    <div class="card text-center mb-5">
+                        <div class="circle-image"> <img src="{{user.avatar}}" width="50"> </div> <span
+                            class="dot"></span> <span class="name mb-1 fw-500">{{user.username}}</span>
+
+                        <div class="rate bg-success py-3 text-white mt-3">
+                            <h6 class="mb-0">Rate your product</h6>
+                            <div class="rating"> <input type="radio" name="rating" value="5" id="5"><label
+                                    for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label
+                                    for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label
+                                    for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label
+                                    for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label
+                                    for="1">☆</label> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button id="rating-comment" type="button" class="btn btn-danger">Gửi đánh giá</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="notice">
+
+</div>
+
+
+
+<form name="update-order-form" method="POST"></form>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/js/datetime_handling.js"></script>
+<script>
+    var real_total = parseInt(document.getElementById('real-total').innerHTML)
+    var discount_vnd_tag = document.getElementById('discount-vnd')
+    var discount_pecentage_tag = document.getElementById('discount-pecentage')
+    var fake_total;
+    var vnd;
+    var percentage;
+    if (discount_vnd_tag) {
+        vnd = parseInt(discount_vnd_tag.innerHTML)
+    } else if (discount_pecentage_tag) {
+        percentage = parseInt(discount_pecentage_tag.innerHTML)
+    }
+
+    if (vnd) {
+        fake_total = vnd + real_total
+    } else if (percentage) {
+        fake_total = real_total * 100 / (100 - percentage)
+    } else fake_total = real_total
+
+    document.getElementById('fake-total').innerHTML = fake_total
+
+    $(document).ready(function () {
+        var orderId = $('#order-id').val()
+        var itemId;
+        var updateForm = document.forms['update-order-form'];
+        var btnUpdateOrder = document.getElementById('btn-update-order-status');
+        var btnRating = document.getElementById('rating-comment');
+        var type;
+
+        $('#update-order-status-modal').on('show.bs.modal', function (item) {
+            var button = $(item.relatedTarget);
+            console.log(button)
+            itemId = button.data('id');
+            console.log(itemId)
+        });
+
+        $('#rating-item-modal').on('show.bs.modal', function (item) {
+            var button = $(item.relatedTarget);
+            type = button.parent().attr('id')
+            console.log(button)
+            itemId = button.data('id');
+            console.log(itemId)
+        });
+
+
+        btnUpdateOrder.onclick = function () {
+            updateForm.action = `/orders/update?itemId=${itemId}`;
+            updateForm.submit();
+        }
+
+        btnRating.onclick = function () {
+            const rating = $('input[name="rating"]:checked').val();
+            const comment = $('#rating-comment-input').val()
+
+            if (comment) {
+                var data = {
+                    username: $("#username").val(),
+                    content: comment,
+                    itemId: itemId.split("-")[1],
+                    avatar: $("#user_avatar").val(),
+                    rating: rating
+                }
+
+
+
+
+                $.ajax({
+                    url: `/${type}/do-comment`,
+                    method: "POST",
+                    data: data,
+                    success: function (res) {
+                        $('#close-rating-comment-btn').click()
+
+
+
+                        $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
+                                                <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4 d-flex flex-direction-column align-items-center" style="background-color: #837542;">
+                                                            <h2 style="text-align: center; color: white; margin-bottom: 36px">Feedback successfully !</h2>
+                                                            <img src="/img/thank-you.png" style="height: 198px; width: 343px;"></img>
+                                                            
+                                                            <div class="text-center mb-3"><a href="/" class="btn btn-primary" style="margin-top: 12px; font-size: 14px;font-weight: 700" >Go back to the homepage</a></div> <a style="text-align:center; color: #c18e00; font-weight: 700" href="/orders/detail/${orderId}">Not now</a>
+                                                        </div>
+                                                    </div>
+                                                </div>`)
+                        setTimeout($("#notice-btn").click(), 2000);
+
+
+                    }
+                });
+            } else {
+                alert('Bạn chưa viết phản hồi')
+            }
+
+
+
+
+
+        }
+
+    })
+
+
+
+
+</script>

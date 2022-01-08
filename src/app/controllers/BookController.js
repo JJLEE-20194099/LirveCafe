@@ -16,6 +16,9 @@ import {
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
+import {
+   cal_avg_rating
+} from '../../support_lib/rating.js';
 
 import emailController from './EmailController.js';
 
@@ -89,7 +92,8 @@ const BookController = {
                             user: res.locals.user,
                             cart: res.locals.cart,
                             notis: res.locals.notis,
-                            no_new_notis: getNoNewNotis(res.locals.notis)
+                            no_new_notis: getNoNewNotis(res.locals.notis),
+                            avg_rating: cal_avg_rating(commentList)
                         })
                     })
 

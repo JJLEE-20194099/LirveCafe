@@ -12,6 +12,8 @@ import {
     createNotiOrNot
 } from '../../support_lib/noti.js'
 
+
+
 const PromoController = {
 
     // GET promos/list
@@ -61,6 +63,7 @@ const PromoController = {
     save(req, res, next) {
         const newPromo = new Promo(req.body);
         const errors = [];
+        var pro = ''
         Promo.findOne({
                 $and: [{
                         'discountAmount': req.body.discountAmount
@@ -79,17 +82,19 @@ const PromoController = {
             .then((promo) => {
                 if (!promo) {
                     newPromo.save()
-                        .then((pro) => {
+                        .then((x) => {
+                            pro = singleMongooseDocumentToObject(x)
                             return Promise.all([Promo.find(), User.find()])
                         })
                         .then(([promos, users]) => {
                             promos = mongooseDocumentsToObject(promos);
                             users = mongooseDocumentsToObject(users);
-                            var pro = singleMongooseDocumentToObject(newPromo)
                             var user_list_noticed = createNotiOrNot(users, promos, pro)
+                            console.log("length: ", user_list_noticed.length)
                             if (user_list_noticed.length) {
                                 var us = user_list_noticed
                                 var noti_promises = []
+                        
                                 for (var u of us) {
                                     const notice_data = {
                                         sender: res.locals.user.username,

@@ -53,28 +53,42 @@
                             <div class="noti-content">
                                 <div>
                                     {{#if this.isRead}}
-                                    {{#if this.type}}
+                                    {{#ifCond this.type 1}}
                                     <span class="noti-username">Bạn đã nhận đươc 1</span> <span class="noti-type">mã
                                         giảm giá mới của LivreCafé </span> <span class="noti-where">tại đây</span>
-                                    {{else}}
-                                    <span class="noti-username">{{this.sender}}</span> <span class="noti-type">đã
+                                    {{/ifCond}}
+
+                                     {{#ifCond this.type 0}}
+                                        <span class="noti-username">{{this.sender}}</span> <span class="noti-type">đã
                                         nhắc đến bạn </span> trong <span class="noti-where">trang
                                         này hoặc có liên quan tới bạn</span>
-                                    {{/if}}
+                                    {{/ifCond}}
+
+                                      {{#ifCond this.type 2}}
+                                        <p style="margin-bottom: 4px">Bạn có 1 đơn hàng mới từ <span class="noti-username">{{this.sender}}</p>
+                                       
+                                    {{/ifCond}}
+                                    
                                     {{else}}
-                                    {{#if this.type}}
+                                    {{#ifCond this.type 1}}
                                     <span class="noti-username" style="font-weight: bold!important;">Bạn đã nhận đươc
                                         1</span> <span style="font-weight: bold!important;" class="noti-type">mã giảm
                                         giá mới của LivreCafé</span> <span style="font-weight: bold!important;"
                                         class="noti-where">tạiđây</span>
-                                    {{else}}
+                                    {{/ifCond}}
+
+                                     {{#ifCond this.type 2}}
+                                        <p style="font-weight: bold; margin-bottom: 4px">Bạn có 1 đơn hàng mới từ <span class="noti-username" style="font-weight: bold;">{{this.sender}}</p>
+                                    {{/ifCond}}
+
+                                    {{#ifCond this.type 0}}
                                     <span class="noti-username"
                                         style="font-weight: bold!important;">{{this.sender}}</span> <span
                                         class="noti-type" style="font-weight: bold!important;">đã
                                         nhắc đến bạn </span> <span style="font-weight: bold!important;">trong</span>
                                     <span style="font-weight: bold!important;" class="noti-where">trang
                                         này hoặc có liên quan tới bạn</span>
-                                    {{/if}}
+                                    {{/ifCond}}
                                     {{/if}}
 
                                 </div>
@@ -175,10 +189,12 @@
                     <li style="height: 60px; border-top: 1px solid white"><a
                             href='/users/{{user.username}}/register_loyal_member'>Đăng ký thành viên thân thiết</a></li>
                     <li style="height: 60px; border-top: 1px solid white"><a
+                            href='/workingspaces/create'>Đăng kí workingspace</a></li>
+                    <li style="height: 60px; border-top: 1px solid white"><a
                             href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Giỏ
                             hàng của tôi</a></li>
                     <li style="height: 60px; border-top: 1px solid white"><a
-                            href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Đơn
+                            href='/orders/list/{{user.username}}'>Đơn
                             hàng của tôi</a></li>
                     <li style="height: 60px; border-top: 1px solid white"><a
                             href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Sự
@@ -197,9 +213,8 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
 <script>
-
-
     function noti_toggle() {
         if (document.getElementById("noti-container").style.display == "none") {
             document.getElementById("noti-container").style.display = "flex"

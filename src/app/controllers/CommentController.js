@@ -15,10 +15,10 @@ const CommentControllers = {
     
     // POST /do-comment
 
-     doComment(req, res, next) {
-       
+     doComment(req, res, next) {    
+        
         const comment = new Comment(req.body);
-        console.log(comment);
+      
         comment.save()
             .then(() => res.send(singleMongooseDocumentToObject(comment)))
             .catch(next)

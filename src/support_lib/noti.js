@@ -9,6 +9,8 @@ export const getNoNewNotis = function (notis) {
 }
 
 export const createNotiOrNot = function(users, promos, promo) {
+
+
     promos.sort(function (a, b) {
         if (!a.discountAmount)
             a.disCountAmount = 0;
@@ -45,7 +47,7 @@ export const createNotiOrNot = function(users, promos, promo) {
     var res = []
 
     for (var user of users) {
-        var level = user.level || 0
+        var level = user.registered_level || 0
         const limitPromo = parseInt(level * promos.length / 6)
         var available_promos = promos.slice(0, limitPromo)     
         let check = false

@@ -18,7 +18,9 @@ const Book = new Schema(
         meta: {
             votes: {type: Number, default: 0},
             favs: {type: Number, default: 0}
-        }   
+        },
+        quantity: {type: Number, required: true, default: 0},
+        no_sold: {type: Number, default: 0},
     },
     {
         timestamps: true,

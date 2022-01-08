@@ -23,7 +23,6 @@ function getTimeFormat(year, month, day, hour, minute, second) {
 function convert(timeString) {
     const start = new Date(timeString).getTime() / 1000;
     var no_year = (end - start) / (60 * 60 * 24 * 365)
-    console.log(start, " ", end, " ", no_year)
     var no_month = (end - start) / (60 * 60 * 24 * 30)
     var no_day = (end - start) / (60 * 60 * 24)
     var no_hour = (end - start) / (60 * 60)

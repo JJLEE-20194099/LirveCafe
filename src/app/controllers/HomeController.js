@@ -15,7 +15,7 @@ import {
 
 const HomeController = {
     index: function (req, res, next) {
-        console.log(req.signedCookies.userId)
+        // console.log(req.signedCookies.userId)
         Promise.all([Book.find({}), Coffee.find({}), Food.find({}), User.findOne({
                 _id: req.signedCookies.userId
             })])

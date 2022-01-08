@@ -33,7 +33,7 @@ const NotificationController = {
         const id = data.id;
 
         
-        console.log(data)
+         
         Noti.updateOne({_id: id}, {isRead: 1})
             .then(() => Noti.findOne({_id: id}))
             .then((noti) => {

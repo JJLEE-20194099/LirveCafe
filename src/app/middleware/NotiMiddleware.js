@@ -17,7 +17,6 @@ const NotiMiddleware = {
                 .then(user => {
                     
                     if (user) {
-                        console.log(res.locals.user.username)
                         return Noti.find({
                             receiver: res.locals.user.username
                         }).sort({'createdAt': -1})

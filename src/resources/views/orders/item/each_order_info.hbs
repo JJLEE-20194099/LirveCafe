@@ -1,0 +1,138 @@
+<link rel="stylesheet" href="/css/each_item_order.css">
+<div class="d-flex flex-column justify-content-center align-items-center" id="order-heading">
+    <div class="text-uppercase">
+        <p>Order's Product Detail</p>
+    </div>
+    <div class="h4">{{order.createdAt}}</div>
+    <div class="pt-1">
+        <p>Product involves order <a href="/orders/detail/{{order._id}}" style="color: #246c0c">#{{order._id}}</a><b class="text-dark"></b></p>
+    </div>
+
+</div>
+<div class="wrapper bg-white">
+    <div class="table-responsive">
+        <table class="table table-borderless">
+            <thead>
+                <tr class="text-uppercase text-muted">
+                    <th scope="col">Your product</th>
+                    <th scope="col" class="text-right">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row"><a href="/orders/detail/{{order._id}}" style="color: #246c0c">#{{order._id}}</a></th>
+                    <td class="text-right"><b id="fake-total"></b></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-start align-items-center list my-2 py-1">
+        <div><b id="product-quantity">{{item.quantity}}</b></div>
+        {{#if item.food}}
+        <p id="product-price" style="display: none">{{item.food.price}}</p>
+        <div class="mx-3"> <img src="{{item.food.image}}" alt="apple" class="rounded-circle" width="30" height="30">
+        </div>
+        <div class="order-item">{{item.food.name}}</div>
+        {{/if}}
+
+        {{#if item.book}}
+        <p id="product-price" style="display: none">{{item.book.price}}</p>
+        <div class="mx-3"> <img src="{{item.book.image}}" alt="apple" class="rounded-circle" width="30" height="30">
+        </div>
+        <div class="order-item">{{item.book.title}}</div>
+        {{/if}}
+
+        {{#if item.coffee}}
+        <p id="product-price" style="display: none">{{item.coffee.price}}</p>
+        <div class="mx-3"> <img src="{{item.coffee.image}}" alt="apple" class="rounded-circle" width="30" height="30">
+        </div>
+        <div class="order-item">{{item.coffee.name}}</div>
+        {{/if}}
+
+
+    </div>
+
+
+    <div class="pt-2 border-bottom mb-3"></div>
+    <div class="d-flex justify-content-start align-items-center pl-3">
+        <div class="text-muted">Payment Method</div>
+        <div class="ml-auto"> <img
+                src="https://i1.wp.com/www.worth.com/wp-content/uploads/2021/03/bermix-studio-aX1hN4uNd-I-unsplash-scaled-e1617884102155.jpg?fit=605%2C349&ssl=1"
+                alt="" width="30" height="30" style="border-radius: 50%;"> <label>Cash</label> </div>
+    </div>
+    <div class="d-flex justify-content-start align-items-center py-1 pl-3">
+        <div class="text-muted">Shipping</div>
+        <div class="ml-auto"> <label>Free</label> </div>
+    </div>
+
+
+    <div class="d-flex justify-content-start align-items-center pl-3 py-3 mb-4 border-bottom">
+        <div class="text-muted"> Total </div>
+        <div class="ml-auto h5" id="real-total"></div>
+    </div>
+    <div class="row border rounded p-1 my-3">
+        <div class="col-md-6 py-3">
+            <div class="d-flex flex-column align-items start"> <b>Billing Address</b>
+                <p class="text-justify pt-2">{{order.address}}</p>
+            </div>
+        </div>
+        <div class="col-md-6 py-3">
+            <div class="d-flex flex-column align-items start"> <b>Shipping Address</b>
+                <p class="text-justify pt-2">{{order.address}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="pl-3 font-weight-bold">Related Subsriptions</div>
+    <div class="d-sm-flex justify-content-between rounded my-3 subscriptions align-items-center">
+        {{#if item.book}}
+        <div> <b>#{{item.book._id}}</b> </div>
+
+        <div>Monday</div>
+        {{/if}}
+
+        {{#if item.coffee}}
+        <div> <b>#{{item.coffee._id}}</b> </div>
+
+        <div>Monday</div>
+        {{/if}}
+
+        {{#if item.food}}
+        <div> <b>#{{item.food._id}}</b> </div>
+
+        <div>Monday</div>
+        {{/if}}
+
+        {{#if item.status}}
+        <button href="" class="btn btn-success" data-toggle="modal" data-target="#update-order-status-modal"
+                    style="color: white; font-size: 15px; font-weight: bold"
+                    data-id="{{../order._id}}-{{this.food._id}}">Status: Successful</button>
+        {{else}}
+        <button href="" class="btn btn-danger" data-toggle="modal" data-target="#update-order-status-modal"
+                    style="color: white; font-size: 15px; font-weight: bold"
+                    data-id="{{../order._id}}-{{this.food._id}}">Status: Processing</button>
+        {{/if}}
+
+        {{#if item.book}}
+        <div> Total: <b> {{item.book.price}}VNĐ for {{item.quantity}} items</b> </div>
+        {{/if}}
+
+        {{#if item.coffee}}
+        <div> Total: <b> {{item.coffee.price}}VNĐ for {{item.quantity}} items</b> </div>
+        {{/if}}
+
+        {{#if item.food}}
+        <div> Total: <b> {{item.food.price}}VNĐ for {{item.quantity}} items</b> </div>
+        {{/if}}
+
+
+    </div>
+</div>
+
+<script>
+    var price = document.getElementById("product-price").innerHTML;
+    var quantity = document.getElementById("product-quantity").innerHTML;
+    document.getElementById("real-total").innerHTML = parseInt(price) * parseInt(quantity) + 'VNĐ';
+    document.getElementById("fake-total").innerHTML = parseInt(price) * parseInt(quantity) + 'VNĐ';
+
+</script>

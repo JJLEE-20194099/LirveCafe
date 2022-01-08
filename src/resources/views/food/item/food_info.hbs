@@ -190,7 +190,7 @@
                             <input type="text" name="me_avatar" id="user_avatar" value={{user.avatar}}
                                 style="display: none">
                             <span class="round"><img src="{{user.avatar}}" class="align-self-start mr-3"
-                                    style="border-radius: 50%; height: 36px"></span>
+                                    style="border-radius: 50%; height: 36px;  width: 36px"></span>
                             <div class="reply-input">
                                 <input type="text" name="content" placeholder="Bạn đánh giá gì về sản phẩm này?"
                                     style="font-size: 14px" onkeyup="showSendBox(this)" id="content">
@@ -219,11 +219,14 @@
                     <div id="{{this._id}}" class="each_comment_box">
                         <div class="media d-flex align-items-start">
                             <span class="round"><img src="{{this.avatar}}" class="align-self-start mr-3"
-                                    style="border-radius: 50%; height: 36px"></span>
+                                    style="border-radius: 50%; height: 36px; width: 36px"></span>
                             <div class="container">
                                 <div class="d-flex flex-column align-items-stretch justify-content-evenly comment-container"
                                     style="flex: 1">
                                     <span class="user pt-2 username">{{this.username}}</span>
+                                    {{#if this.rating}}
+                                        <span style="font-weight: bold; color: black;">đã đánh giá <span style="font-weight: bold; color: #f5ba3f">{{this.rating}} sao</span></span>
+                                    {{/if}}
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex justify-content-betweens align-items-center">
                                             <div class="content">{{this.content}}</div>
@@ -245,7 +248,7 @@
                                 <input type="text" name="me_avatar" id="me_avatar" value={{../user.avatar}}
                                     style="display: none">
                                 <span class="round"><img src="{{../user.avatar}}" class="align-self-start mr-3"
-                                        style="border-radius: 50%; height: 36px"></span>
+                                        style="border-radius: 50%; height: 36px; width: 36px"></span>
                                 <div class="reply-input">
                                     <input type="text" name="me" id="me" value={{../user.username}}
                                         style="display: none">
@@ -273,7 +276,7 @@
                                 {{#each this.replyList}}
                                 <div class="media d-flex align-items-start">
                                     <span class="round"><img src="{{this.avatar}}" class="align-self-start mr-3"
-                                            style="border-radius: 50%; height: 36px"></span>
+                                            style="border-radius: 50%; height: 36px; width: 36px"></span>
                                     <div class="container">
                                         <div class="d-flex flex-column align-items-stretch justify-content-evenly comment-container"
                                             style="flex: 1">
@@ -538,7 +541,7 @@
                     
                     <div class="media d-flex align-items-start">
                         <span class="round"><img src="${data.avatar}" class="align-self-start mr-3"
-                                style="border-radius: 50%; height: 36px"></span>
+                                style="border-radius: 50%; height: 36px; width: 36px"></span>
                         <div class="container">
                             <div class="d-flex flex-column align-items-stretch justify-content-evenly comment-container"
                                 style="flex: 1">
@@ -566,7 +569,7 @@
                             <input type="text" name="me_avatar" id="me_avatar" value=${data.avatar}
                                 style="display: none">
                             <span class="round"><img src=${data.avatar} class="align-self-start mr-3"
-                                    style="border-radius: 50%; height: 36px"></span>
+                                    style="border-radius: 50%; height: 36px; width: 36px"></span>
                             <div class="reply-input">
                                 <input type="text" name="me" id="me" value=${data.username} style="display: none">
                                 <input type="text" name="reply" id="reply" onkeyup="changeBtnStatus(this)">
@@ -612,7 +615,7 @@
                 var html = `<div class="media d-flex align-items-start">
                       <input type="text" name="me_avatar" id="me_avatar" value="${data.avatar}" style="display: none">
                                 <span class="round"><img src="${data.avatar}" class="align-self-start mr-3"
-                                        style="border-radius: 50%; height: 36px"></span>
+                                        style="border-radius: 50%; height: 36px; width: 36px"></span>
                                 <div class="container">
                                     <div class="d-flex flex-column align-items-stretch justify-content-evenly comment-container"
                                         style="flex: 1">

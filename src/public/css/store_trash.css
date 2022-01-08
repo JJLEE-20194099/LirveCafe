@@ -38,3 +38,19 @@ tr {
 
 td, th {
   vertical-align: baseline !important; }
+
+.item-info {
+  height: 500px;
+  overflow: scroll !important; }
+  .item-info .item-info-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; }
+  .item-info .item-info-img {
+    width: 200px;
+    height: 200px;
+    margin-right: 20px; }
+  .item-info .item-info-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; }

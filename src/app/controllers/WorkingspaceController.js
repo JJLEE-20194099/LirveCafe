@@ -71,7 +71,7 @@ const WorkingspaceController = {
                         for(var j = 0; j < drink_lists.length; j++) {
                             workingspace.drinks[j] = {drink: drink_lists[j], quantity:  workingspace.drinks[j].quantity}
                         }
-                    console.log(workingspace)
+                    // console.log(workingspace)
                         res.render('own/workingspaces/item/workingspace_info.hbs', {
                             workingspace: workingspace,
                             user: res.locals.user,
@@ -132,7 +132,7 @@ const WorkingspaceController = {
     //POST /workingspaces/save
     save(req, res, next) {
         let avatar = ''
-        console.log(req.file.path)
+ 
         if (!req.file.path || req.file.path == '') {
             req.body.avatar = "http://www.davidkrugler.com/s/River-Lights-8318.jpg";
         } else  {
@@ -169,7 +169,7 @@ const WorkingspaceController = {
         delete data.total;
         const split = parseInt(data["split"])
         delete data.split;
-        console.log(data)
+
         var cnt = 0;
 
         const foods = []
@@ -211,7 +211,7 @@ const WorkingspaceController = {
 
         const seat_time = (end_date - start_date) * 24 * 60 + (end_hour - start_hour) * 60 + (end_minute - start_minute)
         const seat_fee = (seat_time / 60) * parseInt(no_seating) * 25 * 1000;
-        console.log(seat_fee)
+       
 
         total = parseInt(total) + seat_fee
         my_data["total"] = total

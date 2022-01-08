@@ -5,7 +5,8 @@ import controllers from '../app/controllers/OrderController.js';
 const router = express.Router();
 
 router.get('/list/:username', controllers.index);
-router.get('/detail/:orderId', controllers.show)
+router.get('/detail/:orderId', controllers.show);
+router.post('/update', controllers.updateOrderStatus)
 
 // router.get('/:id/edit', controllers.edit);
 // router.patch('/:id', controllers.update);

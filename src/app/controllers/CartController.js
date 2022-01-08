@@ -11,8 +11,13 @@ import Rank from '../constants/user.rank.js';
 
 import Comment from '../models/Comment.js';
 import Reply from '../models/Reply.js';
+import Noti from  '../models/Noti.js';
 
 import emailController from './EmailController.js';
+
+import {
+    updateProductWarehouse
+} from '../../support_lib/order.js'
 
 const calculateUserLevel = ([multiOrderList, user]) => {
 
@@ -294,7 +299,7 @@ const CartController = {
             })
             .then((cart) => {
                 cart = singleMongooseDocumentToObject(cart)
-                console.log(cart)
+                
                 if (!cart) cart = {
                     username: username,
                     itemList: []
@@ -318,7 +323,7 @@ const CartController = {
                     return acc + parseFloat(price) * parseInt(item.quantity)
                 }, 0)
 
-                console.log(total)
+              
 
                 return Promise.all([Promo.find({
                     condition: {
@@ -488,7 +493,7 @@ const CartController = {
 
         var userCart = [];
         var data = {};
-        console.log(itemList)
+     
     },
 
     
@@ -572,7 +577,7 @@ const CartController = {
         delete data.itemId;
         data.itemList = []
         var orders = new Orders(data);
-
+        var n = ""
         
 
         Cart.findOne({
@@ -584,11 +589,22 @@ const CartController = {
                 orders = new Orders(data);
 
                 
-
                 return Promise.all([orders.save(), Cart.deleteOne({
                     _id: itemId
-                })])
-            }).then(([x, y]) => {
+                }), User.findOne({username: "LivreCafe"})])
+            }).then(([x, y, z]) => {
+                orders._id = x._id
+                const user = res.locals.user    
+                const order_noti = {
+                    itemId: orders._id,
+                    sender:  z.username,
+                    receiver: user.username,
+                    where_url: `http://localhost:3000/orders/detail/${orders._id}`,
+                    avatar: z.avatar,
+                    type: 2,
+                }
+
+                const noti = new Noti(order_noti)
                 return Promise.all([
                     Orders.find({
                         username: data.username
@@ -596,13 +612,16 @@ const CartController = {
                     User.findOne({
                         username: data.username
                     }),
+                    Promise.all(updateProductWarehouse(orders)),
+                    noti.save()
                 ])
-            }).then(([multiOrderList, user]) => {
+            }).then(([multiOrderList, user, updateList, noti]) => {
                 calculateUserLevel(([multiOrderList, user]))
+                n = singleMongooseDocumentToObject(noti)
             })
             .then(() => {
                 emailController.sendOrderNotice(req, orders)
-                    res.send("Ok")
+                res.send(n)
             })
             .catch(next)
     },

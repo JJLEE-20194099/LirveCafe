@@ -1,8 +1,6 @@
 const validate = {
     postCreatePromo: function(req, res, next) {
         const errors = [];
-        
-        console.log(req.body)
 
         if (!req.body.discountPercentage && !req.body.discountAmount) {
             errors.push("Discount Percentage Or Discount Amount is required");
