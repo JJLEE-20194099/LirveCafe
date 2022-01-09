@@ -20,7 +20,7 @@ function getTimeFormat(year, month, day, hour, minute, second) {
     return "Vài giây trước"
 }
 
-function convert(timeString) {
+export const convert =  function(timeString) {
     const start = new Date(timeString).getTime() / 1000;
     var no_year = (end - start) / (60 * 60 * 24 * 365)
     var no_month = (end - start) / (60 * 60 * 24 * 30)
