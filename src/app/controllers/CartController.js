@@ -19,6 +19,10 @@ import {
     updateProductWarehouse
 } from '../../support_lib/order.js'
 
+import {
+    checkNumberOfUsesLimit
+} from '../../support_lib/promo.js'
+
 const calculateUserLevel = ([multiOrderList, user]) => {
 
     if (!multiOrderList)
@@ -304,20 +308,16 @@ const CartController = {
                     username: username,
                     itemList: []
                 }
+               
                 total = cart.itemList.reduce(function (acc, item) {
                     let price = 0
+                    // if price is string type
                     if (item.book) {
                         price = item.book.price
-                        if (price.includes("đ"))
-                            price = price.slice(1)
                     } else if (item.food) {
                         price = item.food.price
-                        if (price.includes("đ"))
-                            price = price.slice(1)
                     } else if (item.coffee) {
                         price = item.coffee.price
-                        if (price.includes("đ"))
-                            price = price.slice(1)
                     }
                     
                     return acc + parseFloat(price) * parseInt(item.quantity)
@@ -337,6 +337,7 @@ const CartController = {
                 if (!promoList) promoList = []
                 else {
                     promoList = mongooseDocumentsToObject(promoList)
+                   
                     promoList.sort(function (a, b) {
                         if (!a.discountAmount)
                             a.disCountAmount = 0;
@@ -474,6 +475,7 @@ const CartController = {
     addPromoToCart(req, res, next) {
 
         const data = req.body;
+        var p;
         Promise.all([
             Cart.findOne({
                 _id: data.cartId
@@ -483,7 +485,17 @@ const CartController = {
             }),
 
         ]).then(([cart, promo]) => {
-
+            cart = singleMongooseDocumentToObject(cart)
+            p = singleMongooseDocumentToObject(promo)
+            return Orders.find({username: cart.username, promoId: p._id})
+        }).then((orders) => {
+            var flag = true
+            if (orders) {
+                orders = mongooseDocumentsToObject(orders)
+                var check = checkNumberOfUsesLimit(orders, p)
+                if (check) flag = false
+            }
+            res.send(flag)
         }).catch(next)
     },
 
