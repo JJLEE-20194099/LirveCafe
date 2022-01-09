@@ -6,7 +6,7 @@ import newsRoute from './news.js';
 import userRoute from './user.js'; 
 import ownRoute from './own.js'; 
 import authRoute from './auth.js';
-import homeRoute from './test.js';
+import homeRoute from './home.js';
 import emailRoute from './email.js';
 import promoRoute from './promo.js';
 import cartRoute from './cart.js';

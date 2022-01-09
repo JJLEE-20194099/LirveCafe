@@ -10,6 +10,7 @@ import notiControllers from '../app/controllers/NotificationController.js';
 import validate from '../app/validate/book.validate.js';
 
 import authMiddleware from '../app/middleware/AuthMiddleware.js';
+import sortMiddleware from '../app/middleware/SortMiddleware.js';
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -39,7 +40,7 @@ var upload = multer({
     }
 })
 
-router.get('/list', controllers.index);
+router.get('/list', sortMiddleware.filterList, controllers.index);
 router.get('/create', controllers.create);
 router.get('/:slug', controllers.show);
 router.post('/save',
