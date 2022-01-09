@@ -58,7 +58,18 @@ const calculateUserLevel = ([multiOrderList, user]) => {
 const BookController = {
     // GET /books/list
     index(req, res, next) {
-        Book.find({})
+        const enabled = res.locals.sort.enabled;
+        const field = res.locals.sort.field;
+        var type;
+        console.log(res.locals.sort)
+        if (res.locals.sort.type == 'desc') {
+            type = -1
+        } else type = 1
+        console.log("type: ", type)
+
+        if (field == 'price') {
+            
+            Book.find().sort({price: parseInt(type)})
             .then((books) => {
                 res.render('books/list/list.hbs', {
                     books: mongooseDocumentsToObject(books),
@@ -68,6 +79,32 @@ const BookController = {
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             }).catch(next);
+        } else if (field == 'newest') {
+            Book.find().sort({createdAt: 1})
+            .then((books) => {
+                res.render('books/list/list.hbs', {
+                    books: mongooseDocumentsToObject(books),
+                    user: res.locals.user,
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                });
+            }).catch(next);
+        } else {
+            Book.find().sort({no_sold: -1})
+            .then((books) => {
+                res.render('books/list/list.hbs', {
+                    books: mongooseDocumentsToObject(books),
+                    user: res.locals.user,
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                });
+            }).catch(next);
+        }
+
+
+        
     },
 
     // GET: /books/:slug

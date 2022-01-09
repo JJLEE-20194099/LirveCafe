@@ -16,17 +16,34 @@ const OrderController = {
 
     index(req, res, next) {
         const username = req.params.username;
-        Orders.find({username: username})
-            .then((orders) => {
+        Promise.all([Orders.find({username: username}), Orders.countDocumentsDeleted({username: username})])
+            .then(([orders, deletedCount]) => {
                 
-                res.render('orders/list/list.hbs', {
+                res.render('orders/list/store.hbs', {
                     orders: mongooseDocumentsToObject(orders),
                     user: res.locals.user,
                     cart: res.locals.cart,
                     notis: res.locals.notis,
-                    no_new_notis: getNoNewNotis(res.locals.notis)
+                    no_new_notis: getNoNewNotis(res.locals.notis),
+                    deletedCount
                 });
             }).catch(next);
+    },
+
+    // GET orders/trash_list/:username
+
+    indexTrash(req, res, next) {
+        Orders.findDeleted({
+            username: res.locals.user.username
+        })
+        .then((orders) => {
+            res.render('orders/list/trash.hbs', {
+                orders: mongooseDocumentsToObject(orders),
+                user: res.locals.user,
+                notis: res.locals.notis,
+                no_new_notis: getNoNewNotis(res.locals.notis)
+            })
+        }).catch(next);
     },
 
     
@@ -101,7 +118,33 @@ const OrderController = {
                 res.render("orders/item/each_order_info.hbs", {item: item, order: updatedOrder, promo: promo})
             }).catch(next)
 
-    }
+    },
+    // SOFT DELETE /orders/:id
+    softDelete(req, res, next) {
+        Orders.delete({
+                _id: req.params.id
+            })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    },
+
+    // DEEP DELETE /orders/:id/force
+    deepDelete(req, res, next) {
+        Orders.deleteOne({
+                _id: req.params.id
+            })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    },
+
+    // RESTORE BOOK (PATCH) /orders/:id/restore
+    restore(req, res, next) {
+        Orders.restore({
+                _id: req.params.id
+            })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    },
 }
 
 export default OrderController;

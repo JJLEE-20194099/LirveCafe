@@ -17,6 +17,9 @@ import {
     mongooseDocumentsToObject
 } from '../../support_lib/mongoose.js';
 
+import {
+    cal_avg_rating
+ } from '../../support_lib/rating.js';
 
 import emailController from './EmailController.js';
 
@@ -56,7 +59,18 @@ const calculateUserLevel = ([multiOrderList, user]) => {
 const CoffeeController = {
     // GET /coffee/list
     index(req, res, next) {
-        Coffee.find({})
+        const enabled = res.locals.sort.enabled;
+        const field = res.locals.sort.field;
+        var type;
+        console.log(res.locals.sort)
+        if (res.locals.sort.type == 'desc') {
+            type = -1
+        } else type = 1
+        console.log("type: ", type)
+
+        if (field == 'price') {
+            
+            Coffee.find().sort({price: parseInt(type)})
             .then((coffee) => {
                 res.render('drink/list/list.hbs', {
                     coffee: mongooseDocumentsToObject(coffee),
@@ -66,6 +80,32 @@ const CoffeeController = {
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             }).catch(next);
+        } else if (field == 'newest') {
+            Coffee.find().sort({createdAt: 1})
+            .then((coffee) => {
+                res.render('drink/list/list.hbs', {
+                    coffee: mongooseDocumentsToObject(coffee),
+                    user: res.locals.user,
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                });
+            }).catch(next);
+        } else {
+            Coffee.find().sort({no_sold: -1})
+            .then((coffee) => {
+                res.render('drink/list/list.hbs', {
+                    coffee: mongooseDocumentsToObject(coffee),
+                    user: res.locals.user,
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                });
+            }).catch(next);
+        }
+
+
+        
     },
 
     // GET: /coffee/:slug
@@ -90,7 +130,8 @@ const CoffeeController = {
                             user: res.locals.user,
                             cart: res.locals.cart,
                             notis: res.locals.notis,
-                            no_new_notis: getNoNewNotis(res.locals.notis)
+                            no_new_notis: getNoNewNotis(res.locals.notis),
+                            avg_rating: cal_avg_rating(commentList)
                         })
                     })
 

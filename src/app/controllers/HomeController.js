@@ -3,7 +3,6 @@ import Coffee from '../models/Coffee.js';
 import Food from '../models/Food.js';
 import User from '../models/User.js';
 
-
 import {
     mongooseDocumentsToObject,
     singleMongooseDocumentToObject
@@ -58,7 +57,20 @@ const HomeController = {
             }).catch(next)
 
 
-    }
+    },
+    
+    suggestIndex: function (req, res, next) {
+        Promise.all([Book.find({}), Coffee.find({}), Food.find({})])
+            .then(([books, coffee, food]) => {
+                books = mongooseDocumentsToObject(books)
+                coffee = mongooseDocumentsToObject(coffee)
+                food = mongooseDocumentsToObject(food)
+                res.send({books, food, coffee})
+            }).catch(next)
+
+
+    },
+
 }
 
 export default HomeController;

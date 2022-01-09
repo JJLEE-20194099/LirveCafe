@@ -208,6 +208,8 @@ const OwnController = {
             }).catch(next);
     },
 
+    
+
     // GET own/trash/orders
     trashOrders(req, res, next) {
         Orders.findDeleted({

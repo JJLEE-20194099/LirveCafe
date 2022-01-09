@@ -14,7 +14,32 @@ import {
 const NotificationController = {
 
     getNotisByUser: function(req, res, next) {
-        res.render('notis/list/store.hbs')
+        const username = req.params.username;
+        Promise.all([Noti.find({username: username}), Noti.countDocumentsDeleted({username: username})])
+            .then(([notis, deletedCount]) => {
+                
+                res.render('notis/list/store.hbs', {
+                    my_notis: mongooseDocumentsToObject(notis),
+                    user: res.locals.user,
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis),
+                    deletedCount
+                });
+            }).catch(next);
+    },
+
+    getNotisTrashByUser: function(req, res, next) {
+        Noti.findDeleted({
+            username: res.locals.user.username
+        })
+        .then((notis) => {
+            res.render('notis/list/trash.hbs', {
+                notis: mongooseDocumentsToObject(notis),
+                user: res.locals.user,
+                no_new_notis: getNoNewNotis(res.locals.notis)
+            })
+        }).catch(next);
     },
 
     getCommentNotification: function(req, res, next) {
@@ -54,7 +79,34 @@ const NotificationController = {
                 res.send(n)
             })
             .catch(next)
-    }
+    },
+
+      // SOFT DELETE /notis/:id
+      softDelete(req, res, next) {
+        Noti.delete({
+                _id: req.params.id
+            })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    },
+
+    // DEEP DELETE /notis/:id/force
+    deepDelete(req, res, next) {
+        Noti.deleteOne({
+                _id: req.params.id
+            })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    },
+
+    // RESTORE Noti (PATCH) /notis/:id/restore
+    restore(req, res, next) {
+        Noti.restore({
+                _id: req.params.id
+            })
+            .then(() => res.redirect('back'))
+            .catch(next);
+    },
 }
 
 export default NotificationController;

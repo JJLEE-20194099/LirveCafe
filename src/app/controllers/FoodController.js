@@ -10,6 +10,10 @@ import Rank from '../constants/user.rank.js';
 import Comment from '../models/Comment.js';
 import Reply from '../models/Reply.js';
 
+import {
+    cal_avg_rating
+ } from '../../support_lib/rating.js';
+
 
 import {
     singleMongooseDocumentToObject,
@@ -55,7 +59,18 @@ const calculateUserLevel = ([multiOrderList, user]) => {
 const FoodController = {
     // GET /food/list
     index(req, res, next) {
-        Food.find({})
+        const enabled = res.locals.sort.enabled;
+        const field = res.locals.sort.field;
+        var type;
+        console.log(res.locals.sort)
+        if (res.locals.sort.type == 'desc') {
+            type = -1
+        } else type = 1
+        console.log("type: ", type)
+
+        if (field == 'price') {
+            
+            Food.find().sort({price: parseInt(type)})
             .then((food) => {
                 res.render('food/list/list.hbs', {
                     food: mongooseDocumentsToObject(food),
@@ -65,7 +80,34 @@ const FoodController = {
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             }).catch(next);
+        } else if (field == 'newest') {
+            Food.find().sort({createdAt: 1})
+            .then((food) => {
+                res.render('food/list/list.hbs', {
+                    food: mongooseDocumentsToObject(food),
+                    user: res.locals.user,
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                });
+            }).catch(next);
+        } else {
+            Food.find().sort({no_sold: -1})
+            .then((food) => {
+                res.render('food/list/list.hbs', {
+                    food: mongooseDocumentsToObject(food),
+                    user: res.locals.user,
+                    cart: res.locals.cart,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                });
+            }).catch(next);
+        }
+
+
+        
     },
+
 
     // GET: /food/:slug
     show(req, res, next) {
@@ -89,7 +131,8 @@ const FoodController = {
                             user: res.locals.user,
                             cart: res.locals.cart,
                             notis: res.locals.notis,
-                            no_new_notis: getNoNewNotis(res.locals.notis)
+                            no_new_notis: getNoNewNotis(res.locals.notis),
+                            avg_rating: cal_avg_rating(commentList)
                         })
                     })
 
