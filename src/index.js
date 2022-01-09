@@ -11,7 +11,6 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import routeObj from './routes/index.js';
 import mongoose_driver from './config/database/index.js';
-import SortMiddleware from './app/middleware/SortMiddleware.js';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -26,7 +25,6 @@ const __dirname = dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser(process.env.SESSION_SECRET));
-app.use(SortMiddleware);
 // parsing application/json
 
 app.use(express.json());
