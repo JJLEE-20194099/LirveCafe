@@ -12,61 +12,25 @@
             <img class="product-img col col-6 d-flex justify-content-center" src="{{coffee.image}}">
 
             <input type="text" value="{{coffee.slug}}" id="slug" style="display: none">
-
+            <input type="text" id="avg_rating" value="{{avg_rating}}" style="display: none">
             <div id="product-buy-detail" class="col col-6">
 
                 <div class="detail-header">
                     <h2 class="detail-title" id="item_name" style="color: black; font-weight: 600">{{coffee.name}}</h2>
-                    <div class="detail-rating">
 
-                        {{!-- light star --}}
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
-                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
-                            style="color: rgb(253, 216, 54);">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
-                            </path>
-                        </svg>
+                    <div class="detail-rating" id="detail-rating">
 
-                        {{!-- light star --}}
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
-                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
-                            style="color: rgb(253, 216, 54);">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
-                            </path>
-                        </svg>
-
-                        {{!-- light star --}}
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
-                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
-                            style="color: rgb(253, 216, 54);">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
-                            </path>
-                        </svg>
-
-                        {{!-- light star --}}
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
-                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
-                            style="color: rgb(253, 216, 54);">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
-                            </path>
-                        </svg>
-
-                        {{!-- dark star --}}
-                        <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
-                            color="#c7c7c7" style="color:#c7c7c7" height="16" width="16"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
-                            </path>
-                        </svg>
-
+                       
+                
                     </div>
-                    <a href="#">(Xem <span>44</span> đánh giá)</a>
-                    <div class="detail-sold">Đã bán <span>888</span></div>
+                    {{#if commentList.length}}
+                         <a href="#">(<span>{{commentList.length}}</span> đánh giá)</a>
+                    {{/if}}
+
+                    {{#if coffee.no_sold}}
+                        <div class="detail-sold">Đã bán <span>{{coffee.no_sold}}</span></div>
+                    {{/if}}
+                    
                 </div>
 
                 <div class="detail-cost">
@@ -454,6 +418,34 @@
 
 
         $(document).ready(function () {
+
+            const avg_rating = $('#avg_rating').val()
+            const light_star = parseInt(avg_rating)
+            const dark_star = 5 - light_star
+            var star_html = '';
+            for (var i = 0; i < light_star; i++) {
+                star_html += ` <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
+                            color="#fdd836" height="16" width="16" xmlns="http://www.w3.org/2000/svg"
+                            style="color: rgb(253, 216, 54);">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                            </path>
+                        </svg>`
+            }
+
+            for(var j = 0; j < dark_star; j++) {
+                star_html += `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
+                            color="#c7c7c7" style="color:#c7c7c7" height="16" width="16"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z">
+                            </path>
+                        </svg>`
+            }
+
+            console.log("avg rating: ", avg_rating)
+
+            $('#detail-rating').html(star_html)
 
             $("#content").focus(function () {
                 $("#send-box").css("display", "flex")

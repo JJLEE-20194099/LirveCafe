@@ -6,22 +6,9 @@
   font-family: 'Poppins', sans-serif;
 }
 
-body{
-  background: #644bff;
-  padding: 0 20px;
-}
 
-::selection{
-  color: #fff;
-  background: #664AFF;
-}
-
-.wrapper{
+.search-input{
   max-width: 450px;
-  margin: 150px auto;
-}
-
-.wrapper .search-input{
   background: #fff;
   width: 100%;
   border-radius: 5px;

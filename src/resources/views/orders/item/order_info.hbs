@@ -284,7 +284,7 @@
     }
 
     if (vnd) {
-        fake_total = vnd + real_total
+        fake_total = vnd*1000 + real_total
     } else if (percentage) {
         fake_total = real_total * 100 / (100 - percentage)
     } else fake_total = real_total

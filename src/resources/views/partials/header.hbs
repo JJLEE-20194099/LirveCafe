@@ -1,8 +1,9 @@
+<link rel="stylesheet" href="/css/search.css">
 <div id="header">
 
     <div id="main-header" class="row navbar d-flex flex-row justify-content-start align-items-center">
 
-        <div class="d-flex justify-content-start align-items-center" style="flex: 3; height: 100%">
+        <div class="d-flex justify-content-start align-items-center" style="height: 100%">
             <a href="/" class="navbar-brand mx-0 d-flex align-items-center justify-content-between">
                 <img src="/img/brand-logo.png" alt="logo-brand" width="80px" height="80px">
                 <span id="name-brand">LivreCafé</span>
@@ -22,197 +23,212 @@
 
             </div>
 
-            <form class="form-inline col col-9 row header-form">
-                <input class="col-9 form-control " type="search" placeholder="Nhập để tìm kiếm..." aria-label="Search"
-                    style="background-color: white">
-                <button class="btn col-2 search-btn" type="submit">Search</button>
-            </form>
+
+
         </div>
-
-
-        <div class="d-flex justify-content-between .align-items-center">
-            <a href='#' id="noti-toggle" onclick="noti_toggle()">
-                <i class="noti-icon ti-bell header-icon">
-                    {{#if no_new_notis}}
-                    <span id="noti-number" class="header-number">{{no_new_notis}}</span>
-                    {{else}}
-                    <span id="noti-number"></span>
-                    {{/if}}
-                </i>
-            </a>
-            <div class="noti-container" id="noti-container" style="display: none">
-                <div class="noti-box" id="noti-box">
-
-                    {{#each notis}}
-                    <div class="noti-each" id="{{this._id}}" onClick="read_info(this)">
-                        <div>
-                            <img src="{{this.avatar}}" class="noti-img" alt="logo-brand">
-                        </div>
-
-                        <div class="noti-main">
-                            <div class="noti-content">
-                                <div>
-                                    {{#if this.isRead}}
-                                    {{#ifCond this.type 1}}
-                                    <span class="noti-username">Bạn đã nhận đươc 1</span> <span class="noti-type">mã
-                                        giảm giá mới của LivreCafé </span> <span class="noti-where">tại đây</span>
-                                    {{/ifCond}}
-
-                                     {{#ifCond this.type 0}}
-                                        <span class="noti-username">{{this.sender}}</span> <span class="noti-type">đã
-                                        nhắc đến bạn </span> trong <span class="noti-where">trang
-                                        này hoặc có liên quan tới bạn</span>
-                                    {{/ifCond}}
-
-                                      {{#ifCond this.type 2}}
-                                        <p style="margin-bottom: 4px">Bạn có 1 đơn hàng mới từ <span class="noti-username">{{this.sender}}</p>
-                                       
-                                    {{/ifCond}}
-                                    
-                                    {{else}}
-                                    {{#ifCond this.type 1}}
-                                    <span class="noti-username" style="font-weight: bold!important;">Bạn đã nhận đươc
-                                        1</span> <span style="font-weight: bold!important;" class="noti-type">mã giảm
-                                        giá mới của LivreCafé</span> <span style="font-weight: bold!important;"
-                                        class="noti-where">tạiđây</span>
-                                    {{/ifCond}}
-
-                                     {{#ifCond this.type 2}}
-                                        <p style="font-weight: bold; margin-bottom: 4px">Bạn có 1 đơn hàng mới từ <span class="noti-username" style="font-weight: bold;">{{this.sender}}</p>
-                                    {{/ifCond}}
-
-                                    {{#ifCond this.type 0}}
-                                    <span class="noti-username"
-                                        style="font-weight: bold!important;">{{this.sender}}</span> <span
-                                        class="noti-type" style="font-weight: bold!important;">đã
-                                        nhắc đến bạn </span> <span style="font-weight: bold!important;">trong</span>
-                                    <span style="font-weight: bold!important;" class="noti-where">trang
-                                        này hoặc có liên quan tới bạn</span>
-                                    {{/ifCond}}
-                                    {{/if}}
-
-                                </div>
-                            </div>
-                            <div class="noti-time date">
-                                {{this.createdAt}}
-                            </div>
-                        </div>
-                    </div>
-                    {{/each}}
-
-                    {{#if notis.length}}
-
-                    <div id="see-all" class="justify-content-center align-items-center"
-                        style="border-top: 0.5px solid #ccc; display: none"><a
-                            style="color: #c39e51; margin-top: 8px; margin-bottom: 8px"
-                            href="/notis/{{user.username}}">Xem tất cả</a></div>
-                    {{else}}
-                    <div id="no-noti-title" class="justify-content-center align-items-center"
-                        style="border-top: 0.5px solid #ccc; display: flex; padding-top: 12; padding-bottom: 12">
-                        <div style="color: #75736e; margin-top: 8px; margin-bottom: 8px"
-                            href="/notis/{{user.username}}">Bạn chưa có thông báo nào cả</div>
-                    </div>
-                    {{/if}}
-
-
-                </div>
+        <div class="search-input">
+            <input type="search" placeholder="Nhập để tìm kiếm..." aria-label="Search" style="background-color: white">
+            <div class="autocom-box">
+                <!-- here list are inserted from javascript -->
             </div>
         </div>
+        <button class="btn col-2 search-btn" type="submit" style="background-color: #ffc347">Search</button>
+
+    </div>
 
 
 
-        <div id="header-cart" class="col-1 text-center .align-items-center">
 
+    <div class="d-flex justify-content-between .align-items-center">
+        <a href='#' id="noti-toggle" onclick="noti_toggle()" style="display: flex; align-items: center">
+            <i class="noti-icon ti-bell header-icon">
+                {{#if no_new_notis}}
+                <span id="noti-number" class="header-number">{{no_new_notis}}</span>
+                {{else}}
+                <span id="noti-number"></span>
+                {{/if}}
+            </i>
+        </a>
+        <div class="noti-container" id="noti-container" style="display: none">
+            <div class="noti-box" id="noti-box">
+
+                {{#each notis}}
+                <div class="noti-each" id="{{this._id}}" onClick="read_info(this)">
+                    <div>
+                        <img src="{{this.avatar}}" class="noti-img" alt="logo-brand">
+                    </div>
+
+                    <div class="noti-main">
+                        <div class="noti-content">
+                            <div>
+                                {{#if this.isRead}}
+                                {{#ifCond this.type 1}}
+                                <span class="noti-username">Bạn đã nhận đươc 1</span> <span class="noti-type">mã
+                                    giảm giá mới của LivreCafé </span> <span class="noti-where">tại đây</span>
+                                {{/ifCond}}
+
+                                {{#ifCond this.type 0}}
+                                <span class="noti-username">{{this.sender}}</span> <span class="noti-type">đã
+                                    nhắc đến bạn </span> trong <span class="noti-where">trang
+                                    này hoặc có liên quan tới bạn</span>
+                                {{/ifCond}}
+
+                                {{#ifCond this.type 2}}
+                                <p style="margin-bottom: 4px">Bạn có 1 đơn hàng mới từ <span
+                                        class="noti-username">{{this.sender}}</p>
+
+                                {{/ifCond}}
+
+                                {{else}}
+                                {{#ifCond this.type 1}}
+                                <span class="noti-username" style="font-weight: bold!important;">Bạn đã nhận đươc
+                                    1</span> <span style="font-weight: bold!important;" class="noti-type">mã giảm
+                                    giá mới của LivreCafé</span> <span style="font-weight: bold!important;"
+                                    class="noti-where">tạiđây</span>
+                                {{/ifCond}}
+
+                                {{#ifCond this.type 2}}
+                                <p style="font-weight: bold; margin-bottom: 4px">Bạn có 1 đơn hàng mới từ <span
+                                        class="noti-username" style="font-weight: bold;">{{this.sender}}</p>
+                                {{/ifCond}}
+
+                                {{#ifCond this.type 0}}
+                                <span class="noti-username" style="font-weight: bold!important;">{{this.sender}}</span>
+                                <span class="noti-type" style="font-weight: bold!important;">đã
+                                    nhắc đến bạn </span> <span style="font-weight: bold!important;">trong</span>
+                                <span style="font-weight: bold!important;" class="noti-where">trang
+                                    này hoặc có liên quan tới bạn</span>
+                                {{/ifCond}}
+                                {{/if}}
+
+                            </div>
+                        </div>
+                        <div class="noti-time date">
+                            {{this.createdAt}}
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+                {{#if notis.length}}
+
+                <div id="see-all" class="justify-content-center align-items-center"
+                    style="border-top: 0.5px solid #ccc; display: none"><a
+                        style="color: #c39e51; margin-top: 8px; margin-bottom: 8px"
+                        href="/notis/list/{{user.username}}">Xem tất cả</a></div>
+                {{else}}
+                <div id="no-noti-title" class="justify-content-center align-items-center"
+                    style="border-top: 0.5px solid #ccc; display: flex; padding-top: 12; padding-bottom: 12">
+                    <div style="color: #75736e; margin-top: 8px; margin-bottom: 8px" href="/notis/{{user.username}}">Bạn
+                        chưa có thông báo nào cả</div>
+                </div>
+                {{/if}}
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="header-cart" class="col-1 text-center .align-items-center">
+
+        {{#if user}}
+        <a class="cart-icon-box" href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>
+            <i class="header-icon ti-shopping-cart-full">
+                {{#if cart.itemList.length}}
+                <span id="cart-number" class="header-number">{{cart.itemList.length}}</span>
+
+                {{/if}}
+            </i>
+        </a>
+
+        {{else}}
+        <a class="cart-icon-box" href='/auth/index'>
+            <i class="header-icon ti-shopping-cart-full">
+
+            </i>
+        </a>
+        {{/if}}
+    </div>
+
+    <div class="header-user d-flex .align-items-center">
+        <i class="header-icon ti-user ml-3 mr-1"></i>
+        <div class="header-des d-flex align-items-center">
             {{#if user}}
-            <a
-                href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>
-                <i class="header-icon ti-shopping-cart-full">
-                    {{#if cart.itemList.length}}
-                    <span id="cart-number" class="header-number">{{cart.itemList.length}}</span>
-
-                    {{/if}}
-                </i>
-            </a>
-
+            <span class="header-text" id="user-name">{{user.username}}</span>
             {{else}}
-            <a
-                href='/auth/index'>
-                <i class="header-icon ti-shopping-cart-full">
-                  
-                </i>
-            </a>
+            <a class="header-text" id="login-text" href="/auth/index">Đăng nhập</a>
+            {{/if}}
+        </div>
+        <div class="link-tri"></div>
+        <div id="user-list" class="func-list">
+            {{#if user}}
+            <ul>
+                <li><a style="font-size: 16px" href='/users/{{user._id}}'>Tài khoản</a></li>
+                <li
+                    style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <a style="font-size: 16px" href='/auth/logout'>Đăng xuất</a>
+                </li>
+
+                {{#if user.role}}
+                <li
+                    style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <a style="font-size: 16px" href='/own/stored/books'>Quản lý sách</a>
+                </li>
+                <li
+                    style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <a style="font-size: 16px" href='/own/stored/coffee'>Quản lý nước uống</a>
+                </li>
+                <li
+                    style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <a style="font-size: 16px" href='/own/stored/food'>Quản lý đồ ăn</a>
+                </li>
+                <li
+                    style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <a style="font-size: 16px" href='/own/stored/promos'>Quản lý mã giảm giá</a>
+                </li>
+                <li
+                    style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <a style="font-size: 16px" href='/own/stored/workingspaces'>Quản lý workingspace</a>
+                </li>
+                <li
+                    style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <a style="font-size: 16px" href='/own/stored/users'>Quản lý người dùng</a>
+                </li>
+                <li
+                    style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
+                    <a style="font-size: 16px" href='/own/stored/orders'>Quản lý đơn hàng</a>
+                </li>
+                {{else}}
+
+                <li style="height: 60px; border-top: 1px solid white"><a
+                        href='/users/{{user.username}}/register_loyal_member'>Đăng ký thành viên thân thiết</a></li>
+                <li style="height: 60px; border-top: 1px solid white"><a href='/workingspaces/create'>Đăng kí
+                        workingspace</a></li>
+                <li style="height: 60px; border-top: 1px solid white"><a
+                        href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Giỏ
+                        hàng của tôi</a></li>
+                <li style="height: 60px; border-top: 1px solid white"><a href='/orders/list/{{user.username}}'>Đơn
+                        hàng của tôi</a></li>
+                <li style="height: 60px; border-top: 1px solid white"><a
+                        href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Sự
+                        kiện của tôi</a></li>
+                {{/if}}
+
+
+            </ul>
             {{/if}}
         </div>
 
-        <div class="header-user d-flex .align-items-center">
-            <i class="header-icon ti-user ml-3 mr-1"></i>
-            <div class="header-des d-flex align-items-center">
-                {{#if user}}
-                <span class="header-text" id="user-name">{{user.username}}</span>
-                {{else}}
-                <a class="header-text" id="login-text" href="/auth/index">Đăng nhập</a>
-                {{/if}}
-            </div>
-            <div class="link-tri"></div>
-            <div id="user-list" class="func-list">
-                <ul>
-                    {{#if user}}
-                    <li><a style="font-size: 16px" href='/users/{{user._id}}'>Tài khoản</a></li>
-                    <li
-                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
-                        <a style="font-size: 16px" href='/auth/logout'>Đăng xuất</a></li>
-
-                    {{#if user.role}}
-                    <li
-                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
-                        <a style="font-size: 16px" href='/own/stored/books'>Quản lý sách</a></li>
-                    <li
-                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
-                        <a style="font-size: 16px" href='/own/stored/coffee'>Quản lý nước uống</a></li>
-                    <li
-                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
-                        <a style="font-size: 16px" href='/own/stored/food'>Quản lý đồ ăn</a></li>
-                    <li
-                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
-                        <a style="font-size: 16px" href='/own/stored/promos'>Quản lý mã giảm giá</a></li>
-                    <li
-                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
-                        <a style="font-size: 16px" href='/own/stored/workingspaces'>Quản lý workingspace</a></li>
-                    <li
-                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
-                        <a style="font-size: 16px" href='/own/stored/users'>Quản lý người dùng</a></li>
-                    <li
-                        style="border-top: 1px solid white; height: 60px; display: flex; align-items: center; justify-content: center">
-                        <a style="font-size: 16px" href='/own/stored/orders'>Quản lý đơn hàng</a></li>
-                    {{else}}
-
-                    <li style="height: 60px; border-top: 1px solid white"><a
-                            href='/users/{{user.username}}/register_loyal_member'>Đăng ký thành viên thân thiết</a></li>
-                    <li style="height: 60px; border-top: 1px solid white"><a
-                            href='/workingspaces/create'>Đăng kí workingspace</a></li>
-                    <li style="height: 60px; border-top: 1px solid white"><a
-                            href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Giỏ
-                            hàng của tôi</a></li>
-                    <li style="height: 60px; border-top: 1px solid white"><a
-                            href='/orders/list/{{user.username}}'>Đơn
-                            hàng của tôi</a></li>
-                    <li style="height: 60px; border-top: 1px solid white"><a
-                            href='/carts/show/{{user.username}}?level={{user.registered_level}}&activating={{user.activating_loyalty}}'>Sự
-                            kiện của tôi</a></li>
-                    {{/if}}
-
-
-                    {{/if}}
-                </ul>
-            </div>
-
-        </div>
-
     </div>
+
+</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="/js/suggestions_list.js"></script>
 
 <script>
     function noti_toggle() {
@@ -249,5 +265,17 @@
         });
     }
 
+    $.ajax({
+        url: '/getSuggest',
+        method: 'GET',
+        data: {},
+        success: function (res) {
+            suggestions = res
+        }
+    })
+
+
 
 </script>
+
+<script src="/js/suggestions_script.js"></script>

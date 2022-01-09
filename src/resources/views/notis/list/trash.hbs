@@ -2,23 +2,27 @@
 <link rel="stylesheet" href="/css/load_more.css">
 <div class="container">
     <div class="mt-4">
-        <div class="header">
-            <h3>Thông báo của tôi</h3>
-            <a href="/notis/trash_list/{{user.username}}">Thùng rác ({{deletedCount}})</a>
+        <div>
+            <a href="/notis/list/{{user.username}}">Danh sách các thông báo</a>
+            <h3>Thông báo đã xóa</h3>
         </div>
 
         <table class="table mt-4">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nội dung</th>
-                    <th scope="col" colspan="2">Thời gian tạo</th>
+                    <th scope="col">Nôi dung</th>
+                    <th scope="col" colspan="2">Thời gian xóa</th>
                 </tr>
             </thead>
+
+
             <tbody>
                 {{#each notis}}
                 <tr class="item-for-loadmore">
                     <th scope="row">{{sum @index 1}}</th>
+
+
                     <td>
                         <a href="{{this.where_url}}">
                             {{#if this.isRead}}
@@ -60,30 +64,29 @@
                                 này hoặc có liên quan tới bạn</span>
                             {{/ifCond}}
                             {{/if}}
+
                         </a>
                     </td>
-                    <td class="date">{{this.createdAt}}</td>
-                    <td class="btn-group">
-                        <button href="" class="btn btn-outline-warning" data-toggle="modal" data-id="{{this._id}}"
-                            data-target="#delete-noti-modal">Xóa</button>
+
+
+                    <td class="date">{{this.deletedAt}}</td>
+                    <td>
+                        <a href="" class="btn btn-restore btn-outline-success" data-id="{{this._id}}">Khôi phục</a>
+                        <a href="" class="btn btn-outline-danger" data-toggle="modal" data-id="{{this._id}}"
+                            data-target="#delete-noti-modal">Xóa vĩnh viễn</a>
                     </td>
                 </tr>
                 {{else}}
                 <tr>
                     <td colspan="5" class="text-center">
-                        Bạn chưa có thông báo nào.
-                        <a href="/">Quay về trang chủ và chọn những sản phẩm bạn thích nhé</a>
+                        Thùng rác trống.
+                        <a href="/">Quay về trang chủ và mua các sản phẩm bạn thích</a>
                     </td>
                 </tr>
                 {{/each}}
-
-
-
             </tbody>
-
         </table>
     </div>
-
     <a href="#" id="loadMore">Load More</a>
 
     <p class="totop btn btn-danger">
@@ -95,52 +98,60 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Xóa noti?</h5>
+                    <h5 class="modal-title">Xóa thông báo?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn chắc chắn muốn xóa thông báo này?</p>
+                    <p>Hành động này không thể khôi phục. Bạn vẫn muốn xóa thông báo này?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button id="btn-delete-noti" type="button" class="btn btn-danger">Xóa bỏ</button>
+                    <button id="btn-delete-noti" type="button" class="btn btn-danger">Xóa vĩnh viễn</button>
                 </div>
             </div>
         </div>
     </div>
 
-    {{!-- Delete hidden form --}}
     <form name="delete-noti-form" method="POST"></form>
+    <form name="restore-noti-form" method="POST"></form>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="/js/datetime_handling.js"></script>
     <script>
-
-
-
-        $(document).ready(function () {
+        document.addEventListener('DOMContentLoaded', function () {
             var notiId;
             var deleteForm = document.forms['delete-noti-form'];
-            var btnDeleteBook = document.getElementById('btn-delete-noti');
-
+            var restoreForm = document.forms['restore-noti-form'];
+            var btnDeletenoti = document.getElementById('btn-delete-noti');
+            var restoreBtn = $('.btn-restore');
 
             // When dialog confirm clicked
             $('#delete-noti-modal').on('show.bs.modal', function (noti) {
-
                 var button = $(noti.relatedTarget);
                 notiId = button.data('id');
-                console.log(notiId)
             });
 
             // When delete noti btn clicked
-            btnDeleteBook.onclick = function () {
-                deleteForm.action = '/notis/' + notiId + '?_method=DELETE';
+            btnDeletenoti.onclick = function () {
+                deleteForm.action = '/notis/' + notiId + '/force?_method=DELETE';
                 deleteForm.submit();
             }
+
+            // Restore btn clicked
+            restoreBtn.click(function (e) {
+                e.preventDefault();
+
+                var notiId = $(this).data('id');
+                restoreForm.action = '/notis/' + notiId + '/restore?_method=PATCH';
+                restoreForm.submit();
+            });
+        });
+
+        $(document).ready(function () {
 
             $(".item-for-loadmore").slice(0, 4).show();
             $("#loadMore").on('click', function (e) {
@@ -171,5 +182,7 @@
                 $('.totop a').fadeOut();
             }
         });
+
+
     </script>
 </div>

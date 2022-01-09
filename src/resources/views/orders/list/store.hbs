@@ -4,7 +4,7 @@
     <div class="mt-4">
         <div class="header">
             <h3>Đơn hàng của tôi</h3>
-            <a href="/own/trash_me/orders">Thùng rác ({{deletedCount}})</a>
+            <a href="/orders/trash_list/{{user.username}}">Thùng rác ({{deletedCount}})</a>
         </div>
 
         <table class="table mt-4">
@@ -47,7 +47,7 @@
                                                         <p style="font-weight: bold; font-size: 16px; color: #c5970d">
                                                             {{this.food.name}}</p>
                                                         <p style="font-weight: bold; font-size: 14px; color: #c5970d">
-                                                            Price-Each: {{this.food.price}}</p>
+                                                            Price-Each: {{this.food.price}}VNĐ</p>
                                                         <p style="font-weight: bold; font-size: 12px; color: #c5970d">
                                                             Quantity: {{this.quantity}}</p>
                                                         <a href="/food/{{this.food.slug}}" class="btn btn-warning"
@@ -56,20 +56,21 @@
                                                 </div>
 
                                                 {{#if this.status}}
+                                                
+
+                                                <div style="margin-top: 24px; display: flex; justify-content: center">
+
+                                                    <button href="" class="btn btn-success"
+                                                        style="color: white; width: 300px">Status:
+                                                        Successful</button>
+                                                </div>
+                                                {{else}}
                                                 <div style="margin-top: 24px; display: flex; justify-content: center">
 
                                                     <button href="" class="btn btn-danger" data-toggle="modal"
                                                         data-target="#update-order-status-modal"
                                                         style="color: white; width: 300px"
                                                         data-id="{{../this._id}}-{{this.food._id}}">Status:
-                                                        Processing</button>
-                                                </div>
-
-                                                {{else}}
-                                                <div style="margin-top: 24px; display: flex; justify-content: center">
-
-                                                    <button href="" class="btn btn-success"
-                                                        style="color: white; width: 300px">Status:
                                                         Processing</button>
                                                 </div>
                                                 {{/if}}
@@ -84,7 +85,7 @@
                                                         <p style="font-weight: bold; font-size: 16px; color: #c5970d">
                                                             {{this.book.title}}</p>
                                                         <p style="font-weight: bold; font-size: 14px; color: #c5970d">
-                                                            Price-Each: {{this.book.price}}</p>
+                                                            Price-Each: {{this.book.price}}VNĐ</p>
                                                         <p style="font-weight: bold; font-size: 12px; color: #c5970d">
                                                             Quantity: {{this.quantity}}</p>
                                                         <a href="/books/{{this.book.slug}}" class="btn btn-warning"
@@ -93,6 +94,14 @@
                                                 </div>
 
                                                 {{#if this.status}}
+                                                 <div style="margin-top: 24px; display: flex; justify-content: center">
+
+                                                    <button href="" class="btn btn-success"
+                                                        style="color: white; width: 300px">Status:
+                                                        Successful</button>
+                                                </div>
+                                                {{else}}
+
                                                 <div style="margin-top: 24px; display: flex; justify-content: center">
 
                                                     <button href="" class="btn btn-danger" data-toggle="modal"
@@ -101,13 +110,8 @@
                                                         data-id="{{../this._id}}-{{this.book._id}}">Status:
                                                         Processing</button>
                                                 </div>
-                                                {{else}}
-                                                <div style="margin-top: 24px; display: flex; justify-content: center">
 
-                                                    <button href="" class="btn btn-success"
-                                                        style="color: white; width: 300px">Status:
-                                                        Processing</button>
-                                                </div>
+                                               
                                                 {{/if}}
                                             </div>
                                             {{/if}}
@@ -120,7 +124,7 @@
                                                         <p style="font-weight: bold; font-size: 16px; color: #c5970d">
                                                             {{this.coffee.name}}</p>
                                                         <p style="font-weight: bold; font-size: 14px; color: #c5970d">
-                                                            Price-Each: {{this.coffee.price}}</p>
+                                                            Price-Each: {{this.coffee.price}}VNĐ</p>
                                                         <p style="font-weight: bold; font-size: 12px; color: #c5970d">
                                                             Quantity: {{this.quantity}}</p>
                                                         <a href="/coffee/{{this.coffee.slug}}" class="btn btn-warning"
@@ -129,19 +133,20 @@
                                                 </div>
 
                                                 {{#if this.status}}
+                                                
+                                                <div style="margin-top: 24px; display: flex; justify-content: center">
+
+                                                    <button href="" class="btn btn-success"
+                                                        style="color: white; width: 300px">Status:
+                                                        Successful</button>
+                                                </div>
+                                                {{else}}
                                                 <div style="margin-top: 24px; display: flex; justify-content: center">
 
                                                     <button href="" class="btn btn-danger" data-toggle="modal"
                                                         data-target="#update-order-status-modal"
                                                         style="color: white; width: 300px"
                                                         data-id="{{../this._id}}-{{this.coffee._id}}">Status:
-                                                        Processing</button>
-                                                </div>
-                                                {{else}}
-                                                <div style="margin-top: 24px; display: flex; justify-content: center">
-
-                                                    <button href="" class="btn btn-success"
-                                                        style="color: white; width: 300px">Status:
                                                         Processing</button>
                                                 </div>
                                                 {{/if}}
@@ -155,7 +160,6 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/orders/{{this._id}}/edit" class="btn btn-outline-primary">Sửa</a>
                         <button href="" class="btn btn-outline-warning" data-toggle="modal" data-id="{{this._id}}"
                             data-target="#delete-order-modal">Xóa</button>
                     </td>
