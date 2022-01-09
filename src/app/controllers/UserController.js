@@ -56,7 +56,8 @@ const UserController = {
         req.body.avatar = getAvatar(req);
         if (!req.body.avatar || req.body.avatar == '') {
             const name = req.body.firstname + ' ' + req.body.lastname;
-            req.body.avatar = '/img/' + name + '-default.jpg';
+            const file_name = name.split(" ").join("-")
+            req.body.avatar = '/img/' + file_name + '-default.jpg';
         }
         let user = new User(req.body);
       
