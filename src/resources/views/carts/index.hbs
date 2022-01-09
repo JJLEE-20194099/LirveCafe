@@ -9,7 +9,7 @@
     <p id="username" style="display: none">{{cart.username}}</p>
 
     <input type="text" id="cartId" value="{{cart._id}}" style="display:none">
-     <div class="box-title">
+    <div class="box-title">
       <div class="d-flex align-items-center" style="flex: 1">
         <span class="cart-title">Tên sản phẩm</span>
       </div>
@@ -104,6 +104,7 @@
     <div style="display: flex; justify-content: center; align-items: center; margin-top: 32px"><a
         href="/carts/buys/{{cart._id}}" class="btn btn-warning" id="purchaseBtn">Purchase now</a></div>
     {{/if}}
+
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="/js/datetime_handling.js"></script>
@@ -159,28 +160,34 @@
         }
 
         if (s_box == '') {
-          box.classList.add("box-success")
-          btn.innerHTML = "Remove"
           var promoId = btn.parentElement.parentElement.id;
-          var promoList = document.getElementsByClassName('promo-btn');
-          for (item of promoList) {
-            if (item !== btn) {
-              item.setAttribute("disabled", true)
-              item.parentElement.style.opacity = 0.5;
-            }
-
-          }
           const data = {
             cartId, promoId
           }
-          $("#promoId").text(promoId)
-          $("#purchaseBtn").attr('href', `/carts/buys/${cartId}?promoId=${promoId}`);
+
           $.ajax({
             url: '/carts/add-promo-to-cart',
             method: "POST",
             data: data,
             success: function (res) {
               console.log(res)
+              if (res == false) {
+                alert("Bạn đã đến ngưỡng tối đã sử dụng mã trong 1 ngày")
+              } else {
+                box.classList.add("box-success")
+                btn.innerHTML = "Remove"
+                var promoList = document.getElementsByClassName('promo-btn');
+                for (item of promoList) {
+                  if (item !== btn) {
+                    item.setAttribute("disabled", true)
+                    item.parentElement.style.opacity = 0.5;
+                  }
+
+                }
+
+                $("#promoId").text(promoId)
+                $("#purchaseBtn").attr('href', `/carts/buys/${cartId}?promoId=${promoId}`);
+              }
             }
           })
         } else {
