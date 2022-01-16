@@ -185,7 +185,6 @@ var avatar = ''
 function uploadImage(e) {
     var e = e || window.event;
     var files = e.target.files;
-    console.log(files)
     avatar = files[0];
 }
 
@@ -206,7 +205,7 @@ $_1('#working-space .submit-order button').onclick = function (e) {
         eventEndDate: $_1('#basic-info .end-time input ').value.substring(0, 10),
         eventEndTime: $_1('#basic-info .end-time input ').value.substring(11, 17),
     }
-
+    console.log(check.username ,check.email ,check.eventBooker ,check.title , check.no_seating ,check.phone ,check.eventEndDate ,check.eventStartDate ,        check.eventStartTime, check.eventEndTime)
     if (check.username && check.email && check.eventBooker && check.title &&
         check.no_seating && check.phone && check.eventEndDate && check.eventStartDate &&
         check.eventStartTime && check.eventEndTime) {
@@ -234,6 +233,7 @@ $_1('#working-space .submit-order button').onclick = function (e) {
             drinks.push(a)
 
         })
+        alert(1)
 
         total_nums = $_1('#ordered .fodr-total span').innerText.replaceAll('.', '').split(',').join("")
         const dataWS = {
@@ -288,8 +288,31 @@ $_1('#working-space .submit-order button').onclick = function (e) {
                 processData: false,
                 contentType: false,
                 success: function (res) {
-                    console.log(1)
-                    window.location.href =`/workingspaces/${res.slug}`;
+                    console.log(res)
+                    if (res["check"])
+                        window.location.href =`/workingspaces/${res["wk"].slug}`;
+                    else {
+                        $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
+                                                <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: #837542; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);">
+                                                            <h5 style="text-align: center; margin-bottom: 12px; color: #a2ddfd">Bạn chỉ có thể đặt tối đa số lượng ${res["item"].quantity} sản phẩm <a href="/${res["type"]}/${res["item"].slug}" style="color: #8daee1;">${res["item"].name}</a></h5>
+                                                            <h5 style="text-align: center; color: #a2ddfd">Xin lỗi bạn vì sự bất tiện này</h5>
+                                                            <div class="d-flex align-items-center justify-content-center">
+                                                            <img src="/img/sorry.png" style="text-align: center; color: #b78908; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2); height: 300px; width: 300px" class="" />
+                                                            </div>
+                                                            <p class="r3 px-md-5 px-sm-1" style="text-align: center">Bạn hãy đặt thêm những đồ ăn thức uống khác nhé</p>
+                                                            <div class="text-center mb-3"> <button id="continue" class="btn w-50 rounded-pill b1" style="background-color: #8daee1">Tiếp tục đặt</button> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`)
+
+                        $("#notice-btn").click()
+                        $("#continue").click(function () {
+                            $("#form").click()
+                        })
+
+                    }
                 }
             })
         })

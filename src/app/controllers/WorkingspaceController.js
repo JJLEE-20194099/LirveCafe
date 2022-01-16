@@ -10,6 +10,11 @@ import {
 import {
     getNoNewNotis
 } from '../../support_lib/noti.js'
+
+import {
+    getProduct
+} from '../../support_lib/workingspace.js'
+
 import {
     promises
 } from 'stream';
@@ -65,13 +70,19 @@ const WorkingspaceController = {
                         food_lists = mongooseDocumentsToObject(food_lists)
                         drink_lists = mongooseDocumentsToObject(drink_lists)
                         workingspace = singleMongooseDocumentToObject(workingspace)
-                        for(var i = 0; i < food_lists.length; i++) {
-                            workingspace.foods[i] = {food: food_lists[i], quantity:  workingspace.foods[i].quantity}
+                        for (var i = 0; i < food_lists.length; i++) {
+                            workingspace.foods[i] = {
+                                food: food_lists[i],
+                                quantity: workingspace.foods[i].quantity
+                            }
                         }
-                        for(var j = 0; j < drink_lists.length; j++) {
-                            workingspace.drinks[j] = {drink: drink_lists[j], quantity:  workingspace.drinks[j].quantity}
+                        for (var j = 0; j < drink_lists.length; j++) {
+                            workingspace.drinks[j] = {
+                                drink: drink_lists[j],
+                                quantity: workingspace.drinks[j].quantity
+                            }
                         }
-                    // console.log(workingspace)
+                        // console.log(workingspace)
                         res.render('own/workingspaces/item/workingspace_info.hbs', {
                             workingspace: workingspace,
                             user: res.locals.user,
@@ -131,16 +142,18 @@ const WorkingspaceController = {
 
     //POST /workingspaces/save
     save(req, res, next) {
+        console.log("here")
         let avatar = ''
- 
-        if (!req.file.path || req.file.path == '') {
+
+        if (!req.file || !req.file.path || req.file.path == '') {
             req.body.avatar = "http://www.davidkrugler.com/s/River-Lights-8318.jpg";
-        } else  {
+            avatar = "http://www.davidkrugler.com/s/River-Lights-8318.jpg"
+        } else {
             avatar = req.file.path
             avatar = '/' + avatar.split('\\').slice(2).join('/')
         }
 
-        
+
 
         const data = req.body;
         const username = data.username
@@ -169,17 +182,24 @@ const WorkingspaceController = {
         delete data.total;
         const split = parseInt(data["split"])
         delete data.split;
+        delete data.avatar
 
         var cnt = 0;
 
         const foods = []
         const drinks = []
 
-        for(var key in data) {
+        for (var key in data) {
             if (cnt < split) {
-                foods.push({food_id: key, quantity: parseInt(data[key])})
+                foods.push({
+                    food_id: key,
+                    quantity: parseInt(data[key])
+                })
             } else {
-                drinks.push({drink_id: key, quantity: parseInt(data[key])})
+                drinks.push({
+                    drink_id: key,
+                    quantity: parseInt(data[key])
+                })
             }
             cnt += 1
         }
@@ -197,10 +217,12 @@ const WorkingspaceController = {
             eventEndDate: eventEndDate,
             eventEndTime: eventEndTime,
             total: total,
-            avatar:avatar,
+            avatar: avatar,
             foods: foods,
             drinks: drinks,
         }
+
+        console.log(my_data)
 
         const start_date = parseInt(eventStartDate.split('-')[2])
         const end_date = parseInt(eventEndDate.split('-')[2])
@@ -211,17 +233,79 @@ const WorkingspaceController = {
 
         const seat_time = (end_date - start_date) * 24 * 60 + (end_hour - start_hour) * 60 + (end_minute - start_minute)
         const seat_fee = (seat_time / 60) * parseInt(no_seating) * 25 * 1000;
-       
+
 
         total = parseInt(total) + seat_fee
         my_data["total"] = total
 
-    
+
         const workingspace = new Workingspace(my_data);
-        workingspace.save()
-            .then((wk) => res.send(wk))
-            .catch(next)
-    },  
+
+        var check_data = getProduct(my_data)
+        const quantity_list = check_data[1]
+        const id_list = check_data[2]
+        var type;
+        var check = true
+        var item_excepion;
+        var updatePromises = []
+
+        Promise.all(check_data[0].map(promise => promise()))
+            .then((product_list) => {
+                for (var i = 0; i < product_list.length; i++) {
+                    let product = singleMongooseDocumentToObject(product_list[i]);
+
+                    if (i < my_data.foods.length) {
+                        if (product.quantity < quantity_list[i]) {
+                            item_excepion = product;
+                            type = "food"
+                            check = false
+                        } else {
+                            product.quantity -= quantity_list[i]
+                            product.no_sold += quantity_list[i]
+
+                            updatePromises.push(() => Food.updateOne({
+                                _id: id_list[i]
+                            }, product))
+                        }
+                    } else {
+                        if (product.quantity < quantity_list[i]) {
+                            item_excepion = product;
+                            type = "coffee"
+                            check = false
+                        } else {
+                            product.quantity -= quantity_list[i]
+                            product.no_sold += quantity_list[i]
+
+                            updatePromises.push(() => Coffee.updateOne({
+                                _id: id_list[i]
+                            }, product))
+                        }
+                    }
+
+                    if (check == false) break;
+
+                }
+
+                if (check) {
+                    Promise.all([workingspace.save(), Promise.all(updatePromises.map(promise => promise()))])
+                        .then(([wk, _]) => {
+                            wk = singleMongooseDocumentToObject(wk)
+                            res.send({
+                                check: true,
+                                wk: wk
+                            })
+                        })
+                } else {
+                    res.send({
+                        check: false,
+                        item: item_excepion,
+                        type: type
+                    })
+                }
+
+            }).catch(next)
+
+    },
 
     // GET /workingspaces/:id/edit
     edit(req, res, next) {

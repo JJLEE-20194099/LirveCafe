@@ -145,21 +145,30 @@
 
                 </ul>
 
+                <div id="empty_product"></div>
+
             </div>
 
-            <div class="fodr-total">
-                Chi phí thức ăn và đồ uống đã đặt
-                <span>{{workingspace.total}}</span><span>VNĐ</span>
-            </div>
         </div>
 
-        <div class="event-image col col-6">
-            <img src="{{workingspace.avatar}}" alt="ảnh sự kiện">
+        <div class="event-image col col-6" style="height: 390px; overflow-y: scroll;">
+            <img src="{{workingspace.avatar}}" alt="ảnh sự kiện" style="">
         </div>
 
     </div>
+
+    <div class="fodr-total" style="text-align: center; font-weight: bold; color: #df7509; font-size: 16px">
+                Tổng chi phí:
+                <span>{{workingspace.total}}</span><span>VNĐ</span>
+            </div>
 
     <div class="update-event">
         <button>Chỉnh sửa thông tin</button>
     </div>
 </div>
+
+<script>
+    if (document.getElementsByClassName("fodr-item").length == 0) {
+        document.getElementById("empty_product").innerHTML = `<h5 style="color: #c39e51">Bạn không đặt sản phẩm ở bên quán của chúng tôi</h5>`
+    }
+</script>

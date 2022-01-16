@@ -105,9 +105,9 @@ const PromoController = {
                                         type: 1
                                     }
                                     var noti_model = new Noti(notice_data)
-                                    noti_promises.push(noti_model.save())
+                                    noti_promises.push(() => noti_model.save())
                                 }
-                                Promise.all(noti_promises).then((data) => {
+                                Promise.all(noti_promises.map(promise => promise())).then((data) => {
                                         res.redirect('/own/stored/promos')
                                     })
                                     .catch(next)

@@ -16,7 +16,7 @@ import Noti from  '../models/Noti.js';
 import emailController from './EmailController.js';
 
 import {
-    updateProductWarehouse
+    getUpdateProductWarehousePromise
 } from '../../support_lib/order.js'
 
 import {
@@ -624,7 +624,7 @@ const CartController = {
                     User.findOne({
                         username: data.username
                     }),
-                    Promise.all(updateProductWarehouse(orders)),
+                    Promise.all(getUpdateProductWarehousePromise(orders).map(promise => promise())),
                     noti.save()
                 ])
             }).then(([multiOrderList, user, updateList, noti]) => {
