@@ -20,9 +20,15 @@ body {
     font-size: 14px;
     font-weight: bold;
     color: #fff; }
-  #header .header-user #login-text {
-    font-size: 15px;
-    margin-left: 8px; }
+  #header .header-user {
+    padding: 8px 12px; }
+    #header .header-user #login-text {
+      font-size: 15px;
+      margin-left: 8px; }
+  #header .header-form input {
+    width: 100%; }
+  #header .header-form div {
+    padding: 0; }
   #header .func-list {
     z-index: 2;
     display: none;
@@ -53,12 +59,14 @@ body {
     #header .func-list a {
       color: #fff;
       font-weight: bold;
-      font-size: 16px; }
+      font-size: 16px;
+      display: inline-block;
+      width: 100%; }
   #header .header-list {
     z-index: 2;
     display: none;
     position: absolute;
-    top: 75%;
+    top: 64%;
     left: 200px; }
     #header .header-list ul {
       padding-left: 0px;
@@ -67,9 +75,11 @@ body {
       border: 1px solid #fff;
       text-align: center;
       border-radius: 6px;
-      box-shadow: 0 0 8px #fff; }
+      box-shadow: 0 0 8px #fff;
+      border-bottom: none; }
     #header .header-list li {
       list-style-type: none;
+      border-bottom: 1px solid #fff;
       height: 40px;
       padding: 4px 16px;
       width: 150px;
@@ -83,8 +93,11 @@ body {
     #header .header-list a {
       color: #fff;
       font-weight: bold;
-      font-size: 16px; }
+      font-size: 16px;
+      display: inline-block;
+      width: 100%; }
   #header .header-menu:hover #menu-list {
+    padding-top: 12px;
     display: block;
     margin-left: -15px;
     margin-top: -2px; }
@@ -161,9 +174,10 @@ body {
 
 .carousel-control-next,
 .carousel-control-prev {
-  top: 170px;
-  bottom: 170px;
-  color: #c39e51; }
+  height: 20px;
+  color: #c39e51;
+  margin: auto 60px;
+  width: 20px; }
 
 #home-slider {
   margin-top: 32px; }
@@ -220,20 +234,50 @@ body {
     .home-product .carousel-item .card-link {
       position: absolute;
       bottom: 0; }
-    .home-product .carousel-item .item-price {
-      position: absolute;
-      z-index: 2;
-      bottom: 4%; }
-      .home-product .carousel-item .item-price .price-value,
-      .home-product .carousel-item .item-price .discount-value {
-        display: inline-block;
-        color: #FF424E;
-        font-weight: 500; }
-      .home-product .carousel-item .item-price .discount-value {
-        border: 1px solid #FF424E;
-        font-size: 12px;
-        margin-left: 6px;
-        padding: 1px; }
+    .home-product .carousel-item .item-price .price-sale-value, .home-product .carousel-item .item-price .price-real-value,
+    .home-product .carousel-item .item-price .discount-value {
+      display: inline-block;
+      color: #FF424E;
+      font-weight: 500; }
+    .home-product .carousel-item .item-price .price-sale-value.gone, .home-product .carousel-item .item-price .price-real-value.gone {
+      display: none; }
+    .home-product .carousel-item .item-price .discount-value {
+      border: 1px solid #FF424E;
+      font-size: 14px;
+      margin-left: 6px;
+      padding: 1px 8px;
+      border-radius: 4px; }
+    .home-product .carousel-item .item-price .discount-value.gone {
+      display: none; }
+    .home-product .carousel-item .hotsale .dealQuantity, .home-product .carousel-item .justOverSale .dealQuantity {
+      position: relative;
+      background-color: #ffaaaf;
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      font-weight: 500; }
+      .home-product .carousel-item .hotsale .dealQuantity .dealProgress, .home-product .carousel-item .justOverSale .dealQuantity .dealProgress {
+        min-width: 24px;
+        height: 24px;
+        border-radius: 10px;
+        background-color: #ff424e;
+        width: 0; }
+      .home-product .carousel-item .hotsale .dealQuantity .sale-text, .home-product .carousel-item .justOverSale .dealQuantity .sale-text {
+        line-height: 24px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        text-align: center; }
+    .home-product .carousel-item .hotsale.gone, .home-product .carousel-item .justOverSale.gone {
+      display: none; }
+    .home-product .carousel-item .justOverSale {
+      display: none;
+      background-color: #ccc;
+      text-align: center;
+      border-radius: 8px; }
+    .home-product .carousel-item .justOverSale.active {
+      display: block; }
   .home-product .carousel-item:hover {
     box-shadow: 0 0 4px #fff;
     text-decoration: none;
@@ -305,6 +349,11 @@ body {
   #footer .contact {
     width: 300px;
     margin: 0 auto; }
+    #footer .contact .des {
+      min-width: 54px;
+      display: inline-block; }
+    #footer .contact a {
+      color: #8f0277; }
   #footer .footer-icon {
     margin-right: 10px; }
 

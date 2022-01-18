@@ -1,4 +1,6 @@
 <!--Carousel Wrapper-->
+<link rel="stylesheet" href='/css/countDownClock.css'>
+<!--Carousel Wrapper-->
 <div id="home-slider">
 
   <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel"
@@ -45,8 +47,41 @@
   <!--/.Carousel Wrapper-->
 </div>
 
+
+<div id="saleClock" class="row">
+
+  <div class="header col col-8">
+    <h2>Sự kiện đang diễn ra</h2>
+    <span>Nhanh chân lên các bạn ơi, hú hú</span>
+  </div>
+
+  <div id="end_clock_food">
+    <div class="endDate" style="display: none">2022-01-29</div>
+    <div class="endTime" style="display: none">15:53</div>
+  </div>
+
+  <div id="clockdiv" class="col col-4">
+    <div>
+      <span class="days">0</span>
+      <div class="smalltext">Days</div>
+    </div>
+    <div>
+      <span class="hours">0</span>
+      <div class="smalltext">Hours</div>
+    </div>
+    <div>
+      <span class="minutes"></span>
+      <div class="smalltext">Minutes</div>
+    </div>
+    <div>
+      <span class="seconds">10</span>
+      <div class="smalltext">Seconds</div>
+    </div>
+  </div>  
+</div>
+
 {{#if workingspaces.length}}
-  {{!-- home workingspace --}}
+{{!-- home workingspace --}}
 <div class="home-product" id="home-workingspaces">
 
   <div class="product-header" class="books-header">
@@ -112,8 +147,8 @@
     <div class="carousel-inner row w-100 mx-auto" role="listbox">
 
       {{#each food}}
-      {{!-- drink item1 --}}
-      <a href="/food/{{this.slug}}" class="carousel-item col-md-3">
+
+      <a class="carousel-item col-md-3">
 
         <div class="panel panel-default">
           <div class="panel-thumbnail">
@@ -126,17 +161,45 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{this.name}}</h5>
-            {{!-- <div class="book-author"><span>Tác giả: </span><span>Riot</span></div> --}}
+
             <p class="card-text">{{this.description}}</p>
 
             <div class="item-price flex">
-              <div class="price-value">{{this.price}} VNĐ</div>
+              {{#if this.saleoff_status}}
+              <div class="price-sale-value"><span>{{this.saleoff_price}}</span> VNĐ</div>
+              <div class="price-real-value gone"><span>{{this.price}}</span> VNĐ</div>
+              <div class="discount-value">-<span>{{this.discountPercentage}}</span>%</div>
+              {{else}}
+              <div class="price-real-value"><span>{{this.price}}</span> VNĐ</div>
+              {{/if}}
+
+
             </div>
+
+            {{#if this.saleoff_status}}
+            <div class="hotsale">
+              <span class="soldNo" style='display:none'>{{this.no_sold_during_saleoff}}</span>
+              <span class="sumNo" style='display:none'>100</span>
+              <div class="dealQuantity">
+                <div class="dealProgress"></div>
+                <span class="sale-text"></span>
+              </div>
+            </div>
+            <div class="justOverSale">
+              <span class="message">Sự kiện vừa kết thúc</span>
+            </div>
+
+            {{/if}}
+
+
           </div>
         </div>
 
       </a>
       {{/each}}
+
+
+
 
 
     </div>
@@ -252,13 +315,13 @@
 
 
     </div>
-    {{!-- book prev icon --}}
+    {{!-- drink prev icon --}}
     <a class="carousel-control-prev" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
 
-    {{!-- book next icon --}}
+    {{!-- drink next icon --}}
     <a class="carousel-control-next text-faded" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
@@ -378,4 +441,9 @@
   nextworkingspaceIcon.onclick = function () {
     nextIconClick(workingspaceItems);
   }
+
 </script>
+
+
+<script src="/js/hotSale.js"></script>
+<script src="/js/countDownClock.js"></script>

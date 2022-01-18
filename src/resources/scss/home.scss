@@ -38,12 +38,21 @@ body {
     }
 
     .header-user {
+        padding: 8px 12px;
         #login-text {
             font-size: 15px;
             margin-left: 8px;
         }
     }
 
+    .header-form {
+        input {
+            width: 100%;
+        }
+        div {
+            padding: 0;
+        }
+    }
 
     .func-list {
         z-index: 2;
@@ -87,6 +96,8 @@ body {
             color: $textHeaderColor;
             font-weight: bold;
             font-size: 16px;
+            display: inline-block;
+            width: 100%;
         }
 
     }
@@ -95,9 +106,8 @@ body {
         z-index: 2;
         display: none;
         position: absolute;
-        top: 75%;
+        top: 64%;
         left: 200px;
-
 
         ul {
             padding-left: 0px;
@@ -107,11 +117,12 @@ body {
             text-align: center;
             border-radius: 6px;
             box-shadow: 0 0 8px $textHeaderColor;
+            border-bottom: none;
         }
 
         li {
             list-style-type: none;
-
+            border-bottom: 1px solid #fff;
             height: 40px;
             padding: 4px 16px;
             width: 150px;
@@ -133,11 +144,14 @@ body {
             color: $textHeaderColor;
             font-weight: bold;
             font-size: 16px;
+            display: inline-block;
+            width: 100%;
         }
 
     }
 
     .header-menu:hover #menu-list {
+        padding-top: 12px;
         display: block;
         margin-left: -15px;
         margin-top: -2px;
@@ -241,9 +255,10 @@ body {
 
 .carousel-control-next,
 .carousel-control-prev {
-    top: 170px;
-    bottom: 170px;
+    height: 20px;
     color: $headerColor1;
+    margin: auto 60px;
+    width: 20px;
 }
 
 #home-slider {
@@ -290,7 +305,8 @@ body {
         height: 400px;
         padding: 0 8px;
         position: relative;
-
+        // box-sizing: content-box;
+ 
         box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);
         border-radius: 10;
 
@@ -320,8 +336,6 @@ body {
                 margin-bottom: 8px;
             }
 
-
-
             .book-author {
                 font-size: 16px;
                 margin-bottom: 8px;
@@ -335,28 +349,80 @@ body {
         }
 
         .item-price {
-            position: absolute;
-            z-index: 2;
-            bottom: 4%;
+            // position: absolute;
+            // z-index: 2;
+            // bottom: 4%;
 
 
-            .price-value,
+            .price-sale-value, .price-real-value,
             .discount-value {
                 display: inline-block;
                 color: $valueColor;
                 font-weight: 500;
             }
+            .price-sale-value.gone, .price-real-value.gone {
+                display: none;
+            }
 
             .discount-value {
                 border: 1px solid $valueColor;
-                font-size: 12px;
+                font-size: 14px;
                 margin-left: 6px;
-                padding: 1px;
+                padding: 1px 8px;
+                border-radius: 4px;
+            }
+            .discount-value.gone {
+                display: none;
             }
         }
+        .hotsale, .justOverSale {
+           
+            .dealQuantity {
+                position: relative;
+                background-color:#ffaaaf;
+                border-radius: 10px;
+                text-align: center;
+                color: #fff;
+                font-weight: 500;
+                .dealProgress {
+                    min-width: 24px;
+                    height: 24px;
+                    border-radius: 10px;
+                    background-color:  #ff424e;
+                    width: 0;
+                }
+                .sale-text {
+                    line-height: 24px;
+                    width: 100%;
+                    position: absolute;
+                    top:0;
+                    right: 0;
+                    text-align: center;
+                }
+                
+            }
+            // &.justOver {
+            //     background-color: #ccc;
+            // }
+
+            &.gone {
+                display: none;
+            }
+        }
+
+        .justOverSale {
+            display: none;
+            background-color: #ccc;
+            text-align: center;
+            border-radius: 8px;
+            .message {
+                
+            }
+        }
+        .justOverSale.active {
+            display: block;
+        }
     }
-
-
 
     .carousel-item:hover {
         box-shadow: 0 0 4px $textHeaderColor;
@@ -460,10 +526,16 @@ body {
         padding-bottom: 24px;
     }
 
-
     .contact {
         width: 300px;
         margin: 0 auto;
+        .des {
+            min-width: 54px;
+            display: inline-block;
+        }
+        a{
+            color: #8f0277;
+        }
     }
 
     .footer-icon {
