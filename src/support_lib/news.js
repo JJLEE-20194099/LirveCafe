@@ -1,3 +1,8 @@
+
+import Book from '../app/models/Book.js';
+import Food from '../app/models/Food.js';
+import Coffee from '../app/models/Coffee.js';
+
 export const mergeNewsAndProduct = function(products, news) {
 
     var get_new = null;
@@ -41,6 +46,7 @@ export const mergeNewsAndProduct = function(products, news) {
 
     const items = []
 
+
     for (let product of products) {
 
        
@@ -54,14 +60,35 @@ export const mergeNewsAndProduct = function(products, news) {
         let new_product = {
             ...product,
             "discountPercentage": discountPercentage,
-            "type": get_new.applicableObject,
             "eventStartTime": get_new.eventStartTime,
             "eventStartDate": get_new.eventStartDate,
             "eventEndTime": get_new.eventEndTime,
-            "eventEndDate": get_new.eventEndDate
+            "eventEndDate": get_new.eventEndDate,
+            "saleoff_price": parseInt(product.price * (1 - discountPercentage / 100)),
+            "saleoff_status": 1,
+           
         }
         items.push(new_product)
     }
     return [items, get_new];
     
+}
+
+export const getUpdateSaleoffPromises = function(books, coffee, food) {
+    const res = []
+
+    for (let item of books) {
+        res.push(() => Book.updateOne({_id: item._id}, item))
+    }
+
+    for (let item of coffee) {
+        
+        res.push(() => Coffee.updateOne({_id: item._id}, item))
+    }
+
+    for (let item of food) {
+        res.push(() => Food.updateOne({_id: item._id}, item))
+    }
+    console.log(res)
+    return res;
 }

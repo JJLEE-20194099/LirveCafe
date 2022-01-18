@@ -19,6 +19,10 @@ const Food = new Schema(
         },
         quantity: {type: Number, required: true, default: 0},
         no_sold: {type: Number, default: 0},
+        saleoff_status: {type: Number, default: 0},
+        no_sold_during_saleoff: {type: Number, default: 0},
+        discountPercentage: {type: Number, default: 0},
+        saleoff_price: {type: Number}
     },
     {
         timestamps: true

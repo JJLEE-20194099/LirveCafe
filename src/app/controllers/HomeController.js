@@ -24,36 +24,12 @@ const HomeController = {
         
         Promise.all([Book.find({}), Coffee.find({}), Food.find({}), User.findOne({
             _id: req.signedCookies.userId
-        }), Workingspace.find({}), News.find({applicableObject: 0}), News.find({applicableObject: 1}), News.find({applicableObject: 2})])
-        .then(([books, coffee, food, user, workingspaces, bookNews, coffeeNews, foodNews]) => {
+        }), Workingspace.find({})])
+        .then(([books, coffee, food, user, workingspaces]) => {
             books = mongooseDocumentsToObject(books)
             coffee = mongooseDocumentsToObject(coffee)
             food = mongooseDocumentsToObject(food)
-            let a_book_new;
-            let a_food_new;
-            let a_coffee_new;
-            let new_products;
-            if (bookNews) {
-                bookNews = mongooseDocumentsToObject(bookNews)
-                new_products = mergeNewsAndProduct(books, bookNews)
-                books = new_products[0]
-                a_book_new = new_products[1]
-            }
-
-            if (coffeeNews) {
-                coffeeNews = mongooseDocumentsToObject(coffeeNews)
-                new_products = mergeNewsAndProduct(coffee, coffeeNews) 
-                coffee = new_products[0]
-                a_coffee_new = new_products[1]
-            }
-
-            if (foodNews) {
-                foodNews = mongooseDocumentsToObject(foodNews)
-                new_products = mergeNewsAndProduct(food, foodNews)
-                food = new_products[0]
-                a_food_new = new_products[1]
-            }
-
+        
             workingspaces = mongooseDocumentsToObject(workingspaces)
             var u = '';
             if (user) {
@@ -73,9 +49,6 @@ const HomeController = {
                     food: food,
                     notis: res.locals.notis,
                     workingspaces: workingspaces,
-                    a_book_new,
-                    a_coffee_new,
-                    a_food_new,
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             } else {
@@ -87,9 +60,6 @@ const HomeController = {
                     notis: res.locals.notis,
                     cart: res.locals.cart,
                     workingspaces: workingspaces,
-                    a_book_new,
-                    a_coffee_new,
-                    a_food_new,
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             }

@@ -380,6 +380,7 @@ const CartController = {
 
 
                 cart = singleMongooseDocumentToObject(cart)
+                
                 res.render('carts/index.hbs', {
                     cart,
                     total: total,
