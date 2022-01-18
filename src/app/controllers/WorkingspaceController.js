@@ -24,13 +24,13 @@ const getFullWorkingSpaceItemListData = function (workingspace) {
     let drinks = workingspace.drinks;
     let food_promises = []
     for (let food of foods) {
-        food_promises.push(Food.findOne({
+        food_promises.push(() => Food.findOne({
             _id: food.food_id
         }))
     }
     let drink_promises = []
     for (let drink of drinks) {
-        drink_promises.push(Coffee.findOne({
+        drink_promises.push(() => Coffee.findOne({
             _id: drink.drink_id
         }))
     }
@@ -65,7 +65,7 @@ const WorkingspaceController = {
                 const food_promises = getFullWorkingSpaceItemListData(singleMongooseDocumentToObject(workingspace))[0]
                 const drink_promises = getFullWorkingSpaceItemListData(singleMongooseDocumentToObject(workingspace))[1]
 
-                Promise.all([Promise.all(food_promises), Promise.all(drink_promises)])
+                Promise.all([Promise.all(food_promises.map(promise => promise())), Promise.all(drink_promises.map(promise => promise()))])
                     .then(([food_lists, drink_lists]) => {
                         food_lists = mongooseDocumentsToObject(food_lists)
                         drink_lists = mongooseDocumentsToObject(drink_lists)
@@ -142,7 +142,7 @@ const WorkingspaceController = {
 
     //POST /workingspaces/save
     save(req, res, next) {
-        console.log("here")
+       
         let avatar = ''
 
         if (!req.file || !req.file.path || req.file.path == '') {
@@ -222,7 +222,7 @@ const WorkingspaceController = {
             drinks: drinks,
         }
 
-        console.log(my_data)
+    
 
         const start_date = parseInt(eventStartDate.split('-')[2])
         const end_date = parseInt(eventEndDate.split('-')[2])
@@ -307,20 +307,68 @@ const WorkingspaceController = {
 
     },
 
+    //  /workingspace/check-valid-date
+
+    checkExpirationDate(req, res, next) {
+        var eventStartTime = req.body.eventStartTime
+        var eventStartDate = req.body.eventStartDate
+        var eventEndTime = req.body.eventEndTime
+        var eventEndDate = req.body.eventEndDate
+        
+        var minute = eventEndTime.split(":")[1]
+        var hour = eventEndTime.split(":")[0]
+        var second = 0
+        var year = eventEndDate.split("-")[0]
+        var month = eventEndDate.split("-")[1]
+        var day = eventEndDate.split("-")[2]
+
+        var datum = new Date(Date.UTC(year, month,day, hour, minute, second));
+        var timestamp_end = datum.getTime()
+        if (timestamp_end < Date.now()) {
+            res.send({check: false})
+        } else {
+            res.send({check: true})
+        }
+    },
+
+
     // GET /workingspaces/:id/edit
     edit(req, res, next) {
         Workingspace.findOne({
-                _id: req.params.id
-            })
-            .then((workingspace) => {
-                res.render('workingspaces/item/edit.hbs', {
-                    workingspace: singleMongooseDocumentToObject(workingspace),
-                    user: res.locals.user,
-                    notis: res.locals.notis,
-                    no_new_notis: getNoNewNotis(res.locals.notis)
+            _id: req.params.id
+        })
+        .then((workingspace) => {
+            const food_promises = getFullWorkingSpaceItemListData(singleMongooseDocumentToObject(workingspace))[0]
+            const drink_promises = getFullWorkingSpaceItemListData(singleMongooseDocumentToObject(workingspace))[1]
+
+            Promise.all([Promise.all(food_promises.map(promise => promise())), Promise.all(drink_promises.map(promise => promise()))])
+                .then(([food_lists, drink_lists]) => {
+                    food_lists = mongooseDocumentsToObject(food_lists)
+                    drink_lists = mongooseDocumentsToObject(drink_lists)
+                    workingspace = singleMongooseDocumentToObject(workingspace)
+                    for (var i = 0; i < food_lists.length; i++) {
+                        workingspace.foods[i] = {
+                            food: food_lists[i],
+                            quantity: workingspace.foods[i].quantity
+                        }
+                    }
+                    for (var j = 0; j < drink_lists.length; j++) {
+                        workingspace.drinks[j] = {
+                            drink: drink_lists[j],
+                            quantity: workingspace.drinks[j].quantity
+                        }
+                    }
+                    // console.log(workingspace)
+                    res.render('workingspaces/item/edit.hbs', {
+                        workingspace: workingspace,
+                        user: res.locals.user,
+                        notis: res.locals.notis,
+                        no_new_notis: getNoNewNotis(res.locals.notis)
+                    })
                 })
-            })
-            .catch(next)
+
+
+        }).catch(next)
     },
 
     // PUT /workingspaces/:id
