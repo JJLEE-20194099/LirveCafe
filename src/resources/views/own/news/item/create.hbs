@@ -1,0 +1,130 @@
+<style>
+    .mt-4 {
+        background-color: white;
+        border-radius: 4px;
+        box-shadow: 0 2px 12px #090d11;
+        margin-bottom: 24px;
+        padding: 24px 24px 24px 24px;
+    }
+
+    .mt-4 .form-group input:focus {
+        border-color: unset;
+        box-shadow: unset;
+    }
+
+    .form-group #videoId {
+        border: none;
+        position: relative;
+        transform: translateX(-12px);
+        width: 230px;
+    }
+</style>
+{{#each errors}}
+<p>{{this}}</p>
+{{/each}}
+
+<div class="mt-4">
+    <h3>Thêm các tin mới cho cửa hàng của bạn</h3>
+
+    <form if="form" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="discountPercentage">Giới hạn số phần trăm giảm giá</label>
+            <input type="text" class="form-control" id="discountPercentage" name="discountPercentage">
+        </div>
+        <div class="form-group">
+            <div for="description">Đối tượng áp dụng</div>
+            <input type="radio" id="book" name="applicableObject" value="0">
+            <label for="book">Sách</label><br>
+            <input type="radio" id="coffee" name="applicableObject" value="1">
+            <label for="coffee">Coffee</label><br>
+            <input type="radio" id="food" name="applicableObject" value="2">
+            <label for="food">Đồ ăn</label>
+        </div>
+        <div class="form-group">
+            <label for="condition">Điều kiện áp dụng (Sản phẩm có số tiền trên)</label>
+            <input type="text" class="form-control" id="condition" name="condition">
+        </div>
+
+        <div class="form-group">
+            <label for="image">Hình ảnh</label>
+            <input type="file" name="image" id="image" onchange="uploadImage(event)">
+        </div>
+
+        <div id="basic-info">
+            <div class="start-time col col-6">
+                <span>Bắt đầu</span>
+                <input type="datetime-local" />
+
+            </div>
+            <div class="end-time col col-6">
+                <span>Kết thúc</span>
+                <input type="datetime-local" />
+
+            </div>
+        </div>
+
+        <button id="btn-submit" class="btn btn-primary">Thêm mới tin</button>
+    </form>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../socket.io/socket.io.js"></script>
+<script src="/js/datetime_handling.js"></script>
+
+<script>
+
+    var image = ''
+
+    function uploadImage(e) {
+        var e = e || window.event;
+        var files = e.target.files;
+        image = files[0];
+    }
+
+
+
+
+    $(document).ready(function () {
+
+        $('#btn-submit').click(function (e) {
+
+            e.preventDefault();
+
+            const data = {
+                eventStartDate: $('#basic-info .start-time input').val().substring(0, 10),
+                eventStartTime: $('#basic-info .start-time input').val().substring(11, 17),
+                eventEndDate: $('#basic-info .end-time input ').val().substring(0, 10),
+                eventEndTime: $('#basic-info .end-time input ').val().substring(11, 17),
+                image: image,
+                discountPercentage: $('#discountPercentage').val(),
+                applicableObject: $("input[type='radio']:checked").val(),
+                condition: $('#condition').val(),
+            }
+
+            var formData = new FormData()
+            formData.append('eventStartDate', data.eventStartDate)
+            formData.append('eventStartTime', data.eventStartTime)
+            formData.append('eventEndDate', data.eventEndDate)
+            formData.append('eventEndTime', data.eventEndTime)
+            formData.append('image', data.image)
+            formData.append('discountPercentage', parseInt(data.discountPercentage))
+            formData.append('applicableObject', parseInt(data.applicableObject))
+            formData.append('condition', parseInt(data.condition))
+
+            $.ajax({
+                url: "/news/save",
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    window.location.href =`/own/stored/news`;
+                }
+            })
+
+
+        })
+    })
+
+</script>

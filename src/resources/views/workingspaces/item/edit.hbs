@@ -29,36 +29,36 @@
         <div class="info row">
             <div class="name col col-6">
                 <span>Họ và tên</span>
-                <input type="text" value="{{workingspace.eventBooker}}" disabled />
+                <input type="text" value="{{workingspace.eventBooker}}"/>
             </div>
             <div class="phoneNum col col-6">
                 <span>Số điện thoại</span>
-                <input type="tel" value="{{workingspace.phone}}" disabled />
+                <input type="tel" value="{{workingspace.phone}}"/>
             </div>
             <div class="line col-12"></div>
 
             <div class="event-title col col-6">
                 <span>Tiêu đề</span>
-                <input type="text" value="{{workingspace.title}}" disabled>
+                <input type="text" value="{{workingspace.title}}">
             </div>
 
             <div class="email col col-6">
                 <span>Email</span>
-                <input type="email" accept="email/*" disabled value="{{workingspace.email}}">
+                <input type="email" accept="email/*" value="{{workingspace.email}}">
             </div>
 
             <div class="line col-12"></div>
 
-            <div class="start-time col col-6">
+            <div class="start-time event-time col col-6">
                 <span>Ngày bắt đầu</span>
-                <input type="text" value="{{workingspace.eventStartTime}} {{workingspace.eventStartDate}}" disabled />
+                <input type="text" value="{{workingspace.eventStartTime}} {{workingspace.eventStartDate}}"  class="constant" />
                 <input type="text" id="eventStartTime" value="{{workingspace.eventStartTime}}" style="display: none" />
                 <input type="text" id="eventStartDate" value="{{workingspace.eventStartTime}}" style="display: none"/>
 
             </div>
-            <div class="end-time col col-6">
+            <div class="end-time  event-time col col-6">
                 <span>Ngày kết thúc</span>
-                <input type="text" value="{{workingspace.eventEndTime}} {{workingspace.eventEndDate}}" disabled />
+                <input type="text" value="{{workingspace.eventEndTime}} {{workingspace.eventEndDate}}"  class="constant"/>
                  <input type="text" id="eventEndTime" value="{{workingspace.eventStartTime}}" style="display: none"/>
                 <input type="text" id="eventEndDate" value="{{workingspace.eventStartTime}}" style="display: none"/>
             </div>
@@ -67,14 +67,14 @@
 
             <div class="seat-num col col-6">
                 <span>Số lượng ghế</span>
-                {{!-- <button class="seat-btn decre-btn"><i class="ti-minus" disabled></i></button> --}}
-                <input type="text" value={{workingspace.no_seating}} class="input" disabled />
-                {{!-- <button class="seat-btn incre-btn"><i class="ti-plus" disabled></i></button> --}}
+                {{!-- <button class="seat-btn decre-btn"><i class="ti-minus" ></i></button> --}}
+                <input type="text" value={{workingspace.no_seating}} class="input constant"  />
+                {{!-- <button class="seat-btn incre-btn"><i class="ti-plus" ></i></button> --}}
             </div>
 
             <div class="total-amount col col-6">
                 <span>Tổng chi phí:</span>
-                <input type="text" value="{{workingspace.total}} VNĐ" class="input" disabled />
+                <input type="text" value="{{workingspace.total}} VNĐ" class="input constant"  />
             </div>
 
             <div class="line col-12"></div>
@@ -82,7 +82,7 @@
             {{#if workingspace.description}}
             <div class="description col col-12">
                 <span>Thông tin mô tả</span>
-                <textarea type="text" disabled>{{this.description}}</textarea>
+                <textarea type="text" >{{this.description}}</textarea>
             </div>
             {{/if}}
             <div class="line col-12"></div>
@@ -114,7 +114,7 @@
                             <div class="fodr-name"><span>{{this.food.name}}</span></div>
                             <div class="fodr-number">
                                 <label style="font-size: 16; font-weight: bold; margin-right: 4px">Số lượng:</label>
-                                <input type="text" value="{{this.quantity}}" class="input" disabled />
+                                <input type="text" value="{{this.quantity}}" class="input constant"  />
                             </div>
                         </a>
                     </li>
@@ -138,7 +138,7 @@
 
                                 <label style="font-size: 16; font-weight: bold; margin-right: 4px">Số lượng:</label>
 
-                                <input type="text" value="{{this.quantity}}" class="input" disabled />
+                                <input type="text" value="{{this.quantity}}" class="input constant"  />
 
                             </div>
                         </a>
@@ -188,6 +188,30 @@
     $(document).ready(function () {
 
         var wk_id = $("#wk-id").val()
+        console.log($(".constant"))
+        for (var ele of $(".constant")) {
+            ele.addEventListener("click", function() {
+                $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
+                                            <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: #837542; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);">
+                                                        <h5 style="text-align: center; margin-bottom: 12px; color: #a2ddfd">Những thông tin cố định</h5>
+                                                        <h5 style="text-align: center; color: #a2ddfd">Bạn không thể chỉnh sửa những thông tin này của sự kiện</h5>
+                                                        <div class="d-flex align-items-center justify-content-center">
+                                                        <img src="/img/sorry.png" style="text-align: center; color: #b78908; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2); height: 300px; width: 300px" class="" />
+                                                        </div>
+                                                        <a class="r3 px-md-5 px-sm-1" style="text-align: center; color: white; margin-bottom:12px" href="/workingspaces/create">Bạn muốn đặt sự kiện</a>
+                                                        <div class="text-center mb-3"> <button id="continue" class="btn w-50 rounded-pill b1" style="background-color: #8daee1; color: #5e4283">Tiếp tục chỉnh sửa sự kiện</button> </div>
+                                                    </div>
+                                                </div>
+                                            </div>`)
+
+                    $("#notice-btn").click()
+                    $("#continue").click(function () {
+                        $("#form").click()
+                    })
+            })
+        }
 
         $('#update-event').click(function () {
             $.ajax({
@@ -203,25 +227,7 @@
                     if (res["check"]) {
                         window.location.href =`/workingspaces/${wk_id}/edit`;
                     } else {
-                         $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
-                                                <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                                        <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: #837542; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);">
-                                                            <h5 style="text-align: center; margin-bottom: 12px; color: #a2ddfd">Sự kiện đã kết thúc</h5>
-                                                            <h5 style="text-align: center; color: #a2ddfd">Bạn không thể chỉnh sửa thông tin của sự kiện</h5>
-                                                            <div class="d-flex align-items-center justify-content-center">
-                                                            <img src="/img/sorry.png" style="text-align: center; color: #b78908; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2); height: 300px; width: 300px" class="" />
-                                                            </div>
-                                                            <a class="r3 px-md-5 px-sm-1" style="text-align: center" href="/workingspaces/create">Bạn muốn đặt sự kiện</a>
-                                                            <div class="text-center mb-3"> <button id="continue" class="btn w-50 rounded-pill b1" style="background-color: #8daee1">Tiếp tục xem sự kiện</button> </div>
-                                                        </div>
-                                                    </div>
-                                                </div>`)
-
-                        $("#notice-btn").click()
-                        $("#continue").click(function () {
-                            $("#form").click()
-                        })
+                        
                     }
                 },
                 error: function (error) {
