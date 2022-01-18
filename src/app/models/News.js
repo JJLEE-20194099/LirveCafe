@@ -4,23 +4,28 @@ import mongooseDelete from 'mongoose-delete';
 
 const {Schema} = mongoose;
 
+mongoose.plugin(slug)
+
 const News = new Schema(
     {
-        title: {type: String, required: true},
-        image: {type: String, default: "https://dailyvoinuoc.com/wp-content/uploads/2016/10/big-sale.jpg"},
-        description: {type: String},
-        slug: {type: String, slug: 'title', unique: true},
-        endTime: {type: Date, default: Date.now() + 60*60*24*7}
+        discountPercentage: {type: Number, required: true},
+        applicableObject: {type: Number, required: true},
+        condition: {type: Number, required: true},
+        image: {type: String, default: "https://www.templaza.com/images/easyblog_images/924/what-do-you-know-about-vietnamese-tet-holiday-392_XL.png"},
+        eventStartDate: {type: String, required: true},
+        eventStartTime: {type: String, required: true},
+        eventEndDate: {type: String, required: true},
+        eventEndTime: {type: String, required: true},
     },
     {
-        timestamps: true    
+        timestamps: true
     }
-);
+)
 
-mongoose.plugin(slug)
 News.plugin(mongooseDelete, {
     deletedAt: true,
-    overrideMethos: 'all'
-});
+    overrideMethods: 'all'
+})
 
-export default mongoose.model('News', News);
+export default mongoose.model('News', News)
+
