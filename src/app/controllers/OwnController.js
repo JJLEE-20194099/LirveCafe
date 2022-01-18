@@ -111,6 +111,7 @@ const OwnController = {
     storedNews(req, res, next) {
         Promise.all([News.find({}), News.countDocumentsDeleted()])
             .then(([news, deletedCount]) => {
+                console.log(news)
                 res.render('own/news/list/store.hbs', {
                     deletedCount,
                     news: mongooseDocumentsToObject(news),

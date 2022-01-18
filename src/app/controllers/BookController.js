@@ -4,6 +4,7 @@ import Cart from '../models/Cart.js';
 import Orders from '../models/Orders.js';
 import User from '../models/User.js';
 import Promo from '../models/Promo.js';
+import News from '../models/News.js';
 
 import Rank from '../constants/user.rank.js';
 
@@ -17,7 +18,7 @@ import {
 } from '../../support_lib/mongoose.js';
 
 import {
-   cal_avg_rating
+    cal_avg_rating
 } from '../../support_lib/rating.js';
 
 import emailController from './EmailController.js';
@@ -29,6 +30,10 @@ import {
 import {
     calculateRemainingCart
 } from '../../support_lib/cart.js'
+
+import {
+    mergeNewsAndProduct
+} from '../../support_lib/news.js'
 
 
 const calculateUserLevel = ([multiOrderList, user]) => {
@@ -61,50 +66,96 @@ const BookController = {
         const enabled = res.locals.sort.enabled;
         const field = res.locals.sort.field;
         var type;
-        console.log(res.locals.sort)
+      
         if (res.locals.sort.type == 'desc') {
             type = -1
         } else type = 1
-        console.log("type: ", type)
+        
 
         if (field == 'price') {
-            
-            Book.find().sort({price: parseInt(type)})
-            .then((books) => {
-                res.render('books/list/list.hbs', {
-                    books: mongooseDocumentsToObject(books),
-                    user: res.locals.user,
-                    cart: res.locals.cart,
-                    notis: res.locals.notis,
-                    no_new_notis: getNoNewNotis(res.locals.notis)
-                });
-            }).catch(next);
+
+            Promise.all([Book.find().sort({
+                    price: parseInt(type)
+                }), News.find({
+                    applicableObject: 0
+                })])
+                .then(([books, bookNews]) => {
+                    books = mongooseDocumentsToObject(books)
+
+                    let a_book_new;
+                    let new_products;
+                    if (bookNews) {
+                        bookNews = mongooseDocumentsToObject(bookNews)
+                        new_products = mergeNewsAndProduct(books, bookNews)
+                        books = new_products[0]
+                        a_book_new = new_products[1]
+                    }
+
+                    res.render('books/list/list.hbs', {
+                        books: books,
+                        user: res.locals.user,
+                        cart: res.locals.cart,
+                        notis: res.locals.notis,
+                        a_book_new: a_book_new,
+                        no_new_notis: getNoNewNotis(res.locals.notis)
+                    });
+                }).catch(next);
         } else if (field == 'newest') {
-            Book.find().sort({createdAt: 1})
-            .then((books) => {
-                res.render('books/list/list.hbs', {
-                    books: mongooseDocumentsToObject(books),
-                    user: res.locals.user,
-                    cart: res.locals.cart,
-                    notis: res.locals.notis,
-                    no_new_notis: getNoNewNotis(res.locals.notis)
-                });
-            }).catch(next);
+            Promise.all([Book.find().sort({
+                    createdAt: 1
+                }), News.find({
+                    applicableObject: 0
+                })])
+                .then(([books, bookNews]) => {
+                    books = mongooseDocumentsToObject(books)
+
+                    let a_book_new;
+                    let new_products;
+                    if (bookNews) {
+                        bookNews = mongooseDocumentsToObject(bookNews)
+                        new_products = mergeNewsAndProduct(books, bookNews)
+                        books = new_products[0]
+                        a_book_new = new_products[1]
+                    }
+                    res.render('books/list/list.hbs', {
+                        books: books,
+                        user: res.locals.user,
+                        cart: res.locals.cart,
+                        notis: res.locals.notis,
+                        a_book_new: a_book_new,
+                        no_new_notis: getNoNewNotis(res.locals.notis)
+                    });
+                }).catch(next);
         } else {
-            Book.find().sort({no_sold: -1})
-            .then((books) => {
-                res.render('books/list/list.hbs', {
-                    books: mongooseDocumentsToObject(books),
-                    user: res.locals.user,
-                    cart: res.locals.cart,
-                    notis: res.locals.notis,
-                    no_new_notis: getNoNewNotis(res.locals.notis)
-                });
-            }).catch(next);
+            Promise.all([Book.find().sort({
+                    no_sold: -1
+                }), News.find({
+                    applicableObject: 0
+                })])
+                .then(([books, bookNews]) => {
+                    books = mongooseDocumentsToObject(books)
+
+                    let a_book_new;
+                    let new_products;
+                    if (bookNews) {
+                        bookNews = mongooseDocumentsToObject(bookNews)
+                        new_products = mergeNewsAndProduct(books, bookNews)
+                        books = new_products[0]
+                        a_book_new = new_products[1]
+                    }
+                    res.render('books/list/list.hbs', {
+                        books: books,
+                        user: res.locals.user,
+                        cart: res.locals.cart,
+                        a_book_new: a_book_new,
+                        notis: res.locals.notis,
+                        no_new_notis: getNoNewNotis(res.locals.notis)
+                    });
+                }).catch(next);
         }
 
 
-        
+
     },
 
     // GET: /books/:slug

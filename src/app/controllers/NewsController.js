@@ -38,10 +38,10 @@ const NewsController = {
 
     // POST : /news/save
     save(req, res, next) {
-        req.body.image = 'http://www.davidkrugler.com/s/River-Lights-8318.jpg';
-        const news = new News(req.body);
+        req.body.image = '/' + req.file.path.split('\\').slice(2).join('/');
+        const news = new News(req.body);   
         news.save()
-            .then(() => res.redirect('/own/stored/news'))
+            .then(() => res.send({code: 1}))
             .catch(next);
     },
 

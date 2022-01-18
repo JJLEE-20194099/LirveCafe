@@ -5,6 +5,7 @@ import Cart from '../models/Cart.js';
 import Orders from '../models/Orders.js';
 import User from '../models/User.js';
 import Promo from '../models/Promo.js';
+import News from '../models/News.js';
 
 import Rank from '../constants/user.rank.js';
 
@@ -30,6 +31,10 @@ import {
 import {
     calculateRemainingCart
 } from '../../support_lib/cart.js'
+
+import {
+    mergeNewsAndProduct
+} from '../../support_lib/news.js'
 
 
 const calculateUserLevel = ([multiOrderList, user]) => {
@@ -62,43 +67,79 @@ const CoffeeController = {
         const enabled = res.locals.sort.enabled;
         const field = res.locals.sort.field;
         var type;
-        console.log(res.locals.sort)
+        
         if (res.locals.sort.type == 'desc') {
             type = -1
         } else type = 1
-        console.log("type: ", type)
+        
 
         if (field == 'price') {
             
-            Coffee.find().sort({price: parseInt(type)})
-            .then((coffee) => {
+            Promise.all([Coffee.find().sort({price: parseInt(type)}), News.find({applicableObject: 1})])
+            .then(([coffee, coffeeNews]) => {
+                 coffee = mongooseDocumentsToObject(coffee)
+
+                    let a_coffee_new;
+                    let new_products;
+                    if (coffeeNews) {
+                        coffeeNews = mongooseDocumentsToObject(coffeeNews)
+                        new_products = mergeNewsAndProduct(coffee, coffeeNews)
+                        coffee = new_products[0]
+                        a_coffee_new = new_products[1]
+                    }
+
                 res.render('drink/list/list.hbs', {
-                    coffee: mongooseDocumentsToObject(coffee),
+                    coffee:coffee,
                     user: res.locals.user,
                     cart: res.locals.cart,
                     notis: res.locals.notis,
+                    a_coffee_new: a_coffee_new,
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             }).catch(next);
         } else if (field == 'newest') {
-            Coffee.find().sort({createdAt: 1})
-            .then((coffee) => {
+            Promise.all([Coffee.find().sort({createdAt: 1}), News.find({applicableObject: 1})])
+            .then(([coffee, coffeeNews]) => {
+                 coffee = mongooseDocumentsToObject(coffee)
+
+                    let a_coffee_new;
+                    let new_products;
+                    if (coffeeNews) {
+                        coffeeNews = mongooseDocumentsToObject(coffeeNews)
+                        new_products = mergeNewsAndProduct(coffee, coffeeNews)
+                        coffee = new_products[0]
+                        a_coffee_new = new_products[1]
+                    }
+
                 res.render('drink/list/list.hbs', {
-                    coffee: mongooseDocumentsToObject(coffee),
+                    coffee:coffee,
                     user: res.locals.user,
                     cart: res.locals.cart,
                     notis: res.locals.notis,
+                    a_coffee_new: a_coffee_new,
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             }).catch(next);
         } else {
-            Coffee.find().sort({no_sold: -1})
-            .then((coffee) => {
+            Promise.all([Coffee.find().sort({no_sold: -1}), News.find({applicableObject: 1})])
+            .then(([coffee, coffeeNews]) => {
+                 coffee = mongooseDocumentsToObject(coffee)
+
+                    let a_coffee_new;
+                    let new_products;
+                    if (coffeeNews) {
+                        coffeeNews = mongooseDocumentsToObject(coffeeNews)
+                        new_products = mergeNewsAndProduct(coffee, coffeeNews)
+                        coffee = new_products[0]
+                        a_coffee_new = new_products[1]
+                    }
+
                 res.render('drink/list/list.hbs', {
-                    coffee: mongooseDocumentsToObject(coffee),
+                    coffee: coffee,
                     user: res.locals.user,
                     cart: res.locals.cart,
                     notis: res.locals.notis,
+                    a_coffee_new: a_coffee_new,
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 });
             }).catch(next);
