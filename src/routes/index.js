@@ -17,20 +17,20 @@ import notiRoute from './noti.js';
 
 const routeObj = {
     route: function (app) {
-        app.use('/books', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, bookRoute);
-        app.use('/food', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, foodRoute);
-        app.use('/coffee', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, coffeeRoute);
-        app.use('/workingspaces', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, workingspaceRoute);
-        app.use('/news', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, newsRoute);
-        app.use('/users', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, userRoute);
-        app.use('/own', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, ownRoute);
+        app.use('/books', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  bookRoute);
+        app.use('/food', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  foodRoute);
+        app.use('/coffee', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  coffeeRoute);
+        app.use('/workingspaces', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  workingspaceRoute);
+        app.use('/news', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  newsRoute);
+        app.use('/users', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  userRoute);
+        app.use('/own', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  ownRoute);
         app.use('/auth', authRoute);
-        app.use('/email', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, emailRoute);
-        app.use('/promos', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, promoRoute);
-        app.use('/carts', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,cartRoute);
-        app.use('/', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, homeRoute);
-        app.use('/orders', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, orderRoute);
-        app.use('/notis', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,notiRoute);
+        app.use('/email', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  emailRoute);
+        app.use('/promos', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  promoRoute);
+        app.use('/carts', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, cartRoute);
+        app.use('/', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  homeRoute);
+        app.use('/orders', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo,  orderRoute);
+        app.use('/notis', authMiddleware.getCurrentUserInfo, notiMiddleware.getNotiInfo, notiRoute);
     },
 }
 export default routeObj;

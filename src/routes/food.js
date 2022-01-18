@@ -49,6 +49,7 @@ router.post('/save',
     validate.postCreateFood,
     controllers.save,
 );
+router.post('/update_saleoff_status', controllers.updateSaleoffStatus)
 router.get('/:id/edit', controllers.edit);
 router.patch('/:id', controllers.update);
 router.delete('/:id', controllers.softDelete);

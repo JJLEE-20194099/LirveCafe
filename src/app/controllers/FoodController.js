@@ -293,6 +293,29 @@ const FoodController = {
             .catch(next);
     },
 
+    // POST /food/update_saleoff_status
+    
+    updateSaleoffStatus(req, res, next) {
+        Food.find({saleoff_status: 1})
+            .then((food) => {
+                if (food)
+                    food = mongooseDocumentsToObject(food)
+                const updatePromises = [];
+                for(let item of food) {
+                    item.quantity = item.quantity + item.sum_items_during_saleoff
+                    item.no_sold = item.no_sold + item.no_sold_during_saleoff
+                    delete item.no_sold_during_saleoff
+                    delete item.saleoff_status
+                    delete item.discountPercentage
+                    delete item.saleoff_price
+                    delete item.sum_items_during_saleoff
+                    updatePromises.push(() => Food.updateOne({_id: item._id}, item))
+                }
+                return Promise.all(updatePromises.map(promise => promise()))
+            })
+    },
+
+
     // SOFT DELETE /food/:id
     softDelete(req, res, next) {
         Food.delete({

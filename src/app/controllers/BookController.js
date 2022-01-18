@@ -195,6 +195,28 @@ const BookController = {
             .catch(next);
     },
 
+    // POST /books/update_saleoff_status
+
+    updateSaleoffStatus(req, res, next) {
+        Book.find({saleoff_status: 1})
+            .then((books) => {
+                if (books)
+                    books = mongooseDocumentsToObject(books)
+                const updatePromises = [];
+                for(let book of books) {
+                    book.quantity = book.quantity + book.sum_items_during_saleoff
+                    book.no_sold = book.no_sold + book.no_sold_during_saleoff
+                    delete book.no_sold_during_saleoff
+                    delete book.saleoff_status
+                    delete book.discountPercentage
+                    delete book.saleoff_price
+                    delete book.sum_items_during_saleoff
+                    updatePromises.push(() => Book.updateOne({_id: book._id}, book))
+                }
+                return Promise.all(updatePromises.map(promise => promise()))
+            })
+    },
+
     // SOFT DELETE /books/:id
     softDelete(req, res, next) {
         Book.delete({

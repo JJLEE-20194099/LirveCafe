@@ -48,6 +48,7 @@ router.post('/save',
     validate.postCreateBook,
     controllers.save,
 );
+router.post('/update_saleoff_status', controllers.updateSaleoffStatus)
 router.get('/:id/edit', controllers.edit);
 router.patch('/:id',
     upload.single('image'),

@@ -46,6 +46,11 @@
         </div>
 
         <div class="form-group">
+            <label for="sum_items_during_saleoff">Số lượng của sản phẩm trong đợt giảm giá này </label>
+            <input type="text" class="form-control" id="sum_items_during_saleoff" name="sum_items_during_saleoff">
+        </div>
+
+        <div class="form-group">
             <label for="image">Hình ảnh</label>
             <input type="file" name="image" id="image" onchange="uploadImage(event)">
         </div>
@@ -97,6 +102,7 @@
                 eventEndDate: $('#basic-info .end-time input ').val().substring(0, 10),
                 eventEndTime: $('#basic-info .end-time input ').val().substring(11, 17),
                 image: image,
+                sum_items_during_saleoff: $('#sum_items_during_saleoff').val(),
                 discountPercentage: $('#discountPercentage').val(),
                 applicableObject: $("input[type='radio']:checked").val(),
                 condition: $('#condition').val(),
@@ -108,6 +114,7 @@
             formData.append('eventEndDate', data.eventEndDate)
             formData.append('eventEndTime', data.eventEndTime)
             formData.append('image', data.image)
+            formData.append('sum_items_during_saleoff', data.sum_items_during_saleoff)
             formData.append('discountPercentage', parseInt(data.discountPercentage))
             formData.append('applicableObject', parseInt(data.applicableObject))
             formData.append('condition', parseInt(data.condition))

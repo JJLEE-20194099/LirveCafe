@@ -311,13 +311,13 @@ const CartController = {
                
                 total = cart.itemList.reduce(function (acc, item) {
                     let price = 0
-                    // if price is string type
+                    
                     if (item.book) {
-                        price = item.book.price
+                        price = item.book.saleoff_price || item.book.price
                     } else if (item.food) {
-                        price = item.food.price
+                        price = item.food.saleoff_price ||item.food.price
                     } else if (item.coffee) {
-                        price = item.coffee.price
+                        price = item.coffee.saleoff_price ||item.coffee.price
                     }
                     
                     return acc + parseFloat(price) * parseInt(item.quantity)
@@ -544,11 +544,11 @@ const CartController = {
                 var total = cart.itemList.reduce(function (acc, item) {
                     
                     if (item.book)
-                        return acc + parseInt(item.book.price) * parseInt(item.quantity)
+                        return acc + parseInt(item.book.saleoff_price || item.book.price) * parseInt(item.quantity)
                     else if (item.food)
-                        return acc + parseInt(item.food.price) * parseInt(item.quantity)
+                        return acc + parseInt(item.food.saleoff_price || item.food.price) * parseInt(item.quantity)
                     else if (item.coffee)
-                        return acc + parseInt(item.coffee.price) * parseInt(item.quantity)
+                        return acc + parseInt(item.coffee.saleoff_price || item.coffee.price) * parseInt(item.quantity)
                     else return 0
                 }, 0)
                 

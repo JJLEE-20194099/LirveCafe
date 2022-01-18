@@ -66,6 +66,8 @@ export const mergeNewsAndProduct = function(products, news) {
             "eventEndDate": get_new.eventEndDate,
             "saleoff_price": parseInt(product.price * (1 - discountPercentage / 100)),
             "saleoff_status": 1,
+            "sum_items_during_saleoff": get_new.sum_items_during_saleoff,
+            "quantity": product.quantity - get_new.sum_items_during_saleoff
            
         }
         items.push(new_product)

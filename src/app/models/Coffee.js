@@ -22,7 +22,8 @@ const Coffee = new Schema(
         saleoff_status: {type: Number, default: 0},
         no_sold_during_saleoff: {type: Number, default: 0},
         discountPercentage: {type: Number, default: 0},
-        saleoff_price: {type: Number}
+        saleoff_price: {type: Number},
+        sum_items_during_saleoff: {type: Number}
     },
     {
         timestamps: true

@@ -16,6 +16,7 @@ const News = new Schema(
         eventStartTime: {type: String, required: true},
         eventEndDate: {type: String, required: true},
         eventEndTime: {type: String, required: true},
+        sum_items_during_saleoff: {type: Number, required: true}
     },
     {
         timestamps: true

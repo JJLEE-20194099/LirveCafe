@@ -292,6 +292,28 @@ const CoffeeController = {
             .catch(next);
     },
 
+    // POST /coffee/update_saleoff_status
+
+    updateSaleoffStatus(req, res, next) {
+        Coffee.find({saleoff_status: 1})
+            .then((coffee) => {
+                if (coffee)
+                    coffee = mongooseDocumentsToObject(coffee)
+                const updatePromises = [];
+                for(let item of coffee) {
+                    item.quantity = item.quantity + item.sum_items_during_saleoff
+                    item.no_sold = item.no_sold + item.no_sold_during_saleoff
+                    delete item.no_sold_during_saleoff
+                    delete item.saleoff_status
+                    delete item.discountPercentage
+                    delete item.saleoff_price
+                    delete item.sum_items_during_saleoff
+                    updatePromises.push(() => Coffee.updateOne({_id: item._id}, item))
+                }
+                return Promise.all(updatePromises.map(promise => promise()))
+            })
+    },
+
     // SOFT DELETE /coffee/:id
     softDelete(req, res, next) {
         Coffee.delete({
