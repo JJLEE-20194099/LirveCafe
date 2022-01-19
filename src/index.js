@@ -1,5 +1,4 @@
 import express from 'express';
-import morgan from 'morgan';
 import methodOverride from 'method-override';
 import handlebars from 'express-handlebars';
 import cookieParser from 'cookie-parser';
