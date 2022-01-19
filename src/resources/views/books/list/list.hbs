@@ -147,12 +147,23 @@
               <p class="card-title">{{this.title}}</p>
               <p class="card-text">{{this.description}}</p>
               <div class="item-price flex">
-                <div class="price-value">{{this.price}} VNĐ</div>
+                {{#if this.saleoff_status}}
+                <div class="price-value"><span>{{this.saleoff_price}}</span> VNĐ</div>
+             
+                <div class="discount-value">-<span>{{this.discountPercentage}}</span>%</div>
+                {{else}}
+
+                <div class="price-value"><span>{{this.price}}</span> VNĐ</div>
+               
+                {{/if}}
+
               </div>
             </div>
           </div>
         </a>
       </div>
+
+
       {{/each}}
     </div>
 

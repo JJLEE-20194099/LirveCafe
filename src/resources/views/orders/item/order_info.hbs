@@ -32,15 +32,41 @@
     {{#each order.itemList}}
     <div class="d-flex justify-content-between align-items-center list my-2 py-1">
         <div class="d-flex justify-content-start align-items-center list my-2 py-1">
+             {{#if this.food}}
+            <div><a href="/orders/item?itemId={{../order._id}}-{{this.food._id}}" style="margin-right: 8px; font-weight: bold; color: #c39e51">Xem</a></div>
+            {{/if}}
+
+             {{#if this.book}}
+            <div><a href="/orders/item?itemId={{../order._id}}-{{this.book._id}}" style="margin-right: 8px; font-weight: bold; color: #c39e51">Xem</a></div>
+            {{/if}}
+
+             {{#if this.coffee}}
+            <div><a href="/orders/item?itemId={{../order._id}}-{{this.coffee._id}}" style="margin-right: 8px; font-weight: bold; color: #c39e51"}">Xem</a></div>
+            {{/if}}
             <div><b id="product-quantity">{{this.quantity}}</b></div>
+            
             {{#if this.food}}
+            
+            
+            {{#if this.food.saleoff_status}}
+            <p id="product-price" style="display: none">{{this.food.saleoff_price}}</p>
+            {{else}}
             <p id="product-price" style="display: none">{{this.food.price}}</p>
+            {{/if}}
             <div class="mx-3"> <img src="{{this.food.image}}" alt="apple" class="rounded-circle" width="30" height="30">
             </div>
             <div class="order-item">{{this.food.name}}</div>
             {{/if}}
 
             {{#if this.book}}
+            
+
+             {{#if this.book.saleoff_status}}
+            <p id="product-price" style="display: none">{{this.book.saleoff_price}}</p>
+            {{else}}
+            <p id="product-price" style="display: none">{{this.book.price}}</p>
+            {{/if}}
+            
             <p id="product-price" style="display: none">{{this.book.price}}</p>
             <div class="mx-3"> <img src="{{this.book.image}}" alt="apple" class="rounded-circle" width="30" height="30">
             </div>
@@ -48,6 +74,14 @@
             {{/if}}
 
             {{#if this.coffee}}
+            
+
+            {{#if this.coffee.saleoff_status}}
+            <p id="product-price" style="display: none">{{this.coffee.saleoff_price}}</p>
+            {{else}}
+            <p id="product-price" style="display: none">{{this.coffee.price}}</p>
+            {{/if}}
+            
             <p id="product-price" style="display: none">{{this.coffee.price}}</p>
             <div class="mx-3"> <img src="{{this.coffee.image}}" alt="apple" class="rounded-circle" width="30"
                     height="30">

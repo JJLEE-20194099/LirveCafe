@@ -28,15 +28,27 @@
                          <a href="#">(<span>{{commentList.length}}</span> đánh giá)</a>
                     {{/if}}
 
+                    
+
                     {{#if food.no_sold}}
                         <div class="detail-sold">Đã bán <span>{{food.no_sold}}</span></div>
                     {{/if}}
                     
                 </div>
 
+                {{#if food.saleoff_status}}
+                <div style="display: flex; align-items: center">
+                    <div class="detail-cost">
+                    {{food.saleoff_price}} VNĐ
+                </div>
+                <div class="discount-value">-<span style="font-size: 18px; font-weight: bold">{{food.discountPercentage}}</span>%</div>
+                </div>
+                 <div style="padding-left: 16px; color: #bb8817; font-size: 16; font-weight: bold">Có {{food.no_sold_during_saleoff}}/{{sum food.sum_items_during_saleoff food.no_sold_during_saleoff}} sản phẩm giảm giá đã bán</div>
+                {{else}}
                 <div class="detail-cost">
                     {{food.price}} VNĐ
                 </div>
+                {{/if}}
 
                 <div class="detail-coupon">
                     <div class="coupon-text">Mã giảm giá</div>

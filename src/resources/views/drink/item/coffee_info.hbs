@@ -33,9 +33,19 @@
                     
                 </div>
 
+                 {{#if coffee.saleoff_status}}
+                <div style="display: flex; align-items: center">
+                    <div class="detail-cost">
+                    {{coffee.saleoff_price}} VNĐ
+                </div>
+                <div class="discount-value">-<span style="font-size: 18px; font-weight: bold">{{coffee.discountPercentage}}</span>%</div>
+                </div>
+                 <div style="padding-left: 16px; color: #bb8817; font-size: 16; font-weight: bold">Có {{coffee.no_sold_during_saleoff}}/{{sum coffee.sum_items_during_saleoff coffee.no_sold_during_saleoff}} sản phẩm giảm giá đã bán</div>
+                {{else}}
                 <div class="detail-cost">
                     {{coffee.price}} VNĐ
                 </div>
+                {{/if}}
 
                 <div class="detail-coupon">
                     <div class="coupon-text">Mã giảm giá</div>

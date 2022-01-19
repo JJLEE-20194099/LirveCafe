@@ -115,8 +115,8 @@
     </div>
     <!--/.Carousel Wrapper-->
 
-     <div class="product-filter">
-     <ul>
+    <div class="product-filter">
+      <ul>
         <li class="active">
           <a href='/coffee/list?field=top_seller'>Bán chạy</a>
           <div class="filter-pane"></div>
@@ -134,7 +134,7 @@
           <div class="filter-pane"></div>
         </li>
       </ul>
-    </div>  
+    </div>
 
     <div id="product-list" class="row ">
 
@@ -147,7 +147,16 @@
               <p class="card-title">{{this.name}}</p>
               <p class="card-text">{{this.description}}</p>
               <div class="item-price flex">
-                <div class="price-value">{{this.price}} VNĐ</div>
+                {{#if this.saleoff_status}}
+                <div class="price-value"><span>{{this.saleoff_price}}</span> VNĐ</div>
+               
+                <div class="discount-value">-<span>{{this.discountPercentage}}</span>%</div>
+                {{else}}
+
+                <div class="price-value"><span>{{this.price}}</span> VNĐ</div>
+
+                {{/if}}
+               
               </div>
             </div>
           </div>

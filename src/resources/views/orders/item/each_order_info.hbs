@@ -5,7 +5,8 @@
     </div>
     <div class="h4">{{order.createdAt}}</div>
     <div class="pt-1">
-        <p>Product involves order <a href="/orders/detail/{{order._id}}" style="color: #246c0c">#{{order._id}}</a><b class="text-dark"></b></p>
+        <p>Product involves order <a href="/orders/detail/{{order._id}}" style="color: #246c0c">#{{order._id}}</a><b
+                class="text-dark"></b></p>
     </div>
 
 </div>
@@ -20,7 +21,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row"><a href="/orders/detail/{{order._id}}" style="color: #246c0c">#{{order._id}}</a></th>
+                    <th scope="row"><a href="/orders/detail/{{order._id}}" style="color: #246c0c">#{{order._id}}</a>
+                    </th>
                     <td class="text-right"><b id="fake-total"></b></td>
                 </tr>
             </tbody>
@@ -30,21 +32,36 @@
     <div class="d-flex justify-content-start align-items-center list my-2 py-1">
         <div><b id="product-quantity">{{item.quantity}}</b></div>
         {{#if item.food}}
+        {{#if item.food.saleoff_status}}
+        <p id="product-price" style="display: none">{{item.food.saleoff_price}}</p>
+        {{else}}
         <p id="product-price" style="display: none">{{item.food.price}}</p>
+        {{/if}}
+
         <div class="mx-3"> <img src="{{item.food.image}}" alt="apple" class="rounded-circle" width="30" height="30">
         </div>
         <div class="order-item">{{item.food.name}}</div>
         {{/if}}
 
         {{#if item.book}}
+        {{#if item.book.saleoff_status}}
+        <p id="product-price" style="display: none">{{item.book.saleoff_price}}</p>
+        {{else}}
         <p id="product-price" style="display: none">{{item.book.price}}</p>
+        {{/if}}
+
         <div class="mx-3"> <img src="{{item.book.image}}" alt="apple" class="rounded-circle" width="30" height="30">
         </div>
         <div class="order-item">{{item.book.title}}</div>
         {{/if}}
 
         {{#if item.coffee}}
+        {{#if item.coffee.saleoff_status}}
+        <p id="product-price" style="display: none">{{item.coffee.saleoff_price}}</p>
+        {{else}}
         <p id="product-price" style="display: none">{{item.coffee.price}}</p>
+        {{/if}}
+
         <div class="mx-3"> <img src="{{item.coffee.image}}" alt="apple" class="rounded-circle" width="30" height="30">
         </div>
         <div class="order-item">{{item.coffee.name}}</div>
@@ -89,40 +106,78 @@
         <div> <b>#{{item.book._id}}</b> </div>
 
         <div>Monday</div>
+          {{#if item.status}}
+        <button href="" class="btn btn-success" data-toggle="modal" data-target="#update-order-status-modal"
+            style="color: white; font-size: 15px; font-weight: bold"
+            data-id="{{../../order._id}}-{{item.book._id}}">Status: Successful</button>
+        {{else}}
+        <button href="" class="btn btn-danger" data-toggle="modal" data-target="#update-order-status-modal"
+            style="color: white; font-size: 15px; font-weight: bold"
+            data-id="{{../../order._id}}-{{item.book._id}}">Status: Processing</button>
+        {{/if}}
         {{/if}}
 
         {{#if item.coffee}}
         <div> <b>#{{item.coffee._id}}</b> </div>
 
         <div>Monday</div>
+          {{#if item.status}}
+        <button href="" class="btn btn-success" data-toggle="modal" data-target="#update-order-status-modal"
+            style="color: white; font-size: 15px; font-weight: bold"
+            data-id="{{../../order._id}}-{{item.coffee._id}}">Status: Successful</button>
+        {{else}}
+        <button href="" class="btn btn-danger" data-toggle="modal" data-target="#update-order-status-modal"
+            style="color: white; font-size: 15px; font-weight: bold"
+            data-id="{{../../order._id}}-{{item.coffee._id}}">Status: Processing</button>
+        {{/if}}
         {{/if}}
 
         {{#if item.food}}
         <div> <b>#{{item.food._id}}</b> </div>
 
         <div>Monday</div>
-        {{/if}}
-
         {{#if item.status}}
         <button href="" class="btn btn-success" data-toggle="modal" data-target="#update-order-status-modal"
-                    style="color: white; font-size: 15px; font-weight: bold"
-                    data-id="{{../order._id}}-{{this.food._id}}">Status: Successful</button>
+            style="color: white; font-size: 15px; font-weight: bold"
+            data-id="{{../../order._id}}-{{item.food._id}}">Status: Successful</button>
         {{else}}
         <button href="" class="btn btn-danger" data-toggle="modal" data-target="#update-order-status-modal"
-                    style="color: white; font-size: 15px; font-weight: bold"
-                    data-id="{{../order._id}}-{{this.food._id}}">Status: Processing</button>
+            style="color: white; font-size: 15px; font-weight: bold"
+            data-id="{{../../order._id}}-{{item.food._id}}">Status: Processing</button>
         {{/if}}
 
+
+        {{/if}}
+
+
+
+
         {{#if item.book}}
-        <div> Total: <b> {{item.book.price}}VNĐ for {{item.quantity}} items</b> </div>
+        {{#if item.book.saleoff_status}}
+        <div> Total: <b> {{multiply item.book.saleoff_price item.quantity}}VNĐ for {{item.quantity}} items</b> </div>
+        {{else}}
+        <div> Total: <b> {{multiply item.book.price item.quantity}}VNĐ for {{item.quantity}} items</b> </div>
+        {{/if}}
+
         {{/if}}
 
         {{#if item.coffee}}
-        <div> Total: <b> {{item.coffee.price}}VNĐ for {{item.quantity}} items</b> </div>
+        {{#if item.coffee.saleoff_status}}
+        <div> Total: <b> {{multiply item.coffee.saleoff_price item.quantity}}VNĐ for {{item.quantity}} items</b> </div>
+        {{else}}
+        <div> Total: <b> {{multiply item.coffee.saleoff_price}}VNĐ for {{item.quantity}} items</b> </div>
+        {{/if}}
+
+
         {{/if}}
 
         {{#if item.food}}
-        <div> Total: <b> {{item.food.price}}VNĐ for {{item.quantity}} items</b> </div>
+        {{#if item.food.saleoff_status}}
+        <div> Total: <b>{{multiply item.food.saleoff_price item.quantity}}VNĐ for {{item.quantity}} items</b> </div>
+        {{else}}
+        <div> Total: <b>{{multiply item.food.price item.quantity}}VNĐ for {{item.quantity}} items</b> </div>
+        {{/if}}
+
         {{/if}}
 
 
