@@ -22,11 +22,11 @@ const Workingspace = new Schema(
         eventEndTime: {type: String, required: true},
         foods: [new Schema({
                     food_id: {type: String, required:true},
-                    quantity: {type: String, required: true, min: 1}
+                    quantity: {type: Number, required: true, min: 1}
                 })],
         drinks: [new Schema({
             drink_id: {type: String, required:true},
-            quantity: {type: String, required: true, min: 1}
+            quantity: {type: Number, required: true, min: 1}
         })],        
         slug: {type: String, slug: 'title', unique: true}
 

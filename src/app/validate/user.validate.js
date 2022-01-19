@@ -23,7 +23,7 @@ const validate = {
         }
 
         if (errors.length) {
-            res.render('users/create', {
+            res.render('users/info/item/create.hbs', {
                 errors: errors,
                 values: req.body
             });

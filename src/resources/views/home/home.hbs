@@ -48,7 +48,29 @@
   <!--/.Carousel Wrapper-->
 </div>
 
+{{#if book_new}}
+  <input type="text" id="show_book_clock" value="1" style="display:none">
+
+{{else}}
+  <input type="text" id="show_book_clock" value="0" style="display:none">
+{{/if}}
+
+{{#if food_new}}
+  <input type="text" id="show_food_clock" value="1" style="display:none">
+
+{{else}}
+  <input type="text" id="show_food_clock" value="0" style="display:none">
+{{/if}}
+
+{{#if coffee_new}}
+  <input type="text" id="show_drink_clock" value="1" style="display:none">
+
+{{else}}
+  <input type="text" id="show_drink_clock" value="0" style="display:none">
+{{/if}}
+
 {{!-- đồng hồ food --}}
+{{#if food_new}}
 <div class="saleClock row" id="saleClockFood">
 
   <div class="header col col-8">
@@ -81,6 +103,7 @@
   </div>
 
 </div>
+{{/if}}
 
 
 {{#if workingspaces.length}}
@@ -231,6 +254,7 @@
 </div>
 
 {{!-- đồng hồ book --}}
+{{#if book_new}}
 <div class="saleClock row" id="saleClockBook">
 
   <div class="header col col-8">
@@ -263,6 +287,7 @@
   </div>
 
 </div>
+{{/if}}
 
 {{!-- home books --}}
 <div class="home-product" id="home-books">
@@ -333,7 +358,7 @@
       </a>
       {{/each}}
 
-     
+
     </div>
     {{!-- book prev icon --}}
     <a class="carousel-control-prev" role="button" data-slide="prev">
@@ -350,8 +375,8 @@
 </div>
 
 {{!-- đồng hồ drink --}}
-
-<div class="saleClock row" id="saleClockDrink">
+{{#if drink_new}}
+  <div class="saleClock row" id="saleClockDrink">
 
   <div class="header col col-8">
     <h3>Sự kiện giảm Drink đang diễn ra</h3>
@@ -383,6 +408,7 @@
   </div>
 
 </div>
+{{/if}}
 
 {{!-- home drink --}}
 
@@ -454,7 +480,7 @@
       </a>
       {{/each}}
 
-    
+
 
     </div>
     {{!-- drink prev icon --}}

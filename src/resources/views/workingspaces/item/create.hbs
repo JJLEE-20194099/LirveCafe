@@ -11,9 +11,14 @@
     {{! chon chỗ ngồi }}
     <div id="basic-info">
       <div class="header">Vui lòng nhập đầy đủ thông tin để đặt chỗ</div>
-       <div style="display: flex; justify-content: center; align-items: center; margin-top: 8px">
-    <p style="font-weight: bold; font-size: 16; color: #df7509">1 slot/hour: 25k</p>
-    </div>
+      <div style="display: flex; justify-content: center; align-items: center; margin-top: 8px">
+        <p style="font-weight: bold; font-size: 16; color: #df7509">1 slot/hour: 25k</p>
+      </div>
+
+      <div style="display: flex; justify-content: center; align-items: center; margin-top: 8px">
+        <p class="noti-validate" id="noti-validate"></p>
+      </div>
+
       <div class="line w-100"></div>
 
       <div class="info row">
@@ -23,20 +28,20 @@
         </div>
         <div class="phoneNum col col-6">
           <span>Số điện thoại</span>
-          <input type="tel" required />
+          <input type="tel"  required />
         </div>
         <div class="line col-12"></div>
-        
-        <div class = "event-title col col-6">
+
+        <div class="event-title col col-6">
           <span>Tiêu đề</span>
-          <input type = "text" required>
+          <input type="text" required>
         </div>
 
-        <div class = "email col col-6">
+        <div class="email col col-6">
           <span>Email</span>
-          <input type= "email" accept="email/*" required>
+          <input type="email" accept="email/*" required>
         </div>
-        
+
         <div class="line col-12"></div>
 
         <div class="start-time col col-6">
@@ -51,9 +56,9 @@
         </div>
 
         <div class="line col-12"></div>
-        <div class = "image col col-6">
+        <div class="image col col-6">
           <span>Ảnh sự kiện</span>
-          <input type = "file" name="avatar" id="avatar" onchange="uploadImage(event)">
+          <input type="file" name="avatar" id="avatar" onchange="uploadImage(event)">
         </div>
 
 
@@ -66,7 +71,7 @@
 
         <div class="line col-12"></div>
 
-        <div class = "description col col-12">
+        <div class="description col col-12">
           <span>Thông tin mô tả</span>
           <textarea type="text"></textarea>
         </div>
@@ -84,7 +89,8 @@
       {{! danh sách đang chọn }}
       <div id="ordering" class="col col-6">
         <nav id="ordering-nav" class="row navbar navbar-light bg-light">
-          <span class="navbar-brand col col-3" href="#" style="font-size: 16px; font-weight: bold; color: #df7509">Tích để chọn sản phẩm bạn muốn dùng</span>
+          <span class="navbar-brand col col-3" href="#" style="font-size: 16px; font-weight: bold; color: #df7509">Tích
+            để chọn sản phẩm bạn muốn dùng</span>
           <ul class="nav nav-pills col col-auto d-flex justify-content-end">
             <li class="nav-item active" id="food-btn">
               <span>Snack-Food</span>
@@ -102,16 +108,22 @@
             {{#each food}}
             <li class="fodr-item">
               <img src="{{this.image}}" />
+
               <div class="fodr-name"><span>{{this.name}}</span></div>
+              {{#if this.saleoff_status}}
+              <div class="fodr-cost"><span>{{this.saleoff_price}}</span>đ</div>
+              {{else}}
               <div class="fodr-cost"><span>{{this.price}}</span>đ</div>
+              {{/if}}
+
               <input type="checkbox" />
             </li>
 
             {{/each}}
 
-           
 
-           
+
+
           </ul>
 
         </div>
@@ -120,15 +132,19 @@
         <div id="ws-drink-scroll" class="fodr-list-div" data-spy="scroll" data-target="#ordering-nav" data-offset="0">
           <ul class="fodr-list">
             {{#each coffee}}
-              <li class="fodr-item">
-                <img src="{{this.image}}" />
-                <div class="fodr-name"><span>{{this.name}}</span></div>
-                <div class="fodr-cost"><span>{{this.price}}</span>đ</div>
-                <input type="checkbox" />
-              </li>
+            <li class="fodr-item">
+              <img src="{{this.image}}" />
+              <div class="fodr-name"><span>{{this.name}}</span></div>
+              {{#if this.saleoff_status}}
+              <div class="fodr-cost"><span>{{this.saleoff_price}}</span>đ</div>
+              {{else}}
+              <div class="fodr-cost"><span>{{this.price}}</span>đ</div>
+              {{/if}}
+              <input type="checkbox" />
+            </li>
             {{/each}}
 
-           
+
 
           </ul>
         </div>
@@ -158,12 +174,17 @@
                 <button class="change-btn buy-btn" id="incre-btn"><i class="ti-plus"></i></button>
 
               </div>
+              
+              {{#if this.saleoff_status}}
+              <div class="fodr-cost"><span>{{this.saleoff_price}}</span>đ</div>
+              {{else}}
               <div class="fodr-cost"><span>{{this.price}}</span>đ</div>
+              {{/if}}
             </li>
 
             {{/each}}
 
-           
+
           </ul>
 
           {{! drink ordered }}
@@ -180,11 +201,16 @@
                 <button class="change-btn buy-btn" id="incre-btn"><i class="ti-plus"></i></button>
 
               </div>
+              {{#if this.saleoff_status}}
+              <div class="fodr-cost"><span>{{this.saleoff_price}}</span>đ</div>
+              {{else}}
               <div class="fodr-cost"><span>{{this.price}}</span>đ</div>
+              {{/if}}
+              
             </li>
             {{/each}}
 
-           
+
           </ul>
 
         </div>
@@ -211,5 +237,5 @@
 <script src="/js/working_space.js"></script>
 
 <script>
- 
+
 </script>

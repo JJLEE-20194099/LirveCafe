@@ -20,27 +20,30 @@
 
                     <div class="detail-rating" id="detail-rating">
 
-                       
-                
+
+
                     </div>
                     {{#if commentList.length}}
-                         <a href="#">(<span>{{commentList.length}}</span> đánh giá)</a>
+                    <a href="#">(<span>{{commentList.length}}</span> đánh giá)</a>
                     {{/if}}
 
                     {{#if coffee.no_sold}}
-                        <div class="detail-sold">Đã bán <span>{{coffee.no_sold}}</span></div>
+                    <div class="detail-sold">Đã bán <span>{{coffee.no_sold}}</span></div>
                     {{/if}}
-                    
+
                 </div>
 
-                 {{#if coffee.saleoff_status}}
+                {{#if coffee.saleoff_status}}
                 <div style="display: flex; align-items: center">
                     <div class="detail-cost">
-                    {{coffee.saleoff_price}} VNĐ
+                        {{coffee.saleoff_price}} VNĐ
+                    </div>
+                    <div class="discount-value">-<span
+                            style="font-size: 18px; font-weight: bold">{{coffee.discountPercentage}}</span>%</div>
                 </div>
-                <div class="discount-value">-<span style="font-size: 18px; font-weight: bold">{{coffee.discountPercentage}}</span>%</div>
-                </div>
-                 <div style="padding-left: 16px; color: #bb8817; font-size: 16; font-weight: bold">Có {{coffee.no_sold_during_saleoff}}/{{sum coffee.sum_items_during_saleoff coffee.no_sold_during_saleoff}} sản phẩm giảm giá đã bán</div>
+                <div style="padding-left: 16px; color: #bb8817; font-size: 16; font-weight: bold">Có
+                    {{coffee.no_sold_during_saleoff}}/{{sum coffee.sum_items_during_saleoff
+                    coffee.no_sold_during_saleoff}} sản phẩm giảm giá đã bán</div>
                 {{else}}
                 <div class="detail-cost">
                     {{coffee.price}} VNĐ
@@ -125,7 +128,16 @@
                                 <p class="card-text">{{this.description}}</p>
 
                                 <div class="item-price flex">
-                                    <div class="price-value">{{this.price}} VNĐ</div>
+                                    {{#if this.saleoff_status}}
+                                    <div class="price-value"><span>{{this.saleoff_price}}</span> VNĐ</div>
+
+                                    <div class="discount-value">-<span>{{this.discountPercentage}}</span>%</div>
+                                    {{else}}
+
+                                    <div class="price-value"><span>{{this.price}}</span> VNĐ</div>
+
+                                    {{/if}}
+
                                 </div>
                             </div>
                         </div>
@@ -199,7 +211,8 @@
                                     style="flex: 1">
                                     <span class="user pt-2 username">{{this.username}}</span>
                                     {{#if this.rating}}
-                                        <span style="font-weight: bold; color: black;">đã đánh giá <span style="font-weight: bold; color: #f5ba3f">{{this.rating}} sao</span></span>
+                                    <span style="font-weight: bold; color: black;">đã đánh giá <span
+                                            style="font-weight: bold; color: #f5ba3f">{{this.rating}} sao</span></span>
                                     {{/if}}
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex justify-content-betweens align-items-center">
@@ -443,7 +456,7 @@
                         </svg>`
             }
 
-            for(var j = 0; j < dark_star; j++) {
+            for (var j = 0; j < dark_star; j++) {
                 star_html += `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
                             color="#c7c7c7" style="color:#c7c7c7" height="16" width="16"
                             xmlns="http://www.w3.org/2000/svg">
@@ -523,7 +536,7 @@
                     method: "POST",
                     data: data,
                     success: function (res) {
-                            
+
                         location.href = `/carts/show/${res.username}?level=${res.level}&activating=${res.activating}`
                     }
                 })

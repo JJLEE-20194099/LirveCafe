@@ -1,42 +1,11 @@
-
 // food calculate time
 var clockSaleFood = $_1('#saleClockFood')
 var clockDivFood = $_1('#saleClockFood .clockdiv')
 var end_clock_food = $_1('#saleClockFood .endClock')
 
-var end_clock_food_date = end_clock_food.querySelector('.endDate').innerText
-var end_clock_food_time = end_clock_food.querySelector('.endTime').innerText
-
-var end_clock_food_parse = Date.parse(`${end_clock_food_date}T${end_clock_food_time}`)
-
-    // thời gian còn lại kể từ thời điểm hiện tại tới lúc hết sự kiện
-var timeRemainingFood = end_clock_food_parse - Date.parse(new Date())
-
-// drink calculate time
-var clockSaleDrink = $_1('#saleClockDrink')
-var clockDivDrink = $_1('#saleClockDrink .clockdiv')
-var end_clock_drink = $_1('#saleClockDrink .endClock')
-
-var end_clock_drink_date = end_clock_drink.querySelector('.endDate').innerText
-var end_clock_drink_time = end_clock_drink.querySelector('.endTime').innerText
-
-var end_clock_drink_parse = Date.parse(`${end_clock_drink_date}T${end_clock_drink_time}`)
-
-    // thời gian còn lại kể từ thời điểm hiện tại tới lúc hết sự kiện
-var timeRemainingDrink = end_clock_drink_parse - Date.parse(new Date())
-
-// book calculate time
-var clockSaleBook = $_1('#saleClockBook')
-var clockDivBook = $_1('#saleClockBook .clockdiv')
-var end_clock_book = $_1('#saleClockBook .endClock')
-
-var end_clock_book_date = end_clock_book.querySelector('.endDate').innerText
-var end_clock_book_time = end_clock_book.querySelector('.endTime').innerText
-
-var end_clock_book_parse = Date.parse(`${end_clock_book_date}T${end_clock_book_time}`)
-
-    // thời gian còn lại kể từ thời điểm hiện tại tới lúc hết sự kiện
-var timeRemainingBook = end_clock_book_parse - Date.parse(new Date())
+var show_book_clock = parseInt($_1("#show_book_clock").value)
+var show_food_clock = parseInt($_1("#show_food_clock").value)
+var show_drink_clock = parseInt($_1("#show_drink_clock").value)
 
 function getTimeRemaining(endtime) {
     const total = Date.parse(endtime) - Date.parse(new Date());
@@ -68,12 +37,8 @@ function getTimeRemaining2(total) {
     };
 }
 
-var clockForFood = getTimeRemaining2(timeRemainingFood)
-var clockForDrink = getTimeRemaining2(timeRemainingDrink)
-var clockForBook = getTimeRemaining2(timeRemainingBook)
+function updateTimeToView(clockForNow, clockDiv) {
 
-function updateTimeToView(clockForNow, clockDiv){
- 
     clockDiv.querySelector('.days').innerText = clockForNow.days
     clockDiv.querySelector('.hours').innerText = clockForNow.hours
     clockDiv.querySelector('.minutes').innerText = clockForNow.minutes
@@ -81,12 +46,76 @@ function updateTimeToView(clockForNow, clockDiv){
 }
 
 
-updateTimeToView(clockForFood, clockDivFood)
-updateTimeToView(clockForDrink, clockDivDrink)
-updateTimeToView(clockForBook, clockDivBook)
+
+if (show_food_clock) {
+    var end_clock_food_date = end_clock_food.querySelector('.endDate').innerText
+    var end_clock_food_time = end_clock_food.querySelector('.endTime').innerText
+
+    var end_clock_food_parse = Date.parse(`${end_clock_food_date}T${end_clock_food_time}`)
+
+    // thời gian còn lại kể từ thời điểm hiện tại tới lúc hết sự kiện
+    var timeRemainingFood = end_clock_food_parse - Date.parse(new Date())
+
+    var clockForFood = getTimeRemaining2(timeRemainingFood)
+    updateTimeToView(clockForFood, clockDivFood)
+    const deadlineFood = new Date(Date.parse(new Date()) +
+        timeRemainingFood
+    );
+    
+initializeClock(clockDivFood, deadlineFood, clockSaleFood, foodItems);
+}
+
+if (show_drink_clock) {
+    // drink calculate time
+    var clockSaleDrink = $_1('#saleClockDrink')
+    var clockDivDrink = $_1('#saleClockDrink .clockdiv')
+    var end_clock_drink = $_1('#saleClockDrink .endClock')
+
+    var end_clock_drink_date = end_clock_drink.querySelector('.endDate').innerText
+    var end_clock_drink_time = end_clock_drink.querySelector('.endTime').innerText
+
+    var end_clock_drink_parse = Date.parse(`${end_clock_drink_date}T${end_clock_drink_time}`)
+
+    // thời gian còn lại kể từ thời điểm hiện tại tới lúc hết sự kiện
+    var timeRemainingDrink = end_clock_drink_parse - Date.parse(new Date())
+    var clockForDrink = getTimeRemaining2(timeRemainingDrink)
+    updateTimeToView(clockForDrink, clockDivDrink)
+
+    const deadlineDrink = new Date(Date.parse(new Date()) +
+        timeRemainingDrink
+    );
+    initializeClock(clockDivDrink, deadlineDrink, clockSaleDrink, drinkItems);
+    
+}
+
+if (show_book_clock) {
+
+    // book calculate time
+    var clockSaleBook = $_1('#saleClockBook')
+    var clockDivBook = $_1('#saleClockBook .clockdiv')
+    var end_clock_book = $_1('#saleClockBook .endClock')
+
+    var end_clock_book_date = end_clock_book.querySelector('.endDate').innerText
+    var end_clock_book_time = end_clock_book.querySelector('.endTime').innerText
+
+    var end_clock_book_parse = Date.parse(`${end_clock_book_date}T${end_clock_book_time}`)
+
+    // thời gian còn lại kể từ thời điểm hiện tại tới lúc hết sự kiện
+    var timeRemainingBook = end_clock_book_parse - Date.parse(new Date())
+    var clockForBook = getTimeRemaining2(timeRemainingBook)
+    updateTimeToView(clockForBook, clockDivBook)
+    const deadlineBook = new Date(Date.parse(new Date()) +
+        timeRemainingBook
+    );
+    initializeClock(clockDivBook, deadlineBook, clockSaleBook, bookItems);
+}
+
+
+
+
 
 // khởi tạo đồng hồ
-function initializeClock(clock, endtime,clockSale, productItems) {
+function initializeClock(clock, endtime, clockSale, productItems) {
     // const clock = document.getElementById(selectorClock);
     const daysSpan = clock.querySelector('.days');
     const hoursSpan = clock.querySelector('.hours');
@@ -111,7 +140,7 @@ function initializeClock(clock, endtime,clockSale, productItems) {
 }
 
 // xử lý khi kết thúc sự kiện 
-function handleEndSale (clockSale, productItems) {
+function handleEndSale(clockSale, productItems) {
     clockSale.remove()
 
     productItems.forEach((item) => {
@@ -136,27 +165,5 @@ function handleEndSale (clockSale, productItems) {
         }
     })
 
-    
+
 }
-
-
-
-const deadlineFood = new Date(Date.parse(new Date()) +
-    timeRemainingFood
-);
-
-const deadlineDrink = new Date(Date.parse(new Date()) +
-    timeRemainingDrink
-);
-
-const deadlineBook = new Date(Date.parse(new Date()) +
-    timeRemainingBook
-);
-
-initializeClock(clockDivFood, deadlineFood, clockSaleFood, foodItems);
-initializeClock(clockDivDrink, deadlineDrink, clockSaleDrink, drinkItems);
-initializeClock(clockDivBook, deadlineBook, clockSaleBook, bookItems);
-
-
-
-

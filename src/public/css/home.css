@@ -348,7 +348,7 @@ body {
   #footer .slogan {
     padding-bottom: 24px; }
   #footer .contact {
-    width: 300px;
+    width: 606px;
     margin: 0 auto; }
     #footer .contact .des {
       min-width: 54px;
@@ -427,3 +427,8 @@ a {
     font-weight: 600; }
   .noti-container .noti-where {
     font-weight: 600; }
+
+.noti-validate {
+  color: #c94118;
+  font-size: 16px;
+  font-weight: bold; }

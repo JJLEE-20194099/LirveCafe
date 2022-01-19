@@ -40,6 +40,7 @@
 
 
     <div class="d-flex justify-content-between .align-items-center">
+        {{#if user}}
         <a href='#' id="noti-toggle" onclick="noti_toggle()" style="display: flex; align-items: center">
             <i class="noti-icon ti-bell header-icon">
                 {{#if no_new_notis}}
@@ -127,6 +128,17 @@
 
             </div>
         </div>
+        {{else}}
+        <a href='/auth/index' id="noti-toggle" style="display: flex; align-items: center">
+            <i class="noti-icon ti-bell header-icon">
+                {{#if no_new_notis}}
+                <span id="noti-number" class="header-number">{{no_new_notis}}</span>
+                {{else}}
+                <span id="noti-number"></span>
+                {{/if}}
+            </i>
+        </a>
+        {{/if}}
     </div>
 
 

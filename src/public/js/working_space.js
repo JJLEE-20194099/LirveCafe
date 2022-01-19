@@ -192,20 +192,122 @@ function uploadImage(e) {
 $_1('#working-space .submit-order button').onclick = function (e) {
     e.preventDefault()
 
+    if (!$_1('#basic-info .email input').value) {
+
+        $_1('#noti-validate').innerHTML = 'Vui lòng nhập địa chỉ email';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+    if (!$_1('#basic-info .start-time input').value) {
+
+        $_1('#noti-validate').innerHTML = 'Vui lòng nhập ngày và giờ bắt đầu sự kiện';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+    if (!$_1('#basic-info .end-time input ').value) {
+
+        $_1('#noti-validate').innerHTML = 'Vui lòng nhập ngày và giờ kết thúc sự kiện';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+    
+
     var check = {
         username: $_1('#username').value,
         email: $_1('#basic-info .email input').value,
         eventBooker: $_1('#basic-info .name input').value,
         title: $_1('#basic-info .event-title input').value,
         no_seating: $_1('#basic-info .seat-num input').value,
-        phone: $_1('.phoneNum input').value,
+        phone: $_1('#basic-info .phoneNum input').value,
         description: $_1('#basic-info .description textarea').value,
         eventStartDate: $_1('#basic-info .start-time input').value.substring(0, 10),
         eventStartTime: $_1('#basic-info .start-time input').value.substring(11, 17),
         eventEndDate: $_1('#basic-info .end-time input ').value.substring(0, 10),
         eventEndTime: $_1('#basic-info .end-time input ').value.substring(11, 17),
     }
-    console.log(check.username ,check.email ,check.eventBooker ,check.title , check.no_seating ,check.phone ,check.eventEndDate ,check.eventStartDate ,        check.eventStartTime, check.eventEndTime)
+
+    var eventStartTime = check.eventStartTime
+    var eventStartDate = check.eventStartDate
+    var eventEndTime = check.eventEndTime
+    var eventEndDate = check.eventEndDate
+
+    var minute_end = eventEndTime.split(":")[1]
+    var hour_end = eventEndTime.split(":")[0]
+    var second_end = 0
+    var year_end = eventEndDate.split("-")[0]
+    var month_end = eventEndDate.split("-")[1]
+    var day_end = eventEndDate.split("-")[2]
+
+    var minute_start = eventStartTime.split(":")[1]
+    var hour_start = eventStartTime.split(":")[0]
+    var second_start = 0
+    var year_start = eventStartDate.split("-")[0]
+    var month_start = eventStartDate.split("-")[1]
+    var day_start = eventStartDate.split("-")[2]
+
+    let datum = new Date(Date.UTC(year_end, month_end, day_end, hour_end, minute_end, second_end));
+    var timestamp_end = datum.getTime()
+
+    datum = new Date(Date.UTC(year_start, month_start, day_start, hour_start, minute_start, second_start));
+    var timestamp_start = datum.getTime()
+
+    var date_now = new Date()
+    datum = new Date(Date.UTC(date_now.getFullYear().toString(), (date_now.getMonth() + 1).toString(), date_now.getDate().toString(), (date_now.getHours()).toString(), date_now.getMinutes().toString(), date_now.getSeconds().toString()));
+    var timestamp_now = datum.getTime()
+
+    if(timestamp_end <= timestamp_now) {
+        $_1('#noti-validate').innerHTML = 'Thời gian kết thúc phải sau thời gian hiện tại';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+    if(timestamp_start - timestamp_now < 15 * 60 * 1000) {
+        $_1('#noti-validate').innerHTML = 'Thời gian bắt đầu phải sau thời gian hiện tại 15 phút';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+    if(timestamp_end <= timestamp_start) {
+        $_1('#noti-validate').innerHTML = 'Thời gian kết thúc phải sau thời gian bắt đầu';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+    if (!check.email) {
+
+        $_1('#noti-validate').innerHTML = 'Vui lòng nhập địa chỉ email';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+    if (!check.title) {
+
+        $_1('#noti-validate').innerHTML = 'Vui lòng nhập tên của sự kiện';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+
+    
+    if (!check.eventBooker) {
+        $_1('#noti-validate').innerHTML = 'Vui lòng nhập tên người đặt sự kiện';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+    
+
+    if (!check.phone) {
+        $_1('#noti-validate').innerHTML = 'Vui lòng nhập số điện thoại người đặt sự kiện';
+        window.scrollTo(0, 0);
+        return false;
+    }
+
+    
+
     if (check.username && check.email && check.eventBooker && check.title &&
         check.no_seating && check.phone && check.eventEndDate && check.eventStartDate &&
         check.eventStartTime && check.eventEndTime) {
@@ -233,7 +335,7 @@ $_1('#working-space .submit-order button').onclick = function (e) {
             drinks.push(a)
 
         })
-        alert(1)
+
 
         total_nums = $_1('#ordered .fodr-total span').innerText.replaceAll('.', '').split(',').join("")
         const dataWS = {
@@ -269,16 +371,16 @@ $_1('#working-space .submit-order button').onclick = function (e) {
         formData.append('eventEndTime', dataWS.eventEndTime)
         for (var food of foods) {
             formData.append(food.food_id, food.quantity)
-    
+
         }
         for (var drink of drinks) {
             formData.append(drink.drink_id, drink.quantity)
-    
+
         }
         formData.append('split', foods.length)
         formData.append('total', dataWS.total)
 
-        console.log(formData)
+
 
         $(document).ready(function () {
             $.ajax({
@@ -290,7 +392,7 @@ $_1('#working-space .submit-order button').onclick = function (e) {
                 success: function (res) {
                     console.log(res)
                     if (res["check"])
-                        window.location.href =`/workingspaces/${res["wk"].slug}`;
+                        window.location.href = `/workingspaces/${res["wk"].slug}`;
                     else {
                         $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
                                                 <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

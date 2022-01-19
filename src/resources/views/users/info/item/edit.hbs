@@ -55,7 +55,7 @@
                                 style="border-top: 0.5px solid #ccc" id="membership-container">
                                 <span style="margin-bottom: 12px; color: #422f0b; font-weight: 600">Loyal Member</span>
                                 <img src="" alt="" id="loyal-member-avatar" style="border-radius: 50%;height: 135px;">
-                                
+
 
                             </div>
                             {{else}}
@@ -133,30 +133,72 @@
                                     <div class="user-detail-item__left">Giới tính</div>
                                     <div class="user-detail-item__right">
                                         <div class="user-detail-item__gender">
+
+                                            {{#ifCond user.gender 0}}
                                             <div class="user__gender-item d-flex justify-content-center">
-                                                <input name="gender" value="Nam" type="radio" checked style="margin-right: 4px">
+                                                <input name="gender" value="0" type="radio" checked
+                                                    style="margin-right: 4px">
                                                 Nam
                                             </div>
-
-                                            <!-- selected -->
                                             <div
                                                 class="user__gender-item d-flex justify-content-center user__gender-item--selected">
-                                                <input name="gender" value="Nữ" type="radio" style="margin-right: 4px">
+                                                <input name="gender" value="1" type="radio" style="margin-right: 4px">
 
                                                 Nữ
                                             </div>
                                             <div class="user__gender-item d-flex justify-content-center">
-                                                <input name="gender" value="others" type="radio" style="margin-right: 4px">
+                                                <input name="gender" value="2" type="radio" style="margin-right: 4px">
 
                                                 Khác
                                             </div>
+                                            {{/ifCond}}
+
+                                             {{#ifCond user.gender 1}}
+                                            <div class="user__gender-item d-flex justify-content-center">
+                                                <input name="gender" value="0" type="radio" 
+                                                    style="margin-right: 4px">
+                                                Nam
+                                            </div>
+                                            <div
+                                                class="user__gender-item d-flex justify-content-center user__gender-item--selected">
+                                                <input name="gender" value="1" type="radio" style="margin-right: 4px" checked>
+
+                                                Nữ
+                                            </div>
+                                            <div class="user__gender-item d-flex justify-content-center">
+                                                <input name="gender" value="2" type="radio" style="margin-right: 4px">
+
+                                                Khác
+                                            </div>
+                                            {{/ifCond}}
+
+                                             {{#ifCond user.gender 2}}
+                                            <div class="user__gender-item d-flex justify-content-center">
+                                                <input name="gender" value="0" type="radio" 
+                                                    style="margin-right: 4px">
+                                                Nam
+                                            </div>
+                                            <div
+                                                class="user__gender-item d-flex justify-content-center user__gender-item--selected">
+                                                <input name="gender" value="1" type="radio" style="margin-right: 4px">
+
+                                                Nữ
+                                            </div>
+                                            <div class="user__gender-item d-flex justify-content-center">
+                                                <input name="gender" value="2" type="radio" style="margin-right: 4px" checked>
+
+                                                Khác
+                                            </div>
+                                            {{/ifCond}}
+
+                                            
                                         </div>
                                     </div>
                                 </div>
                                 <div class="user__body-detail-item">
                                     <div class="user-detail-item__left">Ngày Sinh</div>
                                     <input class="user-detail-item__right user-detail-item__right--dateOfBirth "
-                                        type="date" name="birthday" value="26-09-2001">
+                                        type="date" name="birthday" value="{{username.birthday}}">
                                     </input>
                                 </div>
                                 <button class="user__body-detail__btn">Lưu</button>
@@ -164,7 +206,8 @@
 
                             <div class="user__body-right">
                                 <img src="{{user.avatar}}" alt="" id="preview-avatar" class="user__body-right__img">
-                                <input class="user__body-right__btn" type="file" name="avatar" id="avatar" onchange="change_avatar(this)" style="width: 120px">Chọn
+                                <input class="user__body-right__btn" type="file" name="avatar" id="avatar"
+                                    onchange="change_avatar(this)" style="width: 120px">Chọn
                                 ảnh</input>
                                 <div class="body-right__des">
                                     <div class="body-right__des-item">Dung lượng tối đa 1MB</div>
@@ -182,12 +225,12 @@
 
         function change_avatar(input) {
 
-            
+
             const [file] = input.files
             if (file) {
                 blah.src = URL.createObjectURL(file)
             }
-            
+
             name = document.getElementById("avatar").value;
             path = `/uploads/img/${name}`;
 
@@ -203,26 +246,26 @@
 
                 if (parseInt(registered_level) == 1) {
                     $("#loyal-member-avatar").attr("src", "/img/bronze.png")
-                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Bronze Membership</p>`
+                    new_html = `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Bronze Membership</p>`
                 } else if (parseInt(registered_level) == 2) {
                     $("#loyal-member-avatar").attr("src", "/img/silver.jpg")
-                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Silver Membership</p>`
+                    new_html = `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Silver Membership</p>`
                 } else if (parseInt(registered_level) == 3) {
                     $("#loyal-member-avatar").attr("src", "/img/gold.jpg")
-                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Gold Membership</p>`
+                    new_html = `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Gold Membership</p>`
                 } else if (parseInt(registered_level) == 4) {
                     $("#loyal-member-avatar").attr("src", "/img/platinum.jpg")
-                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Platinum Membership</p>`
+                    new_html = `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Platinum Membership</p>`
                 } else if (parseInt(registered_level) == 5) {
                     $("#loyal-member-avatar").attr("src", "/img/dimond.jpg")
-                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Dimond Membership</p>`
+                    new_html = `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Dimond Membership</p>`
                 } else if (parseInt(registered_level) == 6) {
                     $("#loyal-member-avatar").attr("src", "/img/master.jpg")
-                    new_html =  `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Master Membership</p>`
+                    new_html = `<p style="text-align: center; margin-top: 10px; font-weight: 600; color: #bb7815">Master Membership</p>`
                 }
-                
+
                 new_html = $.parseHTML(new_html),
-                $("#membership-container").append(new_html);
+                    $("#membership-container").append(new_html);
 
             }
 

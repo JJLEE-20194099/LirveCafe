@@ -39,30 +39,33 @@
 
                     </div>
                     {{#if commentList.length}}
-                         <a href="#">(<span>{{commentList.length}}</span> đánh giá)</a>
+                    <a href="#">(<span>{{commentList.length}}</span> đánh giá)</a>
                     {{/if}}
 
                     {{#if book.no_sold}}
-                        <div class="detail-sold">Đã bán <span>{{book.no_sold}}</span></div>
-                    {{/if}} 
+                    <div class="detail-sold">Đã bán <span>{{book.no_sold}}</span></div>
+                    {{/if}}
 
-                    
 
-                    
-                   
-                    
+
+
+
+
                 </div>
 
-                
+
 
                 {{#if book.saleoff_status}}
                 <div style="display: flex; align-items: center">
                     <div class="detail-cost">
-                    {{book.saleoff_price}} VNĐ
+                        {{book.saleoff_price}} VNĐ
+                    </div>
+                    <div class="discount-value">-<span
+                            style="font-size: 18px; font-weight: bold">{{book.discountPercentage}}</span>%</div>
                 </div>
-                <div class="discount-value">-<span style="font-size: 18px; font-weight: bold">{{book.discountPercentage}}</span>%</div>
-                </div>
-                <div style="padding-left: 16px; color: #bb8817; font-size: 16; font-weight: bold">Có {{book.no_sold_during_saleoff}}/{{sum book.sum_items_during_saleoff book.no_sold_during_saleoff}} sản phẩm giảm giá đã bán</div>
+                <div style="padding-left: 16px; color: #bb8817; font-size: 16; font-weight: bold">Có
+                    {{book.no_sold_during_saleoff}}/{{sum book.sum_items_during_saleoff book.no_sold_during_saleoff}}
+                    sản phẩm giảm giá đã bán</div>
                 {{else}}
                 <div class="detail-cost">
                     {{book.price}} VNĐ
@@ -186,8 +189,19 @@
                                 <p class="card-text">{{this.body}}</p>
 
                                 <div class="item-price flex">
-                                    <div class="price-value">{{this.price}} VNĐ</div>
+                                    {{#if this.saleoff_status}}
+                                    <div class="price-value"><span>{{this.saleoff_price}}</span> VNĐ</div>
+
+                                    <div class="discount-value">-<span>{{this.discountPercentage}}</span>%</div>
+                                    {{else}}
+
+                                    <div class="price-value"><span>{{this.price}}</span> VNĐ</div>
+
+                                    {{/if}}
+
                                 </div>
+
+                                
                             </div>
                         </div>
 
@@ -259,9 +273,10 @@
                                 <div class="d-flex flex-column align-items-stretch justify-content-evenly comment-container"
                                     style="flex: 1">
                                     <span class="user pt-2 username">{{this.username}}</span>
-                                    
+
                                     {{#if this.rating}}
-                                        <span style="font-weight: bold; color: black;">đã đánh giá <span style="font-weight: bold; color: #f5ba3f">{{this.rating}} sao</span></span>
+                                    <span style="font-weight: bold; color: black;">đã đánh giá <span
+                                            style="font-weight: bold; color: #f5ba3f">{{this.rating}} sao</span></span>
                                     {{/if}}
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex justify-content-betweens align-items-center">
@@ -505,7 +520,7 @@
                         </svg>`
             }
 
-            for(var j = 0; j < dark_star; j++) {
+            for (var j = 0; j < dark_star; j++) {
                 star_html += `<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" size="16"
                             color="#c7c7c7" style="color:#c7c7c7" height="16" width="16"
                             xmlns="http://www.w3.org/2000/svg">
@@ -585,7 +600,7 @@
                     method: "POST",
                     data: data,
                     success: function (res) {
-                            
+
                         location.href = `/carts/show/${res.username}?level=${res.level}&activating=${res.activating}`
                     }
                 })

@@ -12,6 +12,10 @@ import {
 } from '../../support_lib/avatar_processing.js';
 
 import {
+    removeAccents
+} from '../../support_lib/text.js'
+
+import {
     getNoNewNotis
 } from '../../support_lib/noti.js'
 
@@ -52,22 +56,45 @@ const UserController = {
 
     // POST : /users/save
     save(req, res, next) {
-        
-        req.body.avatar = getAvatar(req);
-        if (!req.body.avatar || req.body.avatar == '') {
-            const name = req.body.firstname + ' ' + req.body.lastname;
-            const file_name = name.split(" ").join("-")
-            req.body.avatar = '/img/' + file_name + '-default.jpg';
-        }
-        let user = new User(req.body);
-      
-        user.save()
-            .then(() => res.render('auth/index', {
-                user: singleMongooseDocumentToObject(user),
-                notis: res.locals.notis,
-                no_new_notis: getNoNewNotis(res.locals.notis)
-            }))
-            .catch(next);
+        console.log()
+        User.findOne({
+                username: req.body.username
+            })
+            .then((u) => {
+                if (!u) {
+                    req.body.avatar = getAvatar(req);
+                    if (!req.body.avatar || req.body.avatar == '') {
+                        const name = req.body.firstname + ' ' + req.body.lastname;
+                        const file_name = name.split(" ").join("-")
+                        req.body.avatar = '/img/' + file_name + '-default.jpg';
+                    }
+                    let user = new User(req.body);
+                    user.save()
+                        .then(() => res.render('auth/index', {
+                            user: singleMongooseDocumentToObject(user),
+                            notis: res.locals.notis,
+                            no_new_notis: getNoNewNotis(res.locals.notis)
+                        }))
+                } else {
+                    const errors = []
+                    errors.push("Username already exists")
+                    const lastnames = req.body.lastname.split(" ")
+                    const s = []
+                    for (let lastname of lastnames) {
+                        s.push(req.body.username.toLowerCase() + "_" + removeAccents(lastname).toLowerCase())
+                    }
+                    let last_character = removeAccents(req.body.username[req.body.username.length - 1]).toLowerCase()
+                    let curr_str = last_character;
+                    for (let i = 0; i < 4; i++) {
+                        s.push(removeAccents(req.body.username).toLowerCase() + curr_str)
+                        curr_str = curr_str + last_character;
+                    }
+                    errors.push("Suggest: ", s.join(", "))
+                    res.render('users/info/item/create.hbs', {
+                        errors: errors
+                    });
+                }
+            }).catch(next);
     },
 
     // [GET] /users/:id/edit
@@ -120,7 +147,7 @@ const UserController = {
                 username: req.body.username
             }))
             .then((user) => {
-            
+
                 res.render('users/info/item/edit.hbs', {
                     user: singleMongooseDocumentToObject(user),
                     notis: res.locals.notis,
@@ -131,13 +158,21 @@ const UserController = {
 
     // PATCH /users/:id
     update(req, res, next) {
-       
+
         req.body.avatar = getAvatar(req);
         if (!req.body.avatar || req.body.avatar == '') {
             const name = req.body.firstname + ' ' + req.body.lastname;
             req.body.avatar = '/img/' + name + '-default.jpg';
         }
-       
+
+        // User.findOne({_id: req.params.id})
+        //     .then((u) => {
+        //         u = singleMongooseDocumentToObject(u)
+        //         if (u.avatar.includes('-default.jpg') && u.avatar.includes('/img/')) {
+
+        //         }
+        //     })
+
         User.updateOne({
                 _id: req.params.id
             }, req.body)

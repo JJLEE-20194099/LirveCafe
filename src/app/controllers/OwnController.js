@@ -126,7 +126,7 @@ const OwnController = {
     trashNews(req, res, next) {
         News.findDeleted({})
             .then((news) => {
-                res.render('own/news/list/store.hbs', {
+                res.render('own/news/list/trash.hbs', {
                     news: mongooseDocumentsToObject(news),
                     user: res.locals.user,
                     notis: res.locals.notis,

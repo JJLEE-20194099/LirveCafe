@@ -1,3 +1,4 @@
+$valueColor: #FF424E; 
 .feedback-container {
     margin-top: 20px;
     margin-bottom: 32px;
@@ -23,3 +24,16 @@
     align-items: center;
     font-size: 18px; font-weight: bold
 }
+
+.price-value,.discount-value {
+    display: inline-block;
+    color: $valueColor;
+    font-weight: 500;
+}
+
+.discount-value {
+    border: 1px solid $valueColor;
+    font-size: 12px;
+    margin-left: 6px;
+    padding: 1px;
+}       

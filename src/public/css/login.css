@@ -90,3 +90,6 @@
   color: #f0940a;
   font-size: 20px;
   text-shadow: 2px 2px 4px #000000; }
+
+.btn-login:hover {
+  color: #ccc; }

@@ -66,6 +66,7 @@ const AuthController = {
                     res.cookie('userId', user._id, {
                         signed: true
                     })
+                    res.redirect('/')
                     
                     // const from = 'Vonage APIs'
                     // const to = '+84969973012'.replace(/\D/g,'')
@@ -88,7 +89,7 @@ const AuthController = {
                         // validToken: otpGenerator.generate(6, { upperCase: false, specialChars: false})
                     }
 
-                    return Promise.all([Book.find({}), Coffee.find({}), Food.find({}), User.findOne({username: key})])
+                    
                        // res.render('auth/2fa', {data: data});                    
                 } else {
                     errors.push('username or phone or email or password is not correct');
@@ -98,11 +99,6 @@ const AuthController = {
                        values: req.body
                     });
                 }
-            }).then(([books, coffee, food, user]) => {
-                // books = mongooseDocumentsToObject(books)
-                // coffee = mongooseDocumentsToObject(coffee)
-                // food = mongooseDocumentsToObject(food)
-                res.redirect('/');
             })
             .catch(next)
 

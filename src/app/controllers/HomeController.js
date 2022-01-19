@@ -15,7 +15,8 @@ import {
 } from '../../support_lib/noti.js'
 
 import {
-    mergeNewsAndProduct
+    mergeNewsAndProduct,
+    get_news_by_type
 } from '../../support_lib/news.js'
 
 const HomeController = {
@@ -43,24 +44,18 @@ const HomeController = {
 
                 if (bookNews) {
                     bookNews = mongooseDocumentsToObject(bookNews)
-                    new_products = mergeNewsAndProduct(books, bookNews)
-                    books = new_products[0]
-                    book_new = new_products[1]
+                    book_new = get_news_by_type(bookNews)
                 }
 
                 if (coffeeNews) {
                     coffeeNews = mongooseDocumentsToObject(coffeeNews)
-                    new_products = mergeNewsAndProduct(coffee, coffeeNews)
-                    coffee = new_products[0]
-                    coffee_new = new_products[1]
+                    coffee_new = get_news_by_type(coffeeNews)
                 }
 
 
                 if (foodNews) {
                     foodNews = mongooseDocumentsToObject(foodNews)
-                    new_products = mergeNewsAndProduct(food, foodNews)
-                    food = new_products[0]
-                    food_new = new_products[1]
+                    food_new = get_news_by_type(foodNews)
                 }
 
 

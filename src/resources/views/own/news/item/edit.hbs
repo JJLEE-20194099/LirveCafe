@@ -23,31 +23,56 @@
 <p>{{this}}</p>
 {{/each}}
 
+<input type="text" id="news_id" value="{{news._id}}" style="display: none">
+
 <div class="mt-4">
     <h3>Thêm các tin mới cho cửa hàng của bạn</h3>
 
     <form id="form" enctype="multipart/form-data">
         <div class="form-group">
             <label for="discountPercentage">Giới hạn số phần trăm giảm giá</label>
-            <input type="text" class="form-control" id="discountPercentage" name="discountPercentage">
+            <input type="text" class="form-control" id="discountPercentage" name="discountPercentage"
+                value={{news.discountPercentage}}>
         </div>
         <div class="form-group">
             <div for="description">Đối tượng áp dụng</div>
-            <input type="radio" id="book" name="applicableObject" value="0">
-            <label for="book">Sách</label><br>
+            {{#ifCond news.applicableObject 0}}
+            <input type="radio" id="book" name="applicableObject" value="0" checked>
+            <label class="label-radio" for="book">Sách</label><br>
             <input type="radio" id="coffee" name="applicableObject" value="1">
-            <label for="coffee">Coffee</label><br>
+            <label class="label-radio" for="coffee">Coffee</label><br>
             <input type="radio" id="food" name="applicableObject" value="2">
-            <label for="food">Đồ ăn</label>
+            <label class="label-radio" for="food">Đồ ăn</label>
+            {{/ifCond}}
+            {{#ifCond news.applicableObject 1}}
+            <input type="radio" id="book" name="applicableObject" value="0">
+            <label class="label-radio" for="book">Sách</label><br>
+            <input type="radio" id="coffee" name="applicableObject" value="1" checked>
+            <label class="label-radio" for="coffee">Coffee</label><br>
+            <input type="radio" id="food" name="applicableObject" value="2">
+            <label class="label-radio" for="food">Đồ ăn</label>
+            {{/ifCond}}
+
+            {{#ifCond news.applicableObject 2}}
+            <input type="radio" id="book" name="applicableObject" value="0">
+            <label class="label-radio" for="book">Sách</label><br>
+            <input type="radio" id="coffee" name="applicableObject" value="1">
+            <label class="label-radio" for="coffee">Coffee</label><br>
+            <input type="radio" id="food" name="applicableObject" value="2" checked>
+            <label class="label-radio" for="food">Đồ ăn</label>
+            {{/ifCond}}
+
+
         </div>
         <div class="form-group">
             <label for="condition">Điều kiện áp dụng (Sản phẩm có số tiền trên)</label>
-            <input type="text" class="form-control" id="condition" name="condition">
+            <input type="text" class="form-control" id="condition" name="condition" value={{news.condition}}>
         </div>
 
         <div class="form-group">
             <label for="sum_items_during_saleoff">Số lượng của sản phẩm trong đợt giảm giá này </label>
-            <input type="text" class="form-control" id="sum_items_during_saleoff" name="sum_items_during_saleoff">
+            <input type="text" class="form-control" id="sum_items_during_saleoff" name="sum_items_during_saleoff"
+                value={{news.sum_items_during_saleoff}}>
         </div>
 
         <div class="form-group">
@@ -58,21 +83,25 @@
         <div id="basic-info">
             <div class="start-time col col-6" style="padding-left: 0; margin-bottom: 12px">
                 <span>Ngày bắt đầu đợt giảm giá</span>
-                <input type="datetime-local" />
+                <input type="datetime-local" value="{{news.eventStartDate}}T{{news.eventStartTime}}" />
 
             </div>
             <div class="end-time col col-6" style="padding-left: 0; margin-bottom: 12px">
                 <span>Ngày kết thúc đợt giảm giá</span>
-                <input type="datetime-local" />
+                <input type="datetime-local" value="{{news.eventEndDate}}T{{news.eventEndTime}}" />
 
             </div>
         </div>
 
-        <button id="btn-submit" class="btn btn-primary">Thêm mới tin</button>
+        <button id="btn-submit" class="btn btn-primary">Chỉnh sửa mới tin</button>
     </form>
 </div>
 
 <div id="notice">
+
+</div>
+
+<div id="unchanged-notice">
 
 </div>
 
@@ -95,6 +124,34 @@
 
     $(document).ready(function () {
 
+        $(':radio:not(:checked)').attr('disabled', true);
+        
+
+        for (let radio of document.querySelectorAll('.label-radio')) {
+            radio.addEventListener("click", function () {
+                $("#unchanged-notice").html(`<button  id="unchanged-notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#unchanged-form" style="display: none"> See Modal with Form </button>
+                                                <div class="modal fade" id="unchanged-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: #837542; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);">
+                                                            <h5 style="text-align: center; margin-bottom: 12px; color: #a2ddfd">Lỗi chỉnh sửa</h5>
+                                                            <h5 style="text-align: center; color: #a2ddfd">Bạn không thể chỉnh sửa thông tin cố định này</h5>
+                                                            <div class="d-flex align-items-center justify-content-center">
+                                                            <img src="/img/sorry_yellow.png" style="text-align: center; color: #b78908; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2); height: 300px; width: 300px" class="" />
+                                                            </div>
+                                                            <a class="r3 px-md-5 px-sm-1" style="text-align: center; color: white; margin-top: 12px; margin-bottom: 12px" href="/news/create">Bạn muốn tạo một đợt giảm giá mới</a>
+                                                            <div class="text-center mb-3"> <button id="unchanged-continue" class="btn w-50 rounded-pill b1" style="background-color: #8daee1; color: white">Tiếp tục chỉnh sửa</button> </div>
+                                                        </div>
+                                                    </div>
+                                                </div>`)
+
+                $("#unchanged-notice-btn").click()
+                $("#unchanged-continue").click(function () {
+                    $("#unchanged-form").click()
+                })
+            })
+        }
+
+       
         $('#btn-submit').click(function (e) {
 
             e.preventDefault();
@@ -109,7 +166,10 @@
                 discountPercentage: $('#discountPercentage').val(),
                 applicableObject: $("input[type='radio']:checked").val(),
                 condition: $('#condition').val(),
+                _id: $('#news_id').val()
             }
+
+           
 
             var formData = new FormData()
             formData.append('eventStartDate', data.eventStartDate)
@@ -119,11 +179,12 @@
             formData.append('image', data.image)
             formData.append('sum_items_during_saleoff', data.sum_items_during_saleoff)
             formData.append('discountPercentage', parseInt(data.discountPercentage))
-            formData.append('applicableObject', parseInt(data.applicableObject))
+            formData.append('applicableObject', parseInt(data.applicableObject)) 
             formData.append('condition', parseInt(data.condition))
+            formData.append('_id', data._id)
 
             $.ajax({
-                url: "/news/save",
+                url: `/news/${$('#news_id').val()}/edit`,
                 method: "POST",
                 data: formData,
                 processData: false,
@@ -131,19 +192,19 @@
                 success: function (res) {
                     console.log(res["currNews"])
                     if (res["status"])
-                        window.location.href =`/own/stored/news`;
+                        window.location.href = `/own/stored/news`;
                     else {
                         $("#notice").html(`<button id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#notice-form" style="display: none"> See Modal with Form </button>
                                                 <div class="modal fade" id="notice-form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                                         <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: #837542; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2);">
-                                                            <h5 style="text-align: center; margin-bottom: 12px; color: wheat">Đang diễn ra sự kiện <span style="color: #a2ddfd">giảm giá tới <span style="font-weight: bold; color: wheat">${res["currNews"].discountPercentage}%</span> cho các loại ${res["type"]} bắt đầu từ <span style="font-weight: bold; color: wheat">${res["currNews"].eventStartTime} ${res["currNews"].eventStartDate}</span> đến  <span style="font-weight: bold; color: wheat">${res["currNews"].eventEndTime} ${res["currNews"].eventEndDate}</span></span></h5>
+                                                            <h5 style="text-align: center; margin-bottom: 12px; color: wheat">Đang diễn ra sự kiện<span style="color: #a2ddfd">giảm giá tới <span style="font-weight: bold; color: wheat">${res["currNews"].discountPercentage}%</span> cho các loại ${res["type"]} bắt đầu từ <span style="font-weight: bold; color: wheat">${res["currNews"].eventStartTime} ${res["currNews"].eventStartDate}</span> đến  <span style="font-weight: bold; color: wheat">${res["currNews"].eventEndTime} ${res["currNews"].eventEndDate}</span></span></h5>
                                                             <h5 style="text-align: center; color: #a2ddfd">Xin lỗi bạn vì sự bất tiện này</h5>
                                                             <div class="d-flex align-items-center justify-content-center">
                                                             <img src="/img/sorry_red.png" style="text-align: center; color: #b78908; box-shadow: 0 4px 8px 0 rgb(0, 0, 0 / 20%), 0 6px 20px 0 rgb(34, 2, 2); height: 300px; width: 300px" class="" />
                                                             </div>
                                                             <p class="r3 px-md-5 px-sm-1" style="text-align: center; color: white">Bạn có đặt sự kiện cho ${res["type"]} sau khi kết thúc sự kiên này</p>
-                                                            <div class="text-center mb-3"> <button id="continue" class="btn w-50 rounded-pill b1" style="background-color: #8daee1; color: white">Tạo tin tức khác</button> </div>
+                                                            <div class="text-center mb-3"> <button id="continue" class="btn w-50 rounded-pill b1" style="background-color: #8daee1; color: white">Tiếp tục chỉnh sửa</button> </div>
                                                         </div>
                                                     </div>
                                                 </div>`)

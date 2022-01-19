@@ -3,8 +3,7 @@ import Book from '../app/models/Book.js';
 import Food from '../app/models/Food.js';
 import Coffee from '../app/models/Coffee.js';
 
-export const mergeNewsAndProduct = function(products, news) {
-
+export const get_news_by_type = function(news) {
     var get_new = null;
 
     for (let item of news) {
@@ -43,6 +42,15 @@ export const mergeNewsAndProduct = function(products, news) {
         }
     
     }
+    return get_new
+
+}
+
+export const mergeNewsAndProduct = function(products, news) {
+
+    var get_new = null;
+
+    get_new = get_news_by_type(news)
 
     const items = []
 
@@ -76,6 +84,88 @@ export const mergeNewsAndProduct = function(products, news) {
     
 }
 
+export const updateNewsAndMergeNewsAndProduct = function(products, news) {
+
+    var get_new = null;
+
+    get_new = get_news_by_type(news)
+
+    const items = []
+
+
+    for (let product of products) {
+
+       
+
+       
+        if (!get_new || product.price < get_new.condition * 1000) {
+
+            product["saleoff_status"] = 0;
+            product["saleoff_price"] = 0;
+            product["no_sold"] += product["no_sold_during_saleoff"]
+            product["no_sold_during_saleoff"] = 0
+            product["discountPercentage"] = 0
+            if(product["sum_items_during_saleoff"])
+                product["quantity"] += parseInt(product["sum_items_during_saleoff"])
+            product["sum_items_during_saleoff"] = 0
+            if (product["eventStartTime"]) {
+                delete product["eventStartTime"]
+            }
+            if (product["eventStartDate"]) {
+                delete product["eventStartDate"]
+            }
+            if (product["eventEndTime"]) {
+                delete product["eventEndTime"]
+            }
+            if (product["eventEndDate"]) {
+                delete product["eventEndDate"]
+            }
+
+            if (!product["quantity"]) {
+                console.log('1')
+                console.log(product)
+            }
+
+            items.push(product);
+
+            continue;
+        }
+
+        let discountPercentage = Math.floor(Math.random() * get_new.discountPercentage) + 1
+
+        
+
+        let new_product = {
+            ...product,
+            "discountPercentage": discountPercentage,
+            "eventStartTime": get_new.eventStartTime,
+            "eventStartDate": get_new.eventStartDate,
+            "eventEndTime": get_new.eventEndTime,
+            "eventEndDate": get_new.eventEndDate,
+            "saleoff_price": parseInt(product.price * (1 - discountPercentage / 100)),
+            "saleoff_status": 1,
+            "sum_items_during_saleoff": get_new.sum_items_during_saleoff,
+            "quantity":  product.quantity + product.sum_items_during_saleoff - get_new.sum_items_during_saleoff,
+            "no_sold_during_saleoff": 0,
+            "no_sold": product.no_sold + product.no_sold_during_saleoff
+           
+        }
+
+        if(!new_product["quantity"]) {
+            console.log("2")
+            console.log(new_product["quantity"])
+        }
+
+    
+        items.push(new_product)
+    }
+    return [items, get_new];
+    
+}
+
+
+
+
 export const getUpdateSaleoffPromises = function(books, coffee, food) {
     const res = []
 
@@ -91,13 +181,16 @@ export const getUpdateSaleoffPromises = function(books, coffee, food) {
     for (let item of food) {
         res.push(() => Food.updateOne({_id: item._id}, item))
     }
-    console.log(res)
     return res;
 }
 
 export const check_intersection_news = function(newsEle, allNews) {
     let get_new;
     for (let item of allNews) {
+        if(item._id.toString() == newsEle._id.toString()) {
+            continue;
+        }
+
         var eventEndTime = item.eventEndTime
         var eventEndDate = item.eventEndDate
 
@@ -149,4 +242,67 @@ export const check_intersection_news = function(newsEle, allNews) {
         }
     }
     return [false, null];
+}
+
+export const deleteNewsAndUpdateProducts = function(products, news, deletedNews) {
+
+    var get_new = null;
+
+    get_new = get_news_by_type(news)
+
+    const items = []
+
+
+    for (let product of products) {
+
+        if (product.price >= deletedNews.condition*1000) {
+            product["saleoff_status"] = 0;
+            product["saleoff_price"] = 0;
+            product["no_sold"] += product["no_sold_during_saleoff"]
+            product["no_sold_during_saleoff"] = 0
+            product["discountPercentage"] = 0
+            if(product["sum_items_during_saleoff"])
+                product["quantity"] += parseInt(product["sum_items_during_saleoff"])
+            product["sum_items_during_saleoff"] = 0
+            if (product["eventStartTime"]) {
+                delete product["eventStartTime"]
+            }
+            if (product["eventStartDate"]) {
+                delete product["eventStartDate"]
+            }
+            if (product["eventEndTime"]) {
+                delete product["eventEndTime"]
+            }
+            if (product["eventEndDate"]) {
+                delete product["eventEndDate"]
+            }
+        }
+
+
+
+       
+        if (!get_new || get_new.condition*1000 > product.price) {
+            items.push(product);
+            continue;
+        }
+
+        let discountPercentage = Math.floor(Math.random() * get_new.discountPercentage) + 1
+
+        let new_product = {
+            ...product,
+            "discountPercentage": discountPercentage,
+            "eventStartTime": get_new.eventStartTime,
+            "eventStartDate": get_new.eventStartDate,
+            "eventEndTime": get_new.eventEndTime,
+            "eventEndDate": get_new.eventEndDate,
+            "saleoff_price": parseInt(product.price * (1 - discountPercentage / 100)),
+            "saleoff_status": 1,
+            "sum_items_during_saleoff": get_new.sum_items_during_saleoff,
+            "quantity": product.quantity - get_new.sum_items_during_saleoff
+           
+        }
+        items.push(new_product)
+    }
+    return [items, get_new];
+    
 }
