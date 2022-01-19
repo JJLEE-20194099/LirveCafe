@@ -9,12 +9,11 @@ import {
 } from '../../support_lib/mongoose.js';
 
 import {
-    getUpdateSaleoffPromises
-} from '../../support_lib/news.js';
-
-import {
+    getUpdateSaleoffPromises,
+    check_intersection_news,
     mergeNewsAndProduct
 } from '../../support_lib/news.js';
+
 
 const NewsController = {
 
@@ -54,7 +53,30 @@ const NewsController = {
     save(req, res, next) {
         req.body.image = '/' + req.file.path.split('\\').slice(2).join('/');
         const news = new News(req.body);
-        news.save()
+        var flag = 1;
+        News.find({applicableObject:req.body.applicableObject})
+            .then((allNews) => {
+                if(allNews)
+                    allNews = mongooseDocumentsToObject(allNews)
+                let checkData = check_intersection_news(req.body, allNews)
+                console.log(checkData)
+                if (!checkData[0])
+                    return news.save()
+                else {
+                    let currNews = checkData[1]
+                    flag = 0;
+                    if(req.body.applicableObject == 0) {
+                        res.status(200).json({status: 0, currNews: currNews, type: "sách"})
+                    } else if(req.body.applicableObject == 1) {
+                        
+                        res.status(200).json({status: 0, currNews: currNews, type: "cafe"})
+                    } else {
+                        res.status(200).json({status: 0, currNews: currNews, type: "đồ ăn"})
+                        
+                    }
+                
+                }
+            })
             .then(() => {
                 return Promise.all([Book.find({}), Coffee.find({}), Food.find({}), User.findOne({
                     _id: req.signedCookies.userId
@@ -94,8 +116,15 @@ const NewsController = {
                 return Promise.all(updateSaleoffPromises.map(promise => promise()))
 
             })
-            .then((_) => {
-                res.send({status: "success"})
+            .then((_) => { 
+                if(flag) {
+                    res.status(200).json({
+                        status: 1,
+                       
+                      })
+                }
+                
+               
             })
             .catch(next);
     },

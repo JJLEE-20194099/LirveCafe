@@ -14,7 +14,7 @@ export const getUpdateProductWarehousePromise = function(orders) {
                 updatePromises.push(() => Food.updateOne({_id: food._id}, food))
             } else {
                 food = item.food;
-                food.no_sold_during_saleoff = item.quantity
+                food.no_sold_during_saleoff = food.no_sold_during_saleoff + item.quantity
                 food.sum_items_during_saleoff = food.sum_items_during_saleoff - item.quantity
                 updatePromises.push(() => Food.updateOne({_id: food._id}, food))
             }
@@ -28,7 +28,7 @@ export const getUpdateProductWarehousePromise = function(orders) {
                 updatePromises.push(() => Coffee.updateOne({_id: coffee._id}, coffee))
             } else {
                 coffee = item.coffee;
-                coffee.no_sold_during_saleoff = item.quantity
+                coffee.no_sold_during_saleoff = coffee.no_sold_during_saleoff + item.quantity
                 coffee.sum_items_during_saleoff = coffee.sum_items_during_saleoff - item.quantity
                 updatePromises.push(() => Coffee.updateOne({_id: coffee._id}, coffee))
             }
@@ -41,7 +41,7 @@ export const getUpdateProductWarehousePromise = function(orders) {
                 updatePromises.push(() => Book.updateOne({_id: book._id}, book))
             } else {
                 book = item.book;
-                book.no_sold_during_saleoff = item.quantity
+                book.no_sold_during_saleoff =  book.no_sold_during_saleoff + item.quantity
                 book.sum_items_during_saleoff = book.sum_items_during_saleoff - item.quantity
                 updatePromises.push(() => Book.updateOne({_id: book._id}, book))
             }

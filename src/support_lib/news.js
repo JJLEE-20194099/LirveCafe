@@ -94,3 +94,59 @@ export const getUpdateSaleoffPromises = function(books, coffee, food) {
     console.log(res)
     return res;
 }
+
+export const check_intersection_news = function(newsEle, allNews) {
+    let get_new;
+    for (let item of allNews) {
+        var eventEndTime = item.eventEndTime
+        var eventEndDate = item.eventEndDate
+
+        var minute_end = eventEndTime.split(":")[1]
+        var hour_end = eventEndTime.split(":")[0]
+        var second_end = 0
+        var year_end = eventEndDate.split("-")[0]
+        var month_end = eventEndDate.split("-")[1]
+        var day_end = eventEndDate.split("-")[2]
+
+        let datum = new Date(Date.UTC(year_end, month_end,day_end, hour_end, minute_end, second_end));
+        var timestamp_end = datum.getTime()
+
+        var eventStartTime = item.eventStartTime
+        var eventStartDate = item.eventStartDate
+
+        var minute_start = eventStartTime.split(":")[1]
+        var hour_start = eventStartTime.split(":")[0]
+        var second_start = 0
+        var year_start = eventStartDate.split("-")[0]
+        var month_start = eventStartDate.split("-")[1]
+        var day_start = eventStartDate.split("-")[2]
+
+        datum = new Date(Date.UTC(year_start, month_start,day_start, hour_start, minute_start, second_start));
+        var timestamp_start = datum.getTime()
+
+        var date_now = new Date()
+        datum = new Date(Date.UTC(date_now.getFullYear().toString(), (date_now.getMonth() + 1).toString(),date_now.getDate().toString(), (date_now.getHours()).toString(), date_now.getMinutes().toString(), date_now.getSeconds().toString()));
+        var timestamp_now = datum.getTime()
+
+        let eventStartTimeEle = newsEle.eventStartTime
+        let eventStartDateEle = newsEle.eventStartDate
+
+        minute_start = eventStartTimeEle.split(":")[1]
+        hour_start = eventStartTimeEle.split(":")[0]
+        second_start = 0
+        year_start = eventStartDateEle.split("-")[0]
+        month_start = eventStartDateEle.split("-")[1]
+        day_start = eventStartDateEle.split("-")[2]
+
+        datum = new Date(Date.UTC(year_start, month_start,day_start, hour_start, minute_start, second_start));
+        var timestamp_news_ele = datum.getTime()
+
+       
+
+        if ( timestamp_now <= timestamp_end && timestamp_now >= timestamp_start && timestamp_news_ele <= timestamp_end) {
+            get_new = item;
+            return [true, get_new];
+        }
+    }
+    return [false, null];
+}

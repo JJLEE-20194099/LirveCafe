@@ -83,7 +83,7 @@ const HomeController = {
                         food: food,
                         notis: res.locals.notis,
                         workingspaces: workingspaces,
-                        book_new,
+                        book_new: book_new,
                         coffee_new:coffee_new,
                         food_new:food_new,
                         no_new_notis: getNoNewNotis(res.locals.notis)
@@ -97,7 +97,7 @@ const HomeController = {
                         notis: res.locals.notis,
                         cart: res.locals.cart,
                         workingspaces: workingspaces,
-                        ook_new:book_new,
+                        book_new:book_new,
                         coffee_new:coffee_new,
                         food_new:food_new,
                         no_new_notis: getNoNewNotis(res.locals.notis)

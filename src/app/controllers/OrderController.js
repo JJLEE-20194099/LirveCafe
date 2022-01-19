@@ -119,6 +119,51 @@ const OrderController = {
             }).catch(next)
 
     },
+
+    // GET /orders/item?itemId=
+
+    getEachItemInOrders(req, res, next) {
+        const itemIdQuery = req.query.itemId;
+        const item_id_arr = itemIdQuery.split("-")
+        const itemId = item_id_arr[1]
+        const orderId = item_id_arr[0]
+        var all_orders;
+        var item;
+        Orders.findOne({_id: orderId})
+            .then((order) => {
+                order = singleMongooseDocumentToObject(order)
+                all_orders = order;
+        
+                const itemList = order.itemList
+                for (var i = 0; i < itemList.length; i++) {
+                    if (itemList[i].food) {
+                        if (itemList[i].food._id.toString() == itemId) {
+                            item = order.itemList[i]
+                        }
+                    } else if (itemList[i].coffee) {
+                        if (itemList[i].coffee._id.toString() == itemId) {
+                            item = order.itemList[i]
+                        }
+                    } else if (itemList[i].book) {
+                        if (itemList[i].book._id.toString() == itemId) {
+                            item = order.itemList[i]
+                        }
+                    }
+                }
+                
+                if (all_orders.promoId)
+                    return Promise.all([Promo.findById(updatedOrder.promoId)])
+                else return Promise.all([Promo.findById(null)])
+                
+               
+            }).then(([_, promo]) => {
+                if(promo) {
+                    promo = singleMongooseDocumentToObject(promo)
+                }
+                res.render("orders/item/each_order_info.hbs", {item: item, order: all_orders, promo: promo})
+            }).catch(next)
+    },
+
     // SOFT DELETE /orders/:id
     softDelete(req, res, next) {
         Orders.delete({
