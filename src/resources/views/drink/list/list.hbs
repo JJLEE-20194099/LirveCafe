@@ -169,13 +169,14 @@
   </div>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/datetime_handling.js"></script>
 <script>
-  const $ = document.querySelector.bind(document);
-  const $$ = document.querySelectorAll.bind(document);
+  const $_1 = document.querySelector.bind(document);
+  const $$_1 = document.querySelectorAll.bind(document);
 
-  const filterList = $('.product-filter')
-  const filterItems = $$('.product-filter li')
+  const filterList = $_1('.product-filter')
+  const filterItems = $$_1('.product-filter li')
 
 
 
@@ -183,7 +184,7 @@
 
     element.onclick = function () {
 
-      var activeItem = $('.product-filter li.active')
+      var activeItem = $_1('.product-filter li.active')
 
       activeItem.classList.remove('active')
 

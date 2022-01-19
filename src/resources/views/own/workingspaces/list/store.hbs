@@ -3,7 +3,11 @@
 <div class="container">
     <div class="mt-4">
         <div class="header">
-            <h3>Workingspaces in LivreCafé</h3>
+            <h3>Sự kiện tại livrecafé</h3>
+            <span><a href="/workingspaces/create" style="font-size: 16px; font-weight: 500;">Tạo sự kiện</a></span>
+            {{#ifCond user.role 1}}
+            <a href="/own/trash/workingspaces">Thùng rác ({{deletedCount}})</a>
+            {{/ifCond}}
         </div>
 
         <table class="table mt-4">
@@ -11,8 +15,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Price</th>
-                    <th scope="col" colspan="2">Thời gian tạo</th>
+                    <th scope="col">Tổng chi phí</th>
+                    <th scope="col" colspan="2">Thời gian xảy ra xử kiện</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,42 +27,24 @@
                     <td>
                         {{this.total}}đ
                     </td>
-                    <td class="date">{{this.createdAt}}</td>
+                    <td>{{this.eventStartDate}} {{this.eventStartTime}} - {{this.eventEndDate}} {{this.eventEndTime}}
+                    </td>
                     <td class="btn-group">
-                        <button type="button" class="btn btn-outline-success" data-toggle="modal"
-                            data-target="#{{this._id}}">Xem</button>
-                        <div class="modal fade" id="{{this._id}}" tabindex="-1" role="dialog"
-                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content py-md-5 px-md-4 p-sm-3 p-4" style="background-color: white;">
-                                    <div class="item-info">
-                                        <div>
-                                            <img src="{{this.avatar}}" alt="" class="img-admin">
-                                        </div>
-
-                                        <div>
-                                            <div>
-                                                <h3>{{this.title}}</h3>
-                                            </div>
-                                            <div>
-                                                <p>Giá: {{this.total}}đ</p>
-                                                <p>Số chỗ ngồi: {{this.no_seating}}</p>
-                                                <p>Ngày bắt đầu: {{this.eventStartTime}} {{this.eventStartDate}}</p>
-                                                <p>Ngày kết thúc: {{this.eventEndTime}} {{this.eventEndDate}}</p>
-                                                <a href="/workingspaces/{{this.slug}}">Xem chi tiết tại đây</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="/workingspaces/{{this.slug}}" class="btn btn-outline-success" >Xem</a>
+                        {{#ifCond user.role 0}}
+                        <a href="/workingspaces/{{this.slug}}" class="btn btn-outline-primary">Sửa</a>
+                        {{/ifCond}}
+                        <button href="" class="btn btn-outline-warning" data-toggle="modal" data-id="{{this._id}}"
+                            data-target="#delete-book-modal">Xóa</button>
                     </td>
                 </tr>
                 {{else}}
                 <tr>
                     <td colspan="5" class="text-center">
-                        Quán chưa có sự kiện nào.
+                        Chưa có sự kiện nào.
+                        
                         <a href="/">Quay về trang chủ</a>
+                        
                     </td>
                 </tr>
                 {{/each}}
@@ -81,13 +67,13 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Xóa book?</h5>
+                    <h5 class="modal-title">Xóa sự kiện?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Bạn chắc chắn muốn xóa cuốn sách này?</p>
+                    <p>Bạn chắc chắn muốn xóa sự kiện này?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
@@ -99,63 +85,61 @@
 
     {{!-- Delete hidden form --}}
     <form name="delete-book-form" method="POST"></form>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="/js/datetime_handling.js"></script>
-    <script>
-
-
-
-        $(document).ready(function () {
-            var bookId;
-            var deleteForm = document.forms['delete-book-form'];
-            var btnDeleteBook = document.getElementById('btn-delete-book');
-
-
-            // When dialog confirm clicked
-            $('#delete-book-modal').on('show.bs.modal', function (book) {
-
-                var button = $(book.relatedTarget);
-                bookId = button.data('id');
-                console.log(bookId)
-            });
-
-            // When delete book btn clicked
-            btnDeleteBook.onclick = function () {
-                deleteForm.action = '/workingspaces/' + bookId + '?_method=DELETE';
-                deleteForm.submit();
-            }
-
-            $(".item-for-loadmore").slice(0, 4).show();
-            $("#loadMore").on('click', function (e) {
-                e.preventDefault();
-                $(".item-for-loadmore:hidden").slice(0, 4).slideDown();
-                if ($(".item-for-loadmore:hidden").length == 0) {
-                    $("#load").fadeOut('slow');
-                }
-                $('html,body').animate({
-                    scrollTop: $(this).offset().top
-                }, 1500);
-            });
-
-            $('#top').click(function () {
-                $('body,html').animate({
-                    scrollTop: 0
-                }, 600);
-                return false;
-            });
-
-
-        });
-
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 50) {
-                $('.totop a').fadeIn();
-            } else {
-                $('.totop a').fadeOut();
-            }
-        });
-    </script>
 </div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="/js/datetime_handling.js"></script>
+<script>
+    $(document).ready(function () {
+        var bookId;
+        var deleteForm = document.forms['delete-book-form'];
+        var btnDeleteBook = document.getElementById('btn-delete-book');
+
+
+        // When dialog confirm clicked
+        $('#delete-book-modal').on('show.bs.modal', function (book) {
+
+            var button = $(book.relatedTarget);
+            bookId = button.data('id');
+            console.log(bookId)
+        });
+
+        // When delete book btn clicked
+        btnDeleteBook.onclick = function () {
+            deleteForm.action = '/workingspaces/' + bookId + '?_method=DELETE';
+            deleteForm.submit();
+        }
+
+        $(".item-for-loadmore").slice(0, 4).show();
+        $("#loadMore").on('click', function (e) {
+            e.preventDefault();
+            $(".item-for-loadmore:hidden").slice(0, 4).slideDown();
+            if ($(".item-for-loadmore:hidden").length == 0) {
+                $("#load").fadeOut('slow');
+            }
+            $('html,body').animate({
+                scrollTop: $(this).offset().top
+            }, 1500);
+        });
+
+        $('#top').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
+
+    });
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 50) {
+            $('.totop a').fadeIn();
+        } else {
+            $('.totop a').fadeOut();
+        }
+    });
+
+</script>

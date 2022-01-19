@@ -18,6 +18,7 @@ router.get('/trash/users', controllers.trashUsers);
 router.get('/trash/news', controllers.trashNews);
 router.get('/trash/promos', controllers.trashPromos);
 router.get('/trash/food', controllers.trashFood);
+router.get('/trash/workingspaces', controllers.trashWorkingspaces);
 router.get('/trash/orders', controllers.trashOrders);
 
 export default router;

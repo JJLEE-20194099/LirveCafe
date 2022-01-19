@@ -115,7 +115,7 @@
     </div>
     <!--/.Carousel Wrapper-->
 
-     <div class="product-filter">
+    <div class="product-filter">
       <ul>
         <li class="active">
           <a href='/food/list?field=top_seller'>Bán chạy</a>
@@ -134,7 +134,7 @@
           <div class="filter-pane"></div>
         </li>
       </ul>
-    </div>  
+    </div>
 
     <div id="product-list" class="row ">
 
@@ -147,15 +147,15 @@
               <p class="card-title">{{this.name}}</p>
               <p class="card-text">{{this.description}}</p>
               <div class="item-price flex">
-                  {{#if this.saleoff_status}}
+                {{#if this.saleoff_status}}
                 <div class="price-value"><span>{{this.saleoff_price}}</span> VNĐ</div>
                 <div class="discount-value">-<span>{{this.discountPercentage}}</span>%</div>
                 {{else}}
 
                 <div class="price-value"><span>{{this.price}}</span> VNĐ</div>
-               
+
                 {{/if}}
-                
+
               </div>
             </div>
           </div>
@@ -168,13 +168,15 @@
   </div>
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/datetime_handling.js"></script>
 
 <script>
-  const $ = document.querySelector.bind(document);
-  const $$ = document.querySelectorAll.bind(document);
+  const $_1 = document.querySelector.bind(document);
+  const $$_1 = document.querySelectorAll.bind(document);
 
-  const filterList = $('.product-filter')
-  const filterItems = $$('.product-filter li')
+  const filterList = $_1('.product-filter')
+  const filterItems = $$_1('.product-filter li')
 
 
 
@@ -182,7 +184,7 @@
 
     element.onclick = function () {
 
-      var activeItem = $('.product-filter li.active')
+      var activeItem = $_1('.product-filter li.active')
 
       activeItem.classList.remove('active')
 

@@ -29,11 +29,11 @@
         <div class="info row">
             <div class="name col col-6">
                 <span>Họ và tên</span>
-                <input type="text" value="{{workingspace.eventBooker}}"/>
+                <input type="text" value="{{workingspace.eventBooker}}" />
             </div>
             <div class="phoneNum col col-6">
                 <span>Số điện thoại</span>
-                <input type="tel" value="{{workingspace.phone}}"/>
+                <input type="tel" value="{{workingspace.phone}}" />
             </div>
             <div class="line col-12"></div>
 
@@ -51,30 +51,32 @@
 
             <div class="start-time event-time col col-6">
                 <span>Ngày bắt đầu</span>
-                <input type="text" value="{{workingspace.eventStartTime}} {{workingspace.eventStartDate}}"  class="constant" />
+                <input type="text" value="{{workingspace.eventStartTime}} {{workingspace.eventStartDate}}"
+                    class="constant" />
                 <input type="text" id="eventStartTime" value="{{workingspace.eventStartTime}}" style="display: none" />
-                <input type="text" id="eventStartDate" value="{{workingspace.eventStartTime}}" style="display: none"/>
+                <input type="text" id="eventStartDate" value="{{workingspace.eventStartTime}}" style="display: none" />
 
             </div>
             <div class="end-time  event-time col col-6">
                 <span>Ngày kết thúc</span>
-                <input type="text" value="{{workingspace.eventEndTime}} {{workingspace.eventEndDate}}"  class="constant"/>
-                 <input type="text" id="eventEndTime" value="{{workingspace.eventStartTime}}" style="display: none"/>
-                <input type="text" id="eventEndDate" value="{{workingspace.eventStartTime}}" style="display: none"/>
+                <input type="text" value="{{workingspace.eventEndTime}} {{workingspace.eventEndDate}}"
+                    class="constant" />
+                <input type="text" id="eventEndTime" value="{{workingspace.eventStartTime}}" style="display: none" />
+                <input type="text" id="eventEndDate" value="{{workingspace.eventStartTime}}" style="display: none" />
             </div>
 
             <div class="line col-12"></div>
 
             <div class="seat-num col col-6">
                 <span>Số lượng ghế</span>
-                {{!-- <button class="seat-btn decre-btn"><i class="ti-minus" ></i></button> --}}
-                <input type="text" value={{workingspace.no_seating}} class="input constant"  />
-                {{!-- <button class="seat-btn incre-btn"><i class="ti-plus" ></i></button> --}}
+                {{!-- <button class="seat-btn decre-btn"><i class="ti-minus"></i></button> --}}
+                <input type="text" value={{workingspace.no_seating}} class="input constant" />
+                {{!-- <button class="seat-btn incre-btn"><i class="ti-plus"></i></button> --}}
             </div>
 
             <div class="total-amount col col-6">
                 <span>Tổng chi phí:</span>
-                <input type="text" value="{{workingspace.total}} VNĐ" class="input constant"  />
+                <input type="text" value="{{workingspace.total}} VNĐ" class="input constant" />
             </div>
 
             <div class="line col-12"></div>
@@ -82,7 +84,7 @@
             {{#if workingspace.description}}
             <div class="description col col-12">
                 <span>Thông tin mô tả</span>
-                <textarea type="text" >{{this.description}}</textarea>
+                <textarea type="text">{{this.description}}</textarea>
             </div>
             {{/if}}
             <div class="line col-12"></div>
@@ -114,7 +116,7 @@
                             <div class="fodr-name"><span>{{this.food.name}}</span></div>
                             <div class="fodr-number">
                                 <label style="font-size: 16; font-weight: bold; margin-right: 4px">Số lượng:</label>
-                                <input type="text" value="{{this.quantity}}" class="input constant"  />
+                                <input type="text" value="{{this.quantity}}" class="input constant" />
                             </div>
                         </a>
                     </li>
@@ -138,7 +140,7 @@
 
                                 <label style="font-size: 16; font-weight: bold; margin-right: 4px">Số lượng:</label>
 
-                                <input type="text" value="{{this.quantity}}" class="input constant"  />
+                                <input type="text" value="{{this.quantity}}" class="input constant" />
 
                             </div>
                         </a>
@@ -162,14 +164,16 @@
 
     </div>
 
-    <div class="fodr-total" style="text-align: center; font-weight: bold; color: #df7509; font-size: 16px">
+    <div class="fodr-total" style="text-align: center; font-weight: bold; color: #df7509; font-size: 16px; margin-bottom: 24px">
         Tổng chi phí:
         <span>{{workingspace.total}}</span><span>VNĐ</span>
     </div>
 
+    {{#ifCond user.role 0}}
     <div class="update-event" id="update-event">
         <button>Chỉnh sửa thông tin</button>
     </div>
+    {{/ifCond}}
 </div>
 
 <div id="notice">
@@ -190,7 +194,7 @@
         var wk_id = $("#wk-id").val()
         console.log($(".constant"))
         for (var ele of $(".constant")) {
-            ele.addEventListener("click", function() {
+            ele.addEventListener("click", function () {
                 $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
                                             <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -206,10 +210,10 @@
                                                 </div>
                                             </div>`)
 
-                    $("#notice-btn").click()
-                    $("#continue").click(function () {
-                        $("#form").click()
-                    })
+                $("#notice-btn").click()
+                $("#continue").click(function () {
+                    $("#form").click()
+                })
             })
         }
 
@@ -225,9 +229,9 @@
                 },
                 success: function (res) {
                     if (res["check"]) {
-                        window.location.href =`/workingspaces/${wk_id}/edit`;
+                        window.location.href = `/workingspaces/${wk_id}/edit`;
                     } else {
-                        
+
                     }
                 },
                 error: function (error) {

@@ -169,11 +169,11 @@
 
                     <div class="reply-container">
                         <div class="replyForm">
-                            <input type="text" name="username" class="user pt-2" id="username" value={{user.username}}
+                            <input type="text" name="username" class="user pt-2" id="username" value="{{user.username}}"
                                 readonly style="display: none">
-                            <input type="text" name="me_avatar" id="me_avatar" value={{user.avatar}}
+                            <input type="text" name="me_avatar" id="me_avatar" value="{{user.avatar}}"
                                 style="display: none">
-                            <input type="text" name="me_avatar" id="user_avatar" value={{user.avatar}}
+                            <input type="text" name="me_avatar" id="user_avatar" value="{{user.avatar}}"
                                 style="display: none">
                             <span class="round"><img src="{{user.avatar}}" class="align-self-start mr-3"
                                     style="border-radius: 50%; height: 36px; width: 36px"></span>
@@ -232,12 +232,12 @@
 
                         <div class="reply-container" style="display: none">
                             <div class="replyForm">
-                                <input type="text" name="me_avatar" id="me_avatar" value={{../user.avatar}}
+                                <input type="text" name="me_avatar" id="me_avatar" value="{{../user.avatar}}"
                                     style="display: none">
                                 <span class="round"><img src="{{../user.avatar}}" class="align-self-start mr-3"
                                         style="border-radius: 50%; height: 36px; width: 36px"></span>
                                 <div class="reply-input">
-                                    <input type="text" name="me" id="me" value={{../user.username}}
+                                    <input type="text" name="me" id="me" value="{{../user.username}}"
                                         style="display: none">
                                     <input type="text" name="reply" id="reply" onkeyup="changeBtnStatus(this)">
                                     <input name="commentId" id="commentId" value="{{this._id}}" style="display: none">
@@ -581,12 +581,12 @@
                     </div>
                     <div class="reply-container" style="display: none">
                         <div class="replyForm">
-                            <input type="text" name="me_avatar" id="me_avatar" value=${data.avatar}
+                            <input type="text" name="me_avatar" id="me_avatar" value="${data.avatar}"
                                 style="display: none">
                             <span class="round"><img src=${data.avatar} class="align-self-start mr-3"
                                     style="border-radius: 50%; height: 36px; width: 36px"></span>
                             <div class="reply-input">
-                                <input type="text" name="me" id="me" value=${data.username} style="display: none">
+                                <input type="text" name="me" id="me" value="${data.username}" style="display: none">
                                 <input type="text" name="reply" id="reply" onkeyup="changeBtnStatus(this)">
                                 <input name="commentId" id="commentId" value="${data._id}" style="display: none">
 

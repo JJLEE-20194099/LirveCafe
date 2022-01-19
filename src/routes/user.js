@@ -50,8 +50,8 @@ router.delete('/:id/force', controllers.deepDelete);
 router.get('/:username/register_loyal_member', controllers.registerLoyalMemeberIndex)
 router.post('/:username/register_loyal_member', controllers.postRegisterLoyalMemeber)
 
-router.get('/stored/workingspaces', ownControllers.storedWorkingspaces);
-router.get('/trash/workingspaces', ownControllers.trashWorkingspaces);
+router.get('/stored/workingspaces', ownControllers.storedWorkingspacesUser);
+router.get('/trash/workingspaces', ownControllers.trashWorkingspacesUser);
 
 router.get('/stored/Orders', ownControllers.storedOrders);
 router.get('/trash/Orders', ownControllers.trashOrders);

@@ -138,8 +138,21 @@ const OwnController = {
     // 5. Workingspaces warehouse
 
     // GET own/stored/workingspaces
-    storedWorkingspaces(req, res, next) {
-        Promise.all([Event.find({}), Event.countDocumentsDeleted()])
+    storedWorkingspacesUser(req, res, next) {
+        if(req.query.username) {
+
+            Workingspace.find({username: req.query.username})
+            .then((workingspaces) => {
+                res.render('own/workingspaces/list/store.hbs', {
+                    
+                    workingspaces: mongooseDocumentsToObject(workingspaces),
+                    user: res.locals.user,
+                    notis: res.locals.notis,
+                    no_new_notis: getNoNewNotis(res.locals.notis)
+                })
+            }).catch(next);
+        } else {
+            Promise.all([Workingspace.find({}), Workingspace.countDocumentsDeleted()])
             .then(([workingspaces, deletedCount]) => {
                 res.render('own/workingspaces/list/store.hbs', {
                     deletedCount,
@@ -149,11 +162,13 @@ const OwnController = {
                     no_new_notis: getNoNewNotis(res.locals.notis)
                 })
             }).catch(next);
+        }
+        
     },
 
     // GET own/trash/workingspaces
-    trashWorkingspaces(req, res, next) {
-        Event.findDeleted({})
+    trashWorkingspacesUser(req, res, next) {
+        Workingspace.findDeleted({})
             .then((workingspaces) => {
                 res.render('users/workingspaces/list/trash.hbs', {
                     workingspaces: mongooseDocumentsToObject(workingspaces),
@@ -305,9 +320,9 @@ const OwnController = {
 
     // GET own/trash/workingspaces
     trashWorkingspaces(req, res, next) {
-        Workingspace.getfindDeleted({})
+        Workingspace.findDeleted({})
             .then((workingspaces) => {
-                res.render('own/workingspace/list/trash.hbs', {
+                res.render('own/workingspaces/list/trash.hbs', {
                     workingspaces: mongooseDocumentsToObject(workingspaces),
                     user: res.locals.user,
                     notis: res.locals.notis,
