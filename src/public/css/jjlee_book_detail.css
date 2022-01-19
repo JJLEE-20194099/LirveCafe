@@ -8,3 +8,15 @@
 
 .each_comment_box {
   margin-bottom: 72px; }
+
+.discount-value {
+  border: 1px solid #FF424E;
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  color: #FF424E;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold; }
