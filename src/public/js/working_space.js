@@ -390,7 +390,6 @@ $_1('#working-space .submit-order button').onclick = function (e) {
                 processData: false,
                 contentType: false,
                 success: function (res) {
-                    console.log(res)
                     if (res["check"])
                         window.location.href = `/workingspaces/${res["wk"].slug}`;
                     else {

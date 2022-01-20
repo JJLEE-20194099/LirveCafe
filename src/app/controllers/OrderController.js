@@ -56,7 +56,7 @@ const OrderController = {
             .then((o) => {
                 
                 order = singleMongooseDocumentToObject(o);
-                console.log(order)
+                // console.log(order)
                 if (order.promoId)
                     return Promo.findById(order.promoId)
                 else return  Promo.findById(null)               

@@ -56,7 +56,7 @@ const UserController = {
 
     // POST : /users/save
     save(req, res, next) {
-        console.log()
+    
         User.findOne({
                 username: req.body.username
             })

@@ -8,9 +8,8 @@ import {
 
 const AuthMiddleware = {
     requireAuth: function (req, res, next) {
-
-
-        if (!req.signedCookies) {
+        
+        if (Object.keys(req.signedCookies).length.toString() == Number(0).toString()) {
             res.redirect('/auth/index');
             return;
         }

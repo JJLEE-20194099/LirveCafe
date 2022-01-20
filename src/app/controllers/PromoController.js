@@ -90,7 +90,7 @@ const PromoController = {
                             promos = mongooseDocumentsToObject(promos);
                             users = mongooseDocumentsToObject(users);
                             var user_list_noticed = createNotiOrNot(users, promos, pro)
-                            console.log("length: ", user_list_noticed.length)
+                            // console.log("length: ", user_list_noticed.length)
                             if (user_list_noticed.length) {
                                 var us = user_list_noticed
                                 var noti_promises = []

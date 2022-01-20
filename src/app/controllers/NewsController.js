@@ -159,7 +159,6 @@ const NewsController = {
 
     // POST /news/:id
     update(req, res, next) {
-        console.log(req.body)
         if (req.file && req.file.path) {
             req.body.image = '/' + req.file.path.split('\\').slice(2).join('/');
             delete req.body.curr_image
@@ -265,7 +264,6 @@ const NewsController = {
     // SOFT DELETE /news/:id
     softDelete(req, res, next) {
         var deletedNews;
-        console.log(req.params.id)
         News.findOne({
                 _id: req.params.id
             })
