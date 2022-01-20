@@ -187,8 +187,10 @@ export const getUpdateSaleoffPromises = function(books, coffee, food) {
 export const check_intersection_news = function(newsEle, allNews) {
     let get_new;
     for (let item of allNews) {
-        if(item._id.toString() == newsEle._id.toString()) {
-            continue;
+        if(newsEle["_id"]) {
+            if(item._id.toString() == newsEle._id.toString()) {
+                continue;
+            }
         }
 
         var eventEndTime = item.eventEndTime

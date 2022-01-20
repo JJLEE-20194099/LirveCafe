@@ -11,14 +11,35 @@
       <li data-target="#carousel-example-1z" data-slide-to="1"></li>
       <li data-target="#carousel-example-1z" data-slide-to="2"></li>
       <li data-target="#carousel-example-1z" data-slide-to="3"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="4"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="5"></li>
     </ol>
     <!--/.Indicators-->
     <!--Slides-->
 
     <div class="carousel-inner" role="listbox">
-      <!--First slide-->
+
+      {{#if food_new}}
       <div class="carousel-item active">
-        <img class="d-block w-100" src="/img/home-3.jpg" alt="First slide">
+        <img class="d-block w-100" src="{{food_new.image}}" alt="First slide">
+      </div>
+      {{/if}}
+
+      {{#if book_new}}
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{{book_new.image}}" alt="First slide">
+      </div>
+      {{/if}}
+
+      {{#if coffee_new}}
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{{coffee_new.image}}" alt="First slide">
+      </div>
+      {{/if}}
+
+      <!--First slide-->
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/img/home-6.jpg" alt="First slide">
       </div>
       <!--/First slide-->
       <!--Second slide-->
@@ -31,6 +52,28 @@
         <img class="d-block w-100" src="/img/home-1.jpg" alt="Third slide">
       </div>
       <!--/Third slide-->
+
+
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/img/home-4.jpg" alt="Third slide">
+      </div>
+
+
+
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/img/home-5.jpg" alt="Third slide">
+      </div>
+
+
+
+      <div class="carousel-item">
+        <img class="d-block w-100" src="/img/home-3.jpg" alt="Third slide">
+      </div>
+
+
+
+
+
     </div>
     <!--/.Slides-->
     <!--Controls-->
@@ -49,24 +92,24 @@
 </div>
 
 {{#if book_new}}
-  <input type="text" id="show_book_clock" value="1" style="display:none">
+<input type="text" id="show_book_clock" value="1" style="display:none">
 
 {{else}}
-  <input type="text" id="show_book_clock" value="0" style="display:none">
+<input type="text" id="show_book_clock" value="0" style="display:none">
 {{/if}}
 
 {{#if food_new}}
-  <input type="text" id="show_food_clock" value="1" style="display:none">
+<input type="text" id="show_food_clock" value="1" style="display:none">
 
 {{else}}
-  <input type="text" id="show_food_clock" value="0" style="display:none">
+<input type="text" id="show_food_clock" value="0" style="display:none">
 {{/if}}
 
 {{#if coffee_new}}
-  <input type="text" id="show_drink_clock" value="1" style="display:none">
+<input type="text" id="show_drink_clock" value="1" style="display:none">
 
 {{else}}
-  <input type="text" id="show_drink_clock" value="0" style="display:none">
+<input type="text" id="show_drink_clock" value="0" style="display:none">
 {{/if}}
 
 {{!-- đồng hồ food --}}
@@ -74,8 +117,11 @@
 <div class="saleClock row" id="saleClockFood">
 
   <div class="header col col-8">
-    <h3>Sự kiện giảm Food đang diễn ra</h3>
-    <span>Nhanh chân lên các bạn ơi, hú hú</span>
+    <h3>Sự kiện giảm các sản phẩm liên quan đến đồ ăn đang diễn ra</h3>
+    <span style="font-size: 16px; font-weight: 600">Giảm lên tới <span
+        style="font-weight: bold; color: #ff4242d9; font-size: 16px;">{{food_new.discountPercentage}}%</span> cho loại
+      đồ ăn có giá trên <span style="font-weight: bold; color: #ff4242d9; font-size: 16px;">{{food_new.condition}}.000
+        VNĐ</span></span>
   </div>
 
   <div class="endClock">
@@ -202,8 +248,11 @@
 <div class="saleClock row" id="saleClockBook">
 
   <div class="header col col-8">
-    <h3>Sự kiện giảm Book đang diễn ra</h3>
-    <span>Nhanh chân lên các bạn ơi, hú hú</span>
+    <h3>Sự kiện giảm các sản phẩm liên quan đến sách đang diễn ra</h3>
+    <span style="font-size: 16px; font-weight: 600">Giảm lên tới <span
+        style="font-weight: bold; color: #ff4242d9; font-size: 16px;">{{book_new.discountPercentage}}%</span> cho các
+      đầu sách có giá trên <span
+        style="font-weight: bold; color: #ff4242d9; font-size: 16px;">{{book_new.condition}}.000 VNĐ</span></span>
   </div>
 
   <div class="endClock">
@@ -319,12 +368,15 @@
 </div>
 
 {{!-- đồng hồ drink --}}
-{{#if drink_new}}
-  <div class="saleClock row" id="saleClockDrink">
+{{#if coffee_new}}
+<div class="saleClock row" id="saleClockDrink">
 
   <div class="header col col-8">
-    <h3>Sự kiện giảm Drink đang diễn ra</h3>
-    <span>Nhanh chân lên các bạn ơi, hú hú</span>
+    <h3>Sự kiện giảm các sản phẩm liên quan đến đồ uống đang diễn ra</h3>
+    <span style="font-size: 16px; font-weight: 600">Giảm lên tới <span
+        style="font-weight: bold; color: #ff4242d9; font-size: 16px;">{{coffee_new.discountPercentage}}%</span> cho loại
+      đồ uống có giá trên <span
+        style="font-weight: bold; color: #ff4242d9; font-size: 16px;">{{coffee_new.condition}}.000 VNĐ</span></span>
   </div>
 
   <div class="endClock">
@@ -603,7 +655,7 @@
     nextIconClick(foodItems);
   }
 
-   prevworkingspaceIcon.onclick = function () {
+  prevworkingspaceIcon.onclick = function () {
     prevIconClick(workingspaceItems);
   }
   nextworkingspaceIcon.onclick = function () {

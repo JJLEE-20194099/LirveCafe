@@ -91,6 +91,7 @@
                 <input type="datetime-local" value="{{news.eventEndDate}}T{{news.eventEndTime}}" />
 
             </div>
+            <input type="text" value={{news.image}} id="curr-image-news" style="display: none">
         </div>
 
         <button id="btn-submit" class="btn btn-primary">Chỉnh sửa mới tin</button>
@@ -166,7 +167,8 @@
                 discountPercentage: $('#discountPercentage').val(),
                 applicableObject: $("input[type='radio']:checked").val(),
                 condition: $('#condition').val(),
-                _id: $('#news_id').val()
+                _id: $('#news_id').val(),
+                curr_image: $('#curr-image-news').val()
             }
 
            
@@ -182,6 +184,9 @@
             formData.append('applicableObject', parseInt(data.applicableObject)) 
             formData.append('condition', parseInt(data.condition))
             formData.append('_id', data._id)
+            formData.append('curr_image', data.curr_image)
+
+           
 
             $.ajax({
                 url: `/news/${$('#news_id').val()}/edit`,

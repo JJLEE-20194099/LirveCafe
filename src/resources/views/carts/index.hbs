@@ -124,11 +124,12 @@
       {{#each promoList}}
       <div id="{{this._id}}" class="promoItem btn">
         <div class="promo-info">
-          <a href="/promos/{{this._id}}" class="promo-info-container">
+          <a href="#" class="promo-info-container">
 
-            <p href="/promos/{{this._id}}" class="promo-name">{{this._id}}</p>
-            <h4 href="/promos/{{this._id}}" class="promo-desc">{{this.name}}</h4>
-            <p href="/promos/{{this._id}}" class="promo-expiration local-date">{{this.expirationDate}}</p>
+            <p href="#" class="promo-name">{{this._id}}</p>
+            <h4 href="#" class="promo-desc">{{this.name}}</h4>
+            <p href="#" class="promo-expiration local-date">{{this.expirationDate}}</p>
+             
           </a>
 
         </div>
@@ -147,6 +148,9 @@
     {{/if}}
 
   </div>
+
+  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="/js/datetime_handling.js"></script>
   <script>

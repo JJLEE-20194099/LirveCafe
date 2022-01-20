@@ -84,7 +84,7 @@
             {{#if workingspace.description}}
             <div class="description col col-12">
                 <span>Thông tin mô tả</span>
-                <textarea type="text">{{this.description}}</textarea>
+                <textarea type="text">{{workingspace.description}}</textarea>
             </div>
             {{/if}}
             <div class="line col-12"></div>
@@ -169,6 +169,8 @@
         <span>{{workingspace.total}}</span><span>VNĐ</span>
     </div>
 
+   
+
     {{#ifCond user.role 0}}
     <div class="update-event" id="update-event">
         <button>Chỉnh sửa thông tin</button>
@@ -229,7 +231,7 @@
                 },
                 success: function (res) {
                     if (res["check"]) {
-                        window.location.href = `/workingspaces/${wk_id}/edit`;
+                        window.location.href = `/workingspaces/edit/${wk_id}`;
                     } else {
 
                     }

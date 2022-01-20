@@ -159,8 +159,13 @@ const NewsController = {
 
     // POST /news/:id
     update(req, res, next) {
+        console.log(req.body)
         if (req.file && req.file.path) {
             req.body.image = '/' + req.file.path.split('\\').slice(2).join('/');
+            delete req.body.curr_image
+        } else {
+            req.body.image = req.body.curr_image
+            delete req.body.curr_image
         }
 
         var flag = 1;

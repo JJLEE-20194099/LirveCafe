@@ -162,14 +162,18 @@
 
     </div>
 
-    <div class="fodr-total" style="text-align: center; font-weight: bold; color: #df7509; font-size: 16px">
+    <div class="fodr-total" style="text-align: center; font-weight: bold; color: #df7509; font-size: 16px; margin-bottom: 24px;">
         Tổng chi phí:
         <span>{{workingspace.total}}</span><span>VNĐ</span>
     </div>
 
-    <div class="update-event" id="update-event">
+    <input type="text" id="username" style="display: none" value="{{user.username}}">
+    <input type="text" id="own-workingspace" style="display: none" value="{{workingspace.username}}">
+
+    <div class="update-event" id="update-event" style="display: none">
         <button>Chỉnh sửa thông tin</button>
     </div>
+    
 </div>
 
 <div id="notice">
@@ -186,6 +190,10 @@
     }
 
     $(document).ready(function () {
+        console.log($('#username').val(), $('#own-workingspace').val())
+        if($('#username').val() == $('#own-workingspace').val()) {
+            $('#update-event').css('display', 'flex')
+        }
 
         var wk_id = $("#wk-id").val()
 
@@ -201,7 +209,7 @@
                 },
                 success: function (res) {
                     if (res["check"]) {
-                        window.location.href =`/workingspaces/${wk_id}/edit`;
+                        window.location.href =`/workingspaces/edit/${wk_id}`;
                     } else {
                          $("#notice").html(`<button  id="notice-btn" type="button" class="btn btn-danger" data-toggle="modal" data-target="#form" style="display: none"> See Modal with Form </button>
                                                 <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

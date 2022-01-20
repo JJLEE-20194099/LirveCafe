@@ -222,6 +222,7 @@ const WorkingspaceController = {
             drinks: drinks,
         }
 
+        console.log(my_data)
     
 
         const start_date = parseInt(eventStartDate.split('-')[2])

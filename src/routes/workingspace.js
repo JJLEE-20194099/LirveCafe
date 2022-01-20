@@ -42,7 +42,7 @@ router.post('/save',
 upload.single('avatar'),
     controllers.save,
 );
-router.get('/:id/edit', controllers.edit);
+router.get('/edit/:id', controllers.edit);
 router.post('/check-valid-date', controllers.checkExpirationDate);
 router.patch('/:id', controllers.update);
 router.delete('/:id', controllers.softDelete);
