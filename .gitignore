@@ -1,5 +1,5 @@
 .vscode
 node_modules
-.env
+env
 src/public/font
 src/public/themify-icons
