@@ -13,7 +13,6 @@ const Book = new Schema(
         image: { type: String, required: true},
         body: {type: String, required: true},
         price: {type: Number, required: true},
-        no: {type: Number, required: true},
         slug: { type: String, slug: 'title', unique: true },
         meta: {
             votes: {type: Number, default: 0},
