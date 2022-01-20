@@ -1,4 +1,4 @@
-import AvatarGenerator from 'https://livrecafehood.herokuapp.com/named-avatar-generator';
+import AvatarGenerator from 'named-avatar-generator';
 
 export const getAvatar = function(req) {
     let avatarUrl = '';
