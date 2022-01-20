@@ -132,7 +132,6 @@ inputBox.onkeyup = (e) => {
             emptyArray[0] = drink_ele
             emptyArray[1] = food_ele
             emptyArray[2] = book_ele
-            console.log("hahaha", default_suggestions, emptyArray);
 
             searchWrapper.classList.add("active");
             showSuggestions(emptyArray);
@@ -161,5 +160,4 @@ function showSuggestions(list) {
         listData = list.join('');
     }
     suggBox.innerHTML = listData;
-    console.log(suggBox.innerHTML)
 }

@@ -1,4 +1,3 @@
-// console.log(foodItems);
 
 foodItems.forEach((item) => {
 

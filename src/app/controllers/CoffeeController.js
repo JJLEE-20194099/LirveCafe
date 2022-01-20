@@ -62,11 +62,11 @@ const CoffeeController = {
         const enabled = res.locals.sort.enabled;
         const field = res.locals.sort.field;
         var type;
-        console.log(res.locals.sort)
+        
         if (res.locals.sort.type == 'desc') {
             type = -1
         } else type = 1
-        console.log("type: ", type)
+        
 
         if (field == 'price') {
             

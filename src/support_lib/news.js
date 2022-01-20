@@ -121,10 +121,7 @@ export const updateNewsAndMergeNewsAndProduct = function(products, news) {
                 delete product["eventEndDate"]
             }
 
-            if (!product["quantity"]) {
-                console.log('1')
-                console.log(product)
-            }
+    
 
             items.push(product);
 
@@ -151,11 +148,7 @@ export const updateNewsAndMergeNewsAndProduct = function(products, news) {
            
         }
 
-        if(!new_product["quantity"]) {
-            console.log("2")
-            console.log(new_product["quantity"])
-        }
-
+    
     
         items.push(new_product)
     }

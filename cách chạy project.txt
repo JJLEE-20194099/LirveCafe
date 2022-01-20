@@ -1,0 +1,39 @@
+B1: Các mối trường và IDE cần cài đặt
+
++ Cài đặt visualstudo code tại https://code.visualstudio.com/download
++ Cài đặt git vào máy, tải tại https://git-scm.com/downloads
++ Cài đặt nodejs, tải tại https://nodejs.org/en/download/
++ Cài đặt mongodb về máy, tải tại https://www.mongodb.com/try/download/community
+
+B2: cài đặt 1 số thư viên:
+
++ Check node and npm version bằng cách: gõ lệnh "node --version" và "npm --version" vào terminal
++ Tải các module cần thiết bằng cách: gõ lệnh "npm install" vào terminal
++ Tải fontawesome và themify-icons tại https://fontawesome.com/download và https://themify.me/themify-icons
+
+B2: Tải project về máy:
+
++ Mở cửa sổ terminal và cd vào thư mục muốn lưu project
++ git clone -b JJLee_V1 https://github.com/JJLEE-20194099/LivreCafe.git
+
+B3: Hướng dẫn chạy
++ Tạo .env trong thư mục project(LivreCafe) vừa clone về
+
+Nội dung file .env:
+
+MONGO_URL = mongodb://localhost:27017/bookstore
+SESSION_SECRET=123456536302fekjgfdmsmfdsgnjfdgnsldfg
+adminEmail = YOUR_EMAIL
+adminPassword = YOUR_PASSWORD
+
++ Tạo database: 
+	- Sau khi tải mongoDB về máy, mở mongo lên
+ 	- Tạo database có tên là "bookstore"
+	- Tạo 4 collection lần lượt là books, coffees, foods, users
+	- Chọn ADD DATA -> Import File -> JSON -> Select a file -> Chọn file data tương ứng với từng collection vừa tạo ở trên
+	- Chú ý: file json của books là LirveCafe/crawl_data/nha-sach-tiki/books.json,
+		 file json của coffees là LirveCafe/crawl_data/ca-phe/coffee.json,
+		 file json của foods là LirveCafe/crawl_data/do-an/food.json,
+	
++ Sau khi hoàn thành thành công 2 bước trên, gõ "npm start" để chạy project
++ Lết quả được hiện thị trên http://localhost:3000/
