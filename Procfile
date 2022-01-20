@@ -1,1 +1,1 @@
-web: node ./src/index.js
+web: node --experimental-specifier-resolution=nod ./src/index.js
